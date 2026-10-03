@@ -3,6 +3,59 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-03
+
+```
+changes: HEAD -> 2026-10-03
+===========================
+
+now sold out (6)
+  2027-05-15  AVO                    St. John's                         liveaboard.com+padi.com
+  2027-05-22  AVO                    The Best of the South Classic      liveaboard.com+padi.com
+  2027-06-12  AVO                    North & Tiran                      liveaboard.com+padi.com
+  2027-07-17  AVO                    St. John's                         liveaboard.com+padi.com
+  2027-08-10  Amelie Adventures      Mini Safari: Best of Hurghada      divebooker.com+liveaboard.com+padi.com
+  2027-08-14  Amelie Adventures      Mini Safari: Best of Hurghada      divebooker.com+liveaboard.com+padi.com
+
+bookable again (1)
+  2027-06-26  Carlton                Classic North                      divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (12)
+  2027-05-01  Emperor Superior       Reefs & Wrecks               liveaboard.com+padi.com -> padi.com  1,484 USD -> 1,310 EUR
+  2027-05-13  Emperor Elite          Southern Solitude            liveaboard.com+padi.com -> padi.com  1,813 USD -> 1,600 EUR
+  2027-05-15  Emperor Superior       Reefs & Wrecks               liveaboard.com+padi.com -> padi.com  1,484 USD -> 1,310 EUR
+  2027-05-29  Emperor Superior       Reefs & Wrecks               liveaboard.com+padi.com -> padi.com  1,484 USD -> 1,310 EUR
+  2027-06-05  Emperor Superior       Famous Five                  liveaboard.com+padi.com -> padi.com  1,598 USD -> 1,410 EUR  Famous Five Cruise -> Famous Five
+  2027-06-10  Emperor Elite          Simply the Best              liveaboard.com+padi.com -> padi.com  1,813 USD -> 1,600 EUR
+  2027-06-12  Emperor Superior       Reefs & Wrecks               liveaboard.com+padi.com -> padi.com  1,484 USD -> 1,310 EUR
+  2027-07-01  Emperor Elite          South & St. John's           liveaboard.com+padi.com -> padi.com  1,756 USD -> 1,550 EUR
+  2027-07-17  Emperor Superior       Reefs & Wrecks               liveaboard.com+padi.com -> padi.com  1,485 USD -> 1,310 EUR
+  2027-07-24  Emperor Superior       Famous Five                  liveaboard.com+padi.com -> padi.com  1,599 USD -> 1,410 EUR  Famous Five Cruise -> Famous Five
+  2027-08-14  Emperor Superior       Reefs & Wrecks               liveaboard.com+padi.com -> padi.com  1,484 USD -> 1,310 EUR
+  2027-08-21  Emperor Superior       North & Easy                 liveaboard.com+padi.com -> padi.com  1,484 USD -> 1,310 EUR
+
+price up (2)
+  2027-05-20  Emperor Elite          1,700 ->   1,801 USD  +101 (+5.9%)  Daedalus, Fury and Elphinstone
+  2027-06-03  Emperor Elite          1,700 ->   1,801 USD  +101 (+5.9%)  Daedalus, Fury and Elphinstone
+
+price down (757)
+  2027-06-19  MY Odyssey Liveaboar   1,994 ->   1,599 USD  -395 (-19.8%)  Treasures of the North
+  2027-07-31  Emperor Superior       2,676 ->   2,654 USD  -22 (-0.8%)  South & St. John's
+  2027-07-17  DUNE Silky             2,776 ->   2,755 USD  -21 (-0.8%)  Best of Egypt
+  2027-05-01  Marselia Star          3,342 ->   3,321 USD  -21 (-0.6%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-29  Golden Dolphin IV      2,718 ->   2,701 USD  -17 (-0.6%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,719 ->   2,702 USD  -17 (-0.6%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-17  MY Odyssey Liveaboar   2,436 ->   2,420 USD  -16 (-0.7%)  Premium Expedition
+  2027-05-15  Aphrodite              2,323 ->   2,308 USD  -15 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,368 ->   2,353 USD  -15 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-07-24  Aphrodite              2,323 ->   2,308 USD  -15 (-0.6%)  North Dolphins
+  2027-08-21  Aphrodite              2,323 ->   2,308 USD  -15 (-0.6%)  North Wrecks
+  2027-07-03  Aphrodite              2,323 ->   2,308 USD  -15 (-0.6%)  North & Brothers
+  ... and 745 more not shown
+
+120 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-01
 
 ```

@@ -1,6 +1,1692 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-03",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "avo-2027-05-15-0",
+    "boat": "AVO",
+    "title": "St. John's",
+    "start": "2027-05-15",
+    "price": 1924.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "avo-2027-05-22-0",
+    "boat": "AVO",
+    "title": "The Best of the South Classic",
+    "start": "2027-05-22",
+    "price": 1924.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "avo-2027-06-12-0",
+    "boat": "AVO",
+    "title": "North & Tiran",
+    "start": "2027-06-12",
+    "price": 1710.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "avo-2027-07-17-0",
+    "boat": "AVO",
+    "title": "St. John's",
+    "start": "2027-07-17",
+    "price": 1817.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "amelie-adventures-2027-08-10-0",
+    "boat": "Amelie Adventures",
+    "title": "Mini Safari: Best of Hurghada",
+    "start": "2027-08-10",
+    "price": 546.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "amelie-adventures-2027-08-14-0",
+    "boat": "Amelie Adventures",
+    "title": "Mini Safari: Best of Hurghada",
+    "start": "2027-08-14",
+    "price": 546.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [
+   {
+    "id": "carlton-2027-06-26-0",
+    "boat": "Carlton",
+    "title": "Classic North",
+    "start": "2027-06-26",
+    "price": 1047.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-05-01",
+    "title": "Reefs & Wrecks",
+    "was_title": "Reefs & Wrecks",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1484.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Elite",
+    "start": "2027-05-13",
+    "title": "Southern Solitude",
+    "was_title": "Southern Solitude",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1600.0,
+    "was_price": 1813.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-05-15",
+    "title": "Reefs & Wrecks",
+    "was_title": "Reefs & Wrecks",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1484.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-05-29",
+    "title": "Reefs & Wrecks",
+    "was_title": "Reefs & Wrecks",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1484.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-06-05",
+    "title": "Famous Five",
+    "was_title": "Famous Five Cruise",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1410.0,
+    "was_price": 1598.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Elite",
+    "start": "2027-06-10",
+    "title": "Simply the Best",
+    "was_title": "Simply the Best",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1600.0,
+    "was_price": 1813.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-06-12",
+    "title": "Reefs & Wrecks",
+    "was_title": "Reefs & Wrecks",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1484.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Elite",
+    "start": "2027-07-01",
+    "title": "South & St. John's",
+    "was_title": "South & St. John's",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1550.0,
+    "was_price": 1756.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-07-17",
+    "title": "Reefs & Wrecks",
+    "was_title": "Reefs & Wrecks",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1485.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-07-24",
+    "title": "Famous Five",
+    "was_title": "Famous Five Cruise",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1410.0,
+    "was_price": 1599.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-08-14",
+    "title": "Reefs & Wrecks",
+    "was_title": "Reefs & Wrecks",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1484.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Emperor Superior",
+    "start": "2027-08-21",
+    "title": "North & Easy",
+    "was_title": "North & Easy",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 1310.0,
+    "was_price": 1484.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   }
+  ],
+  "price_up": [
+   {
+    "id": "emperor-elite-2027-05-20-0",
+    "boat": "Emperor Elite",
+    "title": "Daedalus, Fury and Elphinstone",
+    "start": "2027-05-20",
+    "was": 1700.0,
+    "now": 1801.0,
+    "currency": "USD",
+    "delta": 101.0,
+    "pct": 5.9411764705882355
+   },
+   {
+    "id": "emperor-elite-2027-06-03-0",
+    "boat": "Emperor Elite",
+    "title": "Daedalus, Fury and Elphinstone",
+    "start": "2027-06-03",
+    "was": 1700.0,
+    "now": 1801.0,
+    "currency": "USD",
+    "delta": 101.0,
+    "pct": 5.9411764705882355
+   }
+  ],
+  "price_down": [
+   {
+    "id": "odyssey-2027-06-19-0",
+    "boat": "MY Odyssey Liveaboard",
+    "title": "Treasures of the North",
+    "start": "2027-06-19",
+    "was": 1994.0,
+    "now": 1599.0,
+    "currency": "USD",
+    "delta": -395.0,
+    "pct": -19.80942828485456
+   },
+   {
+    "id": "emperor-superior-2027-07-31-0",
+    "boat": "Emperor Superior",
+    "title": "South & St. John's",
+    "start": "2027-07-31",
+    "was": 2676.0,
+    "now": 2654.0,
+    "currency": "USD",
+    "delta": -22.0,
+    "pct": -0.8221225710014948
+   },
+   {
+    "id": "dune-silky-2027-07-17-0",
+    "boat": "DUNE Silky",
+    "title": "Best of Egypt",
+    "start": "2027-07-17",
+    "was": 2776.0,
+    "now": 2755.0,
+    "currency": "USD",
+    "delta": -21.0,
+    "pct": -0.7564841498559077
+   },
+   {
+    "id": "marselia-star-2027-05-01-0",
+    "boat": "Marselia Star",
+    "title": "CCR Reefs, Wrecks and Canyons Trip",
+    "start": "2027-05-01",
+    "was": 3342.0,
+    "now": 3321.0,
+    "currency": "USD",
+    "delta": -21.0,
+    "pct": -0.6283662477558348
+   },
+   {
+    "id": "golden-dolphin-iv-2027-07-29-0",
+    "boat": "Golden Dolphin IV",
+    "title": "Daedalus, Rocky Island, Zabargad, St. John's & Elphinstone",
+    "start": "2027-07-29",
+    "was": 2718.0,
+    "now": 2701.0,
+    "currency": "USD",
+    "delta": -17.0,
+    "pct": -0.6254598969830758
+   },
+   {
+    "id": "queen-sherry-2027-07-31-0",
+    "boat": "Queen Sherry",
+    "title": "Eclipse & Big Fish: Pelagic Trail Eclipse Totality",
+    "start": "2027-07-31",
+    "was": 2719.0,
+    "now": 2702.0,
+    "currency": "USD",
+    "delta": -17.0,
+    "pct": -0.625229863920559
+   },
+   {
+    "id": "odyssey-2027-07-17-0",
+    "boat": "MY Odyssey Liveaboard",
+    "title": "Premium Expedition",
+    "start": "2027-07-17",
+    "was": 2436.0,
+    "now": 2420.0,
+    "currency": "USD",
+    "delta": -16.0,
+    "pct": -0.6568144499178982
+   },
+   {
+    "id": "aphrodite-2027-05-15-0",
+    "boat": "Aphrodite",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-15",
+    "was": 2323.0,
+    "now": 2308.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6457167455876023
+   },
+   {
+    "id": "aphrodite-2027-05-29-0",
+    "boat": "Aphrodite",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-29",
+    "was": 2368.0,
+    "now": 2353.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6334459459459459
+   },
+   {
+    "id": "aphrodite-2027-07-24-0",
+    "boat": "Aphrodite",
+    "title": "North Dolphins",
+    "start": "2027-07-24",
+    "was": 2323.0,
+    "now": 2308.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6457167455876023
+   },
+   {
+    "id": "aphrodite-2027-08-21-0",
+    "boat": "Aphrodite",
+    "title": "North Wrecks",
+    "start": "2027-08-21",
+    "was": 2323.0,
+    "now": 2308.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6457167455876023
+   },
+   {
+    "id": "aphrodite-2027-07-03-0",
+    "boat": "Aphrodite",
+    "title": "North & Brothers",
+    "start": "2027-07-03",
+    "was": 2323.0,
+    "now": 2308.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6457167455876023
+   },
+   {
+    "id": "golden-dolphin-iv-2027-08-16-0",
+    "boat": "Golden Dolphin IV",
+    "title": "North, Safaga & Brothers",
+    "start": "2027-08-16",
+    "was": 2491.0,
+    "now": 2476.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.602167804094741
+   },
+   {
+    "id": "golden-imperial-2027-08-12-0",
+    "boat": "Golden Imperial",
+    "title": "North - Straits of Tiran - Brothers - Daedalus - Rocky Island - Zabargad - Salem Express",
+    "start": "2027-08-12",
+    "was": 2491.0,
+    "now": 2476.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.602167804094741
+   },
+   {
+    "id": "royal-evolution-2027-05-27-0",
+    "boat": "Royal Evolution",
+    "title": "Brothers, Daedalus, Rocky, St. John's & Elba",
+    "start": "2027-05-27",
+    "was": 2395.0,
+    "now": 2380.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6263048016701461
+   },
+   {
+    "id": "royal-evolution-2027-05-03-0",
+    "boat": "Royal Evolution",
+    "title": "Elba Reef & Elba borders",
+    "start": "2027-05-03",
+    "was": 2395.0,
+    "now": 2380.0,
+    "currency": "USD",
+    "delta": -15.0,
+    "pct": -0.6263048016701461
+   },
+   {
+    "id": "aphrodite-2027-07-10-0",
+    "boat": "Aphrodite",
+    "title": "Best of Red Sea 2 Weeks",
+    "start": "2027-07-10",
+    "was": 2121.0,
+    "now": 2107.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6600660066006601
+   },
+   {
+    "id": "aphrodite-2027-06-05-0",
+    "boat": "Aphrodite",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-05",
+    "was": 2121.0,
+    "now": 2107.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6600660066006601
+   },
+   {
+    "id": "aphrodite-2027-07-31-0",
+    "boat": "Aphrodite",
+    "title": "Brothers, Safaga Reefs",
+    "start": "2027-07-31",
+    "was": 2209.0,
+    "now": 2195.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6337709370755998
+   },
+   {
+    "id": "aphrodite-2027-05-22-0",
+    "boat": "Aphrodite",
+    "title": "Deep South & St. John's",
+    "start": "2027-05-22",
+    "was": 2243.0,
+    "now": 2229.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6241640659830584
+   },
+   {
+    "id": "aphrodite-2027-06-12-0",
+    "boat": "Aphrodite",
+    "title": "North - Straits of Tiran",
+    "start": "2027-06-12",
+    "was": 2203.0,
+    "now": 2189.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6354970494779846
+   },
+   {
+    "id": "aphrodite-2027-06-26-0",
+    "boat": "Aphrodite",
+    "title": "North - Straits of Tiran",
+    "start": "2027-06-26",
+    "was": 2203.0,
+    "now": 2189.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6354970494779846
+   },
+   {
+    "id": "aphrodite-2027-06-19-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-06-19",
+    "was": 2203.0,
+    "now": 2189.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6354970494779846
+   },
+   {
+    "id": "aphrodite-2027-07-17-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-07-17",
+    "was": 2121.0,
+    "now": 2107.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6600660066006601
+   },
+   {
+    "id": "aphrodite-2027-08-07-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-08-07",
+    "was": 2266.0,
+    "now": 2252.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.617828773168579
+   },
+   {
+    "id": "aphrodite-2027-08-14-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-08-14",
+    "was": 2266.0,
+    "now": 2252.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.617828773168579
+   },
+   {
+    "id": "aphrodite-2027-05-08-0",
+    "boat": "Aphrodite",
+    "title": "North Wrecks",
+    "start": "2027-05-08",
+    "was": 2243.0,
+    "now": 2229.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.6241640659830584
+   },
+   {
+    "id": "emperor-elite-2027-07-15-0",
+    "boat": "Emperor Elite",
+    "title": "Simply the Best",
+    "start": "2027-07-15",
+    "was": 1813.0,
+    "now": 1799.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.7722007722007722
+   },
+   {
+    "id": "emperor-elite-2027-07-22-0",
+    "boat": "Emperor Elite",
+    "title": "Simply the Best",
+    "start": "2027-07-22",
+    "was": 1813.0,
+    "now": 1799.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.7722007722007722
+   },
+   {
+    "id": "ghazala-adventure-2027-08-23-0",
+    "boat": "Ghazala Adventure",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-23",
+    "was": 1779.0,
+    "now": 1765.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.7869589657110737
+   },
+   {
+    "id": "sea-serpent-grand-2027-07-22-0",
+    "boat": "Sea Serpent Grand",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "was": 1846.0,
+    "now": 1832.0,
+    "currency": "USD",
+    "delta": -14.0,
+    "pct": -0.7583965330444203
+   },
+   {
+    "id": "aphrodite-2027-05-01-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-05-01",
+    "was": 2175.0,
+    "now": 2162.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.5977011494252874
+   },
+   {
+    "id": "aphrodite-2027-08-28-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-08-28",
+    "was": 2175.0,
+    "now": 2162.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.5977011494252874
+   },
+   {
+    "id": "blue-2027-05-20-0",
+    "boat": "Blue",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-20",
+    "was": 1610.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.8074534161490683
+   },
+   {
+    "id": "blue-2027-05-06-0",
+    "boat": "Blue",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-05-06",
+    "was": 1610.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.8074534161490683
+   },
+   {
+    "id": "blue-2027-05-27-0",
+    "boat": "Blue",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-05-27",
+    "was": 1610.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.8074534161490683
+   },
+   {
+    "id": "blue-2027-05-13-0",
+    "boat": "Blue",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-05-13",
+    "was": 1610.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.8074534161490683
+   },
+   {
+    "id": "blue-seas-2027-05-13-0",
+    "boat": "Blue Seas",
+    "title": "Rocky - Elba - St. John's - Elphinstone",
+    "start": "2027-05-13",
+    "was": 2028.0,
+    "now": 2015.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.641025641025641
+   },
+   {
+    "id": "dune-silky-2027-08-14-0",
+    "boat": "DUNE Silky",
+    "title": "North Brothers",
+    "start": "2027-08-14",
+    "was": 1643.0,
+    "now": 1630.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7912355447352405
+   },
+   {
+    "id": "dune-silky-2027-07-10-0",
+    "boat": "DUNE Silky",
+    "title": "North Brothers",
+    "start": "2027-07-10",
+    "was": 1643.0,
+    "now": 1630.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7912355447352405
+   },
+   {
+    "id": "dune-silky-2027-07-03-0",
+    "boat": "DUNE Silky",
+    "title": "North Dahab Tiran",
+    "start": "2027-07-03",
+    "was": 1643.0,
+    "now": 1630.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7912355447352405
+   },
+   {
+    "id": "dune-silky-2027-08-28-0",
+    "boat": "DUNE Silky",
+    "title": "North Dahab Tiran",
+    "start": "2027-08-28",
+    "was": 1643.0,
+    "now": 1630.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7912355447352405
+   },
+   {
+    "id": "dune-silky-2027-07-31-0",
+    "boat": "DUNE Silky",
+    "title": "St. John's Reef",
+    "start": "2027-07-31",
+    "was": 1643.0,
+    "now": 1630.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7912355447352405
+   },
+   {
+    "id": "emperor-elite-2027-07-08-0",
+    "boat": "Emperor Elite",
+    "title": "South & St. John's",
+    "start": "2027-07-08",
+    "was": 1756.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7403189066059226
+   },
+   {
+    "id": "ghazala-adventure-2027-08-30-0",
+    "boat": "Ghazala Adventure",
+    "title": "North & Brothers",
+    "start": "2027-08-30",
+    "was": 1700.0,
+    "now": 1687.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7647058823529412
+   },
+   {
+    "id": "ghazala-adventure-2027-08-02-0",
+    "boat": "Ghazala Adventure",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-08-02",
+    "was": 1700.0,
+    "now": 1687.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7647058823529412
+   },
+   {
+    "id": "ghazala-adventure-2027-08-16-0",
+    "boat": "Ghazala Adventure",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-08-16",
+    "was": 1660.0,
+    "now": 1647.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.783132530120482
+   },
+   {
+    "id": "ghazala-adventure-2027-08-09-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-08-09",
+    "was": 1660.0,
+    "now": 1647.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.783132530120482
+   },
+   {
+    "id": "sea-friend-2027-05-08-0",
+    "boat": "Sea Friend",
+    "title": "Sataya - Where Dolphins Touch Your Soul - Retreat",
+    "start": "2027-05-08",
+    "was": 1983.0,
+    "now": 1970.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.6555723651033787
+   },
+   {
+    "id": "sea-serpent-grand-2027-07-15-0",
+    "boat": "Sea Serpent Grand",
+    "title": "North & Tiran",
+    "start": "2027-07-15",
+    "was": 1732.0,
+    "now": 1719.0,
+    "currency": "USD",
+    "delta": -13.0,
+    "pct": -0.7505773672055427
+   },
+   {
+    "id": "avo-2027-08-21-0",
+    "boat": "AVO",
+    "title": "Brothers - Daedalus - Elphinstone (Golden Triangle)",
+    "start": "2027-08-21",
+    "was": 1829.0,
+    "now": 1817.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6560962274466922
+   },
+   {
+    "id": "avo-2027-07-03-0",
+    "boat": "AVO",
+    "title": "Brothers - Daedalus - Elphinstone (Golden Triangle)",
+    "start": "2027-07-03",
+    "was": 1829.0,
+    "now": 1817.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6560962274466922
+   },
+   {
+    "id": "avo-2027-06-26-0",
+    "boat": "AVO",
+    "title": "Dahab Sinai",
+    "start": "2027-06-26",
+    "was": 1829.0,
+    "now": 1817.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6560962274466922
+   },
+   {
+    "id": "avo-2027-05-08-0",
+    "boat": "AVO",
+    "title": "St. John's",
+    "start": "2027-05-08",
+    "was": 1936.0,
+    "now": 1924.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6198347107438017
+   },
+   {
+    "id": "avo-2027-05-15-0",
+    "boat": "AVO",
+    "title": "St. John's",
+    "start": "2027-05-15",
+    "was": 1936.0,
+    "now": 1924.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6198347107438017
+   },
+   {
+    "id": "avo-2027-07-17-0",
+    "boat": "AVO",
+    "title": "St. John's",
+    "start": "2027-07-17",
+    "was": 1829.0,
+    "now": 1817.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6560962274466922
+   },
+   {
+    "id": "avo-2027-07-24-0",
+    "boat": "AVO",
+    "title": "The Best of the South",
+    "start": "2027-07-24",
+    "was": 1829.0,
+    "now": 1817.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6560962274466922
+   },
+   {
+    "id": "avo-2027-07-10-0",
+    "boat": "AVO",
+    "title": "The Best of the South Classic",
+    "start": "2027-07-10",
+    "was": 1829.0,
+    "now": 1817.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6560962274466922
+   },
+   {
+    "id": "avo-2027-05-22-0",
+    "boat": "AVO",
+    "title": "The Best of the South Classic",
+    "start": "2027-05-22",
+    "was": 1936.0,
+    "now": 1924.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6198347107438017
+   },
+   {
+    "id": "blue-2027-06-10-0",
+    "boat": "Blue",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-10",
+    "was": 1609.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7458048477315102
+   },
+   {
+    "id": "blue-2027-06-17-0",
+    "boat": "Blue",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-17",
+    "was": 1609.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7458048477315102
+   },
+   {
+    "id": "blue-2027-06-24-0",
+    "boat": "Blue",
+    "title": "North & Tiran",
+    "start": "2027-06-24",
+    "was": 1462.0,
+    "now": 1450.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.8207934336525308
+   },
+   {
+    "id": "blue-2027-06-03-0",
+    "boat": "Blue",
+    "title": "St. John's",
+    "start": "2027-06-03",
+    "was": 1609.0,
+    "now": 1597.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7458048477315102
+   },
+   {
+    "id": "blue-seas-2027-05-03-0",
+    "boat": "Blue Seas",
+    "title": "Rocky - Elba - St. John's - Elphinstone",
+    "start": "2027-05-03",
+    "was": 1971.0,
+    "now": 1959.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.60882800608828
+   },
+   {
+    "id": "destiny-2027-06-09-0",
+    "boat": "Destiny",
+    "title": "North Tiran - Dahab",
+    "start": "2027-06-09",
+    "was": 1987.0,
+    "now": 1975.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6039255158530448
+   },
+   {
+    "id": "dune-silky-2027-08-07-0",
+    "boat": "DUNE Silky",
+    "title": "Fury Shoals & Dolphins Trip",
+    "start": "2027-08-07",
+    "was": 1530.0,
+    "now": 1518.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7843137254901961
+   },
+   {
+    "id": "dune-silky-2027-05-29-0",
+    "boat": "DUNE Silky",
+    "title": "Golden Triangle",
+    "start": "2027-05-29",
+    "was": 1813.0,
+    "now": 1801.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6618863761720905
+   },
+   {
+    "id": "dune-silky-2027-08-21-0",
+    "boat": "DUNE Silky",
+    "title": "North Ras Mohammed",
+    "start": "2027-08-21",
+    "was": 1530.0,
+    "now": 1518.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7843137254901961
+   },
+   {
+    "id": "emperor-asmaa-2027-08-07-0",
+    "boat": "Emperor Asmaa",
+    "title": "Simply the Best",
+    "start": "2027-08-07",
+    "was": 1530.0,
+    "now": 1518.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7843137254901961
+   },
+   {
+    "id": "emperor-asmaa-2027-08-28-0",
+    "boat": "Emperor Asmaa",
+    "title": "Simply the Best",
+    "start": "2027-08-28",
+    "was": 1530.0,
+    "now": 1518.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7843137254901961
+   },
+   {
+    "id": "emperor-asmaa-2027-08-21-0",
+    "boat": "Emperor Asmaa",
+    "title": "Southern Solitude",
+    "start": "2027-08-21",
+    "was": 1530.0,
+    "now": 1518.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.7843137254901961
+   },
+   {
+    "id": "emperor-elite-2027-06-24-0",
+    "boat": "Emperor Elite",
+    "title": "Simply the Best",
+    "start": "2027-06-24",
+    "was": 1813.0,
+    "now": 1801.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6618863761720905
+   },
+   {
+    "id": "emperor-elite-2027-05-27-0",
+    "boat": "Emperor Elite",
+    "title": "Southern Solitude",
+    "start": "2027-05-27",
+    "was": 1813.0,
+    "now": 1801.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6618863761720905
+   },
+   {
+    "id": "golden-dolphin-iv-2027-06-10-0",
+    "boat": "Golden Dolphin IV",
+    "title": "North - Straits of Tiran - Dahab",
+    "start": "2027-06-10",
+    "was": 1812.0,
+    "now": 1800.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6622516556291391
+   },
+   {
+    "id": "topaz-2027-08-28-0",
+    "boat": "Topaz",
+    "title": "Dancing with Dolphins - Dolphin Liveaboard Safari",
+    "start": "2027-08-28",
+    "was": 1903.0,
+    "now": 1891.0,
+    "currency": "USD",
+    "delta": -12.0,
+    "pct": -0.6305832895428272
+   },
+   {
+    "id": "alia-soul-2027-06-02-0",
+    "boat": "Alia Soul",
+    "title": "Marine Park North: Brothers - Daedalus & Elphinstone",
+    "start": "2027-06-02",
+    "was": 1869.0,
+    "now": 1858.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.588550026752274
+   },
+   {
+    "id": "alia-soul-2027-08-04-0",
+    "boat": "Alia Soul",
+    "title": "Marine Park North: Brothers - Daedalus & Elphinstone",
+    "start": "2027-08-04",
+    "was": 1869.0,
+    "now": 1858.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.588550026752274
+   },
+   {
+    "id": "alia-soul-2027-05-19-0",
+    "boat": "Alia Soul",
+    "title": "Marine Park South: Daedalus - Rocky - Zabargad - Elphinstone",
+    "start": "2027-05-19",
+    "was": 1869.0,
+    "now": 1858.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.588550026752274
+   },
+   {
+    "id": "avo-2027-06-05-0",
+    "boat": "AVO",
+    "title": "North & Ras Mohammed",
+    "start": "2027-06-05",
+    "was": 1721.0,
+    "now": 1710.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6391632771644393
+   },
+   {
+    "id": "avo-2027-06-12-0",
+    "boat": "AVO",
+    "title": "North & Tiran",
+    "start": "2027-06-12",
+    "was": 1721.0,
+    "now": 1710.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6391632771644393
+   },
+   {
+    "id": "avo-2027-06-19-0",
+    "boat": "AVO",
+    "title": "North & Brothers",
+    "start": "2027-06-19",
+    "was": 1721.0,
+    "now": 1710.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6391632771644393
+   },
+   {
+    "id": "avo-2027-08-28-0",
+    "boat": "AVO",
+    "title": "North & Brothers",
+    "start": "2027-08-28",
+    "was": 1721.0,
+    "now": 1710.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6391632771644393
+   },
+   {
+    "id": "blue-seas-2027-07-29-0",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-07-29",
+    "was": 1784.0,
+    "now": 1773.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6165919282511211
+   },
+   {
+    "id": "dune-longara-2027-06-12-0",
+    "boat": "DUNE Longara",
+    "title": "Daedalus, Elphinstone & Fury Shoals",
+    "start": "2027-06-12",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-05-22-0",
+    "boat": "DUNE Longara",
+    "title": "Golden Triangle",
+    "start": "2027-05-22",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-06-05-0",
+    "boat": "DUNE Longara",
+    "title": "Golden Triangle",
+    "start": "2027-06-05",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-06-19-0",
+    "boat": "DUNE Longara",
+    "title": "Golden Triangle",
+    "start": "2027-06-19",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-05-08-0",
+    "boat": "DUNE Longara",
+    "title": "Golden Triangle",
+    "start": "2027-05-08",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-05-29-0",
+    "boat": "DUNE Longara",
+    "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St. John's",
+    "start": "2027-05-29",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-08-14-0",
+    "boat": "DUNE Longara",
+    "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St. John's",
+    "start": "2027-08-14",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-08-28-0",
+    "boat": "DUNE Longara",
+    "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St. John's",
+    "start": "2027-08-28",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-05-15-0",
+    "boat": "DUNE Longara",
+    "title": "North & Tiran",
+    "start": "2027-05-15",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "dune-longara-2027-07-24-0",
+    "boat": "DUNE Longara",
+    "title": "North Brothers",
+    "start": "2027-07-24",
+    "was": 1643.0,
+    "now": 1632.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6695069993913573
+   },
+   {
+    "id": "dune-longara-2027-05-01-0",
+    "boat": "DUNE Longara",
+    "title": "North Dahab Tiran",
+    "start": "2027-05-01",
+    "was": 1643.0,
+    "now": 1632.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6695069993913573
+   },
+   {
+    "id": "dune-longara-2027-08-07-0",
+    "boat": "DUNE Longara",
+    "title": "St. John's Reef",
+    "start": "2027-08-07",
+    "was": 1643.0,
+    "now": 1632.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6695069993913573
+   },
+   {
+    "id": "dune-silky-2027-05-08-0",
+    "boat": "DUNE Silky",
+    "title": "North Brothers",
+    "start": "2027-05-08",
+    "was": 1643.0,
+    "now": 1632.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6695069993913573
+   },
+   {
+    "id": "dune-silky-2027-06-05-0",
+    "boat": "DUNE Silky",
+    "title": "North Dahab Tiran",
+    "start": "2027-06-05",
+    "was": 1643.0,
+    "now": 1632.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6695069993913573
+   },
+   {
+    "id": "dune-silky-2027-05-01-0",
+    "boat": "DUNE Silky",
+    "title": "St. John's Reef",
+    "start": "2027-05-01",
+    "was": 1643.0,
+    "now": 1632.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6695069993913573
+   },
+   {
+    "id": "emperor-asmaa-2027-08-14-0",
+    "boat": "Emperor Asmaa",
+    "title": "South & St. John's",
+    "start": "2027-08-14",
+    "was": 1473.0,
+    "now": 1462.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.7467752885268161
+   },
+   {
+    "id": "emperor-elite-2027-06-17-0",
+    "boat": "Emperor Elite",
+    "title": "South & St. John's",
+    "start": "2027-06-17",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "emperor-elite-2027-05-06-0",
+    "boat": "Emperor Elite",
+    "title": "South & St. John's",
+    "start": "2027-05-06",
+    "was": 1756.0,
+    "now": 1745.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6264236902050113
+   },
+   {
+    "id": "emperor-superior-2027-08-07-0",
+    "boat": "Emperor Superior",
+    "title": "Famous Five Cruise",
+    "start": "2027-08-07",
+    "was": 1598.0,
+    "now": 1587.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.688360450563204
+   },
+   {
+    "id": "emperor-superior-2027-05-22-0",
+    "boat": "Emperor Superior",
+    "title": "North & Easy",
+    "start": "2027-05-22",
+    "was": 1484.0,
+    "now": 1473.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.7412398921832885
+   },
+   {
+    "id": "ghazala-adventure-2027-05-31-0",
+    "boat": "Ghazala Adventure",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-31",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-adventure-2027-07-12-0",
+    "boat": "Ghazala Adventure",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-12",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-adventure-2027-05-10-0",
+    "boat": "Ghazala Adventure",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-10",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-adventure-2027-05-03-0",
+    "boat": "Ghazala Adventure",
+    "title": "Daedalus Rocky & St. John's",
+    "start": "2027-05-03",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-adventure-2027-05-17-0",
+    "boat": "Ghazala Adventure",
+    "title": "North & Brothers",
+    "start": "2027-05-17",
+    "was": 1700.0,
+    "now": 1689.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6470588235294118
+   },
+   {
+    "id": "ghazala-adventure-2027-05-24-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-05-24",
+    "was": 1660.0,
+    "now": 1649.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6626506024096386
+   },
+   {
+    "id": "ghazala-adventure-2027-06-07-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-06-07",
+    "was": 1773.0,
+    "now": 1762.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6204173716864072
+   },
+   {
+    "id": "ghazala-adventure-2027-06-14-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-06-14",
+    "was": 1660.0,
+    "now": 1649.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6626506024096386
+   },
+   {
+    "id": "ghazala-adventure-2027-06-21-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-06-21",
+    "was": 1660.0,
+    "now": 1649.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6626506024096386
+   },
+   {
+    "id": "ghazala-adventure-2027-07-05-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-07-05",
+    "was": 1660.0,
+    "now": 1649.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6626506024096386
+   },
+   {
+    "id": "ghazala-adventure-2027-07-19-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-07-19",
+    "was": 1660.0,
+    "now": 1649.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6626506024096386
+   },
+   {
+    "id": "ghazala-adventure-2027-07-26-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-07-26",
+    "was": 1660.0,
+    "now": 1649.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6626506024096386
+   },
+   {
+    "id": "ghazala-explorer-2027-08-16-0",
+    "boat": "Ghazala Explorer",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-16",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-explorer-2027-06-14-0",
+    "boat": "Ghazala Explorer",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-14",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-explorer-2027-07-26-0",
+    "boat": "Ghazala Explorer",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-26",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-explorer-2027-07-05-0",
+    "boat": "Ghazala Explorer",
+    "title": "Daedalus Rocky & St. John's",
+    "start": "2027-07-05",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   },
+   {
+    "id": "ghazala-explorer-2027-05-31-0",
+    "boat": "Ghazala Explorer",
+    "title": "Daedalus, Rocky & St. John's",
+    "start": "2027-05-31",
+    "was": 1779.0,
+    "now": 1768.0,
+    "currency": "USD",
+    "delta": -11.0,
+    "pct": -0.6183249016301293
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 120,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "more": {
+   "price_down": 637
+  },
+  "day": "2026-10-03"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-01",
   "added": [],
   "sold_out": [],
@@ -3953,373 +5639,5 @@
    "price_down": 606
   },
   "day": "2026-09-24"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-23",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [
-   {
-    "id": "topaz-2027-08-28-0",
-    "boat": "Topaz",
-    "title": "Dancing with Dolphins - Dolphin Liveaboard Safari",
-    "start": "2027-08-28",
-    "was": 1275.0,
-    "now": 1923.0,
-    "currency": "USD",
-    "delta": 648.0,
-    "pct": 50.8235294117647
-   },
-   {
-    "id": "topaz-2027-07-10-0",
-    "boat": "Topaz",
-    "title": "Sataya Dolphin, Daedalus, Elphinstone",
-    "start": "2027-07-10",
-    "was": 1355.0,
-    "now": 1489.0,
-    "currency": "USD",
-    "delta": 134.0,
-    "pct": 9.889298892988931
-   },
-   {
-    "id": "alsuraya-2027-05-29-0",
-    "boat": "ALSURAYA",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-29",
-    "was": 1433.0,
-    "now": 1545.0,
-    "currency": "USD",
-    "delta": 112.0,
-    "pct": 7.815771109560362
-   },
-   {
-    "id": "alsuraya-2027-08-14-0",
-    "boat": "ALSURAYA",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-14",
-    "was": 1218.0,
-    "now": 1314.0,
-    "currency": "USD",
-    "delta": 96.0,
-    "pct": 7.8817733990147785
-   },
-   {
-    "id": "alsuraya-2027-08-28-0",
-    "boat": "ALSURAYA",
-    "title": "Daedalus, Sataya & Fury Shoals",
-    "start": "2027-08-28",
-    "was": 1218.0,
-    "now": 1314.0,
-    "currency": "USD",
-    "delta": 96.0,
-    "pct": 7.8817733990147785
-   }
-  ],
-  "price_down": [
-   {
-    "id": "alsuraya-2027-06-05-0",
-    "boat": "ALSURAYA",
-    "title": "North & Brothers",
-    "start": "2027-06-05",
-    "was": 1316.0,
-    "now": 1216.0,
-    "currency": "USD",
-    "delta": -100.0,
-    "pct": -7.598784194528875
-   },
-   {
-    "id": "emperor-superior-2027-07-31-0",
-    "boat": "Emperor Superior",
-    "title": "South & St. John's",
-    "start": "2027-07-31",
-    "was": 2706.0,
-    "now": 2701.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.18477457501847747
-   },
-   {
-    "id": "marselia-star-2027-05-01-0",
-    "boat": "Marselia Star",
-    "title": "CCR Reefs, Wrecks and Canyons Trip",
-    "start": "2027-05-01",
-    "was": 3382.0,
-    "now": 3377.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.14784151389710232
-   },
-   {
-    "id": "queen-sherry-2027-07-31-0",
-    "boat": "Queen Sherry",
-    "title": "Eclipse & Big Fish: Pelagic Trail Eclipse Totality",
-    "start": "2027-07-31",
-    "was": 2752.0,
-    "now": 2747.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.1816860465116279
-   }
-  ],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 874,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-23"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-22",
-  "added": [
-   {
-    "id": "snefro-spirit-2027-05-01-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-05-01",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-05-08-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-05-08",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-05-15-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-05-15",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-05-22-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-05-22",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-05-29-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-05-29",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-06-05-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-06-05",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-06-12-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-06-12",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-06-19-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-06-19",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-06-26-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-06-26",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-07-03-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-07-03",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-07-10-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-07-10",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-07-17-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-07-17",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-07-24-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-07-24",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-07-31-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-07-31",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-08-07-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-08-07",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-08-14-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-08-14",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-08-21-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-08-21",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "snefro-spirit-2027-08-28-0",
-    "boat": "Snefro Spirit",
-    "title": "Sinai Classic",
-    "start": "2027-08-28",
-    "price": 1375.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   }
-  ],
-  "sold_out": [],
-  "returned": [
-   {
-    "id": "oceanix-2027-08-07-0",
-    "boat": "Oceanix",
-    "title": "North & Brothers Liveaboard",
-    "start": "2027-08-07",
-    "price": 1156.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   }
-  ],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [],
-  "price_down": [
-   {
-    "id": "marselia-star-2027-05-01-0",
-    "boat": "Marselia Star",
-    "title": "CCR Reefs, Wrecks and Canyons Trip",
-    "start": "2027-05-01",
-    "was": 3387.0,
-    "now": 3382.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.14762326542663123
-   }
-  ],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [
-   "Snefro Spirit"
-  ],
-  "fx": [],
-  "price_rounding": 849,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-22"
  }
 ]
