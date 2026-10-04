@@ -1,6 +1,108 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-04",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "blue-horizon-2027-07-17-0",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-17",
+    "price": 1743.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [
+   {
+    "id": "emperor-asmaa-2027-07-22-0",
+    "boat": "Emperor Asmaa",
+    "title": "Simply the Best",
+    "start": "2027-07-22",
+    "was": 1530.0,
+    "now": 1520.0,
+    "currency": "USD",
+    "delta": -10.0,
+    "pct": -0.6535947712418301
+   },
+   {
+    "id": "emperor-asmaa-2027-05-15-0",
+    "boat": "Emperor Asmaa",
+    "title": "Simply the Best",
+    "start": "2027-05-15",
+    "was": 1530.0,
+    "now": 1520.0,
+    "currency": "USD",
+    "delta": -10.0,
+    "pct": -0.6535947712418301
+   },
+   {
+    "id": "emperor-asmaa-2027-05-22-0",
+    "boat": "Emperor Asmaa",
+    "title": "Southern Solitude",
+    "start": "2027-05-22",
+    "was": 1530.0,
+    "now": 1520.0,
+    "currency": "USD",
+    "delta": -10.0,
+    "pct": -0.6535947712418301
+   },
+   {
+    "id": "emperor-asmaa-2027-05-08-0",
+    "boat": "Emperor Asmaa",
+    "title": "Daedalus, Fury and Elphinstone",
+    "start": "2027-05-08",
+    "was": 1416.0,
+    "now": 1407.0,
+    "currency": "USD",
+    "delta": -9.0,
+    "pct": -0.6355932203389831
+   },
+   {
+    "id": "emperor-asmaa-2027-05-01-0",
+    "boat": "Emperor Asmaa",
+    "title": "Simply the Best",
+    "start": "2027-05-01",
+    "was": 1473.0,
+    "now": 1464.0,
+    "currency": "USD",
+    "delta": -9.0,
+    "pct": -0.6109979633401221
+   },
+   {
+    "id": "emperor-asmaa-2027-05-29-0",
+    "boat": "Emperor Asmaa",
+    "title": "South & St. John's",
+    "start": "2027-05-29",
+    "was": 1473.0,
+    "now": 1464.0,
+    "currency": "USD",
+    "delta": -9.0,
+    "pct": -0.6109979633401221
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 140,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-04"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-03",
   "added": [],
   "sold_out": [],

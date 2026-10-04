@@ -3,6 +3,26 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-04
+
+```
+changes: HEAD -> 2026-10-04
+===========================
+
+now sold out (1)
+  2027-07-17  Blue Horizon           Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+price down (6)
+  2027-07-22  Emperor Asmaa          1,530 ->   1,520 USD  -10 (-0.7%)  Simply the Best
+  2027-05-15  Emperor Asmaa          1,530 ->   1,520 USD  -10 (-0.7%)  Simply the Best
+  2027-05-22  Emperor Asmaa          1,530 ->   1,520 USD  -10 (-0.7%)  Southern Solitude
+  2027-05-08  Emperor Asmaa          1,416 ->   1,407 USD  -9 (-0.6%)  Daedalus, Fury and Elphinstone
+  2027-05-01  Emperor Asmaa          1,473 ->   1,464 USD  -9 (-0.6%)  Simply the Best
+  2027-05-29  Emperor Asmaa          1,473 ->   1,464 USD  -9 (-0.6%)  South & St. John's
+
+140 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-03
 
 ```
