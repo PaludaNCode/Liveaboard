@@ -9,6 +9,16 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-10-03
 ===========================
 
+fees (1)
+  Amelie Adventures      nitrox_course    132 EUR / per_trip -> 160 EUR / per_trip
+```
+
+## 2026-10-03
+
+```
+changes: HEAD -> 2026-10-03
+===========================
+
 now sold out (6)
   2027-05-15  AVO                    St. John's                         liveaboard.com+padi.com
   2027-05-22  AVO                    The Best of the South Classic      liveaboard.com+padi.com
