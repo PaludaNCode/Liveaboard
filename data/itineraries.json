@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-01",
+  "collected": "2026-10-04",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -17391,6 +17391,50 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=408087&languageID=1&curr=USD&showPrices=false"
     },
+    "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Muhammad - Thistlegorm (Marsa Alam - Hurghada)": {
+      "boat": "hammerhead-ii",
+      "name": "Mini Safari: Abu Nuhas - Ras Muhammad - Thistlegorm (Marsa Alam - Hurghada)",
+      "tour_id": "390001",
+      "collected": "2026-10-04",
+      "regions": [
+        "Ras Mohammed",
+        "Abu Nuhas",
+        "Thistlegorm"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "dives": 10,
+      "guests": 32,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "Discover the Red Sea’s greatest hits in one powerful mini safari, from legendary wrecks to world-class reefs. Explore the iconic Abu Nuhas wrecks, glide along Ras Muhammad’s vibrant walls, and relive history on the unforgettable WWII Thistlegorm. A compact adventure delivering maximum thrills, beauty, and underwater wonder.",
+      "sections": [
+        {
+          "heading": "Day 1: Embarkation",
+          "text": "Meet at the designated pickup point and transfer to the vessel. Check-in, safety briefing, and equipment setup. Overnight on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 - 4:",
+          "text": "2 day dives, plus 1 night dive where possible. Dive sites: Abu Nuhas Ras Mohammed Thistlegorm",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5: Disembarkation",
+          "text": "Early breakfast, disembarkation at 2:00 - 3:00 pm.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Grey reef sharks, hammerheads, barracudas, trevallies, tuna, manta rays, eagle rays, turtles, and colorful reef fish, alongside the occasional soft coral gardens and thriving Red Sea ecosystems The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390001&languageID=1&curr=USD&showPrices=false"
+    },
     "hammerhead-ii::Northernmost: Abu Nuhas - SS Thistlegorm - Ras Mohammed - Tiran Island - Dahab (Hurghada - Hurghada)": {
       "boat": "hammerhead-ii",
       "name": "15% Off: Northernmost: Abu Nuhas - SS Thistlegorm - Ras Mohammed - Tiran Island - Dahab (Hurghada - Hurghada)",
@@ -32291,6 +32335,7 @@
     "411903": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "412445": "odyssey::Best of Dahab and Tiran (Hurghada - Hurghada)",
     "412446": "odyssey::The Golden Loop: North - Brother - Safaga (Hurghada - Hurghada)",
+    "412447": "odyssey::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "419973": "ghazala-explorer::Get Wrecked (Hurghada - Hurghada)",
     "420265": "hammerhead-ii::Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
     "425606": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
@@ -32303,13 +32348,19 @@
     "426457": "iceberg::Overnight Diving & Snorkelling (Hurghada - Hurghada)",
     "426619": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
     "426620": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
+    "427134": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
+    "427135": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+    "427139": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+    "427141": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "428125": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
     "435584": "new-sambo::Sataya Overnight (Hamata - Hamata)",
     "435585": "new-sambo::Sataya Overnight (Hamata - Hamata)",
+    "435775": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
     "436294": "iceberg::Hurghada North (Hurghada - Hurghada)",
     "436449": "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "436450": "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "436451": "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+    "437066": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
     "437465": "blue-pearl::North & Wrecks (Hurghada - Hurghada)",
     "438085": "blue::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
     "438086": "blue::St. Johns (Port Ghalib - Port Ghalib)",
@@ -32324,7 +32375,10 @@
     "440645": "new-sambo::Sataya Overnight (Hamata - Hamata)",
     "440646": "new-sambo::Sataya Overnight (Hamata - Hamata)",
     "440647": "new-sambo::Sataya Overnight (Hamata - Hamata)",
+    "442006": "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+    "442007": "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "442339": "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
-    "442843": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)"
+    "442843": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
+    "442926": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)"
   }
 }
