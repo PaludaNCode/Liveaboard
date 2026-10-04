@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-03",
+ "collected": "2026-10-04",
  "departures": {
   "all-star-ghani::2026-10-05": {
    "availability": 16,
@@ -6527,19 +6527,6 @@
    "start": "2027-12-25",
    "was": 1499.0
   },
-  "bella-2::2026-10-04": {
-   "availability": 1,
-   "boat": "bella-2",
-   "currency": "EUR",
-   "end": "2026-10-07",
-   "itinerary": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1531060,
-   "price": 590.0,
-   "slug": "bella-2",
-   "start": "2026-10-04",
-   "was": 590.0
-  },
   "bella-2::2026-10-07": {
    "availability": 20,
    "boat": "bella-2",
@@ -7776,7 +7763,7 @@
    "was": 760.0
   },
   "bella-3::2027-06-23": {
-   "availability": 20,
+   "availability": 18,
    "boat": "bella-3",
    "currency": "EUR",
    "end": "2027-06-27",
@@ -8660,7 +8647,7 @@
    "was": 1526.0
   },
   "blue-horizon::2027-07-17": {
-   "availability": 26,
+   "availability": 0,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-07-24",
@@ -9583,7 +9570,7 @@
    "was": 1785.0
   },
   "blue-melody::2026-10-17": {
-   "availability": 1,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-10-24",
@@ -9635,7 +9622,7 @@
    "was": 1400.0
   },
   "blue-melody::2026-11-14": {
-   "availability": 3,
+   "availability": 2,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-11-21",
@@ -10883,7 +10870,7 @@
    "was": 1120.0
   },
   "blue-pearl::2026-10-15": {
-   "availability": 3,
+   "availability": 2,
    "boat": "blue-pearl",
    "currency": "EUR",
    "end": "2026-10-22",
@@ -14406,7 +14393,7 @@
    "was": 900.0
   },
   "discovery-i::2026-12-26": {
-   "availability": 14,
+   "availability": 13,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -15043,7 +15030,7 @@
    "was": 960.0
   },
   "discovery-i::2027-12-04": {
-   "availability": 18,
+   "availability": 16,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-12-11",
@@ -15589,7 +15576,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-10-24": {
-   "availability": 3,
+   "availability": 4,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -15615,7 +15602,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-07": {
-   "availability": 8,
+   "availability": 9,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -15641,7 +15628,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-21": {
-   "availability": 16,
+   "availability": 14,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-28",
@@ -15888,7 +15875,7 @@
    "was": 1100.0
   },
   "discovery-ii::2027-06-05": {
-   "availability": 16,
+   "availability": 14,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-06-12",
@@ -20802,7 +20789,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-05-01": {
-   "availability": 16,
+   "availability": 12,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-05-08",
@@ -22219,7 +22206,7 @@
    "was": 1800.0
   },
   "emperor-elite::2027-10-07": {
-   "availability": 22,
+   "availability": 24,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-10-14",
@@ -26145,7 +26132,7 @@
    "was": 760.0
   },
   "freedom-iv::2026-12-09": {
-   "availability": 21,
+   "availability": 23,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2026-12-13",
@@ -26457,7 +26444,7 @@
    "was": 1465.0
   },
   "ghazala-adventure::2027-03-22": {
-   "availability": 22,
+   "availability": 21,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-03-29",
@@ -26483,7 +26470,7 @@
    "was": 1500.0
   },
   "ghazala-adventure::2027-04-05": {
-   "availability": 21,
+   "availability": 22,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-04-12",
@@ -26743,7 +26730,7 @@
    "was": 1465.0
   },
   "ghazala-adventure::2027-08-23": {
-   "availability": 19,
+   "availability": 17,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-08-30",
@@ -27523,7 +27510,7 @@
    "was": 1570.0
   },
   "ghazala-explorer::2027-08-23": {
-   "availability": 21,
+   "availability": 19,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-08-30",
@@ -27835,7 +27822,7 @@
    "was": 1620.0
   },
   "grand-discovery::2026-11-07": {
-   "availability": 14,
+   "availability": 16,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -27887,7 +27874,7 @@
    "was": 1325.0
   },
   "grand-discovery::2026-12-05": {
-   "availability": 6,
+   "availability": 9,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -27926,7 +27913,7 @@
    "was": 1225.0
   },
   "grand-discovery::2026-12-26": {
-   "availability": 0,
+   "availability": 2,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -28173,7 +28160,7 @@
    "was": 1300.0
   },
   "grand-discovery::2027-05-08": {
-   "availability": 35,
+   "availability": 33,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -28316,7 +28303,7 @@
    "was": 1225.0
   },
   "grand-discovery::2027-07-24": {
-   "availability": 30,
+   "availability": 32,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-07-31",
@@ -28459,7 +28446,7 @@
    "was": 1350.0
   },
   "grand-discovery::2027-10-09": {
-   "availability": 31,
+   "availability": 25,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -29135,7 +29122,7 @@
    "was": 1501.25
   },
   "hammerhead-ii::2026-11-07": {
-   "availability": 23,
+   "availability": 12,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -29174,7 +29161,7 @@
    "was": 1472.5
   },
   "hammerhead-ii::2026-11-28": {
-   "availability": 32,
+   "availability": 16,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -30577,19 +30564,6 @@
    "start": "2027-12-30",
    "was": 1550.0
   },
-  "high-wave::2026-10-04": {
-   "availability": 0,
-   "boat": "high-wave",
-   "currency": "EUR",
-   "end": "2026-10-11",
-   "itinerary": "North & Dahab (Hurghada - Hurghada) 7 Nights",
-   "nights": 7,
-   "padi_id": 1547441,
-   "price": 1460.0,
-   "slug": "high-wave",
-   "start": "2026-10-04",
-   "was": 1460.0
-  },
   "high-wave::2026-10-25": {
    "availability": 16,
    "boat": "high-wave",
@@ -30667,19 +30641,6 @@
    "slug": "high-wave",
    "start": "2026-11-29",
    "was": 1355.0
-  },
-  "iceberg::2026-10-04": {
-   "availability": 6,
-   "boat": "iceberg",
-   "currency": "EUR",
-   "end": "2026-10-08",
-   "itinerary": "Special Wrecks / Hurghada North (Hurghada - Hurghada) 4 nights/4 days diving",
-   "nights": 4,
-   "padi_id": 1548854,
-   "price": 590.0,
-   "slug": "my-iceberg",
-   "start": "2026-10-04",
-   "was": 590.0
   },
   "iceberg::2026-10-11": {
    "availability": 8,
@@ -31161,19 +31122,6 @@
    "slug": "my-lady-m",
    "start": "2026-11-16",
    "was": 625.0
-  },
-  "new-sambo::2026-10-04": {
-   "availability": 0,
-   "boat": "new-sambo",
-   "currency": "EUR",
-   "end": "2026-10-06",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
-   "padi_id": 1550017,
-   "price": 470.0,
-   "slug": "new-sambo-safari-boat-2",
-   "start": "2026-10-04",
-   "was": 470.0
   },
   "new-sambo::2026-10-07": {
    "availability": 14,
@@ -32086,7 +32034,7 @@
    "was": 1570.0
   },
   "odyssey::2026-10-24": {
-   "availability": 0,
+   "availability": 2,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -33035,7 +32983,7 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2027-06-12": {
-   "availability": 16,
+   "availability": 10,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2027-06-19",
@@ -33048,7 +32996,7 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2027-06-19": {
-   "availability": 26,
+   "availability": 18,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2027-06-26",
@@ -34205,7 +34153,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-04-03": {
-   "availability": 23,
+   "availability": 22,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-04-10",
@@ -37949,7 +37897,7 @@
    "was": 950.0
   },
   "royal-evolution::2026-10-08": {
-   "availability": 5,
+   "availability": 6,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-10-15",
@@ -37962,7 +37910,7 @@
    "was": 1499.0
   },
   "royal-evolution::2026-10-15": {
-   "availability": 2,
+   "availability": 3,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-10-22",
@@ -38001,7 +37949,7 @@
    "was": 1499.0
   },
   "royal-evolution::2026-11-05": {
-   "availability": 4,
+   "availability": 2,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-11-12",
@@ -39886,7 +39834,7 @@
    "was": 1500.0
   },
   "serenity::2026-10-17": {
-   "availability": 3,
+   "availability": 2,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -39899,7 +39847,7 @@
    "was": 1500.0
   },
   "serenity::2026-10-24": {
-   "availability": 8,
+   "availability": 6,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -39912,7 +39860,7 @@
    "was": 1400.0
   },
   "serenity::2026-10-31": {
-   "availability": 6,
+   "availability": 5,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -39938,17 +39886,17 @@
    "was": 1400.0
   },
   "serenity::2026-11-14": {
-   "availability": 0,
+   "availability": 2,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-21",
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1537406,
-   "price": 1400.0,
+   "price": 1610.0,
    "slug": "serenity",
    "start": "2026-11-14",
-   "was": 1400.0
+   "was": 1610.0
   },
   "serenity::2026-11-21": {
    "availability": 5,
@@ -39990,7 +39938,7 @@
    "was": 1250.0
   },
   "serenity::2026-12-12": {
-   "availability": 10,
+   "availability": 12,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -40224,7 +40172,7 @@
    "was": 1350.0
   },
   "serenity::2027-04-17": {
-   "availability": 14,
+   "availability": 13,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-04-24",
@@ -40651,19 +40599,6 @@
    "slug": "serenity",
    "start": "2027-12-25",
    "was": 1300.0
-  },
-  "snefro-love::2026-10-04": {
-   "availability": 0,
-   "boat": "snefro-love",
-   "currency": "EUR",
-   "end": "2026-10-11",
-   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el sheikh) 7 nights",
-   "nights": 7,
-   "padi_id": 1555332,
-   "price": 1169.0,
-   "slug": "snefro-love",
-   "start": "2026-10-04",
-   "was": 1169.0
   },
   "snefro-love::2026-10-11": {
    "availability": 0,
@@ -41354,19 +41289,6 @@
    "start": "2027-12-23",
    "was": 699.0
   },
-  "snefro-pearl::2026-10-04": {
-   "availability": 2,
-   "boat": "snefro-pearl",
-   "currency": "EUR",
-   "end": "2026-10-07",
-   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1542390,
-   "price": 529.0,
-   "slug": "snefro-pearl",
-   "start": "2026-10-04",
-   "was": 529.0
-  },
   "snefro-pearl::2026-10-07": {
    "availability": 6,
    "boat": "snefro-pearl",
@@ -41719,7 +41641,7 @@
    "was": 529.0
   },
   "snefro-pearl::2027-01-10": {
-   "availability": 7,
+   "availability": 8,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2027-01-13",
@@ -42654,6 +42576,19 @@
    "start": "2027-09-15",
    "was": 582.0
   },
+  "snefro-pearl::2027-09-19": {
+   "availability": 12,
+   "boat": "snefro-pearl",
+   "currency": "EUR",
+   "end": "2027-09-22",
+   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
+   "nights": 3,
+   "padi_id": 1556385,
+   "price": 582.0,
+   "slug": "snefro-pearl",
+   "start": "2027-09-19",
+   "was": 582.0
+  },
   "snefro-spirit::2027-04-24": {
    "availability": 4,
    "boat": "snefro-spirit",
@@ -43539,7 +43474,7 @@
    "was": 1125.0
   },
   "south-moon-1::2026-10-31": {
-   "availability": 2,
+   "availability": 1,
    "boat": "south-moon-1",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -45424,7 +45359,7 @@
    "was": 1460.0
   },
   "topaz::2027-10-30": {
-   "availability": 14,
+   "availability": 0,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-11-06",
@@ -45554,7 +45489,7 @@
    "was": 1085.0
   },
   "unity::2026-11-21": {
-   "availability": 26,
+   "availability": 27,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-11-28",
