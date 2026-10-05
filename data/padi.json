@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-04",
+ "collected": "2026-10-05",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -41446,6 +41446,93 @@
    },
    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el sheikh) 4 nights"
   },
+  "snefro-spirit::Sinai Classic (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "snefro-spirit",
+   "boat_name": "Snefro Spirit",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras katy",
+    "ras mohammed",
+    "gubal"
+   ],
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 130.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 560.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "private_guide",
+      "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "included": true,
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Shared Transfers at embarkation/disembarkation to/from live aboard in Sharm El Sheikh (from Hotel or Airport)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 9191,
+   "padi_slug": "sinai-classic-2",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 15
+   },
+   "title": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights"
+  },
   "snefro-spirit::Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "snefro-spirit",
    "boat_name": "Snefro Spirit",
@@ -44293,12 +44380,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 57,
-    "first": "2026-10-05",
+    "dated": 56,
+    "first": "2026-10-12",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 57,
+    "read": 56,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -44316,12 +44403,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 56,
-    "first": "2026-10-05",
+    "dated": 55,
+    "first": "2026-10-12",
     "in_season": 17,
     "last": "2027-12-27",
     "priced": 17,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -44361,9 +44448,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-05",
+    "first": "2026-10-09",
     "in_season": 31,
-    "last": "2027-11-18",
+    "last": "2027-11-22",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -44383,12 +44470,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 91,
-    "first": "2026-10-05",
+    "dated": 90,
+    "first": "2026-10-09",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 91,
+    "read": 90,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -45042,12 +45129,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 60,
-    "first": "2026-10-05",
+    "dated": 59,
+    "first": "2026-10-12",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 60,
+    "read": 59,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -45064,12 +45151,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 60,
-    "first": "2026-10-05",
+    "dated": 59,
+    "first": "2026-10-12",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 60,
+    "read": 59,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -45532,12 +45619,12 @@
    "name": "Snefro Spirit",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 2,
+    "dated": 33,
     "first": "2026-11-11",
-    "in_season": 0,
-    "last": "2027-04-24",
-    "priced": 0,
-    "read": 2,
+    "in_season": 18,
+    "last": "2027-11-27",
+    "priced": 18,
+    "read": 33,
     "unpriced": 1
    },
    "slug": "snefro-spirit",

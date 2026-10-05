@@ -1,19 +1,6 @@
 {
- "collected": "2026-10-04",
+ "collected": "2026-10-05",
  "departures": {
-  "all-star-ghani::2026-10-05": {
-   "availability": 16,
-   "boat": "all-star-ghani",
-   "currency": "USD",
-   "end": "2026-10-12",
-   "itinerary": "North (Hurghada - Hurghada) 7 Nights",
-   "nights": 7,
-   "padi_id": 1556276,
-   "price": 1056.0,
-   "slug": "all-star-ghani",
-   "start": "2026-10-05",
-   "was": 1056.0
-  },
   "all-star-ghani::2026-10-12": {
    "availability": 24,
    "boat": "all-star-ghani",
@@ -741,19 +728,6 @@
    "slug": "all-star-ghani",
    "start": "2027-12-27",
    "was": 1135.0
-  },
-  "all-star-red-sea::2026-10-05": {
-   "availability": 0,
-   "boat": "all-star-red-sea",
-   "currency": "USD",
-   "end": "2026-10-12",
-   "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
-   "nights": 7,
-   "padi_id": 1547602,
-   "price": 2295.0,
-   "slug": "all-star-scuba-scene",
-   "start": "2026-10-05",
-   "was": 2295.0
   },
   "all-star-red-sea::2026-10-12": {
    "availability": 0,
@@ -1718,7 +1692,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-03-27": {
-   "availability": 4,
+   "availability": 0,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-04-03",
@@ -1731,7 +1705,7 @@
    "was": 1150.0
   },
   "alsuraya::2027-04-03": {
-   "availability": 22,
+   "availability": 20,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-04-10",
@@ -1809,7 +1783,7 @@
    "was": 1400.0
   },
   "alsuraya::2027-05-15": {
-   "availability": 24,
+   "availability": 20,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-05-22",
@@ -2223,19 +2197,6 @@
    "slug": "alsuraya",
    "start": "2027-12-25",
    "was": 1150.0
-  },
-  "amelie-adventures::2026-10-05": {
-   "availability": 4,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2026-10-08",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1532782,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2026-10-05",
-   "was": 485.0
   },
   "amelie-adventures::2026-10-09": {
    "availability": 10,
@@ -3393,19 +3354,6 @@
    "slug": "amelie-adventures",
    "start": "2027-10-30",
    "was": 1199.0
-  },
-  "amelie::2026-10-05": {
-   "availability": 2,
-   "boat": "amelie",
-   "currency": "EUR",
-   "end": "2026-10-08",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1529898,
-   "price": 435.0,
-   "slug": "amelie-safari",
-   "start": "2026-10-05",
-   "was": 435.0
   },
   "amelie::2026-10-09": {
    "availability": 9,
@@ -4692,6 +4640,19 @@
    "price": 435.0,
    "slug": "amelie-safari",
    "start": "2027-11-18",
+   "was": 435.0
+  },
+  "amelie::2027-11-22": {
+   "availability": 12,
+   "boat": "amelie",
+   "currency": "EUR",
+   "end": "2027-11-25",
+   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
+   "nights": 3,
+   "padi_id": 1546353,
+   "price": 435.0,
+   "slug": "amelie-safari",
+   "start": "2027-11-22",
    "was": 435.0
   },
   "andromeda::2026-10-10": {
@@ -6541,7 +6502,7 @@
    "was": 590.0
   },
   "bella-2::2026-10-11": {
-   "availability": 13,
+   "availability": 10,
    "boat": "bella-2",
    "currency": "EUR",
    "end": "2026-10-14",
@@ -9778,20 +9739,20 @@
    "was": 1281.0
   },
   "blue-melody::2027-03-13": {
-   "availability": 4,
+   "availability": 5,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-03-20",
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526478,
-   "price": 970.2,
+   "price": 896.7,
    "slug": "my-blue-melody",
    "start": "2027-03-13",
-   "was": 1386.0
+   "was": 1281.0
   },
   "blue-melody::2027-03-20": {
-   "availability": 9,
+   "availability": 10,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-03-27",
@@ -11624,14 +11585,14 @@
    "was": 1370.0
   },
   "blue-seas::2026-10-22": {
-   "availability": 1,
+   "availability": 0,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-10-29",
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1542077,
-   "price": 1370.0,
+   "price": 1200.0,
    "slug": "my-blue-seas",
    "start": "2026-10-22",
    "was": 1370.0
@@ -12326,14 +12287,14 @@
    "was": 1680.0
   },
   "blue-storm::2026-10-22": {
-   "availability": 10,
+   "availability": 11,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-10-29",
    "itinerary": "Brothers-Daedalus-Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1541754,
-   "price": 1560.0,
+   "price": 1350.0,
    "slug": "my-blue-storm",
    "start": "2026-10-22",
    "was": 1560.0
@@ -14250,17 +14211,17 @@
    "was": 995.0
   },
   "discovery-i::2026-10-10": {
-   "availability": 0,
+   "availability": 1,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-10-17",
    "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1532040,
-   "price": 912.0,
+   "price": 1094.4,
    "slug": "my-discovery-i",
    "start": "2026-10-10",
-   "was": 960.0
+   "was": 1152.0
   },
   "discovery-i::2026-10-17": {
    "availability": 0,
@@ -14614,7 +14575,7 @@
    "was": 1075.0
   },
   "discovery-i::2027-04-24": {
-   "availability": 15,
+   "availability": 9,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-05-01",
@@ -14653,7 +14614,7 @@
    "was": 930.0
   },
   "discovery-i::2027-05-15": {
-   "availability": 20,
+   "availability": 14,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-05-22",
@@ -15576,7 +15537,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-10-24": {
-   "availability": 4,
+   "availability": 1,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -15602,7 +15563,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-07": {
-   "availability": 9,
+   "availability": 8,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -15615,7 +15576,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-14": {
-   "availability": 16,
+   "availability": 13,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -22089,7 +22050,7 @@
    "was": 1550.0
   },
   "emperor-elite::2027-06-24": {
-   "availability": 22,
+   "availability": 21,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-07-01",
@@ -23168,7 +23129,7 @@
    "was": 1410.0
   },
   "emperor-superior::2027-10-02": {
-   "availability": 16,
+   "availability": 14,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2027-10-09",
@@ -26209,19 +26170,6 @@
    "start": "2026-11-14",
    "was": 1200.0
   },
-  "ghazala-adventure::2026-10-05": {
-   "availability": 0,
-   "boat": "ghazala-adventure",
-   "currency": "EUR",
-   "end": "2026-10-12",
-   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights",
-   "nights": 7,
-   "padi_id": 1544343,
-   "price": 1400.0,
-   "slug": "ghazala-adventure",
-   "start": "2026-10-05",
-   "was": 1400.0
-  },
   "ghazala-adventure::2026-10-12": {
    "availability": 0,
    "boat": "ghazala-adventure",
@@ -26366,7 +26314,7 @@
    "was": 1400.0
   },
   "ghazala-adventure::2026-12-28": {
-   "availability": 13,
+   "availability": 14,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-01-04",
@@ -26821,7 +26769,7 @@
    "was": 1465.0
   },
   "ghazala-adventure::2027-10-11": {
-   "availability": 5,
+   "availability": 7,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-10-18",
@@ -26988,19 +26936,6 @@
    "slug": "ghazala-adventure",
    "start": "2028-01-03",
    "was": 1500.0
-  },
-  "ghazala-explorer::2026-10-05": {
-   "availability": 0,
-   "boat": "ghazala-explorer",
-   "currency": "EUR",
-   "end": "2026-10-12",
-   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights",
-   "nights": 7,
-   "padi_id": 1541635,
-   "price": 1400.0,
-   "slug": "ghazala-explorer",
-   "start": "2026-10-05",
-   "was": 1400.0
   },
   "ghazala-explorer::2026-10-12": {
    "availability": 0,
@@ -27796,7 +27731,7 @@
    "was": 1620.0
   },
   "grand-discovery::2026-10-24": {
-   "availability": 23,
+   "availability": 19,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -27913,7 +27848,7 @@
    "was": 1225.0
   },
   "grand-discovery::2026-12-26": {
-   "availability": 2,
+   "availability": 0,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -27939,7 +27874,7 @@
    "was": 1225.0
   },
   "grand-discovery::2027-01-09": {
-   "availability": 32,
+   "availability": 33,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-16",
@@ -28186,7 +28121,7 @@
    "was": 1275.0
   },
   "grand-discovery::2027-05-22": {
-   "availability": 36,
+   "availability": 34,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-05-29",
@@ -31072,7 +31007,7 @@
    "was": 1889.0
   },
   "lady-m::2026-10-08": {
-   "availability": 0,
+   "availability": 22,
    "boat": "lady-m",
    "currency": "EUR",
    "end": "2026-10-11",
@@ -32060,7 +31995,7 @@
    "was": 1660.0
   },
   "odyssey::2026-11-07": {
-   "availability": 1,
+   "availability": 2,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -32645,17 +32580,17 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-10-17": {
-   "availability": 2,
+   "availability": 0,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-10-24",
    "itinerary": "Northern Red Sea, Ras Mohamed and Straits of Tiran 7 Nights (Hurghada -Hurghada)",
    "nights": 7,
    "padi_id": 1508939,
-   "price": 3060.0,
+   "price": 2760.0,
    "slug": "red-sea-aggressor-ii",
    "start": "2026-10-17",
-   "was": 3060.0
+   "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-10-24": {
    "availability": 0,
@@ -34062,7 +33997,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-12-19": {
-   "availability": 16,
+   "availability": 13,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-12-26",
@@ -34127,7 +34062,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-03-20": {
-   "availability": 22,
+   "availability": 21,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-03-27",
@@ -35349,7 +35284,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-12-12": {
-   "availability": 19,
+   "availability": 23,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-12-19",
@@ -37910,7 +37845,7 @@
    "was": 1499.0
   },
   "royal-evolution::2026-10-15": {
-   "availability": 3,
+   "availability": 2,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-10-22",
@@ -39847,7 +39782,7 @@
    "was": 1500.0
   },
   "serenity::2026-10-24": {
-   "availability": 6,
+   "availability": 7,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -40107,7 +40042,7 @@
    "was": 1300.0
   },
   "serenity::2027-03-13": {
-   "availability": 17,
+   "availability": 19,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-03-20",
@@ -40172,7 +40107,7 @@
    "was": 1350.0
   },
   "serenity::2027-04-17": {
-   "availability": 13,
+   "availability": 11,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-04-24",
@@ -40821,17 +40756,17 @@
    "start": "2027-04-15",
    "was": 699.0
   },
-  "snefro-love::2027-04-22": {
-   "availability": 20,
+  "snefro-love::2027-04-21": {
+   "availability": 0,
    "boat": "snefro-love",
    "currency": "EUR",
-   "end": "2027-04-26",
-   "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
-   "nights": 4,
+   "end": "2027-04-28",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el sheikh) 7 nights",
+   "nights": 7,
    "padi_id": 1558993,
    "price": 699.0,
    "slug": "snefro-love",
-   "start": "2027-04-22",
+   "start": "2027-04-21",
    "was": 699.0
   },
   "snefro-love::2027-04-29": {
@@ -42135,7 +42070,7 @@
    "was": 582.0
   },
   "snefro-pearl::2027-05-23": {
-   "availability": 12,
+   "availability": 10,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2027-05-26",
@@ -42602,6 +42537,409 @@
    "start": "2027-04-24",
    "was": 1239.0
   },
+  "snefro-spirit::2027-05-01": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-05-08",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560922,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-05-01",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-05-08": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-05-15",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560926,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-05-08",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-05-15": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-05-22",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560923,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-05-15",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-05-22": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-05-29",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560924,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-05-22",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-05-29": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-06-05",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560928,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-05-29",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-06-05": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-06-12",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560930,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-06-05",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-06-12": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-06-19",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560932,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-06-12",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-06-19": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-06-26",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560933,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-06-19",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-06-26": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-07-03",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560925,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-06-26",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-07-03": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-07-10",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560927,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-07-03",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-07-10": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-07-17",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560929,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-07-10",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-07-17": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-07-24",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560931,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-07-17",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-07-24": {
+   "availability": 0,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-07-31",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560950,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-07-24",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-07-31": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-08-07",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560941,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-07-31",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-08-07": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-08-14",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560951,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-08-07",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-08-14": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-08-21",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560938,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-08-14",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-08-21": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-08-28",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560939,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-08-21",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-08-28": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-09-04",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560947,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-08-28",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-09-04": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-09-11",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560946,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-09-04",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-09-11": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-09-18",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560940,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-09-11",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-09-18": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-09-25",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560943,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-09-18",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-09-25": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-10-02",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560949,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-09-25",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-10-02": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-10-09",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560952,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-10-02",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-10-09": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-10-16",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560936,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-10-09",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-10-16": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-10-23",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560935,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-10-16",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-10-23": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-10-30",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560944,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-10-23",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-10-30": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-11-06",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560945,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-10-30",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-11-06": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-11-13",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560948,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-11-06",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-11-13": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-11-20",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560937,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-11-13",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-11-20": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-11-27",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560942,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-11-20",
+   "was": 1199.0
+  },
+  "snefro-spirit::2027-11-27": {
+   "availability": 18,
+   "boat": "snefro-spirit",
+   "currency": "EUR",
+   "end": "2027-12-04",
+   "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560934,
+   "price": 1199.0,
+   "slug": "snefro-spirit",
+   "start": "2027-11-27",
+   "was": 1199.0
+  },
   "snefro-target::2026-10-10": {
    "availability": 0,
    "boat": "snefro-target",
@@ -42642,17 +42980,17 @@
    "was": 999.0
   },
   "snefro-target::2026-10-31": {
-   "availability": 2,
+   "availability": 0,
    "boat": "snefro-target",
    "currency": "EUR",
    "end": "2026-11-07",
    "itinerary": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)  - 7 Nights",
    "nights": 7,
    "padi_id": 1550241,
-   "price": 1249.0,
+   "price": 1169.0,
    "slug": "snefro-target",
    "start": "2026-10-31",
-   "was": 1249.0
+   "was": 1169.0
   },
   "snefro-target::2026-11-07": {
    "availability": 0,
@@ -44995,7 +45333,7 @@
    "was": 1360.0
   },
   "topaz::2027-04-03": {
-   "availability": 28,
+   "availability": 16,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-04-10",
