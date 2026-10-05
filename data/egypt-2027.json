@@ -90420,7 +90420,7 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-imperial",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -90612,7 +90612,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--clean-up-safari-north-safaga-brother-islands-elphinstone-hurghada-port-ghalib",
@@ -90621,12 +90630,14 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-imperial",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "elphinstone",
+        "abu dabab",
         "safaga",
+        "thistlegorm",
         "brothers"
       ],
       "region": null,
@@ -90813,7 +90824,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
