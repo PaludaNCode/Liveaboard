@@ -3,6 +3,29 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-05
+
+```
+changes: HEAD -> 2026-10-05
+===========================
+
+new departures (1)
+  2027-06-17  Golden Imperial        Clean up Safari: North - Safaga -         844 USD liveaboard.com
+
+now sold out (3)
+  2027-07-12  Ghazala Explorer       Deep South & St. John's            divebooker.com+liveaboard.com+padi.com
+  2027-07-15  Golden Dolphin         North                              liveaboard.com
+  2027-07-31  Snefro Target          Sinai Classic                      divebooker.com+liveaboard.com+padi.com
+
+bookable again (1)
+  2027-07-31  Star Jet               Elphinstone - St. John's - Sataya  divebooker.com+liveaboard.com
+
+price up (1)
+  2027-07-31  Ocean Lovers           1,408 ->   1,439 USD  +31 (+2.2%)  Brothers, Daedalus & Elphinstone
+
+236 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-04
 
 ```
