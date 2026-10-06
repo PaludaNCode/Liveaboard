@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-05",
+ "collected": "2026-10-06",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -40332,6 +40332,397 @@
    },
    "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights"
   },
+  "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 190.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Park Fees, port fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 210.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21609,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-7",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "serenity::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 190.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Park Fees, port fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 210.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 21610,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-2",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "serenity::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 190.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Park Fees, port fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 210.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22131,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-5",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "serenity::Daedalus - St. John's (Port Ghalib - Port Ghalib)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dive_sites": [
+    "daedalus",
+    "st johns"
+   ],
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 220.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Park Fees, port fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 210.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus - St. John's (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22180,
+   "padi_slug": "deep-south-st-johns-port-ghalib-port-ghalib-7-ni-7",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus - St. John's (Port Ghalib - Port Ghalib) 7 Nights"
+  },
   "serenity::Mini - Hurghada (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
@@ -44789,12 +45180,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 47,
+    "dated": 45,
     "first": "2026-10-12",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 47,
+    "read": 45,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -45106,13 +45497,13 @@
    "name": "MY Galaxy",
    "operator": null,
    "sailings": {
-    "dated": 8,
+    "dated": 10,
     "first": "2026-10-10",
-    "in_season": 0,
-    "last": "2026-11-28",
+    "in_season": 2,
+    "last": "2027-05-08",
     "priced": 0,
-    "read": 8,
-    "unpriced": 6
+    "read": 10,
+    "unpriced": 8
    },
    "slug": "my-galaxy",
    "specs": {
@@ -45330,10 +45721,10 @@
     "dated": 100,
     "first": "2026-10-07",
     "in_season": 20,
-    "last": "2028-06-17",
+    "last": "2028-05-27",
     "priced": 17,
     "read": 100,
-    "unpriced": 32
+    "unpriced": 29
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -45689,9 +46080,9 @@
    "sailings": {
     "dated": 100,
     "first": "2026-10-08",
-    "in_season": 17,
-    "last": "2028-12-14",
-    "priced": 17,
+    "in_season": 16,
+    "last": "2028-12-21",
+    "priced": 16,
     "read": 100,
     "unpriced": 0
    },
@@ -45755,13 +46146,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 14,
-    "first": "2026-10-06",
+    "dated": 13,
+    "first": "2026-10-11",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 14,
-    "unpriced": 14
+    "read": 13,
+    "unpriced": 13
    },
    "slug": "vip-one",
    "specs": {
