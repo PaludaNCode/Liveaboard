@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-05",
+  "collected": "2026-10-06",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -17284,6 +17284,53 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390011&languageID=1&curr=USD&showPrices=false"
     },
+    "hammerhead-ii::Daedalus Light (Marsa Alam - Marsa Alam)": {
+      "boat": "hammerhead-ii",
+      "name": "15% Off: Daedalus Light (Marsa Alam - Marsa Alam)",
+      "tour_id": "390020",
+      "collected": "2026-10-06",
+      "regions": [
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 9,
+      "guests": 32,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "The",
+      "sections": [
+        {
+          "heading": "Red Sea",
+          "text": "is considered to be one of the 7 Wonders of the underwater world, harboring more than 1,000 species of invertebrates and over 200 species of soft and hard coral. This forms the basis of a marine ecosystem that includes 1,100 species of fish, of which just under 20% are endemic to the Red Sea, i.e. these fish species can only be found here. The high level of endemism here is one of the main factors that makes Egypt scuba diving so interesting. The Red Sea dive sites offer you unobstructed opportunities to spot tropical marine life in crystal clear waters, ranging from sharks and dolphins to gorgonian fans and feather stars. Variety is in no short supply either depending on where you choose to dive. Your diving holiday can include shallow patch reefs, drift dives, and walls, or a collection of some of the most interesting wrecks you are likely to find anywhere. In other places, vibrant reefs stretch out far into the sea and form intricate labyrinths of plateaus, lagoons, caves, and gardens. One moment you could find yourself on a coral garden atop a summit and the next a sheer wall could plunge thousands of feet into dark ocean depths. The Red Sea's abundance of marine life and depths of the reef are a thrill that many divers will tell you is unbeatable.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1: Marsa Alam",
+          "text": "Check-in and General Briefing.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Check dive at Marsa Alam and Shoab Sharm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 - 4:",
+          "text": "2-day dives, plus 1 night dive where possible. Dive sites: Daedalus.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5: Marsa Alam",
+          "text": "Elphinstone & Checkout. The last dive of the trip will be on the final day. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics and are at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390020&languageID=1&curr=USD&showPrices=false"
+    },
     "hammerhead-ii::Deepest South: Abu Fandira - Sataya​​ (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)": {
       "boat": "hammerhead-ii",
       "name": "15% Off: Deepest South: Abu Fandira - Sataya​​ (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)",
@@ -25509,6 +25556,57 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6173&tourID=366857&languageID=1&curr=USD&showPrices=false"
     },
+    "serenity::Diver Development Week (Hurghada - Hurghada)": {
+      "boat": "serenity",
+      "name": "Diver Development Week (Hurghada - Hurghada)",
+      "tour_id": "351886",
+      "collected": "2026-10-06",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 22,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": "Take your diving beyond the basics in one unforgettable Red Sea adventure. Whether you’re a beginner or an experienced diver, this trip allows you to learn, get certified, and explore world-class dive sites all in one journey. From Open Water to Advanced and a wide range of PADI specialties, you can build your skills onboard while diving iconic locations such as Dolphin House and Abu Nuhas.",
+      "sections": [
+        {
+          "heading": "What makes this trip unique:",
+          "text": "Perfect for beginners and recreational divers Complete Open Water or Advanced certification onboard—or both Combine multiple PADI specialty courses during the trip Train directly in the Red Sea, one of the best environments to build diving confidence Suitable for non-divers and snorkelers as well",
+          "is_day": false
+        },
+        {
+          "heading": "Specialties:",
+          "text": "Nitrox Deep Diver Night Diver Drift Diver Wreck Diver Boat Diver Peak Performance Buoyancy Underwater Navigator",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Check-in starting at 5:00 pm. Welcome briefing, boat orientation & equipment setup. Dinner on board Spending the first night at the marina.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2-6:",
+          "text": "Departure from port, Dolphin House/Abu Nahas.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives, then back to port at noon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Breakfast and check-out at 9:00 am. Note: The itinerary is indicative and subject to divers' levels, course needs, and weather conditions.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "The Red Sea is one of the world's most biodiverse marine environments, home to vibrant coral reefs teeming with colorful reef fish, moray eels, and graceful sea turtles. Dolphin House lives up to its name with regular spinner dolphin encounters, while the wrecks of Abu Nuhas have transformed into thriving artificial reefs bustling with glassfish, lionfish, and the occasional reef shark. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6173&tourID=351886&languageID=1&curr=USD&showPrices=false"
+    },
     "serenity::Mini - Wrecks (Hurghada - Hurghada)": {
       "boat": "serenity",
       "name": "20% Off: Mini - Wrecks (Hurghada - Hurghada)",
@@ -32359,6 +32457,17 @@
     "332038": "discovery-i::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
     "332039": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
     "332040": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
+    "351876": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+    "351877": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+    "351878": "serenity::North & Brothers (Hurghada - Hurghada)",
+    "351879": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+    "351881": "serenity::North & Brothers (Hurghada - Hurghada)",
+    "351882": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+    "351884": "serenity::North & Brothers (Hurghada - Hurghada)",
+    "351885": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+    "351887": "serenity::Diver Development Week (Hurghada - Hurghada)",
+    "351888": "serenity::North and Wrecks (Hurghada - Hurghada)",
+    "351889": "serenity::Safaga and Hurghada (Hurghada - Hurghada)",
     "353017": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353018": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353019": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
@@ -32386,6 +32495,7 @@
     "362319": "odyssey::The Golden Loop: North - Brother - Safaga (Port Ghalib - Hurghada)",
     "362320": "odyssey::Treasures of the North (Hurghada - Hurghada)",
     "362321": "odyssey::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+    "366841": "serenity::North & Tiran (Hurghada - Hurghada)",
     "373799": "ghazala-explorer::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
     "373800": "ghazala-explorer::North: Wrecks & Reefs (Hurghada - Hurghada)",
     "373801": "ghazala-explorer::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
@@ -32437,6 +32547,7 @@
     "412447": "odyssey::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "419973": "ghazala-explorer::Get Wrecked (Hurghada - Hurghada)",
     "420265": "hammerhead-ii::Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
+    "424855": "ghazala-explorer::North: Wrecks & Reefs (Hurghada - Hurghada)",
     "425606": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
     "425607": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
     "425608": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
