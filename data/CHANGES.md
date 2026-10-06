@@ -3,6 +3,37 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-06
+
+```
+changes: HEAD -> 2026-10-06
+===========================
+
+now sold out (1)
+  2027-07-31  Star Jet               Elphinstone - St. John's - Sataya  divebooker.com+liveaboard.com
+
+price up (2)
+  2027-07-10  Hammerhead II            841 ->   1,183 USD  +342 (+40.7%)  Sharks Obsession: Brothers - Daeda
+  2027-08-14  Hammerhead II            791 ->     928 USD  +137 (+17.3%)  Brothers Light
+
+price down (506)
+  2027-05-03  Royal Evolution        2,380 ->   2,306 USD  -74 (-3.1%)  Elba Reef & Elba borders
+  2027-05-01  Marselia Star          3,322 ->   3,310 USD  -12 (-0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,758 ->   2,749 USD  -9 (-0.3%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,657 ->   2,648 USD  -9 (-0.3%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,701 ->   2,692 USD  -9 (-0.3%)  Daedalus, Rocky Island, Zabargad, 
+  2027-08-16  Golden Dolphin IV      2,476 ->   2,467 USD  -9 (-0.4%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,476 ->   2,467 USD  -9 (-0.4%)  North - Straits of Tiran - Brother
+  2027-07-17  MY Odyssey Liveaboar   2,421 ->   2,412 USD  -9 (-0.4%)  Premium Expedition
+  2027-07-31  Queen Sherry           2,702 ->   2,693 USD  -9 (-0.3%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-10  Aphrodite              2,108 ->   2,100 USD  -8 (-0.4%)  Best of Red Sea 2 Weeks
+  2027-05-15  Aphrodite              2,308 ->   2,300 USD  -8 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,353 ->   2,345 USD  -8 (-0.3%)  Brothers, Daedalus & Elphinstone
+  ... and 494 more not shown
+
+378 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-05
 
 ```
