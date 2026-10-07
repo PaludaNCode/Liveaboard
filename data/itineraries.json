@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-06",
+  "collected": "2026-10-07",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -22180,6 +22180,142 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6579&tourID=413480&languageID=1&curr=USD&showPrices=false"
     },
+    "red-sea-aggressor-ii::Northern Red Sea & Dahab (Hurghada - Hurghada)": {
+      "boat": "red-sea-aggressor-ii",
+      "name": "Northern Red Sea & Dahab (Hurghada - Hurghada)",
+      "tour_id": "335603",
+      "collected": "2026-10-07",
+      "regions": [
+        "Sinai",
+        "Ras Mohammed",
+        "Thistlegorm",
+        "Jackson Reef",
+        "Gordon Reef"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "thistlegorm",
+        "tiran"
+      ],
+      "dives": 20,
+      "guests": 22,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "The Northern Red Sea and Dahab",
+          "text": "itinerary provides some of the most historic wrecks, like the Thistlegorm, combined with the famous Ras Mohamed National Park and Dahab, including the famous Blue Hole. 20 dives will be offered during the week and the chance of a Bedwen dinner at Abu Galom ashore one evening.",
+          "is_day": false
+        },
+        {
+          "heading": "Shaab el Erg:",
+          "text": "Shaab el Erg, also known as “Dolphin House”, is famous for dolphin sightings; it is not uncommon for a school of dolphins to join the dive. The reef drops down to a coral garden at 40 feet/12 meters with marine life like nudibranchs, tuna, trevallies, jacks, scorpionfish, and sea turtles.",
+          "is_day": false
+        },
+        {
+          "heading": "Dunraven:",
+          "text": "The Dunraven was a Victorian steam and sail ship carrying spices, cotton, and timber from India. Dunraven hit the reef during a dispute between the Captain, his wife, and his First Mate, and subsequently caught on fire. It sank in 1876 beside the reef, upside down, and broken in two parts. Inside the wreck are schools of yellow goatfish and giant morays. The hull is covered with corals and full of marine life, like schools of batfish, nudibranchs, pipefish, and the rare ghost pipefish. The wreck rests at 50 - 95 feet/15 - 30 meters depth.",
+          "is_day": false
+        },
+        {
+          "heading": "Ras Mohamed National Park:",
+          "text": "The park is located at the tip of the Sinai Peninsula. It was declared a protected area in 1983. The jewels in the crown of this national park are Shark Reef and Yolanda Reef. Shark Reef offers the chance to dive with grey and blacktip reef sharks. It is also home to huge numbers of reef fish and some larger pelagics such as tuna. Yolanda Reef is named after the shipwreck. On the plateau, at 32 - 82 feet/10 - 25 meters depth, are scattered remains of toilets and baths. Anemone City is a wonderful shallow dive at 40 feet/12 meters depth. The Shark Observatory is awesome, with plenty of whitetip reef sharks and huge barracudas. The dive sites in Ras Mohamed offer an abundance of reef fish, scorpion fish, multiple macro critters, as well as hard and soft corals. The whole area is a big fish territory.",
+          "is_day": false
+        },
+        {
+          "heading": "Thomas Reef",
+          "text": "is the smallest reef in the strait. The reef’s ends are vertical walls with a large plateau at 82 feet/25 meters depth on the southeastern side. This plateau is covered in colorful coral and has a fence of gorgonian fans longnose hawkfish can be found.",
+          "is_day": false
+        },
+        {
+          "heading": "Jackson Reef",
+          "text": "is the northernmost reef in Tiran and is well-known for the Cypriot cargo ship",
+          "is_day": false
+        },
+        {
+          "heading": "The Lara",
+          "text": "that sank in 1985; some remains of the wreckage can still be seen on top of the reef. The west side has a forest of spectacular gorgonian fan corals at 65 - 100 feet/20 - 30 meters depth, as well as many different kinds of reef fishes. The most spectacular and colorful coral garden is on the southwest side at 50 feet/15 meters depth. It is very common to encounter sea turtles, whitetip, and grey reef sharks.",
+          "is_day": false
+        },
+        {
+          "heading": "The Blue Hole",
+          "text": "is a drift dive that moves southward until you reach the Blue Hole. The entry point “Bells” is a small crack in the reef table that continues underwater like a chimney down to 28 m and can be exited at any depth. You continue the dive along a fantastic wall covered in coral overhangs, surrounded by the full variety of Red Sea fish.",
+          "is_day": false
+        },
+        {
+          "heading": "The Canyon",
+          "text": "is a famous drift dive. Big colonies of star coral, gorgonians, as well as soft and black corals. You may also come across butterflyfish, angelfish, and clownfish. The Dahab Canyon is the classic canyon, an essential dive for all fanatics of caves and cavern diving. The Canyon is itself quite a phenomenon. Up to 10 meters high and virtually closed over at the top, it snakes its way up from the depths to emerge in a large glassfish-filled coral dome. The Canyon dive site offers an easy entry and exit point through a shallow, sandy lagoon.",
+          "is_day": false
+        },
+        {
+          "heading": "Gabr el Bint",
+          "text": "ranks among the most attractive sites of North Sinai. There are two different dives here, depending on the weather and conditions - The right side, also known as the dark side, features a steep wall that drops down to about 60m, cut by numerous sandy ravines and overhangs. The drop-off is adorned with healthy table corals. The left side is far more colorful, featuring a virtual forest of gorgonians. Usually, drop down to about 20-25m, swimming along massive boulders protruding from the drop-off, which attracts dense shoals of anthias and glassfish.",
+          "is_day": false
+        },
+        {
+          "heading": "Gordon Reef",
+          "text": "is the most southerly reef of the four islands and has a different topography from the others, offering both a shallow plateau and drop-offs. There is a huge variety of reef fishes and the chance to see sleeping whitetip reef sharks on sandy patches. At 13 - 16 feet/4 - 5 meters depth, there is an eel garden. The top of the reef, with its lighthouse, is also home to the wreck",
+          "is_day": false
+        },
+        {
+          "heading": "Louilla,",
+          "text": "which lies almost parallel to the wreck on Jackson Reef.",
+          "is_day": false
+        },
+        {
+          "heading": "SS Thistlegorm:",
+          "text": "The SS Thistlegorm is the most famous of the Red Sea wrecks. The English cargo ship (423 feet/129 meters) was bombed by German aviation on October 6, 1941, in the area of Shaab Ali. She was transporting supplies destined for the British Fifth Army based in Alexandria, as well as armored MG vehicles, motorcycles, jeeps, trucks, rolling stock, airplane parts, stacks of rifles, radio equipment, munitions, and a plentiful supply of Wellington boots. Now the wreck is an artificial reef on a sandy bottom at 104 feet/32 meters depth and is home to an enormous variety of marine life, with large schooling fish. Additionally, the wreck provides a hunting ground for giant tuna and snappers.",
+          "is_day": false
+        },
+        {
+          "heading": "Shag Rock:",
+          "text": "At the northern side of Shag Rock is a small wreck on the sandy seabed at 50 feet/15 meters depth. Kingston was a British cargo ship and sunk in February 1881. Exploring the ship starts at the stern, which rests at 50 feet/15 meters depth. The dive route continues into the hull, easily accessible as the wooden bridge is gone, and the area is well illuminated by sunlight. The remains of the engine room with the boiler still intact are still visible, whereas the bow area situated at 13 feet/4 meters depth was destroyed. The fauna here is particularly interesting and includes surgeonfish, nudibranchs, jackfish, groupers, snappers, sea turtles, whitetip reef sharks, and eagle rays. Pods of dolphins are regularly spotted in this area as well.",
+          "is_day": false
+        },
+        {
+          "heading": "Giftun Island",
+          "text": "- One of the famous dive sites in Hurghada is the Small Giftun Drift, also known as the Polics Station. It offers a great wall drift dive finishing with a coral garden plateau and a stunning coral reef with lots of marine life of varying types. Huge gardens of Gorgonian fan corals. eagle rays, moray eels, turtles, shoals of goatfish, scorpionfish, porcupinefish, and stonefish.",
+          "is_day": false
+        },
+        {
+          "heading": "Typical Schedule",
+          "text": "18-21 dives per week (depending on itinerary & weather). Maximum 3-4 dives per day. No decompression dives (recreational limits only). Night dives available on several evenings.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Check in between 3-6 PM. Boarding – El Foley Marina. Stateroom orientation. Set up dive gear. Dinner Welcome and safety briefing. Port authority clearances finalized.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Morning Departure (based on – Port authority authorization). Initial dive briefing. Est. 10 AM:1st dives begin. Afternoon Eat, Sleep & Dive 3-4 dives per day (including night dives).",
+          "is_day": true
+        },
+        {
+          "heading": "Days 3-6:",
+          "text": "Eat, Sleep & Dive 3-4 dives per day (including night dives).",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Morning: 2 dives 2-4 pm: Return to El Foley Marina. 6 PM: Cocktail party on board, then dinner off the yacht (not included). After the sunset cocktail party, guests may go ashore and enjoy one of the many fine restaurants, cafes, or pubs in Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "8 AM: Last check-out.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "The Northern Red Sea and Dahab offer a rich mix of vibrant reef ecosystems, dramatic walls, and historic wrecks teeming with marine life. Divers can encounter dolphins at Shaab el Erg, reef sharks, barracudas, and large schools of tuna across Ras Mohamed and the Tiran Islands, alongside colorful coral gardens filled with gorgonians, anthias, and glassfish. Wrecks like the Dunraven and SS Thistlegorm host dense marine life, including moray eels, batfish, goatfish, snappers, and rare macro species such as ghost pipefish and nudibranchs, while Dahab’s Blue Hole and Canyon showcase steep coral walls, glassfish-filled caverns, and frequent sightings of turtles and reef fish. Overall, the region is known for its high biodiversity, strong pelagic presence, and thriving hard and soft coral formations. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5690&tourID=335603&languageID=1&curr=USD&showPrices=false"
+    },
     "red-sea-aggressor-ii::Northern Red Sea - Best Wreck Diving (Hurghada - Hurghada)": {
       "boat": "red-sea-aggressor-ii",
       "name": "33% Off: Northern Red Sea - Best Wreck Diving (Hurghada - Hurghada)",
@@ -32435,6 +32571,16 @@
     "272330": "red-sea-aggressor-iv::St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
     "272331": "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Marsa Alam)",
     "272332": "red-sea-aggressor-iv::St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
+    "299498": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299499": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299500": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299501": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299502": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299503": "red-sea-aggressor-ii::Northern Red Sea & Dahab (Hurghada - Hurghada)",
+    "299504": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299505": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299506": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "299507": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
     "323493": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "323497": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "323498": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
@@ -32457,6 +32603,7 @@
     "332038": "discovery-i::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
     "332039": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
     "332040": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
+    "335588": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
     "351876": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
     "351877": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
     "351878": "serenity::North & Brothers (Hurghada - Hurghada)",
@@ -32481,6 +32628,7 @@
     "353104": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
     "353105": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
     "353118": "emperor-superior::North & Easy (Hurghada - Hurghada)",
+    "353120": "emperor-superior::Famous Five Cruise (Hurghada - Hurghada)",
     "353489": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353490": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353491": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
@@ -32556,6 +32704,7 @@
     "426453": "iceberg::Overnight Diving & Snorkelling (Hurghada - Hurghada)",
     "426456": "iceberg::Overnight Diving & Snorkelling (Hurghada - Hurghada)",
     "426457": "iceberg::Overnight Diving & Snorkelling (Hurghada - Hurghada)",
+    "426459": "iceberg::Overnight Diving & Snorkelling (Hurghada - Hurghada)",
     "426619": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
     "426620": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
     "427134": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",

@@ -129358,11 +129358,19 @@
       "operator_id": "aggressor-fleet-dancer-fleet",
       "boat_id": "red-sea-aggressor-ii",
       "nights": 7,
-      "dives": 18,
+      "dives": 20,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "dahab"
+        "dahab",
+        "sha'ab el erg",
+        "ras mohammed",
+        "tiran",
+        "blue hole",
+        "gabr el bint",
+        "thistlegorm",
+        "gubal",
+        "giftun"
       ],
       "region": null,
       "summary": "Explore Egypt&rsquo;s reefs and historic wrecks aboard Red Sea Aggressor II, with trips from Hurghada, en-suite cabins, a hot tub, and nitrox available.",
@@ -129579,8 +129587,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended. OWD or equivalent"
+        "notes": "Open Water - No minimum logged dives required. PADI Travel: 50+ logged dives recommended. OWD or equivalent"
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -261007,7 +261016,7 @@
     }
   },
   "entry_bar": {
-    "both": 157,
+    "both": 158,
     "disagree": 73,
     "padi_stricter": 38,
     "ours_stricter": 35
