@@ -3,6 +3,46 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-07
+
+```
+changes: HEAD -> 2026-10-07
+===========================
+
+now sold out (1)
+  2027-06-26  Topaz                  Sataya Dolphin, Daedalus, Elphinst divebooker.com+liveaboard.com+padi.com
+
+bookable again (2)
+  2027-07-10  Aphrodite              Best of Red Sea 2 Weeks            liveaboard.com+padi.com
+  2027-07-10  Topaz                  North Reef, Safaga & Brothers      divebooker.com+liveaboard.com+padi.com
+
+withdrawn (1)
+  2027-08-14  Carlton                Classic North                      liveaboard.com
+
+re-listed — same sailing, new row (1)
+  2027-08-16  Carlton                Minisafari - Tiran & Ras Moh divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  595 EUR -> 670 USD
+
+price up (474)
+  2027-07-10  Aphrodite              2,100 ->   4,729 USD  +2,629 (+125.2%)  Best of Red Sea 2 Weeks
+  2027-08-28  Topaz                  1,885 ->   2,010 USD  +125 (+6.6%)  Dancing with Dolphins - Dolphin Li
+  2027-05-01  Marselia Star          3,310 ->   3,322 USD  +12 (+0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,749 ->   2,759 USD  +10 (+0.4%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,648 ->   2,657 USD  +9 (+0.3%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,692 ->   2,701 USD  +9 (+0.3%)  Daedalus, Rocky Island, Zabargad, 
+  2027-08-16  Golden Dolphin IV      2,467 ->   2,476 USD  +9 (+0.4%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,467 ->   2,476 USD  +9 (+0.4%)  North - Straits of Tiran - Brother
+  2027-07-17  MY Odyssey Liveaboar   2,412 ->   2,421 USD  +9 (+0.4%)  Premium Expedition
+  2027-07-31  Queen Sherry           2,693 ->   2,702 USD  +9 (+0.3%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-05-03  Royal Evolution        2,306 ->   2,315 USD  +9 (+0.4%)  Elba Reef & Elba borders
+  2027-05-15  Aphrodite              2,300 ->   2,308 USD  +8 (+0.3%)  Brothers, Daedalus & Elphinstone
+  ... and 462 more not shown
+
+price down (1)
+  2027-07-10  Topaz                  1,459 ->   1,252 USD  -207 (-14.2%)  North Reef, Safaga & Brothers
+
+367 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-06
 
 ```
