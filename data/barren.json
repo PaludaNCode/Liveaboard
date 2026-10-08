@@ -1,17 +1,17 @@
 {
   "note": "Vessels that published no departure when last fetched. Skipped for a week to save the requests, then re-checked. Run `scrape --recheck-all` to visit them before then; deleting this file also works and loses the dates the week is counted from.",
   "vessels": {
-    "ashrafi": "2026-10-01",
-    "bella-2": "2026-10-01",
-    "bella-3": "2026-10-01",
+    "ashrafi": "2026-10-08",
+    "bella-2": "2026-10-08",
+    "bella-3": "2026-10-08",
     "bismarck": "2026-10-07",
-    "blue-diamond": "2026-10-01",
-    "eriny": "2026-10-01",
-    "freedom-iii": "2026-10-01",
-    "freedom-iv": "2026-10-01",
-    "lady-m": "2026-10-01",
-    "reef-voyager": "2026-10-01",
-    "south-moon-1": "2026-10-01",
-    "zabargad": "2026-10-01"
+    "blue-diamond": "2026-10-08",
+    "eriny": "2026-10-08",
+    "freedom-iii": "2026-10-08",
+    "freedom-iv": "2026-10-08",
+    "lady-m": "2026-10-08",
+    "reef-voyager": "2026-10-08",
+    "south-moon-1": "2026-10-08",
+    "zabargad": "2026-10-08"
   }
 }

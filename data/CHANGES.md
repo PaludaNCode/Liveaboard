@@ -3,6 +3,33 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-08
+
+```
+changes: HEAD -> 2026-10-08
+===========================
+
+now sold out (1)
+  2027-07-24  ALSURAYA               Daedalus, Rocky, Zabargad & Elphin divebooker.com+liveaboard.com+padi.com
+
+price down (667)
+  2027-07-10  Aphrodite              4,729 ->   4,705 USD  -24 (-0.5%)  Best of Red Sea 2 Weeks
+  2027-05-01  Marselia Star          3,322 ->   3,305 USD  -17 (-0.5%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,759 ->   2,745 USD  -14 (-0.5%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,657 ->   2,644 USD  -13 (-0.5%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,701 ->   2,688 USD  -13 (-0.5%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,702 ->   2,689 USD  -13 (-0.5%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-05-29  Aphrodite              2,353 ->   2,341 USD  -12 (-0.5%)  Brothers, Daedalus & Elphinstone
+  2027-08-16  Golden Dolphin IV      2,476 ->   2,464 USD  -12 (-0.5%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,476 ->   2,464 USD  -12 (-0.5%)  North - Straits of Tiran - Brother
+  2027-07-17  MY Odyssey Liveaboar   2,421 ->   2,409 USD  -12 (-0.5%)  Premium Expedition
+  2027-05-15  Aphrodite              2,308 ->   2,297 USD  -11 (-0.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-05  Aphrodite              2,108 ->   2,097 USD  -11 (-0.5%)  Brothers, Daedalus & Elphinstone
+  ... and 655 more not shown
+
+215 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-07
 
 ```
