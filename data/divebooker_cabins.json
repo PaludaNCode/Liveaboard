@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-07",
+ "collected": "2026-10-08",
  "note": "One cabin ladder per sailing, from /boatorder/booking?tripId=. Room prices and the seller's own per-room count, which is never summed: the options overlap, so the sailing's total is its stated sumFreeSpaces.",
  "partial": null,
  "sailings": {
@@ -10,7 +10,7 @@
      "berths": 2,
      "cabin_id": "73",
      "name": "Twin Share",
-     "price": 1475.0,
+     "price": 1466.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -18,7 +18,7 @@
      "berths": 2,
      "cabin_id": "73",
      "name": "Single Occupancy",
-     "price": 2145.0,
+     "price": 2133.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -26,7 +26,7 @@
      "berths": 16,
      "cabin_id": "72",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -34,7 +34,7 @@
      "berths": 16,
      "cabin_id": "72",
      "name": "Single Occupancy",
-     "price": 2280.0,
+     "price": 2267.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -42,7 +42,7 @@
      "berths": 2,
      "cabin_id": "75",
      "name": "Twin Share",
-     "price": 1689.0,
+     "price": 1679.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -50,7 +50,7 @@
      "berths": 2,
      "cabin_id": "75",
      "name": "Double Occupancy",
-     "price": 1689.0,
+     "price": 1679.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -58,7 +58,7 @@
      "berths": 2,
      "cabin_id": "1405",
      "name": "Double Occupancy",
-     "price": 1745.0,
+     "price": 1735.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -66,7 +66,7 @@
      "berths": 2,
      "cabin_id": "1405",
      "name": "Single Occupancy",
-     "price": 2618.0,
+     "price": 2603.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -74,7 +74,7 @@
      "berths": 2,
      "cabin_id": "247",
      "name": "Twin Share",
-     "price": 1801.0,
+     "price": 1791.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -82,7 +82,7 @@
      "berths": 2,
      "cabin_id": "247",
      "name": "Single Occupancy",
-     "price": 2956.0,
+     "price": 2939.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -90,7 +90,7 @@
      "berths": 2,
      "cabin_id": "74",
      "name": "Double Occupancy",
-     "price": 1801.0,
+     "price": 1791.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -98,12 +98,12 @@
      "berths": 2,
      "cabin_id": "74",
      "name": "Single Occupancy",
-     "price": 2956.0,
+     "price": 2939.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-29",
    "free_spaces": 26,
@@ -117,7 +117,7 @@
      "berths": 0,
      "cabin_id": "247",
      "name": "Twin Share",
-     "price": 1801.0,
+     "price": 1791.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -125,12 +125,12 @@
      "berths": 0,
      "cabin_id": "247",
      "name": "Single Occupancy",
-     "price": 2956.0,
+     "price": 2939.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-26",
    "free_spaces": 0,
@@ -144,7 +144,7 @@
      "berths": 2,
      "cabin_id": "73",
      "name": "Twin Share",
-     "price": 1587.0,
+     "price": 1578.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -152,7 +152,7 @@
      "berths": 2,
      "cabin_id": "73",
      "name": "Single Occupancy",
-     "price": 2314.0,
+     "price": 2301.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -160,7 +160,7 @@
      "berths": 12,
      "cabin_id": "72",
      "name": "Twin Share",
-     "price": 1632.0,
+     "price": 1623.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -168,7 +168,7 @@
      "berths": 12,
      "cabin_id": "72",
      "name": "Single Occupancy",
-     "price": 2449.0,
+     "price": 2435.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -176,7 +176,7 @@
      "berths": 2,
      "cabin_id": "75",
      "name": "Twin Share",
-     "price": 1801.0,
+     "price": 1791.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -184,7 +184,7 @@
      "berths": 2,
      "cabin_id": "75",
      "name": "Double Occupancy",
-     "price": 1801.0,
+     "price": 1791.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -192,7 +192,7 @@
      "berths": 2,
      "cabin_id": "247",
      "name": "Twin Share",
-     "price": 1914.0,
+     "price": 1903.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -200,12 +200,12 @@
      "berths": 2,
      "cabin_id": "247",
      "name": "Single Occupancy",
-     "price": 3125.0,
+     "price": 3107.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-08-14",
    "free_spaces": 18,
@@ -219,7 +219,7 @@
      "berths": 8,
      "cabin_id": "1005",
      "name": "Double Occupancy",
-     "price": 1800.0,
+     "price": 1790.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -227,7 +227,7 @@
      "berths": 8,
      "cabin_id": "1005",
      "name": "Single Occupancy",
-     "price": 3150.0,
+     "price": 3133.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -235,7 +235,7 @@
      "berths": 16,
      "cabin_id": "1006",
      "name": "Twin Share",
-     "price": 1800.0,
+     "price": 1790.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -243,12 +243,12 @@
      "berths": 16,
      "cabin_id": "1006",
      "name": "Single Occupancy",
-     "price": 3150.0,
+     "price": 3133.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-17",
    "free_spaces": 24,
@@ -262,7 +262,7 @@
      "berths": 8,
      "cabin_id": "1005",
      "name": "Double Occupancy",
-     "price": 1688.0,
+     "price": 1678.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -270,7 +270,7 @@
      "berths": 8,
      "cabin_id": "1005",
      "name": "Single Occupancy",
-     "price": 2953.0,
+     "price": 2937.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -278,7 +278,7 @@
      "berths": 14,
      "cabin_id": "1006",
      "name": "Twin Share",
-     "price": 1688.0,
+     "price": 1678.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -286,12 +286,12 @@
      "berths": 14,
      "cabin_id": "1006",
      "name": "Single Occupancy",
-     "price": 2953.0,
+     "price": 2937.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-08",
    "free_spaces": 22,
@@ -305,7 +305,7 @@
      "berths": 8,
      "cabin_id": "1005",
      "name": "Double Occupancy",
-     "price": 1688.0,
+     "price": 1678.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -313,7 +313,7 @@
      "berths": 8,
      "cabin_id": "1005",
      "name": "Single Occupancy",
-     "price": 2953.0,
+     "price": 2937.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -321,7 +321,7 @@
      "berths": 16,
      "cabin_id": "1006",
      "name": "Twin Share",
-     "price": 1688.0,
+     "price": 1678.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -329,12 +329,12 @@
      "berths": 16,
      "cabin_id": "1006",
      "name": "Single Occupancy",
-     "price": 2953.0,
+     "price": 2937.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-29",
    "free_spaces": 24,
@@ -348,7 +348,7 @@
      "berths": 12,
      "cabin_id": "1204",
      "name": "Twin Share",
-     "price": 1216.0,
+     "price": 1209.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -356,47 +356,47 @@
      "berths": 12,
      "cabin_id": "1204",
      "name": "Single Occupancy",
-     "price": 2128.0,
+     "price": 2116.0,
      "shareable": false,
      "sleeps": 1
     },
     {
-     "berths": 4,
+     "berths": 0,
      "cabin_id": "1205",
      "name": "Twin Share",
-     "price": 1328.0,
+     "price": 1321.0,
      "shareable": true,
      "sleeps": 2
     },
     {
-     "berths": 4,
+     "berths": 0,
      "cabin_id": "1205",
      "name": "Single Occupancy",
-     "price": 2325.0,
+     "price": 2312.0,
      "shareable": false,
      "sleeps": 1
     },
     {
-     "berths": 2,
+     "berths": 0,
      "cabin_id": "1206",
      "name": "Double Occupancy",
-     "price": 1328.0,
+     "price": 1321.0,
      "shareable": false,
      "sleeps": 2
     },
     {
-     "berths": 2,
+     "berths": 0,
      "cabin_id": "1206",
      "name": "Single Occupancy",
-     "price": 2325.0,
+     "price": 2312.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-08-07",
-   "free_spaces": 18,
+   "free_spaces": 12,
    "start": "2027-07-31",
    "trip_id": "73211"
   },
@@ -407,7 +407,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -415,7 +415,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 3023.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -423,7 +423,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -431,7 +431,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 3023.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -439,7 +439,7 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -447,12 +447,12 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 3023.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-08",
    "free_spaces": 24,
@@ -466,7 +466,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1360.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -474,7 +474,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 2721.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -482,7 +482,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1360.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -490,7 +490,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 2721.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -498,7 +498,7 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1360.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -506,12 +506,12 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 2721.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-15",
    "free_spaces": 24,
@@ -525,7 +525,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1199.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -533,7 +533,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2398.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -541,7 +541,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1199.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -549,7 +549,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2398.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -557,7 +557,7 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1199.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -565,12 +565,12 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2398.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-22",
    "free_spaces": 24,
@@ -584,7 +584,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1332.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -592,7 +592,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2665.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -600,7 +600,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1332.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -608,7 +608,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2665.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -616,7 +616,7 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1332.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -624,12 +624,12 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2665.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-29",
    "free_spaces": 24,
@@ -643,7 +643,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1407.0,
+     "price": 1399.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -651,7 +651,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 2815.0,
+     "price": 2799.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -659,7 +659,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1407.0,
+     "price": 1399.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -667,7 +667,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 2815.0,
+     "price": 2799.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -675,7 +675,7 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1407.0,
+     "price": 1399.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -683,12 +683,12 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 2815.0,
+     "price": 2799.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-05",
    "free_spaces": 24,
@@ -702,7 +702,7 @@
      "berths": 0,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1332.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -710,7 +710,7 @@
      "berths": 0,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2665.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -718,7 +718,7 @@
      "berths": 0,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1332.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -726,7 +726,7 @@
      "berths": 0,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2665.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -734,7 +734,7 @@
      "berths": 0,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1340.0,
+     "price": 1332.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -742,12 +742,12 @@
      "berths": 0,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 2680.0,
+     "price": 2665.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-19",
    "free_spaces": 0,
@@ -761,7 +761,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -769,7 +769,7 @@
      "berths": 8,
      "cabin_id": "1901",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 3023.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -777,7 +777,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -785,7 +785,7 @@
      "berths": 4,
      "cabin_id": "1902",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 3023.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -793,7 +793,7 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Twin Share",
-     "price": 1520.0,
+     "price": 1511.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -801,12 +801,12 @@
      "berths": 12,
      "cabin_id": "1903",
      "name": "Single Occupancy",
-     "price": 3040.0,
+     "price": 3023.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-26",
    "free_spaces": 24,
@@ -820,7 +820,7 @@
      "berths": 16,
      "cabin_id": "37",
      "name": "Twin Share",
-     "price": 1552.0,
+     "price": 1544.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -828,7 +828,7 @@
      "berths": 16,
      "cabin_id": "37",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -836,7 +836,7 @@
      "berths": 4,
      "cabin_id": "32",
      "name": "Double Occupancy",
-     "price": 1609.0,
+     "price": 1600.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -844,7 +844,7 @@
      "berths": 4,
      "cabin_id": "32",
      "name": "Single Occupancy",
-     "price": 2896.0,
+     "price": 2880.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -852,7 +852,7 @@
      "berths": 0,
      "cabin_id": "38",
      "name": "Twin Share",
-     "price": 1609.0,
+     "price": 1600.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -860,12 +860,12 @@
      "berths": 0,
      "cabin_id": "38",
      "name": "Single Occupancy",
-     "price": 2896.0,
+     "price": 2880.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-05",
    "free_spaces": 20,
@@ -879,7 +879,7 @@
      "berths": 16,
      "cabin_id": "37",
      "name": "Twin Share",
-     "price": 1552.0,
+     "price": 1544.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -887,7 +887,7 @@
      "berths": 16,
      "cabin_id": "37",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -895,7 +895,7 @@
      "berths": 4,
      "cabin_id": "32",
      "name": "Double Occupancy",
-     "price": 1609.0,
+     "price": 1600.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -903,7 +903,7 @@
      "berths": 4,
      "cabin_id": "32",
      "name": "Single Occupancy",
-     "price": 2896.0,
+     "price": 2880.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -911,7 +911,7 @@
      "berths": 0,
      "cabin_id": "38",
      "name": "Twin Share",
-     "price": 1609.0,
+     "price": 1600.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -919,12 +919,12 @@
      "berths": 0,
      "cabin_id": "38",
      "name": "Single Occupancy",
-     "price": 2896.0,
+     "price": 2880.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-03",
    "free_spaces": 20,
@@ -938,7 +938,7 @@
      "berths": 7,
      "cabin_id": "37",
      "name": "Twin Share",
-     "price": 1552.0,
+     "price": 1544.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -946,7 +946,7 @@
      "berths": 7,
      "cabin_id": "37",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -954,7 +954,7 @@
      "berths": 0,
      "cabin_id": "38",
      "name": "Twin Share",
-     "price": 1609.0,
+     "price": 1600.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -962,7 +962,7 @@
      "berths": 0,
      "cabin_id": "38",
      "name": "Single Occupancy",
-     "price": 2896.0,
+     "price": 2880.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -970,7 +970,7 @@
      "berths": 0,
      "cabin_id": "32",
      "name": "Double Occupancy",
-     "price": 1609.0,
+     "price": 1600.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -978,12 +978,12 @@
      "berths": 0,
      "cabin_id": "32",
      "name": "Single Occupancy",
-     "price": 2896.0,
+     "price": 2880.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-29",
    "free_spaces": 7,
@@ -997,7 +997,7 @@
      "berths": 16,
      "cabin_id": "1182",
      "name": "Twin Share",
-     "price": 1721.0,
+     "price": 1712.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1005,7 +1005,7 @@
      "berths": 16,
      "cabin_id": "1182",
      "name": "Single Occupancy",
-     "price": 3099.0,
+     "price": 3081.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1013,7 +1013,7 @@
      "berths": 4,
      "cabin_id": "1183",
      "name": "Twin Share",
-     "price": 1806.0,
+     "price": 1796.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1021,7 +1021,7 @@
      "berths": 4,
      "cabin_id": "1183",
      "name": "Single Occupancy",
-     "price": 3251.0,
+     "price": 3232.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1029,7 +1029,7 @@
      "berths": 0,
      "cabin_id": "1255",
      "name": "Double Occupancy",
-     "price": 1890.0,
+     "price": 1880.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1037,12 +1037,12 @@
      "berths": 0,
      "cabin_id": "1255",
      "name": "Single Occupancy",
-     "price": 3403.0,
+     "price": 3384.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-10",
    "free_spaces": 20,
@@ -1056,7 +1056,7 @@
      "berths": 10,
      "cabin_id": "31",
      "name": "Twin Share",
-     "price": 1721.0,
+     "price": 1712.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1064,7 +1064,7 @@
      "berths": 10,
      "cabin_id": "31",
      "name": "Single Occupancy",
-     "price": 3099.0,
+     "price": 3081.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1072,7 +1072,7 @@
      "berths": 0,
      "cabin_id": "30",
      "name": "Double Occupancy",
-     "price": 1890.0,
+     "price": 1880.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1080,7 +1080,7 @@
      "berths": 0,
      "cabin_id": "30",
      "name": "Single Occupancy",
-     "price": 3403.0,
+     "price": 3384.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1088,7 +1088,7 @@
      "berths": 0,
      "cabin_id": "1000",
      "name": "Double Occupancy",
-     "price": 1806.0,
+     "price": 1796.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1096,7 +1096,7 @@
      "berths": 0,
      "cabin_id": "1000",
      "name": "Single Occupancy",
-     "price": 3251.0,
+     "price": 3232.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1104,7 +1104,7 @@
      "berths": 0,
      "cabin_id": "594",
      "name": "Twin Share",
-     "price": 1806.0,
+     "price": 1796.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1112,7 +1112,7 @@
      "berths": 0,
      "cabin_id": "594",
      "name": "Single Occupancy",
-     "price": 3251.0,
+     "price": 3232.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1120,7 +1120,7 @@
      "berths": 0,
      "cabin_id": "999",
      "name": "Double Occupancy",
-     "price": 1890.0,
+     "price": 1880.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1128,12 +1128,12 @@
      "berths": 0,
      "cabin_id": "999",
      "name": "Single Occupancy",
-     "price": 3403.0,
+     "price": 3384.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-27",
    "free_spaces": 10,
@@ -1147,7 +1147,7 @@
      "berths": 12,
      "cabin_id": "31",
      "name": "Twin Share",
-     "price": 1721.0,
+     "price": 1712.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1155,7 +1155,7 @@
      "berths": 12,
      "cabin_id": "31",
      "name": "Single Occupancy",
-     "price": 3099.0,
+     "price": 3081.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1163,7 +1163,7 @@
      "berths": 2,
      "cabin_id": "30",
      "name": "Double Occupancy",
-     "price": 1890.0,
+     "price": 1880.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1171,7 +1171,7 @@
      "berths": 2,
      "cabin_id": "30",
      "name": "Single Occupancy",
-     "price": 3403.0,
+     "price": 3384.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1179,7 +1179,7 @@
      "berths": 4,
      "cabin_id": "1000",
      "name": "Double Occupancy",
-     "price": 1806.0,
+     "price": 1796.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1187,7 +1187,7 @@
      "berths": 4,
      "cabin_id": "1000",
      "name": "Single Occupancy",
-     "price": 3251.0,
+     "price": 3232.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1195,7 +1195,7 @@
      "berths": 8,
      "cabin_id": "594",
      "name": "Twin Share",
-     "price": 1806.0,
+     "price": 1796.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1203,7 +1203,7 @@
      "berths": 8,
      "cabin_id": "594",
      "name": "Single Occupancy",
-     "price": 3251.0,
+     "price": 3232.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1211,7 +1211,7 @@
      "berths": 0,
      "cabin_id": "999",
      "name": "Double Occupancy",
-     "price": 1890.0,
+     "price": 1880.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1219,12 +1219,12 @@
      "berths": 0,
      "cabin_id": "999",
      "name": "Single Occupancy",
-     "price": 3403.0,
+     "price": 3384.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-22",
    "free_spaces": 26,
@@ -1238,7 +1238,7 @@
      "berths": 12,
      "cabin_id": "31",
      "name": "Twin Share",
-     "price": 1834.0,
+     "price": 1824.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1246,7 +1246,7 @@
      "berths": 12,
      "cabin_id": "31",
      "name": "Single Occupancy",
-     "price": 3301.0,
+     "price": 3283.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1254,7 +1254,7 @@
      "berths": 4,
      "cabin_id": "1000",
      "name": "Double Occupancy",
-     "price": 1918.0,
+     "price": 1908.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1262,7 +1262,7 @@
      "berths": 4,
      "cabin_id": "1000",
      "name": "Single Occupancy",
-     "price": 3453.0,
+     "price": 3434.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1270,7 +1270,7 @@
      "berths": 4,
      "cabin_id": "594",
      "name": "Twin Share",
-     "price": 1918.0,
+     "price": 1908.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1278,7 +1278,7 @@
      "berths": 4,
      "cabin_id": "594",
      "name": "Single Occupancy",
-     "price": 3453.0,
+     "price": 3434.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1286,7 +1286,7 @@
      "berths": 0,
      "cabin_id": "30",
      "name": "Double Occupancy",
-     "price": 2003.0,
+     "price": 1992.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1294,7 +1294,7 @@
      "berths": 0,
      "cabin_id": "30",
      "name": "Single Occupancy",
-     "price": 3605.0,
+     "price": 3585.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1302,7 +1302,7 @@
      "berths": 0,
      "cabin_id": "999",
      "name": "Double Occupancy",
-     "price": 2003.0,
+     "price": 1992.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1310,12 +1310,12 @@
      "berths": 0,
      "cabin_id": "999",
      "name": "Single Occupancy",
-     "price": 3605.0,
+     "price": 3585.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-29",
    "free_spaces": 20,
@@ -1329,7 +1329,7 @@
      "berths": 10,
      "cabin_id": "1185",
      "name": "Twin Share",
-     "price": 1417.0,
+     "price": 1409.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1337,7 +1337,7 @@
      "berths": 10,
      "cabin_id": "1185",
      "name": "Single Occupancy",
-     "price": 2551.0,
+     "price": 2537.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1345,7 +1345,7 @@
      "berths": 2,
      "cabin_id": "1186",
      "name": "Double Occupancy",
-     "price": 1417.0,
+     "price": 1409.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1353,7 +1353,7 @@
      "berths": 2,
      "cabin_id": "1186",
      "name": "Single Occupancy",
-     "price": 2551.0,
+     "price": 2537.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1361,7 +1361,7 @@
      "berths": 0,
      "cabin_id": "1187",
      "name": "Twin Share",
-     "price": 1474.0,
+     "price": 1465.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1369,7 +1369,7 @@
      "berths": 0,
      "cabin_id": "1187",
      "name": "Single Occupancy",
-     "price": 2653.0,
+     "price": 2638.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1377,7 +1377,7 @@
      "berths": 0,
      "cabin_id": "1188",
      "name": "Double Occupancy",
-     "price": 1474.0,
+     "price": 1465.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1385,12 +1385,12 @@
      "berths": 0,
      "cabin_id": "1188",
      "name": "Single Occupancy",
-     "price": 2653.0,
+     "price": 2638.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-13",
    "free_spaces": 12,
@@ -1404,7 +1404,7 @@
      "berths": 2,
      "cabin_id": "1185",
      "name": "Twin Share",
-     "price": 1248.0,
+     "price": 1241.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1412,7 +1412,7 @@
      "berths": 2,
      "cabin_id": "1185",
      "name": "Single Occupancy",
-     "price": 2247.0,
+     "price": 2235.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1420,7 +1420,7 @@
      "berths": 2,
      "cabin_id": "1186",
      "name": "Double Occupancy",
-     "price": 1248.0,
+     "price": 1241.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1428,7 +1428,7 @@
      "berths": 2,
      "cabin_id": "1186",
      "name": "Single Occupancy",
-     "price": 2247.0,
+     "price": 2235.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1436,7 +1436,7 @@
      "berths": 2,
      "cabin_id": "1187",
      "name": "Twin Share",
-     "price": 1305.0,
+     "price": 1297.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1444,7 +1444,7 @@
      "berths": 2,
      "cabin_id": "1187",
      "name": "Single Occupancy",
-     "price": 2349.0,
+     "price": 2335.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1452,7 +1452,7 @@
      "berths": 0,
      "cabin_id": "1188",
      "name": "Double Occupancy",
-     "price": 1305.0,
+     "price": 1297.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1460,12 +1460,12 @@
      "berths": 0,
      "cabin_id": "1188",
      "name": "Single Occupancy",
-     "price": 2349.0,
+     "price": 2335.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-22",
    "free_spaces": 6,
@@ -1479,7 +1479,7 @@
      "berths": 12,
      "cabin_id": "39",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1487,7 +1487,7 @@
      "berths": 12,
      "cabin_id": "39",
      "name": "Single Occupancy",
-     "price": 2430.0,
+     "price": 2416.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1495,7 +1495,7 @@
      "berths": 1,
      "cabin_id": "1133",
      "name": "Twin Share",
-     "price": 1406.0,
+     "price": 1398.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1503,7 +1503,7 @@
      "berths": 1,
      "cabin_id": "1133",
      "name": "Single Occupancy",
-     "price": 2531.0,
+     "price": 2517.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1511,7 +1511,7 @@
      "berths": 0,
      "cabin_id": "1134",
      "name": "Double Occupancy",
-     "price": 1406.0,
+     "price": 1398.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1519,12 +1519,12 @@
      "berths": 0,
      "cabin_id": "1134",
      "name": "Single Occupancy",
-     "price": 2531.0,
+     "price": 2517.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-10",
    "free_spaces": 13,
@@ -1538,7 +1538,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1546,7 +1546,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1554,7 +1554,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1562,12 +1562,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-08",
    "free_spaces": 18,
@@ -1581,7 +1581,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1589,7 +1589,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1597,7 +1597,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1605,12 +1605,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-15",
    "free_spaces": 18,
@@ -1624,7 +1624,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1632,7 +1632,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1640,7 +1640,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1648,12 +1648,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-22",
    "free_spaces": 18,
@@ -1667,7 +1667,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1675,7 +1675,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1683,7 +1683,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1691,12 +1691,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-29",
    "free_spaces": 18,
@@ -1710,7 +1710,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1718,7 +1718,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1726,7 +1726,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1734,12 +1734,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-05",
    "free_spaces": 18,
@@ -1753,7 +1753,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1761,7 +1761,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1769,7 +1769,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1777,12 +1777,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-12",
    "free_spaces": 18,
@@ -1796,7 +1796,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1804,7 +1804,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1812,7 +1812,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1820,12 +1820,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-19",
    "free_spaces": 18,
@@ -1839,7 +1839,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1847,7 +1847,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1855,7 +1855,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1863,12 +1863,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-26",
    "free_spaces": 18,
@@ -1882,7 +1882,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Twin Share",
-     "price": 1350.0,
+     "price": 1342.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1890,7 +1890,7 @@
      "berths": 16,
      "cabin_id": "14",
      "name": "Single Occupancy",
-     "price": 1822.0,
+     "price": 1811.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1898,7 +1898,7 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Double Occupancy",
-     "price": 1541.0,
+     "price": 1533.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1906,12 +1906,12 @@
      "berths": 2,
      "cabin_id": "15",
      "name": "Single Occupancy",
-     "price": 2081.0,
+     "price": 2069.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-07-03",
    "free_spaces": 18,
@@ -1925,7 +1925,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Double Occupancy",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1933,7 +1933,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1941,7 +1941,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Twin Share",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1949,7 +1949,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1957,7 +1957,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Twin Share",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -1965,7 +1965,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1973,7 +1973,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Double Occupancy",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1981,7 +1981,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -1989,7 +1989,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Double Occupancy",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -1997,7 +1997,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2005,7 +2005,7 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Twin Share",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2013,12 +2013,12 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-08",
    "free_spaces": 28,
@@ -2032,7 +2032,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2040,7 +2040,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2048,7 +2048,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2056,7 +2056,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2064,7 +2064,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2072,7 +2072,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2080,7 +2080,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2088,7 +2088,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2096,7 +2096,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2104,7 +2104,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2112,7 +2112,7 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2120,12 +2120,12 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Single Occupancy",
-     "price": 2094.0,
+     "price": 2082.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-15",
    "free_spaces": 28,
@@ -2139,7 +2139,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2147,7 +2147,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2155,7 +2155,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2163,7 +2163,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2171,7 +2171,7 @@
      "berths": 2,
      "cabin_id": "1708",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2179,7 +2179,7 @@
      "berths": 2,
      "cabin_id": "1708",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2187,7 +2187,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2195,7 +2195,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2203,7 +2203,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2211,7 +2211,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2219,7 +2219,7 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2227,12 +2227,12 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Single Occupancy",
-     "price": 2094.0,
+     "price": 2082.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-22",
    "free_spaces": 26,
@@ -2246,7 +2246,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2254,7 +2254,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2262,7 +2262,7 @@
      "berths": 10,
      "cabin_id": "1706",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2270,7 +2270,7 @@
      "berths": 10,
      "cabin_id": "1706",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2278,7 +2278,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2286,7 +2286,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2294,7 +2294,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2302,7 +2302,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2310,7 +2310,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Double Occupancy",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2318,7 +2318,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Single Occupancy",
-     "price": 2795.0,
+     "price": 2779.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2326,7 +2326,7 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Twin Share",
-     "price": 1644.0,
+     "price": 1634.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2334,12 +2334,12 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Single Occupancy",
-     "price": 2094.0,
+     "price": 2082.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-05-29",
    "free_spaces": 26,
@@ -2353,7 +2353,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Double Occupancy",
-     "price": 1441.0,
+     "price": 1433.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2361,7 +2361,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Single Occupancy",
-     "price": 2450.0,
+     "price": 2436.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2369,7 +2369,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Twin Share",
-     "price": 1441.0,
+     "price": 1433.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2377,7 +2377,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Single Occupancy",
-     "price": 2450.0,
+     "price": 2436.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2385,7 +2385,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Twin Share",
-     "price": 1441.0,
+     "price": 1433.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2393,7 +2393,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Single Occupancy",
-     "price": 2450.0,
+     "price": 2436.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2401,7 +2401,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Double Occupancy",
-     "price": 1441.0,
+     "price": 1433.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2409,7 +2409,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Single Occupancy",
-     "price": 2450.0,
+     "price": 2436.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2417,7 +2417,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Double Occupancy",
-     "price": 1441.0,
+     "price": 1433.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2425,7 +2425,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Single Occupancy",
-     "price": 2450.0,
+     "price": 2436.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2433,7 +2433,7 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Twin Share",
-     "price": 1441.0,
+     "price": 1433.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2441,12 +2441,12 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Single Occupancy",
-     "price": 1891.0,
+     "price": 1881.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-05",
    "free_spaces": 28,
@@ -2460,7 +2460,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Double Occupancy",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2468,7 +2468,7 @@
      "berths": 4,
      "cabin_id": "1707",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2476,7 +2476,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Twin Share",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2484,7 +2484,7 @@
      "berths": 12,
      "cabin_id": "1706",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2492,7 +2492,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Twin Share",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2500,7 +2500,7 @@
      "berths": 4,
      "cabin_id": "1708",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2508,7 +2508,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Double Occupancy",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2516,7 +2516,7 @@
      "berths": 4,
      "cabin_id": "1710",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2524,7 +2524,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Double Occupancy",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": false,
      "sleeps": 2
     },
@@ -2532,7 +2532,7 @@
      "berths": 4,
      "cabin_id": "1709",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     },
@@ -2540,7 +2540,7 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Twin Share",
-     "price": 1531.0,
+     "price": 1522.0,
      "shareable": true,
      "sleeps": 2
     },
@@ -2548,12 +2548,12 @@
      "berths": 0,
      "cabin_id": "1876",
      "name": "Single Occupancy",
-     "price": 2603.0,
+     "price": 2589.0,
      "shareable": false,
      "sleeps": 1
     }
    ],
-   "collected": "2026-10-07",
+   "collected": "2026-10-08",
    "currency": "USD",
    "end": "2027-06-12",
    "free_spaces": 28,
