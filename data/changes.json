@@ -1,6 +1,117 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-09",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "serenity-2027-06-26-0",
+    "boat": "Serenity",
+    "title": "North, Ras Mohammed, Tiran & Dahab",
+    "start": "2027-06-26",
+    "price": 1177.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "serenity-2027-07-03-0",
+    "boat": "Serenity",
+    "title": "North & Wrecks",
+    "start": "2027-07-03",
+    "price": 1060.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [
+   {
+    "boat": "Serenity",
+    "start": "2027-08-07",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "was_title": "Brothers, Daedalus & Elphinstone",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "was_sellers": [
+     "padi.com"
+    ],
+    "price": 981.0,
+    "was_price": 945.0,
+    "currency": "USD",
+    "was_currency": "EUR",
+    "sellers_moved": true,
+    "repriced": false
+   }
+  ],
+  "price_up": [],
+  "price_down": [
+   {
+    "id": "royal-evolution-2027-05-03-0",
+    "boat": "Royal Evolution",
+    "title": "Elba Reef & Elba borders",
+    "start": "2027-05-03",
+    "was": 2315.0,
+    "now": 2305.0,
+    "currency": "USD",
+    "delta": -10.0,
+    "pct": -0.4319654427645789
+   },
+   {
+    "id": "royal-evolution-2027-05-27-0",
+    "boat": "Royal Evolution",
+    "title": "Brothers, Daedalus, Rocky, St. John's & Elba",
+    "start": "2027-05-27",
+    "was": 2380.0,
+    "now": 2371.0,
+    "currency": "USD",
+    "delta": -9.0,
+    "pct": -0.37815126050420167
+   },
+   {
+    "id": "royal-evolution-2027-05-13-0",
+    "boat": "Royal Evolution",
+    "title": "Daedalus & Elba Reef",
+    "start": "2027-05-13",
+    "was": 1671.0,
+    "now": 1664.0,
+    "currency": "USD",
+    "delta": -7.0,
+    "pct": -0.41891083183722316
+   },
+   {
+    "id": "royal-evolution-2027-05-20-0",
+    "boat": "Royal Evolution",
+    "title": "Daedalus & Elba Reef",
+    "start": "2027-05-20",
+    "was": 1671.0,
+    "now": 1664.0,
+    "currency": "USD",
+    "delta": -7.0,
+    "pct": -0.41891083183722316
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 827,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-09"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-08",
   "added": [],
   "sold_out": [
@@ -7787,206 +7898,5 @@
    "price_down": 241
   },
   "day": "2026-09-30"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-29",
-  "added": [],
-  "sold_out": [
-   {
-    "id": "dune-silky-2027-06-05-0",
-    "boat": "DUNE Silky",
-    "title": "North Dahab Tiran",
-    "start": "2027-06-05",
-    "price": 1649.0,
-    "currency": "USD",
-    "sellers": [
-     "divebooker.com",
-     "liveaboard.com",
-     "padi.com"
-    ]
-   },
-   {
-    "id": "dune-longara-2027-06-12-0",
-    "boat": "DUNE Longara",
-    "title": "Daedalus, Elphinstone & Fury Shoals",
-    "start": "2027-06-12",
-    "price": 1763.0,
-    "currency": "USD",
-    "sellers": [
-     "divebooker.com",
-     "liveaboard.com",
-     "padi.com"
-    ]
-   },
-   {
-    "id": "oceanix-2027-08-07-0",
-    "boat": "Oceanix",
-    "title": "Nord Brothers Safari",
-    "start": "2027-08-07",
-    "price": 1024.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   }
-  ],
-  "returned": [
-   {
-    "id": "oceanix-2027-05-22-0",
-    "boat": "Oceanix",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-22",
-    "price": 1126.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "oceanix-2027-07-24-0",
-    "boat": "Oceanix",
-    "title": "Nord Brothers Safari",
-    "start": "2027-07-24",
-    "price": 1024.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   }
-  ],
-  "withdrawn": [
-   {
-    "id": "iceberg-2027-06-04-0",
-    "boat": "Iceberg",
-    "title": "Overnight Diving & Snorkelling",
-    "start": "2027-06-04",
-    "price": 205.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "iceberg-2027-06-11-0",
-    "boat": "Iceberg",
-    "title": "Overnight Diving & Snorkelling",
-    "start": "2027-06-11",
-    "price": 205.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   },
-   {
-    "id": "iceberg-2027-06-18-0",
-    "boat": "Iceberg",
-    "title": "Overnight Diving & Snorkelling",
-    "start": "2027-06-18",
-    "price": 205.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com"
-    ]
-   }
-  ],
-  "relisted": [
-   {
-    "boat": "Iceberg",
-    "start": "2027-06-06",
-    "title": "Hurghada North",
-    "was_title": "Hurghada North",
-    "sellers": [
-     "divebooker.com"
-    ],
-    "was_sellers": [
-     "divebooker.com",
-     "liveaboard.com"
-    ],
-    "price": 665.0,
-    "was_price": 604.0,
-    "currency": "USD",
-    "was_currency": "USD",
-    "sellers_moved": true,
-    "repriced": true
-   },
-   {
-    "boat": "Iceberg",
-    "start": "2027-06-13",
-    "title": "Hurghada North",
-    "was_title": "Hurghada North",
-    "sellers": [
-     "divebooker.com"
-    ],
-    "was_sellers": [
-     "divebooker.com",
-     "liveaboard.com"
-    ],
-    "price": 665.0,
-    "was_price": 604.0,
-    "currency": "USD",
-    "was_currency": "USD",
-    "sellers_moved": true,
-    "repriced": true
-   }
-  ],
-  "price_up": [
-   {
-    "id": "hammerhead-ii-2027-07-10-0",
-    "boat": "Hammerhead II",
-    "title": "Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm",
-    "start": "2027-07-10",
-    "was": 722.0,
-    "now": 849.0,
-    "currency": "USD",
-    "delta": 127.0,
-    "pct": 17.590027700831026
-   }
-  ],
-  "price_down": [
-   {
-    "id": "oceanix-2027-08-21-0",
-    "boat": "Oceanix",
-    "title": "Sataya & Daedalus",
-    "start": "2027-08-21",
-    "was": 1262.0,
-    "now": 1126.0,
-    "currency": "USD",
-    "delta": -136.0,
-    "pct": -10.776545166402537
-   },
-   {
-    "id": "oceanix-2027-07-24-0",
-    "boat": "Oceanix",
-    "title": "Nord Brothers Safari",
-    "start": "2027-07-24",
-    "was": 1147.0,
-    "now": 1024.0,
-    "currency": "USD",
-    "delta": -123.0,
-    "pct": -10.72362685265911
-   },
-   {
-    "id": "oceanix-2027-08-07-0",
-    "boat": "Oceanix",
-    "title": "Nord Brothers Safari",
-    "start": "2027-08-07",
-    "was": 1147.0,
-    "now": 1024.0,
-    "currency": "USD",
-    "delta": -123.0,
-    "pct": -10.72362685265911
-   }
-  ],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 392,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-29"
  }
 ]

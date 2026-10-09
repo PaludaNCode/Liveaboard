@@ -3,6 +3,28 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-09
+
+```
+changes: HEAD -> 2026-10-09
+===========================
+
+now sold out (2)
+  2027-06-26  Serenity               North, Ras Mohammed, Tiran & Dahab divebooker.com+liveaboard.com
+  2027-07-03  Serenity               North & Wrecks                     divebooker.com+liveaboard.com
+
+re-listed — same sailing, new row (1)
+  2027-08-07  Serenity               Brothers, Daedalus & Elphins padi.com -> liveaboard.com+padi.com  945 EUR -> 981 USD
+
+price down (4)
+  2027-05-03  Royal Evolution        2,315 ->   2,305 USD  -10 (-0.4%)  Elba Reef & Elba borders
+  2027-05-27  Royal Evolution        2,380 ->   2,371 USD  -9 (-0.4%)  Brothers, Daedalus, Rocky, St. Joh
+  2027-05-13  Royal Evolution        1,671 ->   1,664 USD  -7 (-0.4%)  Daedalus & Elba Reef
+  2027-05-20  Royal Evolution        1,671 ->   1,664 USD  -7 (-0.4%)  Daedalus & Elba Reef
+
+827 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-08
 
 ```
