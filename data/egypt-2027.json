@@ -151291,7 +151291,7 @@
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 7,
-      "dives": 16,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -151456,13 +151456,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -260735,7 +260736,7 @@
     }
   },
   "entry_bar": {
-    "both": 158,
+    "both": 159,
     "disagree": 73,
     "padi_stricter": 38,
     "ours_stricter": 35

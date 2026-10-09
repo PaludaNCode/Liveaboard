@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-07",
+  "collected": "2026-10-09",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -25692,6 +25692,75 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6173&tourID=366857&languageID=1&curr=USD&showPrices=false"
     },
+    "serenity::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+      "boat": "serenity",
+      "name": "30% Off: Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+      "tour_id": "444517",
+      "collected": "2026-10-09",
+      "regions": [
+        "The Brothers",
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "brothers",
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 22,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Highlights",
+          "text": "BDE - Brother, Daedalus, Elphinstone: Perfect for pelagic fish and shark action. Dives are challenging and require experienced divers. This is a world-class route. Visiting the famous Golden Triangle: Brother, Daedalus & Elphinstone reefs. This route allows us to explore and get the chance to see some sharks",
+          "is_day": false
+        },
+        {
+          "heading": "Brothers",
+          "text": "One of the most amazing scuba dives, not only in the Southern section but the whole of the Red Sea, the Brothers Islands are quite isolated and thus a delicacy to be savored by the privileged few. They are barely visible and easy to miss, save for the Victorian stone lighthouse, a legacy of British rule, which towers some 32 meters above Big Brother Island.",
+          "is_day": false
+        },
+        {
+          "heading": "Daedalus Reef",
+          "text": "Daedalus Reef (also known as Abu Kizan) is a 400-meter-long and 100-meter-wide (1,310–330 ft) standalone reef in the Egyptian Red Sea situated about 90 kilometers from Marsa Alam. There is a small artificial island in the center of the reef, which hosts a lighthouse constructed in 1863 and rebuilt in 1931.[4] Daedalus Reef is a well-known place for diving because of good chances to see pelagic fish, such as hammerhead sharks, and an abundance of corals. In the high season, one can find many dive safari boats staying overnight, anchored to the reef.",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone",
+          "text": "This long, finger-like reef runs from north to south in the open Red Sea. Steep walls drop to the depths on the reef’s east and west sides, while the north and south ends of the reefs are marked by a submerged plateau. Sharks often swim by the spot to feed on the abundant reef fish population.",
+          "is_day": false
+        },
+        {
+          "heading": "Note:",
+          "text": "16-18 dives (depending on the season).",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "The Serenity crew will transfer the guests from the Airport to the ship. After a nice welcome briefing by our Cruise Director, cabin allocation and ship orientation will take place. Guests can familiarize themselves with the vessel, set up equipment, and get comfortable.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2-6:",
+          "text": "We offer 3-4 dives daily, including a night dive if possible.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Return to the port. Max 2 dives on the last day.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out. The Serenity crew will transfer the guests to the airport. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6173&tourID=444517&languageID=1&curr=USD&showPrices=false"
+    },
     "serenity::Diver Development Week (Hurghada - Hurghada)": {
       "boat": "serenity",
       "name": "Diver Development Week (Hurghada - Hurghada)",
@@ -32714,6 +32783,7 @@
     "427141": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "427142": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "428125": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
+    "428126": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
     "434820": "golden-imperial::North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
     "434824": "golden-imperial::Brother Islands - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "435584": "new-sambo::Sataya Overnight (Hamata - Hamata)",
@@ -32726,6 +32796,7 @@
     "436671": "golden-imperial::North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
     "437066": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
     "437465": "blue-pearl::North & Wrecks (Hurghada - Hurghada)",
+    "437565": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
     "438085": "blue::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
     "438086": "blue::St. Johns (Port Ghalib - Port Ghalib)",
     "438087": "blue::Brothers, Daedalus and Elphinstone (Port Ghalib - Port Ghalib)",
@@ -32735,6 +32806,7 @@
     "438170": "blue-pearl::North & Safaga (Hurghada - Hurghada)",
     "438171": "blue-pearl::North & Tiran (Hurghada - Hurghada)",
     "438172": "blue-pearl::North & Brothers (Hurghada - Hurghada)",
+    "438173": "blue-pearl::North & Wrecks (Hurghada - Hurghada)",
     "438554": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
     "440645": "new-sambo::Sataya Overnight (Hamata - Hamata)",
     "440646": "new-sambo::Sataya Overnight (Hamata - Hamata)",
