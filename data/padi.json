@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-08",
+ "collected": "2026-10-09",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44924,9 +44924,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-09",
+    "first": "2026-10-17",
     "in_season": 31,
-    "last": "2027-11-22",
+    "last": "2027-11-26",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -44947,7 +44947,7 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 90,
-    "first": "2026-10-09",
+    "first": "2026-10-13",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
@@ -45758,12 +45758,12 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 24,
+    "dated": 23,
     "first": "2026-10-15",
     "in_season": 10,
     "last": "2027-10-14",
     "priced": 7,
-    "read": 24,
+    "read": 23,
     "unpriced": 6
    },
    "slug": "my-independence-ii",
