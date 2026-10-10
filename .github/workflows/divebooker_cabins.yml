@@ -17,20 +17,20 @@ name: Read divebooker.com cabin ladders
 # So this runs directly after `divebooker.yml`, against the book that run
 # wrote and the ids it recorded.
 #
-# **What it costs, and how few sailings it reaches.** One request per sailing
-# that states a booking id, and only the **capped ten Events a hull publishes**
-# do — 21 of 906 in-season sailings. So this is a two-minute job, not the
-# 75-minute one the fleet would be. The payload holds no id for the other 885
-# (run 35734945024), so there is nothing here to widen it with; see
-# `docs/sources/divebooker.com.md`. The five-second pace is the part that may
-# not be cut to make it shorter.
+# **What it costs.** One request per sailing that states a booking id. Until
+# #157 that was only the capped ten Events a hull publishes -- 21 of 906
+# in-season sailings, a two-minute job. Since the fleet read takes the season
+# from the page's schedule, every sailing states its `boatTripId`, so this is
+# now the whole season: ~900 requests, ~75 minutes at the five-second pace,
+# which is the part that may not be cut to make it shorter.
 
 on:
-  # Twenty minutes after divebooker.yml starts, which is long enough for the
-  # 117-request fleet read and its publish to land: this run reads the book
-  # that one commits.
+  # An hour after divebooker.yml starts. The fleet read is a page and a
+  # schedule walk per hull since #157 -- ~20 minutes and its publish -- and
+  # this run reads the book that one commits: a ladder read against
+  # yesterday's book is the stale-ladder failure one step early.
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "40 6 * * *"
   workflow_dispatch:
     inputs:
       limit:
