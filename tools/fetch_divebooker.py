@@ -338,7 +338,8 @@ def main() -> int:
                 answered = get(base + spath,
                                headers=db.SCHEDULE_HEADERS | {"Referer": referer})
                 return answered.body if answered is not None else None
-            entries, notes = db.walk_schedule(ask, boat_id, months)
+            entries, notes = db.walk_schedule(ask, boat_id, months[0],
+                                              args.season_end)
             if entries is not None:
                 schedule, more = db.schedule_departures(
                     entries, db.page_currency(result.body))

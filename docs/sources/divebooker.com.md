@@ -223,7 +223,7 @@ user agent; no cookies were needed and none are sent. That is
 |---|---|
 | Answer | `{trips: {list, total}, filters, activeFilters}` |
 | Page size | 10, paged on `p=`; Topaz `total` 32, Alsuraya 49 |
-| Month filter | `f[dm]=202707` — `YYYYMM`; `f[dm]=2027-07` is **ignored** and answers page one of everything |
+| Month filter | `f[dm]=202707` is a **start**, not a month: July and every sailing after it, ten to a page. `f[dm]=2027-07` is ignored and answers page one of everything |
 | Per sailing | `departureDate.date` (ISO), `nights`, `name` (the bare trip name the fee panels use), `price.current`, `price.oldPrice`, `availability`, `charterOnly`, `sumFreeSpaces`, `boatTripId`, `bookingUrl` |
 | Currency | **none stated** — and it is the page's: Alsuraya 2026-11-28 is 1284 here and 1284 USD on the page's own Event offer |
 
@@ -241,9 +241,13 @@ seller states none, and on the pages read until 10-08 it did not. **Read and
 not used**: what a sale is on this site is the owner's rule, so the fetch
 keeps the fare and leaves the markdown for a change of its own.
 
-`fetch_divebooker.py` reads the page and then `walk_schedule` over the season
-months, paged until a page adds no `boatTripId` or reaches the month's
-`total`. A schedule that does not answer is a season nobody read: the hull's
+`fetch_divebooker.py` reads the page and then `walk_schedule` once, from the
+season's first month, ended by the first page whose last sailing is past the
+season, by a page adding no `boatTripId`, or by the answer's `total`. **The
+first version walked each season month in turn** and, measured by the first
+capped run (three hulls, ~13 requests each where ~4 was expected), read the
+same sailings up to four times, because each month's answer runs on to the end
+of the schedule. A schedule that does not answer is a season nobody read: the hull's
 last reading is carried and named, and a run where it failed on most of the
 fleet refuses to write (`schedule_refusal`), because carrying every hull
 would publish last week's season as today's.

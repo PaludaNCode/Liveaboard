@@ -1818,7 +1818,8 @@ refuses to rewrite its file after reading nothing.
 **And the third seller is a page and a schedule per hull, daily, in
 `divebooker.yml`.** `tools/fetch_divebooker.py` reads a vessel page for the
 fee panels, the specials and the ten nearest sailings, and then the season
-from `/restapi/trips/{boatId}`, one request per season month — because on
+from `/restapi/trips/{boatId}`, walked from the season's first month until a
+page passes the season — because on
 2026-10-08 the page stopped carrying the season at all and its own schedule
 block started fetching it (#157). That endpoint answers 403 asked plainly and
 answers asked the way the page's script asks it, with the page as `Referer`;

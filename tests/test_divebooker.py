@@ -2378,8 +2378,11 @@ class TestTheScheduleIsWalkedTheWayThePageAsks(unittest.TestCase):
     """The path is the one the page's script builds, it pages on what it
     sees, and a schedule nobody read is ``None`` -- never an empty season."""
 
-    def answer(self, *trip_ids, total=None):
-        listed = [schedule_entry(boatTripId=str(i)) for i in trip_ids]
+    LAST = "2027-08-31"
+
+    def answer(self, *trip_ids, total=None, start="2027-07-03"):
+        listed = [schedule_entry(boatTripId=str(i), departureDate={"date": start})
+                  for i in trip_ids]
         return json.dumps({"trips": {"list": listed,
                                      "total": len(trip_ids) if total is None else total}})
 
@@ -2389,7 +2392,7 @@ class TestTheScheduleIsWalkedTheWayThePageAsks(unittest.TestCase):
         self.assertEqual(db.schedule_path("503", "202707", 2),
                          "/restapi/trips/503?p=2&f[dm]=202707&type=desc")
 
-    def test_a_month_is_paged_until_its_own_total(self):
+    def test_the_walk_is_paged_until_the_answers_own_total(self):
         pages = {db.schedule_path("503", "202707"): self.answer(*range(1, 11), total=12),
                  db.schedule_path("503", "202707", 2): self.answer(11, 12, total=12)}
         asked = []
@@ -2398,24 +2401,53 @@ class TestTheScheduleIsWalkedTheWayThePageAsks(unittest.TestCase):
             asked.append(path)
             return pages[path]
 
-        found, _ = db.walk_schedule(fetch, "503", ["202707"])
+        found, _ = db.walk_schedule(fetch, "503", "202707", self.LAST)
         self.assertEqual(len(found), 12)
         self.assertEqual(asked, list(pages), "asked past the month's own total")
 
-    def test_a_page_that_repeats_ends_the_month(self):
+    def test_the_walk_ends_at_the_first_page_past_the_season(self):
+        """`f[dm]` is a start: asked for July it answers July and every month
+        after. The page that reaches past the season is the last one asked."""
+        pages = {db.schedule_path("503", "202705"): self.answer(*range(1, 11), total=40),
+                 db.schedule_path("503", "202705", 2): self.answer(
+                     *range(11, 21), total=40, start="2027-09-04")}
+        asked = []
+
+        def fetch(path):
+            asked.append(path)
+            return pages[path]
+
+        found, _ = db.walk_schedule(fetch, "503", "202705", self.LAST)
+        self.assertEqual(asked, list(pages))
+        self.assertEqual(len(found), 20)
+
+    def test_no_sailing_is_read_twice(self):
+        """The first capped run asked each season month in turn and, since
+        each answer runs on to the end, read the same sailings up to four
+        times -- which `with_schedule` would fold into one date with its
+        `offers` counted four times over."""
+        pages = {db.schedule_path("503", "202705"): self.answer(1, 2, 3, total=99),
+                 db.schedule_path("503", "202705", 2): self.answer(3, 4, total=99),
+                 db.schedule_path("503", "202705", 3): self.answer(4, total=99)}
+        found, _ = db.walk_schedule(lambda path: pages[path], "503", "202705",
+                                    self.LAST)
+        self.assertEqual([e["boatTripId"] for e in found], ["1", "2", "3", "4"])
+
+    def test_a_page_that_repeats_ends_the_walk(self):
         same = self.answer(1, 2, total=99)
-        found, _ = db.walk_schedule(lambda path: same, "503", ["202707"])
+        found, _ = db.walk_schedule(lambda path: same, "503", "202707", self.LAST)
         self.assertEqual(len(found), 2)
 
-    def test_a_month_with_no_sailing_is_an_empty_answer_not_an_unread_one(self):
-        found, _ = db.walk_schedule(lambda path: self.answer(), "503", ["202707"])
+    def test_no_sailing_is_an_empty_answer_not_an_unread_one(self):
+        found, _ = db.walk_schedule(lambda path: self.answer(), "503", "202707",
+                                    self.LAST)
         self.assertEqual(found, [])
 
     def test_a_refused_or_reshaped_answer_is_a_schedule_nobody_read(self):
         for body in (None, "<html>Just a moment...</html>", json.dumps({"error": 1})):
             with self.subTest(body=body):
                 found, notes = db.walk_schedule(lambda path: body, "503",
-                                                ["202705", "202706"])
+                                                "202705", self.LAST)
                 self.assertIsNone(found)
                 self.assertTrue(notes)
 

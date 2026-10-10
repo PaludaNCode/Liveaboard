@@ -586,46 +586,54 @@ def schedule_entries(answer: Any) -> tuple[list[dict[str, Any]], int | None]:
 
 
 def walk_schedule(fetch: Callable[[str], str | None], boat_id: str,
-                  months: Iterable[str],
+                  first_ym: str, last_day: str,
                   max_pages: int = MAX_SCHEDULE_PAGES
                   ) -> tuple[list[dict[str, Any]] | None, list[str]]:
-    """Every sailing the schedule states over those months, or ``None``.
+    """Every sailing the schedule states from ``first_ym`` to ``last_day``,
+    or ``None``.
+
+    **`f[dm]` is a start, not a month.** Asked for 202707 it answers July and
+    then everything after, ten to a page -- measured on a weekly boat whose
+    first page ran past July (run 38064242030), and again by the first capped
+    run, which asked each season month in turn and read the same sailings up
+    to four times. So it is one walk from the season's first month, ended by
+    the first page whose last sailing is past the season, by a page adding no
+    ``boatTripId`` the walk has seen, or by the answer's own ``total``.
 
     ``None`` is a schedule this run could not read -- a refusal, a page that is
     not JSON, a page that is not the shape above -- and it is a different
     answer from an empty list, which is the site saying the hull sells nothing
-    those months. The caller carries the hull's last reading on ``None``,
-    because a hull whose season was not read is not a hull with no season.
-
-    Paged the way `walk_search` is: a page adding no ``boatTripId`` the month
-    has shown ends it, and so does reaching the month's own ``total``.
+    from that month on. The caller carries the hull's last reading on
+    ``None``, because a hull whose season was not read is not a hull with no
+    season.
     """
     found: list[dict[str, Any]] = []
     notes: list[str] = []
-    for ym in months:
-        seen: set[str] = set()
-        for page in range(1, max_pages + 1):
-            body = fetch(schedule_path(boat_id, ym, page))
-            if body is None:
-                notes.append(f"{ym} p{page}: unread")
-                return None, notes
-            try:
-                answer = json.loads(body)
-            except json.JSONDecodeError:
-                notes.append(f"{ym} p{page}: not JSON")
-                return None, notes
-            if not isinstance(answer, dict) or not isinstance(answer.get("trips"), dict):
-                notes.append(f"{ym} p{page}: no trips in the answer")
-                return None, notes
-            listed, total = schedule_entries(answer)
-            fresh = [e for e in listed if str(e.get("boatTripId")) not in seen]
-            seen.update(str(e.get("boatTripId")) for e in listed)
-            found.extend(fresh)
-            if not fresh or (total is not None and len(seen) >= total):
-                break
-        else:
-            notes.append(f"{ym}: still finding sailings at page {max_pages}; "
-                         f"this run does not claim the month is complete")
+    seen: set[str] = set()
+    for page in range(1, max_pages + 1):
+        body = fetch(schedule_path(boat_id, first_ym, page))
+        if body is None:
+            notes.append(f"p{page}: unread")
+            return None, notes
+        try:
+            answer = json.loads(body)
+        except json.JSONDecodeError:
+            notes.append(f"p{page}: not JSON")
+            return None, notes
+        if not isinstance(answer, dict) or not isinstance(answer.get("trips"), dict):
+            notes.append(f"p{page}: no trips in the answer")
+            return None, notes
+        listed, total = schedule_entries(answer)
+        fresh = [e for e in listed if str(e.get("boatTripId")) not in seen]
+        seen.update(str(e.get("boatTripId")) for e in listed)
+        found.extend(fresh)
+        starts = [str((e.get("departureDate") or {}).get("date") or "") for e in listed]
+        if (not fresh or (total is not None and len(seen) >= total)
+                or (starts and max(starts) > last_day)):
+            break
+    else:
+        notes.append(f"still inside the season at page {max_pages}; this run "
+                     f"does not claim the season is complete")
     return found, notes
 
 
