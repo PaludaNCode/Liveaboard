@@ -548,7 +548,8 @@ jobs:
         if: contains(inputs.divebooker_ask, 'schedule')
         run: |
           python3 tools/probe_divebooker_schedule.py \
-            --vessels "${{ inputs.divebooker_vessel || 'topaz,alsuraya' }}"
+            --vessels "${{ inputs.divebooker_vessel || 'topaz,alsuraya' }}" \
+            --shapes referer,session
 
       - name: Carry a whole vessel page back
         if: contains(inputs.divebooker_ask, 'page')

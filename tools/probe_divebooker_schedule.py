@@ -18,6 +18,16 @@ Three questions, in order:
    walk has seen, which is `walk_search`'s stop: the repeat, never a count.
 3. **What ``f[dm]`` takes** -- the two spellings a month could have here.
 
+**Asked plainly it answers 403** (run 38063794148). ``--shapes`` then asks
+the way the page's own script does, cheapest first, and stops at the first
+that answers: ``referer`` adds what the script sends plus the page as
+``Referer``; ``session`` also carries the cookies the vessel page set. Our
+own user agent throughout, robots.txt asked first, five seconds between
+requests. Never the ``developer:12345`` header the same chunk sends on other
+calls -- that is a credential, and not ours. On a refusal it prints the
+response headers and the start of the body, so a Cloudflare challenge reads
+as one.
+
 Writes nothing.
 
     python3 tools/probe_divebooker_schedule.py --vessels topaz,alsuraya
@@ -26,8 +36,12 @@ Writes nothing.
 from __future__ import annotations
 
 import argparse
+import http.cookiejar
 import json
 import sys
+import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -63,6 +77,9 @@ def main() -> int:
     parser.add_argument("--pages", type=int, default=12,
                         help="ceiling on p= per hull; the repeat stops it first")
     parser.add_argument("--months", default="202707,2027-07")
+    parser.add_argument("--shapes", default="plain",
+                        help="comma list of plain,referer,session; asked in "
+                             "order, stopping at the first that answers")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     args = parser.parse_args()
@@ -72,15 +89,51 @@ def main() -> int:
     for host in (db.HOST, f"www.{db.HOST}"):
         repair_robots(fetcher, host)
 
+    jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+    shape_now = {"name": "plain", "referer": ""}
+
     def ask(url: str) -> tuple[object | None, str]:
-        try:
-            body = fetcher.get(url).body
-        except Exception as exc:  # noqa: BLE001 - say why, ask the next one
-            return None, f"unread ({exc})"
+        if shape_now["name"] == "plain":
+            try:
+                body = fetcher.get(url).body
+            except Exception as exc:  # noqa: BLE001 - say why, ask the next one
+                return None, f"unread ({exc})"
+        else:
+            if not fetcher.allowed(url):
+                return None, "robots.txt disallows it"
+            time.sleep(args.delay)
+            headers = {"User-Agent": fetcher.user_agent,
+                       "Content-Type": "application/json",
+                       "Accept": "application/json, text/plain, */*",
+                       "Referer": shape_now["referer"]}
+            request = urllib.request.Request(url, headers=headers)
+            try:
+                with opener.open(request, timeout=30) as response:
+                    body = response.read().decode("utf-8", errors="replace")
+            except urllib.error.HTTPError as exc:
+                head = {k: v for k, v in exc.headers.items()
+                        if k.lower() in ("server", "cf-ray", "cf-mitigated",
+                                         "content-type", "set-cookie")}
+                text = exc.read(400).decode("utf-8", errors="replace")
+                return None, f"HTTP {exc.code} {head} body {text!r}"
+            except Exception as exc:  # noqa: BLE001
+                return None, f"unread ({exc})"
         try:
             return json.loads(body), f"{len(body)} chars"
         except json.JSONDecodeError:
             return None, f"not JSON: {body[:200]!r}"
+
+    def load_page(url: str) -> str:
+        """The vessel page, through the jar, so its cookies are kept."""
+        time.sleep(args.delay)
+        request = urllib.request.Request(url, headers={"User-Agent": fetcher.user_agent})
+        try:
+            with opener.open(request, timeout=30) as response:
+                response.read()
+                return f"page {response.status}, cookies {[c.name for c in jar]}"
+        except Exception as exc:  # noqa: BLE001
+            return f"page unread ({exc})"
 
     report: list[str] = []
     for slug in (s.strip() for s in args.vessels.split(",") if s.strip()):
@@ -90,6 +143,20 @@ def main() -> int:
             report.append(f"{slug}: no id in {args.book}")
             continue
         report.append(f"== {slug} (boatId {hull}) ==")
+        page_url = record.get("url") or f"https://{db.HOST}/{slug}-haz{hull}"
+        answered = False
+        for name in (n.strip() for n in args.shapes.split(",") if n.strip()):
+            shape_now.update(name=name, referer=page_url)
+            if name == "session":
+                report.append(f"  {name}: {load_page(page_url)}")
+            answer, note = ask(f"{ENDPOINT}{hull}?type=desc")
+            report.append(f"  shape {name}: {note[:700]}")
+            if answer is not None:
+                answered = True
+                break
+        if not answered:
+            report.append("  no shape answered; nothing further asked of this hull")
+            continue
 
         seen: set[str] = set()
         starts: list[str] = []
