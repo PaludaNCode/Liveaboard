@@ -2249,3 +2249,28 @@ class TestABarrenHullIsSkippedOnlyWhileItStaysBarren(unittest.TestCase):
         self.assertEqual(carried, ["lyra"])
         self.assertEqual(vessels["lyra"]["name"], "Lyra")
         self.assertIn("lyra::2027-05-01", departures)
+
+
+class TestAnEventNameCarryingItsHarboursFindsItsPanel(unittest.TestCase):
+    """#157. Since 2026-10-08 a sailing's only name is its Event's, which
+    appends the harbours, and every price panel on every hull read as a trip
+    the page does not sell."""
+
+    def panel(self, trip, port_from, port_to):
+        return db.FeeBlock(trip=trip, nights=7, port_from=port_from, port_to=port_to)
+
+    def test_the_harbour_suffix_the_panel_states_is_the_panels_trip(self):
+        rows = [db.Departure(start="2027-05-01",
+                             trip="Best of Tiran (Hurghada - Hurghada)")]
+        db._name_trips_as_panels_do(rows, [self.panel("Best of Tiran", "Hurghada", "Hurghada")])
+        self.assertEqual(rows[0].trip, "Best of Tiran")
+
+    def test_a_parenthetical_that_is_not_the_panels_harbours_stays(self):
+        name = "Mini Safari (Abu Nuhas - Ras Muhammad - Thistlegorm)"
+        rows = [db.Departure(start="2027-08-18", trip=name),
+                db.Departure(start="2027-05-01",
+                             trip="Best of Tiran (Port Ghalib - Hurghada)")]
+        db._name_trips_as_panels_do(rows, [self.panel("Best of Tiran", "Hurghada", "Hurghada"),
+                                           self.panel("Mini Safari", "Abu Nuhas", "Thistlegorm")])
+        self.assertEqual(rows[0].trip, name)
+        self.assertEqual(rows[1].trip, "Best of Tiran (Port Ghalib - Hurghada)")

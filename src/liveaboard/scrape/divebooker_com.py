@@ -676,6 +676,28 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
     return [found[key] for key in sorted(found)], warnings
 
 
+def _name_trips_as_panels_do(rows: list[Departure], blocks: list[FeeBlock]) -> None:
+    """Give a sailing the trip name its price panel states, where the page
+    says the two are one trip (#157).
+
+    Since 2026-10-08 the ``TouristTrip`` chain is gone and a sailing's only
+    name is its Event's, which appends the harbours: *Best of Tiran (Hurghada
+    - Hurghada)* over a panel titled *Best of Tiran* from Hurghada to
+    Hurghada. Every panel on every hull read as unattached. The bare name is
+    the one the chain used to give, so ids and itinerary keys do not move.
+
+    Renamed only where the suffix is **exactly** the panel's own two
+    harbours, never by stripping a last parenthetical: *Mini Safari (Abu
+    Nuhas - Ras Muhammad - Thistlegorm)* is a trip name, and the panel is what
+    says which part of a name is a route and which is a harbour pair.
+    """
+    named = {f"{b.trip} ({b.port_from} - {b.port_to})": b.trip
+             for b in blocks if b.trip and b.port_from and b.port_to}
+    for row in rows:
+        if row.trip in named:
+            row.trip = named[row.trip]
+
+
 def vessel(html: str, path: str) -> VesselBook:
     """Parse one vessel page into a book.
 
@@ -726,6 +748,7 @@ def vessel(html: str, path: str) -> VesselBook:
     # matching fails silently.
     blocks, fee_warnings = fee_blocks(html)
     book.warnings.extend(f"{path}: {note}" for note in fee_warnings)
+    _name_trips_as_panels_do(book.departures, blocks)
     sold = {row.trip for row in book.departures if row.trip}
     # What each key has already been given, so a second panel under one key is
     # noticed rather than silently preferred. See `fee_key`.

@@ -167,6 +167,37 @@ which sells three, states three. So the top-level Events are a capped ten with
 a booking url and the `TouristTrip` chain is the whole list. The fold takes the
 chain and lets the ten add a url.
 
+**And on 2026-10-08 the chain went (#157).** Every hull read as `N in season
+of 10   0 fee block(s)` from that morning, and `MIN_BOOK_RATIO` refused the
+book three days running (44 departures against 950). Measured on Topaz and
+Alsuraya by `tools/probe_divebooker_page.py`
+([run 38063192303](https://github.com/PaludaNCode/Liveaboard/actions/runs/38063192303)),
+which carries the whole page back: `TouristTrip`, `subjectOf` and
+`itemOffered` occur **0 times** in the raw bytes and 0 in the decoded payload.
+What is left is the capped ten, and they are the ten *nearest*: Alsuraya's run
+2026-11-28 to 2027-03-06, so not one is in the season. No parser change on
+that page can bring the season back.
+
+The fee panels survived — ten `details` blocks a page, exactly as before —
+and all of them read as *a trip this page does not sell*, because a sailing's
+only name is now its Event's and the Event appends the harbours: *Best of
+Tiran (Hurghada - Hurghada)* over a panel titled *Best of Tiran*, from
+Hurghada to Hurghada. `_name_trips_as_panels_do` renames a sailing to the
+panel's trip only where the suffix is exactly that panel's own two harbours —
+never by stripping a last parenthetical, because *Mini Safari (Abu Nuhas - Ras
+Muhammad - Thistlegorm)* is a trip name.
+
+Where the season went is in the scripts the page loads
+(`tools/probe_divebooker_page.py --chunks`,
+[run 38063457268](https://github.com/PaludaNCode/Liveaboard/actions/runs/38063457268)),
+not guessed: chunk `app/[...page]/page` holds the schedule block, which
+fetches `getSchedule` — `https://divebooker.com/restapi/trips/` from the
+endpoint table in chunk 6166 — plus the page's `boatId` (`"508"` for
+`topaz-haz508`, in the payload), `?p=N` to page, `&f[dm]=…` for a month and
+always `type=desc`, and reads `trips.list` (each entry a `boatTripId`, a
+`departureDate`, an `arrivalDate`, a `duration` and a route `name`) and
+`filters` off the answer. `/restapi/` is in no `Disallow:` of the `*` record.
+
 **Both currencies, in one fleet.** 13 offers in EUR and 10 in USD across three
 Egyptian boats — Discovery II quotes EUR 1,254 and the boat above it USD 2,760.
 `changes.repriced`'s rule already covers what that means for a diff: a fare in
