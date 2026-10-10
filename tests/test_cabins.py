@@ -282,6 +282,10 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
         self.assertEqual(reading.cabins[0].price, 500.0)
         self.assertEqual(reading.currency, "USD")
         self.assertTrue(any("EUR" in w for w in reading.warnings))
+        self.assertEqual(reading.shown, "EUR")
+
+    def test_a_page_in_the_currency_asked_for_shows_nothing_else(self):
+        self.assertIsNone(parse_cabins(read(DISCOUNTED), "EUR").shown)
 
     def test_a_banner_disagreeing_with_the_attribute_is_reported(self):
         page = (
@@ -577,3 +581,31 @@ class TestAPageInAnotherCurrencyIsRead(unittest.TestCase):
         now = NOW_PRICE.search(html)
         self.assertEqual(now.group(2), "1,186")
         self.assertEqual(_money("&#x20AC;1,300"), (1300.0, "€"))
+
+
+class TestASessionThatLostItsCurrency(unittest.TestCase):
+    """#157. On 2026-10-07 a USD session was answered in pounds on nearly
+    every booking page, and the fetch wrote them down as dollars."""
+
+    def setUp(self):
+        import sys
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import fetch_cabins
+
+        self.fc = fetch_cabins
+
+    def test_most_of_a_run_in_another_currency_is_refused_and_named(self):
+        why = self.fc.currency_refusal(read=8, elsewhere=884)
+        self.assertIn("currency", why)
+        self.assertIn("884", why)
+
+    def test_a_stray_page_is_skipped_and_the_run_still_writes(self):
+        self.assertIsNone(self.fc.currency_refusal(read=890, elsewhere=2))
+        self.assertIsNone(self.fc.currency_refusal(read=0, elsewhere=0))
+
+    def test_the_fetch_never_writes_a_page_in_another_currency(self):
+        source = (Path(self.fc.__file__)).read_text(encoding="utf-8")
+        skip = source.index("if reading.shown:")
+        self.assertLess(skip, source.index("book[tour] = {"),
+                        "the skip must come before the record is written")
