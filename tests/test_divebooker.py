@@ -2666,8 +2666,8 @@ class TestAScheduleMarkdownIsReadLikeTheOtherTwo(unittest.TestCase):
 
 
 class TestTheLadderIsReadForTheMonthsAsked(unittest.TestCase):
-    """The owner's call: ladders for June to September only, to keep the
-    nightly read short. A sailing outside them, or with no id, is not opened."""
+    """The owner's call: ladders for May to August. A sailing outside them,
+    or with no id, is not opened."""
 
     def test_only_the_asked_months_with_an_id_are_opened(self):
         import sys
@@ -2682,4 +2682,4 @@ class TestTheLadderIsReadForTheMonthsAsked(unittest.TestCase):
             "a::2027-07-03": {"start": "2027-07-03"},
         }
         self.assertEqual(list(fdc.to_read(sailings)),
-                         ["a::2027-06-05", "a::2027-08-28", "a::2027-09-04"])
+                         ["a::2027-05-29", "a::2027-06-05", "a::2027-08-28"])

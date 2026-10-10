@@ -44,13 +44,12 @@ from probe_divebooker import repair_robots  # noqa: E402
 BOOK = Path("data/divebooker.json")
 LADDERS = Path("data/divebooker_cabins.json")
 
-#: The months whose sailings get a ladder read, by the owner's call: the whole
-#: season is ~950 requests and ~80 minutes at the five-second pace, and these
-#: are the months the reader is shopping. A month the book holds no sailing in
-#: costs nothing -- the season ends 31 August, so September reads none until
-#: it is widened. A sailing outside them keeps no ladder, which `promote`
-#: already reads as unread rather than as empty.
-LADDER_MONTHS = ("06", "07", "08", "09")
+#: The months whose sailings get a ladder read, by the owner's call: May to
+#: August, which today is the whole published season (~950 requests, ~80
+#: minutes at the five-second pace). Kept as a constant rather than "every
+#: sailing" so a wider season does not silently widen this read too. A sailing
+#: outside them keeps no ladder, which `promote` reads as unread, never empty.
+LADDER_MONTHS = ("05", "06", "07", "08")
 
 
 def to_read(sailings: dict[str, dict], months: tuple[str, ...] = LADDER_MONTHS
