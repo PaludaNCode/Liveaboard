@@ -198,6 +198,20 @@ always `type=desc`, and reads `trips.list` (each entry a `boatTripId`, a
 `departureDate`, an `arrivalDate`, a `duration` and a route `name`) and
 `filters` off the answer. `/restapi/` is in no `Disallow:` of the `*` record.
 
+**And it refuses us: HTTP 403**, on both hulls, on `p=1`, and on `f[dm]=202707`
+and `f[dm]=2027-07` alike (`tools/probe_divebooker_schedule.py`,
+[run 38063794148](https://github.com/PaludaNCode/Liveaboard/actions/runs/38063794148)).
+robots.txt permits the path and the server refuses the request, so this is a
+refusal rather than a parsing question. The page's own call sends only
+`Content-Type: application/json`, so what separates it from ours is whatever
+a browser adds — cookies from the page load, `Referer`, Cloudflare's own
+checks — and nothing here has measured which. **Not pursued past the first
+refusal**, deliberately: a request reshaped to get past a 403 is a different
+thing from reading what a page serves, and that is the owner's decision to
+make. The same chunk holds `Authorization: Basic developer:12345` on other
+calls (reviews, user data, search data); it is not on this one, and it is
+**not** a credential this project will send anywhere.
+
 **Both currencies, in one fleet.** 13 offers in EUR and 10 in USD across three
 Egyptian boats — Discovery II quotes EUR 1,254 and the boat above it USD 2,760.
 `changes.repriced`'s rule already covers what that means for a diff: a fare in
