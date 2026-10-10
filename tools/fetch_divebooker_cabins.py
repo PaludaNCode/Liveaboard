@@ -44,6 +44,22 @@ from probe_divebooker import repair_robots  # noqa: E402
 BOOK = Path("data/divebooker.json")
 LADDERS = Path("data/divebooker_cabins.json")
 
+#: The months whose sailings get a ladder read, by the owner's call: the whole
+#: season is ~950 requests and ~80 minutes at the five-second pace, and these
+#: are the months the reader is shopping. A month the book holds no sailing in
+#: costs nothing -- the season ends 31 August, so September reads none until
+#: it is widened. A sailing outside them keeps no ladder, which `promote`
+#: already reads as unread rather than as empty.
+LADDER_MONTHS = ("06", "07", "08", "09")
+
+
+def to_read(sailings: dict[str, dict], months: tuple[str, ...] = LADDER_MONTHS
+            ) -> dict[str, dict]:
+    """The sailings this run opens: an id to open, in a month it reads."""
+    return {key: row for key, row in sorted(sailings.items())
+            if row.get("booking_id") and str(row.get("start", ""))[5:7] in months}
+
+
 MIN_BOOK_RATIO = 0.6
 """How much of the previous book a full run must reproduce before replacing it.
 
@@ -77,11 +93,10 @@ def main() -> int:
     # point: the id is written by the crawl, so a book predating that change
     # has none and the remedy is a fresh `divebooker.yml` rather than a guess
     # at the query string.
-    wanted = {key: row for key, row in sorted(sailings.items())
-              if row.get("booking_id")}
-    missing = len(sailings) - len(wanted)
-    print(f"{len(sailings)} sailing(s) in {args.book}, {len(wanted)} with a "
-          f"booking id, {missing} without")
+    with_id = sum(1 for row in sailings.values() if row.get("booking_id"))
+    wanted = to_read(sailings)
+    print(f"{len(sailings)} sailing(s) in {args.book}, {with_id} with a "
+          f"booking id, {len(wanted)} of them in {'/'.join(LADDER_MONTHS)}")
     if not wanted:
         print("  no id to open — run tools/fetch_divebooker.py first")
         return 1

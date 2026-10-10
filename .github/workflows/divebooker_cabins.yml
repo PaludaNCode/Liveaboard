@@ -20,9 +20,10 @@ name: Read divebooker.com cabin ladders
 # **What it costs.** One request per sailing that states a booking id. Until
 # #157 that was only the capped ten Events a hull publishes -- 21 of 906
 # in-season sailings, a two-minute job. Since the fleet read takes the season
-# from the page's schedule, every sailing states its `boatTripId`, so this is
-# now the whole season: ~900 requests, ~75 minutes at the five-second pace,
-# which is the part that may not be cut to make it shorter.
+# from the page's schedule, every sailing states its `boatTripId` -- and the
+# owner's call is June to September only (`LADDER_MONTHS`): ~680 requests,
+# ~55 minutes at the five-second pace, which is the part that may not be cut
+# to make it shorter.
 
 on:
   # An hour after divebooker.yml starts. The fleet read is a page and a

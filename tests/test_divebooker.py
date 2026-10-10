@@ -2663,3 +2663,23 @@ class TestAScheduleMarkdownIsReadLikeTheOtherTwo(unittest.TestCase):
     def test_a_row_never_asked_is_silence_not_a_no(self):
         unasked = {k: v for k, v in self.row().items() if k not in ("listed", "was")}
         self.assertEqual(self.figures(unasked), {})
+
+
+class TestTheLadderIsReadForTheMonthsAsked(unittest.TestCase):
+    """The owner's call: ladders for June to September only, to keep the
+    nightly read short. A sailing outside them, or with no id, is not opened."""
+
+    def test_only_the_asked_months_with_an_id_are_opened(self):
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import fetch_divebooker_cabins as fdc
+
+        sailings = {
+            "a::2027-05-29": {"start": "2027-05-29", "booking_id": "1"},
+            "a::2027-06-05": {"start": "2027-06-05", "booking_id": "2"},
+            "a::2027-08-28": {"start": "2027-08-28", "booking_id": "3"},
+            "a::2027-09-04": {"start": "2027-09-04", "booking_id": "4"},
+            "a::2027-07-03": {"start": "2027-07-03"},
+        }
+        self.assertEqual(list(fdc.to_read(sailings)),
+                         ["a::2027-06-05", "a::2027-08-28", "a::2027-09-04"])

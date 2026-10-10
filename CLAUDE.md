@@ -1854,8 +1854,10 @@ reads the lot without forgetting the record.
 sailing that states an id — the Event `@id` fragment, which the crawl now keeps
 as `booking_id`, so no vessel page is re-read. **That was 21 of 906 sailings**
 while the ids came only from the capped ten Events; since #157 the schedule
-states a `boatTripId` on every sailing, so the ladder is the whole season —
-~900 requests, ~75 minutes, an hour after the fleet read starts. Its own workflow for `cabins.yml`'s reason — two passes over two sets of
+states a `boatTripId` on every sailing, so the ladder reaches every sailing
+in `LADDER_MONTHS` — June to September, the owner's call, ~680 requests and
+~55 minutes, an hour after the fleet read starts. May keeps no divebooker
+ladder, which reads as unread and never as empty. Its own workflow for `cabins.yml`'s reason — two passes over two sets of
 URLs — and it runs **after** the fleet read, because a ladder read a day after
 the fare it explains disagrees with it.
 
