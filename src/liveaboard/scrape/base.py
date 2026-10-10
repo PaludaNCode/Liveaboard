@@ -170,8 +170,13 @@ class PoliteFetcher:
         """
         self._cache.pop(url, None)
 
-    def get(self, url: str) -> FetchResult:
-        """Fetch one URL, refusing if robots.txt disallows it."""
+    def get(self, url: str, headers: dict[str, str] | None = None) -> FetchResult:
+        """Fetch one URL, refusing if robots.txt disallows it.
+
+        ``headers`` are this request's own, over ``self.headers`` -- for a
+        source whose endpoint wants the page it is asked from as ``Referer``,
+        which differs per request (#157). The user agent is never one of them.
+        """
         cached = self._cache.get(url)
         if cached is not None:
             return FetchResult(
@@ -187,7 +192,8 @@ class PoliteFetcher:
 
         self._wait(url)
         request = urllib.request.Request(
-            url, headers={"User-Agent": self.user_agent, **self.headers})
+            url, headers={**self.headers, **(headers or {}),
+                          "User-Agent": self.user_agent})
         try:
             with urllib.request.urlopen(request, timeout=self.timeout) as response:
                 body = response.read().decode("utf-8", errors="replace")

@@ -61,7 +61,11 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # A hull is a vessel page plus one schedule request per season month since
+    # #157 -- about five requests at five seconds, so ~30 minutes for the
+    # fleet against ~8 when the page carried the season. The pace is not what
+    # gives.
+    timeout-minutes: 75
 
     # Resolved once, because `inputs` is null on a scheduled run and
     # `inputs.limit || 3` would quietly become "read three hulls" on the

@@ -212,6 +212,42 @@ make. The same chunk holds `Authorization: Basic developer:12345` on other
 calls (reviews, user data, search data); it is not on this one, and it is
 **not** a credential this project will send anywhere.
 
+**Asked the way the page's own script asks, it answers**
+([run 38064242030](https://github.com/PaludaNCode/Liveaboard/actions/runs/38064242030)):
+the script's `Content-Type: application/json`, an `Accept` for JSON, and the
+vessel page as `Referer`, which is what a browser adds to that call. Our own
+user agent; no cookies were needed and none are sent. That is
+`divebooker_com.SCHEDULE_HEADERS` and the fetch's `Referer`, and nothing else.
+
+| | |
+|---|---|
+| Answer | `{trips: {list, total}, filters, activeFilters}` |
+| Page size | 10, paged on `p=`; Topaz `total` 32, Alsuraya 49 |
+| Month filter | `f[dm]=202707` — `YYYYMM`; `f[dm]=2027-07` is **ignored** and answers page one of everything |
+| Per sailing | `departureDate.date` (ISO), `nights`, `name` (the bare trip name the fee panels use), `price.current`, `price.oldPrice`, `availability`, `charterOnly`, `sumFreeSpaces`, `boatTripId`, `bookingUrl` |
+| Currency | **none stated** — and it is the page's: Alsuraya 2026-11-28 is 1284 here and 1284 USD on the page's own Event offer |
+
+The page's script is the dictionary, so nothing is guessed: `availability`
+truthy draws *Select cabin* and falsy draws **SOLD OUT**; `charterOnly ==
+"1"` draws *For full charters and groups only* and no fare; `oldPrice`, where
+set, is drawn struck through beside `-x% off`. `boatTripId` is the number the
+Event `@id` fragment carried and `/boatorder/booking?tripId=` takes — on every
+sailing now, not the ten. And the Event's own id moved from `id` to `@id` the
+same morning, which is why the ten had stopped yielding booking ids too.
+
+**`price.oldPrice` is a list price stated against a sailing** — Alsuraya's
+2026-11-28 is 1284 from 1512. The rule at the top of this project says this
+seller states none, and on the pages read until 10-08 it did not. **Read and
+not used**: what a sale is on this site is the owner's rule, so the fetch
+keeps the fare and leaves the markdown for a change of its own.
+
+`fetch_divebooker.py` reads the page and then `walk_schedule` over the season
+months, paged until a page adds no `boatTripId` or reaches the month's
+`total`. A schedule that does not answer is a season nobody read: the hull's
+last reading is carried and named, and a run where it failed on most of the
+fleet refuses to write (`schedule_refusal`), because carrying every hull
+would publish last week's season as today's.
+
 **Both currencies, in one fleet.** 13 offers in EUR and 10 in USD across three
 Egyptian boats — Discovery II quotes EUR 1,254 and the boat above it USD 2,760.
 `changes.repriced`'s rule already covers what that means for a diff: a fare in

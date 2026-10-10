@@ -2315,3 +2315,268 @@ class TestThePageAsServedSinceTheChainWentStillAttachesItsFees(unittest.TestCase
         self.assertNotIn(db.fee_key("Fury Shoal", 7), self.book.fees)
         self.assertTrue(any("'Fury Shoal'" in w and "unattached" in w
                             for w in self.book.warnings))
+
+
+SCHEDULE = Path(__file__).resolve().parent / "fixtures" / "divebooker-schedule-2026-10-10.json"
+
+
+def schedule_entry(hull="alsuraya", **over):
+    """One verbatim schedule entry, with the fields a test varies replaced."""
+    entry = json.loads(SCHEDULE.read_text(encoding="utf-8"))[hull]
+    for key, value in over.items():
+        entry[key] = value
+    return entry
+
+
+class TestTheScheduleIsReadAsThePageReadsIt(unittest.TestCase):
+    """#157. Every field here is one the page's own schedule script reads, and
+    the reading is that script's: `availability` truthy is *Select cabin*,
+    falsy is *SOLD OUT*, `charterOnly == "1"` prints no fare."""
+
+    def read(self, *entries, currency="USD"):
+        return db.schedule_departures(entries, currency)
+
+    def test_a_sailing_states_its_date_trip_fare_and_booking_id(self):
+        (row,), warnings = self.read(schedule_entry())
+        self.assertEqual(warnings, [])
+        self.assertEqual((row.start, row.end, row.nights),
+                         ("2026-11-28", "2026-12-05", 7))
+        self.assertEqual(row.trip, "Brother, Deadalus and Elphinstone")
+        self.assertEqual((row.price, row.currency), (1284.0, "USD"))
+        self.assertEqual(row.availability, "InStock")
+        # The id the cabin ladder takes, now on every sailing and not the ten.
+        self.assertEqual(row.as_dict()["booking_id"], "217557")
+
+    def test_the_currency_is_the_callers_because_the_answer_states_none(self):
+        (row,), _ = self.read(schedule_entry(), currency="EUR")
+        self.assertEqual(row.currency, "EUR")
+
+    def test_a_sold_out_sailing_says_so(self):
+        (row,), _ = self.read(schedule_entry(availability=0))
+        self.assertEqual(row.availability, "SoldOut")
+
+    def test_a_charter_only_sailing_prints_no_fare_and_says_why(self):
+        (row,), _ = self.read(schedule_entry(charterOnly="1"))
+        self.assertIsNone(row.price)
+        book = db.vessel("", "/alsuraya-haz503", schedule=[row])
+        self.assertEqual(book.unpriced, {"charter only": 1})
+
+    def test_an_arrival_the_nights_do_not_reach_is_said_not_resolved(self):
+        (row,), warnings = self.read(
+            schedule_entry(arrivalDate={"m": "06 Dec", "y": "2026"}))
+        self.assertEqual(row.end, "2026-12-05")
+        self.assertTrue(any("06 Dec" in w for w in warnings), warnings)
+
+    def test_an_entry_with_no_iso_start_is_dropped_and_said(self):
+        rows, warnings = self.read(
+            schedule_entry(departureDate={"m": "28 Nov", "y": "2026"}))
+        self.assertEqual(rows, [])
+        self.assertEqual(len(warnings), 1)
+
+
+class TestTheScheduleIsWalkedTheWayThePageAsks(unittest.TestCase):
+    """The path is the one the page's script builds, it pages on what it
+    sees, and a schedule nobody read is ``None`` -- never an empty season."""
+
+    def answer(self, *trip_ids, total=None):
+        listed = [schedule_entry(boatTripId=str(i)) for i in trip_ids]
+        return json.dumps({"trips": {"list": listed,
+                                     "total": len(trip_ids) if total is None else total}})
+
+    def test_the_path_is_the_one_the_page_builds(self):
+        self.assertEqual(db.schedule_path("503", "202707"),
+                         "/restapi/trips/503?f[dm]=202707&type=desc")
+        self.assertEqual(db.schedule_path("503", "202707", 2),
+                         "/restapi/trips/503?p=2&f[dm]=202707&type=desc")
+
+    def test_a_month_is_paged_until_its_own_total(self):
+        pages = {db.schedule_path("503", "202707"): self.answer(*range(1, 11), total=12),
+                 db.schedule_path("503", "202707", 2): self.answer(11, 12, total=12)}
+        asked = []
+
+        def fetch(path):
+            asked.append(path)
+            return pages[path]
+
+        found, _ = db.walk_schedule(fetch, "503", ["202707"])
+        self.assertEqual(len(found), 12)
+        self.assertEqual(asked, list(pages), "asked past the month's own total")
+
+    def test_a_page_that_repeats_ends_the_month(self):
+        same = self.answer(1, 2, total=99)
+        found, _ = db.walk_schedule(lambda path: same, "503", ["202707"])
+        self.assertEqual(len(found), 2)
+
+    def test_a_month_with_no_sailing_is_an_empty_answer_not_an_unread_one(self):
+        found, _ = db.walk_schedule(lambda path: self.answer(), "503", ["202707"])
+        self.assertEqual(found, [])
+
+    def test_a_refused_or_reshaped_answer_is_a_schedule_nobody_read(self):
+        for body in (None, "<html>Just a moment...</html>", json.dumps({"error": 1})):
+            with self.subTest(body=body):
+                found, notes = db.walk_schedule(lambda path: body, "503",
+                                                ["202705", "202706"])
+                self.assertIsNone(found)
+                self.assertTrue(notes)
+
+    def test_the_boat_id_is_the_pages_own(self):
+        page = payload_page([{"inWishlist": False, "boatId": "508"}])
+        self.assertEqual(db.schedule_id(page), "508")
+        self.assertIsNone(db.schedule_id("<html></html>"))
+
+
+class TestTheScheduleIsTheSeasonAndThePanelsFindIt(unittest.TestCase):
+    """Topaz as served on 2026-10-10, with the schedule folded in. The page's
+    ten nearest sailings sell no Fury Shoal week, so on the page alone that
+    panel attaches to nothing; the season does sell one."""
+
+    def setUp(self):
+        fixture = json.loads(TOPAZ.read_text(encoding="utf-8"))
+        body = json.dumps({"routes": fixture["routes"]}, ensure_ascii=False)
+        self.html = ('<script type="application/ld+json">'
+                     + json.dumps(fixture["jsonld"], ensure_ascii=False)
+                     + '</script><script>self.__next_f.push([1,'
+                     + json.dumps(body) + '])</script>')
+        self.page_only = db.vessel(self.html, "/topaz-haz508")
+        page_rows, _ = db.departures(self.html)
+        self.page_start = page_rows[0].start
+        schedule, _ = db.schedule_departures([
+            schedule_entry("topaz", name="Fury Shoal", boatTripId="300001",
+                           departureDate={"m": "03 Jul", "y": "2027", "date": "2027-07-03"},
+                           arrivalDate={"m": "10 Jul", "y": "2027"}),
+            # The page's own first sailing, at the fare its Event states.
+            schedule_entry("topaz", boatTripId="258340",
+                           departureDate={"date": self.page_start}, arrivalDate={}),
+        ], "USD")
+        self.book = db.vessel(self.html, "/topaz-haz508", schedule=schedule)
+
+    def test_a_sailing_only_the_schedule_states_is_in_the_book(self):
+        self.assertNotIn("2027-07-03", [r.start for r in self.page_only.departures])
+        self.assertIn("2027-07-03", [r.start for r in self.book.departures])
+
+    def test_a_panel_finds_a_trip_the_season_sells(self):
+        key = db.fee_key("Fury Shoal", 7)
+        self.assertNotIn(key, self.page_only.fees)
+        self.assertIn(key, self.book.fees, self.book.warnings)
+
+    def test_a_date_both_state_is_one_sailing_with_the_events_link(self):
+        rows = [r for r in self.book.departures if r.start == self.page_start]
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0].stated_by, ["schedule", "event"])
+        self.assertTrue(rows[0].event_id)
+        self.assertEqual(rows[0].booking_id, "258340")
+
+
+class TestAnEventsIdIsReadUnderEitherSpelling(unittest.TestCase):
+    """`id` on the pages read in September, `@id` since 2026-10-08 (#157):
+    the same fragment, and the only booking id the ten Events carry."""
+
+    def test_the_new_spelling_carries_the_booking_id(self):
+        fixture = json.loads(TOPAZ.read_text(encoding="utf-8"))
+        html = ('<script type="application/ld+json">'
+                + json.dumps(fixture["jsonld"]) + '</script>')
+        rows, _ = db.departures(html)
+        self.assertEqual(len(rows), 10)
+        self.assertTrue(all(row.booking_id for row in rows),
+                        [row.event_id for row in rows])
+
+    def test_the_old_spelling_still_does(self):
+        rows, _ = db.departures(page())
+        self.assertTrue(any(row.booking_id for row in rows))
+
+
+class TestAHullWhoseScheduleIsRefusedIsCarriedNotEmptied(unittest.TestCase):
+    """`fetch_divebooker.main` over stubbed pages (#157). A refused schedule is
+    a season nobody read: the hull's last reading is carried and named, and a
+    run where the schedule refused most of the fleet writes nothing at all,
+    because carrying every hull would publish last week's season as today's."""
+
+    SEARCH = '<a href="/lyra-haz402">Lyra</a><a href="/neo-haz406">Neo</a>'
+
+    def vessel_page(self, boat_id):
+        return payload_page([{"inWishlist": False, "boatId": boat_id}])
+
+    def run_fetch(self, refuse: set[str]):
+        import io
+        import sys
+        import tempfile
+        from unittest import mock
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import fetch_divebooker
+        from liveaboard.scrape.base import FetchBlocked
+
+        july = schedule_entry("topaz", name="Fury Shoal", boatTripId="300001",
+                              departureDate={"date": "2027-07-03"},
+                              arrivalDate={"m": "10 Jul", "y": "2027"})
+        asked: list[tuple[str, dict]] = []
+
+        class Fetched:
+            def __init__(self, body):
+                self.body = body
+
+        test = self
+
+        class Fetcher:
+            def __init__(self, **_):
+                self.user_agent = "test"
+
+            def get(self, url, headers=None):
+                asked.append((url, dict(headers or {})))
+                path = url.removeprefix(f"https://{db.HOST}")
+                if path.startswith("/boatsearch"):
+                    return Fetched(test.SEARCH)
+                if path.startswith(db.SCHEDULE_PATH):
+                    boat = path[len(db.SCHEDULE_PATH):].split("?")[0]
+                    if boat in refuse:
+                        raise FetchBlocked(f"{url} refused with HTTP 403")
+                    return Fetched(json.dumps({"trips": {"list": [july], "total": 1}}))
+                return Fetched(test.vessel_page(path.split("-haz")[1]))
+
+        previous = {
+            "vessels": {
+                "lyra": {"url": f"https://{db.HOST}/lyra-haz402", "name": "Lyra"},
+                "neo": {"url": f"https://{db.HOST}/neo-haz406", "name": "Neo"}},
+            "departures": {
+                "lyra::2027-05-01": {"boat": "lyra", "start": "2027-05-01"},
+                "neo::2027-06-05": {"boat": "neo", "start": "2027-06-05"}},
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            book = Path(tmp) / "divebooker.json"
+            book.write_text(json.dumps(previous), encoding="utf-8")
+            aliases = Path(tmp) / "aliases.json"
+            aliases.write_text("{}", encoding="utf-8")
+            before = book.read_text(encoding="utf-8")
+            argv = ["fetch_divebooker", "--book", str(book), "--months", "202707",
+                    "--aliases", str(aliases), "--dataset", str(Path(tmp) / "none.json"),
+                    "--snapshots", tmp, "--delay", "0"]
+            with mock.patch.object(sys, "argv", argv), \
+                    mock.patch.object(fetch_divebooker, "PoliteFetcher", Fetcher), \
+                    mock.patch.object(fetch_divebooker, "repair_robots", lambda *_: None), \
+                    mock.patch("sys.stdout", new=io.StringIO()):
+                status = fetch_divebooker.main()
+            after = book.read_text(encoding="utf-8")
+            written = json.loads(after) if after != before else None
+        return status, written, asked
+
+    def test_a_refused_schedule_carries_that_hull_and_reads_the_rest(self):
+        status, book, asked = self.run_fetch(refuse={"406"})
+        self.assertEqual(status, 0)
+        self.assertIsNotNone(book)
+        self.assertIn("lyra::2027-07-03", book["departures"])
+        self.assertNotIn("lyra::2027-05-01", book["departures"])
+        self.assertIn("neo::2027-06-05", book["departures"], "the refused hull was emptied")
+        self.assertIn("neo", book["not_asked"])
+
+    def test_the_schedule_is_asked_as_the_page_asks_and_nothing_more(self):
+        _, _, asked = self.run_fetch(refuse=set())
+        headers = [h for url, h in asked if db.SCHEDULE_PATH in url]
+        self.assertTrue(headers)
+        for sent in headers:
+            self.assertTrue(sent["Referer"].startswith(f"https://{db.HOST}/"))
+            self.assertNotIn("Authorization", sent)
+
+    def test_a_schedule_refused_fleet_wide_writes_nothing_and_fails(self):
+        status, book, _ = self.run_fetch(refuse={"402", "406"})
+        self.assertEqual(status, 1)
+        self.assertIsNone(book)

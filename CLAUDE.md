@@ -1815,12 +1815,15 @@ runner would rebuild it with zero trips and write it: green job, valid file,
 five facts gone. `MIN_BOOK_RATIO` refuses that, the way `fetch_cabins.py`
 refuses to rewrite its file after reading nothing.
 
-**And the third seller is one request per hull, daily, in `divebooker.yml`.**
-`tools/fetch_divebooker.py` reads a vessel page and gets that hull's whole
-season out of it, so the Egyptian fleet costs about as many requests as it has
-hulls — against liveaboard.com's four per vessel and PADI's per-itinerary
-calls. Nothing there needs a browser: the sailings are JSON-LD and everything
-else is in the flight payload the page streams to itself. **The fleet is
+**And the third seller is a page and a schedule per hull, daily, in
+`divebooker.yml`.** `tools/fetch_divebooker.py` reads a vessel page for the
+fee panels, the specials and the ten nearest sailings, and then the season
+from `/restapi/trips/{boatId}`, one request per season month — because on
+2026-10-08 the page stopped carrying the season at all and its own schedule
+block started fetching it (#157). That endpoint answers 403 asked plainly and
+answers asked the way the page's script asks it, with the page as `Referer`;
+that is all that is sent, and a schedule that does not answer is carried, never
+read as an empty season. Nothing there needs a browser. **The fleet is
 discovered, never typed**, and from the seller's own search rather than its
 country page: `/egypt-daz3881` links ten hulls where one month of
 `/boatsearch` states 75, and reading a carousel as an inventory is the mistake
