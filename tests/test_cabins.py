@@ -620,6 +620,8 @@ class TestASessionThatLostItsCurrency(unittest.TestCase):
         from contextlib import redirect_stdout
         from unittest import mock
 
+        sent = self.sent = []
+
         class Fetched:
             def __init__(self, body):
                 self.body = body
@@ -628,7 +630,8 @@ class TestASessionThatLostItsCurrency(unittest.TestCase):
             def __init__(self, **_):
                 pass
 
-            def get(self, url):
+            def get(self, url, headers=None):
+                sent.append(dict(headers or {}))
                 return Fetched(pages[url.split("tourid=")[1].split("&")[0]])
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -671,3 +674,10 @@ class TestASessionThatLostItsCurrency(unittest.TestCase):
             {"101": self.old(1200.0)})
         self.assertEqual(status, 1)
         self.assertIsNone(book, "the book was rewritten under a refusal")
+
+    def test_every_booking_page_is_asked_in_a_stated_currency(self):
+        """The page's currency is a cookie that defaults from wherever the
+        runner is (#154), and on 2026-10-07 a runner was somewhere pounds are
+        the default. So the fetch states it, on every request."""
+        self.run_fetch({"100": self.PAGE.format(glyph="$", price="1,200")}, {})
+        self.assertEqual(self.sent, [{"Cookie": "boardCookie_prefs_v2=currency%3DUSD"}])

@@ -172,6 +172,18 @@ def triggered(
     return why
 
 
+#: The one setting the booking page takes its currency from (#154): a cookie,
+#: set on the first response from the visitor's origin. A runner is not always
+#: where the last one was -- on 2026-10-07 one was answered in pounds on 884
+#: pages (#157) -- so the fetch states the currency rather than inherit it.
+CURRENCY_COOKIE = "boardCookie_prefs_v2=currency%3D{}"
+
+
+def session_currency(currency: str) -> dict[str, str]:
+    """The header that makes a booking page answer in ``currency``."""
+    return {"Cookie": CURRENCY_COOKIE.format(currency)}
+
+
 def currency_refusal(read: int, elsewhere: int) -> str | None:
     """Why this run may not write its book, when the session lost its currency.
 
@@ -260,7 +272,7 @@ def main() -> int:
         entry = sailings[tour]
         url = endpoint(entry["boat_id"], tour)
         try:
-            result = fetcher.get(url)
+            result = fetcher.get(url, headers=session_currency(entry["currency"]))
         except Exception as exc:  # noqa: BLE001 - one bad page must not end the run
             print(f"  [{index}/{len(todo)}] {entry['boat']}: {exc}", flush=True)
             failed += 1

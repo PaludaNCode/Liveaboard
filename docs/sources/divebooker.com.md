@@ -237,9 +237,13 @@ same morning, which is why the ten had stopped yielding booking ids too.
 
 **`price.oldPrice` is a list price stated against a sailing** — Alsuraya's
 2026-11-28 is 1284 from 1512. The rule at the top of this project says this
-seller states none, and on the pages read until 10-08 it did not. **Read and
-not used**: what a sale is on this site is the owner's rule, so the fetch
-keeps the fare and leaves the markdown for a change of its own.
+seller states none, and on the pages read until 10-08 it did not. **Used
+since, as the third seller's per-sailing markdown** — the owner's call: the
+fetch keeps it as the sailing's `was` (only above the fare), and
+`promote._list_prices` reads it exactly as it reads PADI's `price`/`was`, with
+`pct` only on a row whose fare is divebooker's own. A row read before the
+schedule carries no `listed` and is not asked, because it was never read for
+one.
 
 `fetch_divebooker.py` reads the page and then `walk_schedule` once, from the
 season's first month, ended by the first page whose last sailing is past the

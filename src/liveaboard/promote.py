@@ -1173,6 +1173,7 @@ def _list_prices(
     cabins: dict[str, Any] | None,
     sailing: dict[str, Any] | None,
     ignore: frozenset[int] = frozenset(),
+    third: dict[str, Any] | None = None,
 ) -> dict[str, tuple[float, float | None, str | None]]:
     """What each seller charges for this berth and what it says that is down from.
 
@@ -1210,13 +1211,24 @@ def _list_prices(
             (cabins or {}).get("currency"),
         )
 
-    if sailing and SELLERS.index("padi.com") not in ignore:
-        price, was = sailing.get("price"), sailing.get("was")
+    # PADI and divebooker state the pair the same way -- a fare and the figure
+    # it is down from, against the sailing -- so they are read the same way.
+    # divebooker's is the schedule's struck-through `oldPrice` (#157); its
+    # boat-wide `boatSpecials` names no sailing and stays a row in the sales
+    # table, never a percentage here.
+    for seller, book in (("padi.com", sailing), ("divebooker.com", third)):
+        if not book or SELLERS.index(seller) in ignore:
+            continue
+        # A divebooker row read before its schedule was looked at for a list
+        # price said nothing about one, so it is not a "no" (#157).
+        if seller == "divebooker.com" and not book.get("listed"):
+            continue
+        price, was = book.get("price"), book.get("was")
         if isinstance(price, (int, float)) and price > 0:
-            figures["padi.com"] = (
+            figures[seller] = (
                 float(price),
                 float(was) if isinstance(was, (int, float)) and was > price else None,
-                sailing.get("currency"),
+                book.get("currency"),
             )
     return figures
 
@@ -3792,10 +3804,13 @@ def promote(
                 ladder,
                 sailing_book.get(f"{slug}::{item['start']}"),
                 frozenset(outdated),
+                divebooker_book.get(f"{slug}::{item['start']}"),
             )
             sale = _sale_for(
                 figures,
-                "padi.com" if item.get("padi_only") else "liveaboard.com",
+                "padi.com" if item.get("padi_only")
+                else "divebooker.com" if item.get("divebooker_only")
+                else "liveaboard.com",
                 fx_table,
             )
             if sale:
@@ -3945,7 +3960,13 @@ def promote(
         {i["id"]: i["boat_id"] for i in itineraries},
         boats,
         {SELLERS.index("liveaboard.com"): cabin_read,
-         SELLERS.index("padi.com"): padi_read},
+         SELLERS.index("padi.com"): padi_read}
+        # The fleet read's day, the schedule the markdown came off (#157) --
+        # and only where that seller marks something down, because the
+        # block's heading takes the stalest date it is handed.
+        | ({SELLERS.index("divebooker.com"): divebooker_read}
+           if any(SELLERS.index("divebooker.com") in (d.get("sale") or {}).get("sellers", [])
+                  for d in departures) else {}),
     )
     if on_sale:
         deals_block["on_sale"] = on_sale

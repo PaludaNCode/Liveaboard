@@ -261,10 +261,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   it; a row states `pct` only from the seller whose fare it prints;
   `berths_read` and `padi_berths_read` are two crawls on two days; PADI's
   `availability` fills the whole-sailing slot and not the at-price one, because
-  that was measured; divebooker states no berth count and no list
-  price **against a sailing**, so it fills neither — the markdown it does
-  publish names a hull and no date, which is a row in the sales table and
-  never a percentage on a departure.
+  that was measured; divebooker states no berth count at the advertised price,
+  so it fills only the whole-sailing slot. **Its list price is against a
+  sailing since #157** — the schedule's struck-through `oldPrice` — and reaches
+  `_list_prices` exactly as PADI's pair does; its boat-wide `boatSpecials`
+  names a hull and no date, and stays a row in the sales table and never a
+  percentage on a departure.
   **A third arriving is what tested the rule.** `best()` was a pair with the
   one-seller case as its own early return, the seller chip's vocabulary for
   *more than one* was the word `both`, and `advertisedNote` named PADI by
@@ -1590,7 +1592,11 @@ Break these and the site starts lying quietly rather than failing loudly.
   the ladders that are right about the disagreement this page exists to show.
   **No markdown is ever read off that ladder**: `price.old` is an empty string
   on every option read, so what a real one looks like here has never been
-  seen, and this seller's markdown is `boatSpecials`, against a hull.
+  seen. This seller's markdowns are the schedule's `oldPrice`, against a
+  sailing, and `boatSpecials`, against a hull — two claims, kept apart.
+  **And a row read before the schedule was never asked for a list price**, so
+  `listed` marks the rows that were and `_list_prices` hears divebooker only
+  on those: silence is not a "no", the `fees_known` rule.
 - **A ladder that contradicts its row is not that row's ladder.** The advertised
   price *is* the bottom rung, on 864 of 864, so a rung far below it is not a
   cheaper berth on offer — it is last week's prices still on the shelf. The day
@@ -1846,12 +1852,10 @@ reads the lot without forgetting the record.
 **And its cabin ladders are a second pass, in `divebooker_cabins.yml`.**
 `tools/fetch_divebooker_cabins.py` opens `/boatorder/booking?tripId=` once per
 sailing that states an id — the Event `@id` fragment, which the crawl now keeps
-as `booking_id`, so no vessel page is re-read. **That is 21 of 906 sailings**,
-because the Events stating one are the capped ten a hull publishes and the
-`TouristTrip` chain carries no id; the payload holds none either, measured with
-the ids we already had as the probe. So the ladder is a real but narrow read
-rather than the fleet's, and widening it needs a request nobody has watched
-yet. Its own workflow for `cabins.yml`'s reason — two passes over two sets of
+as `booking_id`, so no vessel page is re-read. **That was 21 of 906 sailings**
+while the ids came only from the capped ten Events; since #157 the schedule
+states a `boatTripId` on every sailing, so the ladder is the whole season —
+~900 requests, ~75 minutes, an hour after the fleet read starts. Its own workflow for `cabins.yml`'s reason — two passes over two sets of
 URLs — and it runs **after** the fleet read, because a ladder read a day after
 the fare it explains disagrees with it.
 

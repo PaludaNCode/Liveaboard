@@ -178,6 +178,11 @@ class Departure:
     trip_id: str | None = None
     #: *For full charters and groups only*: the page prints no fare.
     charter_only: bool = False
+    #: The list price the schedule strikes through beside the fare
+    #: (`price.oldPrice`), kept only where it is above the fare: the same
+    #: claim liveaboard.com's `<del>` and PADI's `compareAtPrice` make, so
+    #: `promote._list_prices` reads all three alike.
+    was: float | None = None
     #: Which of the page's two statements of this sailing were read. Kept
     #: because the counts are the evidence for the folding rule above, and a
     #: rule whose evidence is not in the data is a rule nobody can re-check.
@@ -221,7 +226,7 @@ class Departure:
         the sailing, so the vessel carries the counts and the row does not.
         """
         out: dict[str, Any] = {"start": self.start}
-        for key in ("end", "trip", "price", "currency", "availability"):
+        for key in ("end", "trip", "price", "currency", "availability", "was"):
             value = getattr(self, key)
             if value is not None:
                 out[key] = value
@@ -231,6 +236,13 @@ class Departure:
             out["offers"] = self.offers
         if self.booking_id:
             out["booking_id"] = self.booking_id
+        # Whether a list price was looked for at all (#157): a schedule row
+        # was asked and states one or does not, and that is an answer; a row
+        # read before the schedule existed was never asked, which is silence.
+        # `promote._list_prices` tells the two apart by this, the
+        # `fees_known` rule.
+        if "schedule" in self.stated_by:
+            out["listed"] = True
         return out
 
 
@@ -674,6 +686,18 @@ def schedule_departures(entries: Iterable[dict[str, Any]], currency: str | None
                 row.price = float(current) if current not in (None, "") else None
             except (TypeError, ValueError):
                 warnings.append(f"{start}: a fare that is not a number: {current!r}")
+            # The page draws `oldPrice` struck through, with `-x% off`, only
+            # where it is set; an empty string is no markdown. Stated, never
+            # reconstructed, and never below the fare it is a markdown from.
+            old_price = (entry.get("price") or {}).get("oldPrice")
+            try:
+                listed = float(old_price) if old_price not in (None, "") else None
+            except (TypeError, ValueError):
+                listed = None
+                warnings.append(f"{start}: a list price that is not a number: "
+                                f"{old_price!r}")
+            if listed is not None and row.price is not None and listed > row.price:
+                row.was = listed
         row.availability = "InStock" if entry.get("availability") else "SoldOut"
         trip_id = str(entry.get("boatTripId") or "")
         row.trip_id = trip_id if trip_id.isdigit() else None
@@ -702,6 +726,7 @@ def with_schedule(page_rows: list[Departure], schedule: list[Departure]
                 held.price is None
                 or (row.currency == held.currency and row.price < held.price)):
             held.price, held.trip, held.trip_id = row.price, row.trip, row.trip_id
+            held.was = row.was
     for event in page_rows:
         held = found.get(event.start)
         if held is None:

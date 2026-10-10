@@ -2612,3 +2612,54 @@ class TestAHullWhoseScheduleIsRefusedIsCarriedNotEmptied(unittest.TestCase):
         status, book, _ = self.run_fetch(refuse={"402", "406"})
         self.assertEqual(status, 1)
         self.assertIsNone(book)
+
+
+class TestAScheduleMarkdownIsReadLikeTheOtherTwo(unittest.TestCase):
+    """#157. The schedule strikes `oldPrice` through beside the fare, against
+    one sailing -- the claim liveaboard.com's `<del>` and PADI's
+    `compareAtPrice` make -- so it reaches `_list_prices` the way PADI's pair
+    does, and speaks only on a row whose fare is divebooker's own."""
+
+    def row(self, **over):
+        (row,), _ = db.schedule_departures([schedule_entry(**over)], "USD")
+        return row.as_dict()
+
+    def test_a_struck_through_price_is_the_sailings_was(self):
+        self.assertEqual(self.row()["was"], 1512.0)
+
+    def test_no_markdown_is_no_was_and_still_a_reading(self):
+        row = self.row(price={"text": "from", "oldPrice": "", "current": "1635"})
+        self.assertNotIn("was", row)
+        self.assertTrue(row["listed"], "a schedule row was asked; its silence is a no")
+
+    def test_a_was_at_or_below_the_fare_is_no_markdown(self):
+        row = self.row(price={"text": "from", "oldPrice": "1284", "current": "1284"})
+        self.assertNotIn("was", row)
+
+    def test_a_row_read_off_the_page_alone_was_never_asked(self):
+        rows, _ = db.departures(page())
+        self.assertTrue(rows)
+        self.assertNotIn("listed", rows[0].as_dict())
+
+    def figures(self, third):
+        from liveaboard import promote
+        return promote._list_prices(None, None, frozenset(), third)
+
+    def test_the_pair_reaches_the_sale_as_padis_does(self):
+        from liveaboard import promote
+        figures = self.figures(self.row())
+        self.assertEqual(figures["divebooker.com"], (1284.0, 1512.0, "USD"))
+        sale = promote._sale_for(figures, "divebooker.com", None)
+        self.assertEqual(sale["pct"], 15)
+        self.assertEqual(sale["sellers"], [promote.SELLERS.index("divebooker.com")])
+
+    def test_it_never_marks_down_another_sellers_fare(self):
+        from liveaboard import promote
+        sale = promote._sale_for(self.figures(self.row()), "liveaboard.com", None)
+        self.assertEqual(sale["sellers"], [promote.SELLERS.index("divebooker.com")])
+        self.assertNotIn("pct", sale)
+        self.assertNotIn("was", sale)
+
+    def test_a_row_never_asked_is_silence_not_a_no(self):
+        unasked = {k: v for k, v in self.row().items() if k not in ("listed", "was")}
+        self.assertEqual(self.figures(unasked), {})
