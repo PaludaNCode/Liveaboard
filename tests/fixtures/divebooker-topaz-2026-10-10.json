@@ -1,0 +1,819 @@
+{
+ "_comment": "Topaz, divebooker.com/topaz-haz508, carried back verbatim by tools/probe_divebooker_page.py on 2026-10-10 (run 38063192303): the page JSON-LD block whole, and two of the ten route objects its payload streams. The page carries no TouristTrip chain since 2026-10-08 (#157).",
+ "jsonld": {
+  "@context": "http://schema.org",
+  "@graph": [
+   {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+     {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+       "@type": "Thing",
+       "@id": "https://divebooker.com",
+       "name": "Home"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+       "@type": "Thing",
+       "@id": "https://divebooker.com/egypt-daz3881",
+       "name": "Egypt"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+       "@type": "Thing",
+       "@id": "https://divebooker.com/topaz-haz508",
+       "name": "Topaz, Egypt"
+      }
+     }
+    ]
+   },
+   {
+    "@type": "Service",
+    "areaServed": "Egypt",
+    "name": "Topaz Liveaboard, Egypt",
+    "description": "Topaz liveaboard is a 41m yacht exploring Egypt's Red Sea with scuba diving, kite surfing, and dolphin sightings. Enjoy modern suites, open-air lounges, and land excursions in comfort and space",
+    "image": "https://media.divebooker.com/media/images/big/17859320273478d728565e2e69ce33c5acd1336e39.jpeg",
+    "url": "https://divebooker.com/topaz-haz508",
+    "provider": {
+     "@type": "Organization",
+     "name": "Topaz Liveaboard",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "serviceType": "Diving"
+   },
+   {
+    "@type": "Product",
+    "sameAs": "https://divebooker.com/topaz-haz508",
+    "image": "https://media.divebooker.com/media/images/big/17859320273478d728565e2e69ce33c5acd1336e39.jpeg",
+    "sku": "haz508",
+    "name": "Topaz Liveaboard, Egypt",
+    "description": "Topaz liveaboard is a 41m yacht exploring Egypt's Red Sea with scuba diving, kite surfing, and dolphin sightings. Enjoy modern suites, open-air lounges, and land excursions in comfort and space",
+    "brand": {
+     "@type": "Brand",
+     "name": "Divebooker.com"
+    },
+    "offers": {
+     "@type": "AggregateOffer",
+     "priceCurrency": "USD",
+     "lowPrice": 1290,
+     "highPrice": 1635,
+     "seller": {
+      "@type": "Organization",
+      "name": "Divebooker.com"
+     },
+     "offerCount": 32
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#258340",
+    "name": "Brother Islands - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+    "description": "‘Brother Islands - Daedalus - Elphinstone (Port Ghalib - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 06 Mar 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-03-06",
+    "endDate": "2027-03-13",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-03-06",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1635",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#260519",
+    "name": "Best of Tiran (Hurghada - Hurghada)",
+    "description": "‘Best of Tiran (Hurghada - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 13 Mar 2027. No more spaces available.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-03-13",
+    "endDate": "2027-03-20",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-03-13",
+     "availability": "https://schema.org/SoldOut",
+     "price": "1635",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#258342",
+    "name": "The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada)",
+    "description": "‘The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 27 Mar 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-03-27",
+    "endDate": "2027-04-03",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-03-27",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1523",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#261139",
+    "name": "Best of Dahab and Tiran (Hurghada - Hurghada)",
+    "description": "‘Best of Dahab and Tiran (Hurghada - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 17 Apr 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-04-17",
+    "endDate": "2027-04-24",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-04-17",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1523",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#261140",
+    "name": "Best of Dahab and Tiran (Hurghada - Hurghada)",
+    "description": "‘Best of Dahab and Tiran (Hurghada - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 01 May 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-05-01",
+    "endDate": "2027-05-08",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-05-01",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1523",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#258344",
+    "name": "Brother Islands - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+    "description": "‘Brother Islands - Daedalus - Elphinstone (Port Ghalib - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 08 May 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-05-08",
+    "endDate": "2027-05-15",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-05-08",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1635",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#261141",
+    "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
+    "description": "‘Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)’ with the Topaz in Egypt for 8 days and 7 nights, departing 15 May 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-05-15",
+    "endDate": "2027-05-22",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-05-15",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1635",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#258345",
+    "name": "Brother Islands - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+    "description": "‘Brother Islands - Daedalus - Elphinstone (Hurghada - Port Ghalib)’ with the Topaz in Egypt for 8 days and 7 nights, departing 22 May 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-05-22",
+    "endDate": "2027-05-29",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-05-22",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1635",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#258346",
+    "name": "Best of Tiran (Hurghada - Hurghada)",
+    "description": "‘Best of Tiran (Hurghada - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 29 May 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-05-29",
+    "endDate": "2027-06-05",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-05-29",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1433",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   },
+   {
+    "@type": "Event",
+    "@id": "https://divebooker.com/topaz-haz508#261142",
+    "name": "Best of Dahab and Tiran (Hurghada - Hurghada)",
+    "description": "‘Best of Dahab and Tiran (Hurghada - Hurghada)’ with the Topaz in Egypt for 8 days and 7 nights, departing 05 Jun 2027.",
+    "image": "https://media.divebooker.com/media/images/w850/176373774489d53990cb71f61be527c33c6ba2869b.jpg",
+    "startDate": "2027-06-05",
+    "endDate": "2027-06-12",
+    "duration": "P8D",
+    "url": "https://divebooker.com/topaz-haz508",
+    "organizer": {
+     "@type": "Organization",
+     "name": "Topaz",
+     "url": "https://divebooker.com/topaz-haz508"
+    },
+    "eventStatus": "EventScheduled",
+    "location": {
+     "@type": "Place",
+     "name": "Egypt",
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Egypt"
+     }
+    },
+    "offers": {
+     "@type": "Offer",
+     "url": "https://divebooker.com/topaz-haz508",
+     "availabilityEnds": "2027-06-05",
+     "availability": "https://schema.org/OnlineOnly",
+     "price": "1523",
+     "priceCurrency": "USD",
+     "validFrom": "2026-10-10"
+    }
+   }
+  ]
+ },
+ "routes": [
+  {
+   "name": "Best of Tiran (7 nights) (Hurghada-Hurghada)",
+   "nights": "7 nights",
+   "numberDives": "18 dives",
+   "departurePort": {
+    "name": "Hurghada",
+    "url": "https://divebooker.com/egypt-hurghada-eaz665"
+   },
+   "arrivalPort": {
+    "name": "Hurghada",
+    "url": "https://divebooker.com/egypt-hurghada-eaz665"
+   },
+   "airport": {
+    "departure": "Hurghada International Airport (HRG)",
+    "arrival": "Hurghada International Airport (HRG)"
+   },
+   "checkIn": "17:00-17:00",
+   "checkOut": "08:00-09:00",
+   "requirements": {
+    "expirience": {
+     "title": "Requirements",
+     "text": "Minimum 30 dives"
+    },
+    "sertification": {
+     "title": "certification level",
+     "text": "AOWD or equivalent"
+    }
+   },
+   "details": {
+    "title": "Price details",
+    "columns": [
+     {
+      "type": "included",
+      "title": "Included",
+      "text": "In and out transfers to and from the boat, 6 days cruise and 7 nights on board in shared double cabin.\nFull board starting at dinner the day before departure and finishing at breakfast after the 7th night. non-alcoholic beverages included : water, cola, tea, juices on the boat during the cruise.\nMinimum 16 dives per week guaranted.\nGovernment taxes (until 31/12/2026)\nAll extra dives (night and day) free of charge. \nFree short-term DAN diving insurance (upon request)"
+     },
+     {
+      "type": "notincluded",
+      "title": "Obligatory surcharges",
+      "text": "Government and Environmental tax E/7N (unavailable until 2026-12-31): 150EUR per trip, to be paid on board"
+     },
+     {
+      "type": "extra",
+      "title": "Extra cost",
+      "text": "$44"
+     }
+    ]
+   },
+   "programm": {
+    "title": "Program",
+    "text": "$45"
+   },
+   "highlights": [
+    "Tiran reefs with steep coral walls, sea fans, and current-swept drop-offs",
+    "Schools of barracuda, snappers, fusiliers, and trevallies around the reefs",
+    "Chances to see turtles, napoleon wrasse, morays, and occasional reef sharks",
+    "A northern Red Sea route focused on coral-rich offshore reefs and strong fish life"
+   ],
+   "logistic": [
+    {
+     "title": "Departure",
+     "text": ""
+    },
+    {
+     "title": "Return",
+     "text": ""
+    }
+   ],
+   "divesites": [
+    {
+     "type": "departure",
+     "map": {
+      "latitude": "27.1872195",
+      "longitude": "33.8104248"
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Woodhouse Reef",
+      "image": "https://media.divebooker.com/media/images/h128/1389793682cc89aa0573be5a50bc0aaf49e2cead4c.jpg",
+      "url": "https://divebooker.com/woodhouse-reef-baz10750",
+      "latitude": "28.0031500",
+      "longitude": "34.4675170",
+      "tags": [
+       {
+        "id": "176",
+        "name": "Drift"
+       },
+       {
+        "id": "223",
+        "name": "Abundant sea life"
+       },
+       {
+        "id": "273",
+        "name": "Straits of Tiran"
+       },
+       {
+        "id": "278",
+        "name": "Corals"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Thomas Reef",
+      "image": "https://media.divebooker.com/media/images/h128/1389793490181d29d756ea98ba9d3a095616fc6478.jpg",
+      "url": "https://divebooker.com/thomas-reef-baz10749",
+      "latitude": "27.9905670",
+      "longitude": "34.4603500",
+      "tags": [
+       {
+        "id": "173",
+        "name": "Deep"
+       },
+       {
+        "id": "213",
+        "name": "Canyon"
+       },
+       {
+        "id": "215",
+        "name": "Tec diving"
+       },
+       {
+        "id": "268",
+        "name": "Top-50 dive sites of the world"
+       },
+       {
+        "id": "273",
+        "name": "Straits of Tiran"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Gordon Reef",
+      "image": "https://media.divebooker.com/media/images/h128/13897934120a3a1dee4b0561002a9e112d29930a56.jpg",
+      "url": "https://divebooker.com/gordon-reef-baz10748",
+      "latitude": "27.9845170",
+      "longitude": "34.4532330",
+      "tags": [
+       {
+        "id": "214",
+        "name": "Drop-off"
+       },
+       {
+        "id": "219",
+        "name": "Pinnacles"
+       },
+       {
+        "id": "273",
+        "name": "Straits of Tiran"
+       }
+      ]
+     }
+    },
+    {
+     "type": "arrival",
+     "map": {
+      "latitude": "27.1872195",
+      "longitude": "33.8104248"
+     }
+    }
+   ],
+   "divesiteTitle": "Route & dive sites",
+   "divesiteSectionTitle": "Dive sites you`ll see"
+  },
+  {
+   "name": "Fury Shoal (7 nights) (Port Ghalib-Port Ghalib)",
+   "nights": "7 nights",
+   "numberDives": "18 dives",
+   "departurePort": {
+    "name": "Port Ghalib",
+    "url": "https://divebooker.com/egypt-port-ghalib-eaz18151"
+   },
+   "arrivalPort": {
+    "name": "Port Ghalib",
+    "url": "https://divebooker.com/egypt-port-ghalib-eaz18151"
+   },
+   "airport": {
+    "departure": "Marsa Alam International Airport (RMF)",
+    "arrival": "Marsa Alam International Airport (RMF)"
+   },
+   "checkIn": "17:00-17:00",
+   "checkOut": "08:00-09:00",
+   "requirements": {
+    "expirience": {
+     "title": "Requirements",
+     "text": "Minimum 30 dives"
+    },
+    "sertification": {
+     "title": "certification level",
+     "text": "AOWD or equivalent"
+    }
+   },
+   "details": {
+    "title": "Price details",
+    "columns": [
+     {
+      "type": "included",
+      "title": "Included",
+      "text": "In and out transfers to and from the boat, 6 days cruise and 7 nights on board in shared double cabin.\nFull board starting at dinner the day before departure and finishing at breakfast after the 7th night. non-alcoholic beverages included : water, cola, tea, juices on the boat during the cruise.\nMinimum 16 dives per week guaranted.\nGovernment taxes (until 31/12/2026)\nAll extra dives (night and day) free of charge. \nFree short-term DAN diving insurance (upon request)"
+     },
+     {
+      "type": "notincluded",
+      "title": "Obligatory surcharges",
+      "text": "Government and Environmental tax E/7N (unavailable until 2026-12-31): 150EUR per trip, to be paid on board"
+     },
+     {
+      "type": "extra",
+      "title": "Extra cost",
+      "text": "$4d"
+     }
+    ]
+   },
+   "programm": {
+    "title": "Program",
+    "text": "$4e"
+   },
+   "highlights": [
+    "Hammerhead and grey reef sharks circling around the tips of reefs",
+    "Pods of friendly and playful spinner dolphins",
+    "Shear walls covered in soft corals",
+    "Hard coral garden in the shape of an amphitheatre"
+   ],
+   "logistic": [
+    {
+     "title": "Departure",
+     "text": ""
+    },
+    {
+     "title": "Return",
+     "text": ""
+    }
+   ],
+   "divesites": [
+    {
+     "type": "departure",
+     "map": {
+      "latitude": "25.5342810",
+      "longitude": "34.6372260"
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Fury Shoals",
+      "image": "https://media.divebooker.com/media/images/h128/1436528950af23883a1fe071cac47f970410569389.jpg",
+      "url": "https://divebooker.com/fury-shoals-baz13774",
+      "latitude": "23.5362830",
+      "longitude": "35.9060670",
+      "tags": [
+       {
+        "id": "223",
+        "name": "Abundant sea life"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "El Malahi",
+      "image": "https://media.divebooker.com/media/images/h128/14379826393423e16a6c652195d3d87fd4ef6505ce.jpg",
+      "url": "https://divebooker.com/el-malahi-baz13797",
+      "latitude": "24.1962500",
+      "longitude": "35.6615000",
+      "tags": []
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Shaab Claudia",
+      "image": "https://media.divebooker.com/media/images/h128/142616605839346f4ea2abd4292b22af64dcffab32.jpg",
+      "url": "https://divebooker.com/shaab-claudio-baz13296",
+      "latitude": "24.2199000",
+      "longitude": "35.6117830",
+      "tags": [
+       {
+        "id": "216",
+        "name": "Cavern"
+       },
+       {
+        "id": "249",
+        "name": "Macro"
+       },
+       {
+        "id": "441",
+        "name": "UW photo"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Shaab Maksur",
+      "image": "https://media.divebooker.com/media/images/h128/14377443165268f6c8e06609274b5d7a96943594cf.jpg",
+      "url": "https://divebooker.com/shaab-maksur-baz13753",
+      "latitude": "24.2403580",
+      "longitude": "35.6576040",
+      "tags": [
+       {
+        "id": "201",
+        "name": "Pelagics"
+       },
+       {
+        "id": "278",
+        "name": "Corals"
+       },
+       {
+        "id": "389",
+        "name": "Schools of fish"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Shaab Sataya",
+      "image": "https://media.divebooker.com/media/images/h128/139721415143d530901e038cc0dfc97be9b02d702d.jpg",
+      "url": "https://divebooker.com/dolphin-reef-baz10758",
+      "latitude": "24.1676000",
+      "longitude": "35.6732500",
+      "tags": [
+       {
+        "id": "220",
+        "name": "Shallow"
+       },
+       {
+        "id": "239",
+        "name": "Dolphins"
+       },
+       {
+        "id": "256",
+        "name": "Snorkeling"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Elphinstone Reef",
+      "image": "https://media.divebooker.com/media/images/h128/13897957330087c8d45192c148885b36fa0a723ec4.jpg",
+      "url": "https://divebooker.com/elphinstone-reef-baz10754",
+      "latitude": "25.3111500",
+      "longitude": "34.8612170",
+      "tags": [
+       {
+        "id": "63",
+        "name": "Wall"
+       },
+       {
+        "id": "173",
+        "name": "Deep"
+       },
+       {
+        "id": "178",
+        "name": "Sharks"
+       },
+       {
+        "id": "201",
+        "name": "Pelagics"
+       },
+       {
+        "id": "268",
+        "name": "Top-50 dive sites of the world"
+       }
+      ]
+     }
+    },
+    {
+     "type": "divesites",
+     "map": {
+      "name": "Shaab Marsa Alam",
+      "image": "https://media.divebooker.com/media/images/h128/13898774657ea95f95f99d19571f607276f7016f17.jpg",
+      "url": "https://divebooker.com/shaab-marsa-alam-baz10781",
+      "latitude": "25.0716000",
+      "longitude": "34.9381500",
+      "tags": []
+     }
+    },
+    {
+     "type": "arrival",
+     "map": {
+      "latitude": "25.5342810",
+      "longitude": "34.6372260"
+     }
+    }
+   ],
+   "divesiteTitle": "Route & dive sites",
+   "divesiteSectionTitle": "Dive sites you`ll see"
+  }
+ ]
+}

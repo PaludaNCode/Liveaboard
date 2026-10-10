@@ -2274,3 +2274,44 @@ class TestAnEventNameCarryingItsHarboursFindsItsPanel(unittest.TestCase):
                                            self.panel("Mini Safari", "Abu Nuhas", "Thistlegorm")])
         self.assertEqual(rows[0].trip, name)
         self.assertEqual(rows[1].trip, "Best of Tiran (Port Ghalib - Hurghada)")
+
+
+TOPAZ = Path(__file__).resolve().parent / "fixtures" / "divebooker-topaz-2026-10-10.json"
+
+
+class TestThePageAsServedSinceTheChainWentStillAttachesItsFees(unittest.TestCase):
+    """#157, on the bytes Topaz served on 2026-10-10 rather than on a shape
+    written to match the fix: the JSON-LD block whole and two of the payload's
+    route objects verbatim. On 10-07 the fleet read 505 fee books and on 10-08
+    none, because the sailings stopped being named the way the panels are."""
+
+    def setUp(self):
+        fixture = json.loads(TOPAZ.read_text(encoding="utf-8"))
+        body = json.dumps({"routes": fixture["routes"]}, ensure_ascii=False)
+        self.html = ('<script type="application/ld+json">'
+                     + json.dumps(fixture["jsonld"], ensure_ascii=False)
+                     + '</script><script>self.__next_f.push([1,'
+                     + json.dumps(body) + '])</script>')
+        self.book = db.vessel(self.html, "/topaz-haz508")
+
+    def test_the_fixture_is_the_new_shape(self):
+        # If this fails the fixture is not the page #157 is about.
+        self.assertNotIn("TouristTrip", self.html)
+        self.assertEqual(len(self.book.departures), 10)
+
+    def test_a_sailing_carries_the_trip_name_its_panel_uses(self):
+        tiran = [r for r in self.book.departures if r.trip == "Best of Tiran"]
+        self.assertTrue(tiran, sorted({r.trip for r in self.book.departures}))
+        self.assertFalse([r for r in self.book.departures
+                          if r.trip and r.trip.startswith("Best of Tiran (")])
+
+    def test_the_panel_reaches_the_sailings_it_prices(self):
+        key = db.fee_key("Best of Tiran", 7)
+        self.assertIn(key, self.book.fees, self.book.warnings)
+        lines, _ = self.book.fees[key]
+        self.assertTrue(any(fee.has_price for fee in lines))
+
+    def test_a_panel_for_a_trip_no_sailing_sells_stays_unattached_and_said(self):
+        self.assertNotIn(db.fee_key("Fury Shoal", 7), self.book.fees)
+        self.assertTrue(any("'Fury Shoal'" in w and "unattached" in w
+                            for w in self.book.warnings))
