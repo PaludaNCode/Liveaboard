@@ -67,6 +67,26 @@ def census(html: str) -> list[str]:
     return lines
 
 
+SCRIPT = re.compile(r'<script[^>]+src="(/_next/static/[^"]+\.js)"')
+ENDPOINTISH = re.compile(r'["\'`](/(?:api|boatorder|boat|trip|search)[\w/.?=&${}-]*)')
+
+
+def carry_chunks(fetcher: PoliteFetcher, html: str) -> list[str]:
+    """Every script the page loads, emitted, and what in it looks like a path."""
+    lines = []
+    for src in SCRIPT.findall(html):
+        try:
+            chunk = fetcher.get(f"https://{db.HOST}{src}")
+        except Exception as exc:  # noqa: BLE001 - one dead chunk must not end it
+            lines.append(f"  {src}: unread ({exc})")
+            continue
+        name = src.rsplit("/", 1)[-1].replace("%5B", "").replace("%5D", "")
+        emit(name, chunk.body.encode("utf-8"))
+        paths = sorted(set(ENDPOINTISH.findall(chunk.body)))
+        lines.append(f"  {src}: {len(chunk.body)} chars; paths {paths[:12]}")
+    return lines
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--vessels", default="topaz",
@@ -76,6 +96,10 @@ def main() -> int:
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     parser.add_argument("--no-emit", action="store_true",
                         help="print the census only")
+    parser.add_argument("--chunks", action="store_true",
+                        help="also carry back every script chunk the first "
+                             "page loads: the season stopped arriving in the "
+                             "page, so whatever asks for it is in these")
     args = parser.parse_args()
 
     vessels = json.loads(args.book.read_text(encoding="utf-8")).get("vessels") or {}
@@ -98,6 +122,9 @@ def main() -> int:
             emit(f"{slug}.html", result.body.encode("utf-8"))
         report.append(f"== {slug} ({record['url']}) ==")
         report.extend(census(result.body))
+        if args.chunks:
+            report.extend(carry_chunks(fetcher, result.body))
+            args.chunks = False  # one page's worth; the app is the same app
 
     print("\n".join(report))
     return 0

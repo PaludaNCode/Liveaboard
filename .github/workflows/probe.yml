@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,selectcabin,fixture,flight,page,search,listprice,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,selectcabin,fixture,flight,page,chunks,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -548,7 +548,8 @@ jobs:
         if: contains(inputs.divebooker_ask, 'page')
         run: |
           python3 tools/probe_divebooker_page.py \
-            --vessels "${{ inputs.divebooker_vessel || 'topaz' }}"
+            --vessels "${{ inputs.divebooker_vessel || 'topaz' }}" \
+            ${{ contains(inputs.divebooker_ask, 'chunks') && '--chunks' || '' }}
 
       # `docs/sources/divebooker.com.md` records "no list price" as a negative
       # -- measured over 219 departures on vessel pages, and the same file's
