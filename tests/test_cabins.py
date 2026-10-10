@@ -29,6 +29,7 @@ sold out and prices every cabin anyway.
 
 from __future__ import annotations
 
+import json
 import unittest
 from datetime import date
 from pathlib import Path
@@ -282,6 +283,10 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
         self.assertEqual(reading.cabins[0].price, 500.0)
         self.assertEqual(reading.currency, "USD")
         self.assertTrue(any("EUR" in w for w in reading.warnings))
+        self.assertEqual(reading.shown, "EUR")
+
+    def test_a_page_in_the_currency_asked_for_shows_nothing_else(self):
+        self.assertIsNone(parse_cabins(read(DISCOUNTED), "EUR").shown)
 
     def test_a_banner_disagreeing_with_the_attribute_is_reported(self):
         page = (
@@ -577,3 +582,92 @@ class TestAPageInAnotherCurrencyIsRead(unittest.TestCase):
         now = NOW_PRICE.search(html)
         self.assertEqual(now.group(2), "1,186")
         self.assertEqual(_money("&#x20AC;1,300"), (1300.0, "€"))
+
+
+class TestASessionThatLostItsCurrency(unittest.TestCase):
+    """#157. On 2026-10-07 a USD session was answered in pounds on nearly
+    every booking page, and the fetch wrote them down as dollars."""
+
+    def setUp(self):
+        import sys
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import fetch_cabins
+
+        self.fc = fetch_cabins
+
+    def test_most_of_a_run_in_another_currency_is_refused_and_named(self):
+        why = self.fc.currency_refusal(read=8, elsewhere=884)
+        self.assertIn("currency", why)
+        self.assertIn("884", why)
+
+    def test_a_stray_page_is_skipped_and_the_run_still_writes(self):
+        self.assertIsNone(self.fc.currency_refusal(read=890, elsewhere=2))
+        self.assertIsNone(self.fc.currency_refusal(read=0, elsewhere=0))
+
+    # Booking pages as the parser reads them, one cabin each, in the currency
+    # the glyph names. "$" names nothing, so it is the page that obeyed.
+    PAGE = ('<button aria-controls=help-content-cabin-details-7 title=Cabin>x</button>'
+            '<em>{glyph}</em> <span translate=no>{price}</span>'
+            '<select name=input-cabin-guests-7 data-cabinid=7 data-allocation=3>'
+            '<option value=0>-<option value=1>1 person</select>')
+
+    def run_fetch(self, pages: dict[str, str], book: dict) -> tuple[int, dict]:
+        """``fetch_cabins.main`` over stubbed pages, keyed by tour id."""
+        import io
+        import sys
+        import tempfile
+        from contextlib import redirect_stdout
+        from unittest import mock
+
+        class Fetched:
+            def __init__(self, body):
+                self.body = body
+
+        class Fetcher:
+            def __init__(self, **_):
+                pass
+
+            def get(self, url):
+                return Fetched(pages[url.split("tourid=")[1].split("&")[0]])
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "cabins.json"
+            archive = Path(tmp) / "archive.json"
+            archive.write_text("{}", encoding="utf-8")
+            out.write_text(json.dumps({"departures": book}), encoding="utf-8")
+            before = out.read_text(encoding="utf-8")
+            argv = ["fetch_cabins", "--archive", str(archive), "--out", str(out),
+                    "--snapshots", tmp, "--delay", "0",
+                    "--tours", ",".join(f"9:{t}" for t in pages)]
+            with mock.patch.object(sys, "argv", argv), \
+                    mock.patch.object(self.fc, "PoliteFetcher", Fetcher), \
+                    redirect_stdout(io.StringIO()):
+                status = self.fc.main()
+            after = out.read_text(encoding="utf-8")
+            written = json.loads(after)["departures"] if after != before else None
+        return status, written
+
+    def old(self, price):
+        return {"collected": "2026-10-06", "currency": "USD",
+                "cabins": [{"price": price}]}
+
+    def test_a_page_in_pounds_keeps_the_last_good_reading(self):
+        status, book = self.run_fetch(
+            {"100": self.PAGE.format(glyph="$", price="1,200"),
+             "101": self.PAGE.format(glyph="£", price="900")},
+            {"100": self.old(1190.0), "101": self.old(1200.0)})
+        self.assertEqual(status, 0)
+        self.assertIsNotNone(book, "a run that read a page must write its book")
+        self.assertEqual(book["100"]["cabins"][0]["price"], 1200.0)
+        self.assertEqual(book["101"], self.old(1200.0),
+                         "pounds were written down as dollars")
+
+    def test_a_run_mostly_in_pounds_writes_nothing_and_fails(self):
+        status, book = self.run_fetch(
+            {"100": self.PAGE.format(glyph="$", price="1,200"),
+             "101": self.PAGE.format(glyph="£", price="900"),
+             "102": self.PAGE.format(glyph="£", price="950")},
+            {"101": self.old(1200.0)})
+        self.assertEqual(status, 1)
+        self.assertIsNone(book, "the book was rewritten under a refusal")

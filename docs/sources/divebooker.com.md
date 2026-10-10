@@ -167,6 +167,91 @@ which sells three, states three. So the top-level Events are a capped ten with
 a booking url and the `TouristTrip` chain is the whole list. The fold takes the
 chain and lets the ten add a url.
 
+**And on 2026-10-08 the chain went (#157).** Every hull read as `N in season
+of 10   0 fee block(s)` from that morning, and `MIN_BOOK_RATIO` refused the
+book three days running (44 departures against 950). Measured on Topaz and
+Alsuraya by `tools/probe_divebooker_page.py`
+([run 38063192303](https://github.com/PaludaNCode/Liveaboard/actions/runs/38063192303)),
+which carries the whole page back: `TouristTrip`, `subjectOf` and
+`itemOffered` occur **0 times** in the raw bytes and 0 in the decoded payload.
+What is left is the capped ten, and they are the ten *nearest*: Alsuraya's run
+2026-11-28 to 2027-03-06, so not one is in the season. No parser change on
+that page can bring the season back.
+
+The fee panels survived — ten `details` blocks a page, exactly as before —
+and all of them read as *a trip this page does not sell*, because a sailing's
+only name is now its Event's and the Event appends the harbours: *Best of
+Tiran (Hurghada - Hurghada)* over a panel titled *Best of Tiran*, from
+Hurghada to Hurghada. `_name_trips_as_panels_do` renames a sailing to the
+panel's trip only where the suffix is exactly that panel's own two harbours —
+never by stripping a last parenthetical, because *Mini Safari (Abu Nuhas - Ras
+Muhammad - Thistlegorm)* is a trip name.
+
+Where the season went is in the scripts the page loads
+(`tools/probe_divebooker_page.py --chunks`,
+[run 38063457268](https://github.com/PaludaNCode/Liveaboard/actions/runs/38063457268)),
+not guessed: chunk `app/[...page]/page` holds the schedule block, which
+fetches `getSchedule` — `https://divebooker.com/restapi/trips/` from the
+endpoint table in chunk 6166 — plus the page's `boatId` (`"508"` for
+`topaz-haz508`, in the payload), `?p=N` to page, `&f[dm]=…` for a month and
+always `type=desc`, and reads `trips.list` (each entry a `boatTripId`, a
+`departureDate`, an `arrivalDate`, a `duration` and a route `name`) and
+`filters` off the answer. `/restapi/` is in no `Disallow:` of the `*` record.
+
+**And it refuses us: HTTP 403**, on both hulls, on `p=1`, and on `f[dm]=202707`
+and `f[dm]=2027-07` alike (`tools/probe_divebooker_schedule.py`,
+[run 38063794148](https://github.com/PaludaNCode/Liveaboard/actions/runs/38063794148)).
+robots.txt permits the path and the server refuses the request, so this is a
+refusal rather than a parsing question. The page's own call sends only
+`Content-Type: application/json`, so what separates it from ours is whatever
+a browser adds — cookies from the page load, `Referer`, Cloudflare's own
+checks — and nothing here has measured which. **Not pursued past the first
+refusal**, deliberately: a request reshaped to get past a 403 is a different
+thing from reading what a page serves, and that is the owner's decision to
+make. The same chunk holds `Authorization: Basic developer:12345` on other
+calls (reviews, user data, search data); it is not on this one, and it is
+**not** a credential this project will send anywhere.
+
+**Asked the way the page's own script asks, it answers**
+([run 38064242030](https://github.com/PaludaNCode/Liveaboard/actions/runs/38064242030)):
+the script's `Content-Type: application/json`, an `Accept` for JSON, and the
+vessel page as `Referer`, which is what a browser adds to that call. Our own
+user agent; no cookies were needed and none are sent. That is
+`divebooker_com.SCHEDULE_HEADERS` and the fetch's `Referer`, and nothing else.
+
+| | |
+|---|---|
+| Answer | `{trips: {list, total}, filters, activeFilters}` |
+| Page size | 10, paged on `p=`; Topaz `total` 32, Alsuraya 49 |
+| Month filter | `f[dm]=202707` is a **start**, not a month: July and every sailing after it, ten to a page. `f[dm]=2027-07` is ignored and answers page one of everything |
+| Per sailing | `departureDate.date` (ISO), `nights`, `name` (the bare trip name the fee panels use), `price.current`, `price.oldPrice`, `availability`, `charterOnly`, `sumFreeSpaces`, `boatTripId`, `bookingUrl` |
+| Currency | **none stated** — and it is the page's: Alsuraya 2026-11-28 is 1284 here and 1284 USD on the page's own Event offer |
+
+The page's script is the dictionary, so nothing is guessed: `availability`
+truthy draws *Select cabin* and falsy draws **SOLD OUT**; `charterOnly ==
+"1"` draws *For full charters and groups only* and no fare; `oldPrice`, where
+set, is drawn struck through beside `-x% off`. `boatTripId` is the number the
+Event `@id` fragment carried and `/boatorder/booking?tripId=` takes — on every
+sailing now, not the ten. And the Event's own id moved from `id` to `@id` the
+same morning, which is why the ten had stopped yielding booking ids too.
+
+**`price.oldPrice` is a list price stated against a sailing** — Alsuraya's
+2026-11-28 is 1284 from 1512. The rule at the top of this project says this
+seller states none, and on the pages read until 10-08 it did not. **Read and
+not used**: what a sale is on this site is the owner's rule, so the fetch
+keeps the fare and leaves the markdown for a change of its own.
+
+`fetch_divebooker.py` reads the page and then `walk_schedule` once, from the
+season's first month, ended by the first page whose last sailing is past the
+season, by a page adding no `boatTripId`, or by the answer's `total`. **The
+first version walked each season month in turn** and, measured by the first
+capped run (three hulls, ~13 requests each where ~4 was expected), read the
+same sailings up to four times, because each month's answer runs on to the end
+of the schedule. A schedule that does not answer is a season nobody read: the hull's
+last reading is carried and named, and a run where it failed on most of the
+fleet refuses to write (`schedule_refusal`), because carrying every hull
+would publish last week's season as today's.
+
 **Both currencies, in one fleet.** 13 offers in EUR and 10 in USD across three
 Egyptian boats — Discovery II quotes EUR 1,254 and the boat above it USD 2,760.
 `changes.repriced`'s rule already covers what that means for a diff: a fare in

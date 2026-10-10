@@ -172,6 +172,23 @@ def triggered(
     return why
 
 
+def currency_refusal(read: int, elsewhere: int) -> str | None:
+    """Why this run may not write its book, when the session lost its currency.
+
+    One page in another currency is a page; most of a run is the site
+    answering the session in a currency it was not asked for, which is a fault
+    of the run and not of any sailing (#157 -- pounds for dollars on nearly
+    every page of 2026-10-07). Each such page is already skipped, so nothing
+    false would be written; the refusal is so the red job names the cause
+    rather than a ladder floor in the publish gate two steps later.
+    """
+    if elsewhere and elsewhere > read:
+        return (f"REFUSED: {elsewhere} booking page(s) answered in a currency "
+                f"other than the one asked for, against {read} read. The "
+                f"session's currency did not hold; nothing written.")
+    return None
+
+
 def load(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
@@ -237,7 +254,7 @@ def main() -> int:
 
     fetcher = PoliteFetcher(snapshot_dir=args.snapshots, delay=args.delay)
     today = date.today().isoformat()
-    read = failed = nothing = disagreed = 0
+    read = failed = nothing = disagreed = elsewhere = 0
 
     for index, tour in enumerate(todo, 1):
         entry = sailings[tour]
@@ -253,6 +270,17 @@ def main() -> int:
         for warning in reading.warnings:
             print(f"      ! {warning}", flush=True)
             disagreed += 1
+
+        if reading.shown:
+            # Figures in a currency nobody asked for are not this sailing's
+            # ladder, and labelling them with the one that was asked for is
+            # how 2026-10-07 published pounds as dollars (#157). The record
+            # from the last good reading stays, dated the day it was read.
+            print(f"  [{index}/{len(todo)}] {entry['boat']:22.22} "
+                  f"{entry['start']}  page shows {reading.shown}, not "
+                  f"{entry['currency']}; left as it was", flush=True)
+            elsewhere += 1
+            continue
 
         if not reading.cabins:
             # A page with no cabin markup at all answers nothing, and writing
@@ -302,6 +330,11 @@ def main() -> int:
               f"at it{note}"
               f"{'  FULL' if reading.nothing_bookable else ''}", flush=True)
 
+    refusal = currency_refusal(read, elsewhere)
+    if refusal:
+        print(f"\n{refusal}")
+        return 1
+
     if not read:
         # A run that read nothing must not rewrite the file. The only thing
         # that would change is the collected date, which would report the book
@@ -336,7 +369,8 @@ def main() -> int:
         encoding="utf-8",
     )
     print(f"\nwrote {args.out}: {len(book)} departure(s) ({read} read this run), "
-          f"{failed} failed, {nothing} unreadable, {disagreed} warning(s)")
+          f"{failed} failed, {nothing} unreadable, {elsewhere} in another "
+          f"currency, {disagreed} warning(s)")
     return 0
 
 

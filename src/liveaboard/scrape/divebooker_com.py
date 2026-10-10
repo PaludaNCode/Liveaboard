@@ -173,6 +173,11 @@ class Departure:
     offers: int = 1
     url: str | None = None
     event_id: str | None = None
+    #: The schedule's ``boatTripId`` (#157): the same number the Event's
+    #: ``@id`` fragment carries, stated for every sailing rather than the ten.
+    trip_id: str | None = None
+    #: *For full charters and groups only*: the page prints no fare.
+    charter_only: bool = False
     #: Which of the page's two statements of this sailing were read. Kept
     #: because the counts are the evidence for the folding rule above, and a
     #: rule whose evidence is not in the data is a rule nobody can re-check.
@@ -192,6 +197,8 @@ class Departure:
         across two hulls and two dates. Digits only: a fragment that is not a
         number is not an id this project will put in a query string.
         """
+        if self.trip_id:
+            return self.trip_id
         _, _, fragment = (self.event_id or "").partition("#")
         return fragment if fragment.isdigit() else None
 
@@ -521,6 +528,196 @@ def walk_search(fetch: Callable[[str], str | None],
     return found, notes
 
 
+# --------------------------------------------------------------------------
+# The schedule
+#
+# **Since 2026-10-08 a vessel page states its ten nearest sailings and nothing
+# else (#157).** The `TouristTrip` chain that carried the whole season is gone
+# from the bytes, and the page's own schedule block fetches the rest: chunk
+# `app/[...page]/page` calls `getSchedule` -- `/restapi/trips/` -- plus the
+# page's `boatId`, `p=` to page, `f[dm]=YYYYMM` for a month and `type=desc`
+# always, and reads `trips.list` off the answer. Asked plainly it answers 403;
+# asked with the headers that script sends and the vessel page as `Referer`,
+# it answers (run 38064242030). Cookies are not needed and none are sent.
+#
+# Every field read here is one the page's own script reads, and read the way
+# it reads it: `availability` truthy is *Select cabin* and falsy is *SOLD
+# OUT*; `charterOnly == "1"` prints no price at all; `price.current` is the
+# fare. `f[dm]=2027-07` is ignored by the site -- it answers the first page of
+# everything -- so the month is `YYYYMM`, the spelling the search already uses.
+# --------------------------------------------------------------------------
+
+SCHEDULE_PATH = "/restapi/trips/"
+
+#: What the page's schedule script sends, and the vessel page as the Referer
+#: a browser adds. Nothing else: never the `Authorization` header the same
+#: chunk sends on other calls, which is a credential and not ours.
+SCHEDULE_HEADERS = {"Content-Type": "application/json",
+                    "Accept": "application/json, text/plain, */*"}
+
+#: The boat id the schedule block is rendered with. Read off the page rather
+#: than off the slug's `haz` number: they agree on every hull read so far, and
+#: an id typed from a slug is how this module once read another boat.
+BOAT_ID = re.compile(r'"boatId":\s*"(\d+)"')
+
+MAX_SCHEDULE_PAGES = 10
+
+
+def schedule_id(html: str) -> str | None:
+    """The `boatId` the page's own schedule block asks with, or ``None``."""
+    match = BOAT_ID.search(payload(html))
+    return match.group(1) if match else None
+
+
+def schedule_path(boat_id: str, ym: str, page: int = 1) -> str:
+    """The path the schedule block fetches, in the order it builds it."""
+    paged = f"?{PAGE_PARAM}={page}&" if page > 1 else "?"
+    return f"{SCHEDULE_PATH}{boat_id}{paged}f[dm]={ym}&type=desc"
+
+
+def schedule_entries(answer: Any) -> tuple[list[dict[str, Any]], int | None]:
+    """``trips.list`` and ``trips.total`` off one answer, or nothing."""
+    trips = answer.get("trips") if isinstance(answer, dict) else None
+    if not isinstance(trips, dict):
+        return [], None
+    listed = [e for e in trips.get("list") or [] if isinstance(e, dict)]
+    total = trips.get("total")
+    return listed, total if isinstance(total, int) else None
+
+
+def walk_schedule(fetch: Callable[[str], str | None], boat_id: str,
+                  first_ym: str, last_day: str,
+                  max_pages: int = MAX_SCHEDULE_PAGES
+                  ) -> tuple[list[dict[str, Any]] | None, list[str]]:
+    """Every sailing the schedule states from ``first_ym`` to ``last_day``,
+    or ``None``.
+
+    **`f[dm]` is a start, not a month.** Asked for 202707 it answers July and
+    then everything after, ten to a page -- measured on a weekly boat whose
+    first page ran past July (run 38064242030), and again by the first capped
+    run, which asked each season month in turn and read the same sailings up
+    to four times. So it is one walk from the season's first month, ended by
+    the first page whose last sailing is past the season, by a page adding no
+    ``boatTripId`` the walk has seen, or by the answer's own ``total``.
+
+    ``None`` is a schedule this run could not read -- a refusal, a page that is
+    not JSON, a page that is not the shape above -- and it is a different
+    answer from an empty list, which is the site saying the hull sells nothing
+    from that month on. The caller carries the hull's last reading on
+    ``None``, because a hull whose season was not read is not a hull with no
+    season.
+    """
+    found: list[dict[str, Any]] = []
+    notes: list[str] = []
+    seen: set[str] = set()
+    for page in range(1, max_pages + 1):
+        body = fetch(schedule_path(boat_id, first_ym, page))
+        if body is None:
+            notes.append(f"p{page}: unread")
+            return None, notes
+        try:
+            answer = json.loads(body)
+        except json.JSONDecodeError:
+            notes.append(f"p{page}: not JSON")
+            return None, notes
+        if not isinstance(answer, dict) or not isinstance(answer.get("trips"), dict):
+            notes.append(f"p{page}: no trips in the answer")
+            return None, notes
+        listed, total = schedule_entries(answer)
+        fresh = [e for e in listed if str(e.get("boatTripId")) not in seen]
+        seen.update(str(e.get("boatTripId")) for e in listed)
+        found.extend(fresh)
+        starts = [str((e.get("departureDate") or {}).get("date") or "") for e in listed]
+        if (not fresh or (total is not None and len(seen) >= total)
+                or (starts and max(starts) > last_day)):
+            break
+    else:
+        notes.append(f"still inside the season at page {max_pages}; this run "
+                     f"does not claim the season is complete")
+    return found, notes
+
+
+def schedule_departures(entries: Iterable[dict[str, Any]], currency: str | None
+                        ) -> tuple[list[Departure], list[str]]:
+    """One `Departure` per schedule entry, in the vessel page's currency.
+
+    **The currency is the page's.** The answer states none, and measured
+    against the page it was asked beside it is the page's: Alsuraya's
+    2026-11-28 is 1284 in both, and the page's own Event offer says USD.
+
+    The end is the start plus the stated nights. `arrivalDate` states a day
+    and a month and no ISO date, so it is the check rather than the source,
+    and a disagreement is said rather than resolved.
+    """
+    rows: list[Departure] = []
+    warnings: list[str] = []
+    for entry in entries:
+        start = (entry.get("departureDate") or {}).get("date")
+        nights = entry.get("nights")
+        if not isinstance(start, str) or not ISO_DATE.match(start):
+            warnings.append(f"a schedule entry states no ISO start: "
+                            f"{entry.get('departureDate')!r}")
+            continue
+        row = Departure(start=start, trip=_text(entry.get("name")),
+                        currency=currency, stated_by=["schedule"])
+        if isinstance(nights, int) and nights > 0:
+            end = date.fromordinal(date.fromisoformat(start).toordinal() + nights)
+            row.end = end.isoformat()
+            stated = (entry.get("arrivalDate") or {}).get("m")
+            if stated and stated != end.strftime("%d %b"):
+                warnings.append(f"{start}: {nights} night(s) end {end}, and the "
+                                f"schedule states arrival {stated!r}")
+        row.charter_only = str(entry.get("charterOnly")) == "1"
+        if not row.charter_only:
+            current = (entry.get("price") or {}).get("current")
+            try:
+                row.price = float(current) if current not in (None, "") else None
+            except (TypeError, ValueError):
+                warnings.append(f"{start}: a fare that is not a number: {current!r}")
+        row.availability = "InStock" if entry.get("availability") else "SoldOut"
+        trip_id = str(entry.get("boatTripId") or "")
+        row.trip_id = trip_id if trip_id.isdigit() else None
+        rows.append(row)
+    return rows, warnings
+
+
+def with_schedule(page_rows: list[Departure], schedule: list[Departure]
+                  ) -> tuple[list[Departure], list[str]]:
+    """The schedule, with what the page's ten Events add to the same dates.
+
+    The schedule is the whole list and wins, which is the rule the old chain
+    had over the Events. Two schedule entries on one date fold the way two
+    trip offers did: counted in ``offers``, the cheaper kept within one
+    currency.
+    """
+    found: dict[str, Departure] = {}
+    warnings: list[str] = []
+    for row in schedule:
+        held = found.get(row.start)
+        if held is None:
+            found[row.start] = row
+            continue
+        held.offers += 1
+        if row.price is not None and (
+                held.price is None
+                or (row.currency == held.currency and row.price < held.price)):
+            held.price, held.trip, held.trip_id = row.price, row.trip, row.trip_id
+    for event in page_rows:
+        held = found.get(event.start)
+        if held is None:
+            found[event.start] = event
+            continue
+        held.url = held.url or event.url
+        held.event_id = held.event_id or event.event_id
+        held.stated_by.append("event")
+        if (event.price is not None and held.price is not None
+                and (event.price, event.currency) != (held.price, held.currency)):
+            warnings.append(f"{event.start}: the schedule states {held.price} "
+                            f"{held.currency} and the event offer {event.price} "
+                            f"{event.currency}; kept the schedule's")
+    return [found[key] for key in sorted(found)], warnings
+
+
 def split_slug(path: str) -> tuple[str, str | None]:
     """``/bella-2-haz432`` -> ``("bella-2", "haz432")``."""
     match = HULL_HREF.search(f'href="{path}"')
@@ -626,7 +823,10 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
         if "event" not in row.stated_by:
             row.stated_by.append("event")
         row.url = row.url or _text(event.get("url"))
-        row.event_id = row.event_id or _text(event.get("id"))
+        # `id` until 2026-10-08 and `@id` since (#157): the same url and
+        # fragment under JSON-LD's own spelling, so either is the sailing's.
+        row.event_id = (row.event_id or _text(event.get("@id"))
+                        or _text(event.get("id")))
         if offer is None:
             continue
 
@@ -676,7 +876,30 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
     return [found[key] for key in sorted(found)], warnings
 
 
-def vessel(html: str, path: str) -> VesselBook:
+def _name_trips_as_panels_do(rows: list[Departure], blocks: list[FeeBlock]) -> None:
+    """Give a sailing the trip name its price panel states, where the page
+    says the two are one trip (#157).
+
+    Since 2026-10-08 the ``TouristTrip`` chain is gone and a sailing's only
+    name is its Event's, which appends the harbours: *Best of Tiran (Hurghada
+    - Hurghada)* over a panel titled *Best of Tiran* from Hurghada to
+    Hurghada. Every panel on every hull read as unattached. The bare name is
+    the one the chain used to give, so ids and itinerary keys do not move.
+
+    Renamed only where the suffix is **exactly** the panel's own two
+    harbours, never by stripping a last parenthetical: *Mini Safari (Abu
+    Nuhas - Ras Muhammad - Thistlegorm)* is a trip name, and the panel is what
+    says which part of a name is a route and which is a harbour pair.
+    """
+    named = {f"{b.trip} ({b.port_from} - {b.port_to})": b.trip
+             for b in blocks if b.trip and b.port_from and b.port_to}
+    for row in rows:
+        if row.trip in named:
+            row.trip = named[row.trip]
+
+
+def vessel(html: str, path: str,
+           schedule: list[Departure] | None = None) -> VesselBook:
     """Parse one vessel page into a book.
 
     **This source states no operator, and the parser must not invent one.**
@@ -712,6 +935,12 @@ def vessel(html: str, path: str) -> VesselBook:
     book.name = organizer or product
 
     book.departures, book.warnings = departures(html)
+    if schedule is not None:
+        # The page's ten are a window on the season; the schedule is the
+        # season (#157). Folded before the fee panels attach, because a panel
+        # attaches to a trip some sailing sells.
+        book.departures, folded = with_schedule(book.departures, schedule)
+        book.warnings.extend(f"{path}: {note}" for note in folded)
 
     # The boat's own markdown, out of the same bytes. Costs no request, and
     # `docs/divebooker-limitations.md` said for weeks that this seller states
@@ -726,6 +955,7 @@ def vessel(html: str, path: str) -> VesselBook:
     # matching fails silently.
     blocks, fee_warnings = fee_blocks(html)
     book.warnings.extend(f"{path}: {note}" for note in fee_warnings)
+    _name_trips_as_panels_do(book.departures, blocks)
     sold = {row.trip for row in book.departures if row.trip}
     # What each key has already been given, so a second panel under one key is
     # noticed rather than silently preferred. See `fee_key`.
@@ -796,9 +1026,9 @@ def vessel(html: str, path: str) -> VesselBook:
     for row in book.departures:
         if row.price is not None:
             continue
-        book.unpriced[why_unpriced(row.trip, row.availability) or "unexplained"] = (
-            book.unpriced.get(
-                why_unpriced(row.trip, row.availability) or "unexplained", 0) + 1)
+        reason = ("charter only" if row.charter_only
+                  else why_unpriced(row.trip, row.availability) or "unexplained")
+        book.unpriced[reason] = book.unpriced.get(reason, 0) + 1
 
     if not book.departures:
         # A vessel selling nothing and a page that failed are different

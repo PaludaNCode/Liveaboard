@@ -202,6 +202,12 @@ class CabinReading:
     cabins: list[Cabin] = field(default_factory=list)
     currency: str = ""
     warnings: list[str] = field(default_factory=list)
+    #: The currency a glyph on the page names where it is **not** the one
+    #: asked for. Set, the figures are in a currency nobody asked for and the
+    #: reading is not a ladder at all (#157): on 2026-10-07 the site answered
+    #: a USD session in pounds on nearly every page, and writing those down as
+    #: dollars put a 25% markdown under every advertised price.
+    shown: str | None = None
 
     @property
     def cheapest_price(self) -> float | None:
@@ -378,8 +384,9 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
     ``currency`` is what the caller asked the page for. It is not re-derived
     from the glyph beside the price: ``$`` is four currencies the site sells
     in, and a booking page renders whichever the session is set to. Where the
-    glyph does contradict the stated currency, that is reported and the
-    reading keeps the caller's answer rather than inventing one.
+    glyph does contradict the stated currency, that is reported and named in
+    ``shown``, and the reading keeps the caller's answer rather than inventing
+    one -- which makes it a reading the caller must not write down as a ladder.
     """
     reading = CabinReading(currency=currency)
 
@@ -426,6 +433,7 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
 
         code = GLYPHS.get(glyph or list_glyph)
         if code and code != currency:
+            reading.shown = reading.shown or code
             reading.warnings.append(
                 f"cabin {cabin_id}: page shows {glyph or list_glyph} "
                 f"({code}), not the {currency} that was asked for"

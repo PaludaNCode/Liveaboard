@@ -127,6 +127,22 @@ def barren_to_skip(
     return skip, record
 
 
+def schedule_refusal(visited: int, refused: int) -> str | None:
+    """Why this run may not write its book: the schedule stopped answering.
+
+    One hull's schedule failing is that hull, carried. Most of the fleet's
+    failing is the endpoint -- moved, refusing, reshaped -- which is #157's
+    shape one request further down, and a run that carried every hull would
+    write a book that looks fresh and is last week's.
+    """
+    if visited and refused * 2 > visited:
+        return (f"REFUSED: the schedule (/restapi/trips/) was not read for "
+                f"{refused} of {visited} hull(s). The endpoint the vessel page "
+                f"loads its season from has changed or refuses us; nothing "
+                f"written.")
+    return None
+
+
 def carry_skipped(previous: dict, skip: set[str], vessels: dict,
                   departures: dict) -> list[str]:
     """Put back what the last run read on every hull this one skipped.
@@ -239,9 +255,9 @@ def main() -> int:
     for host in (db.HOST, f"www.{db.HOST}"):
         repair_robots(fetcher, host)
 
-    def get(url: str):
+    def get(url: str, headers: dict[str, str] | None = None):
         try:
-            return fetcher.get(url)
+            return fetcher.get(url, headers=headers)
         except FetchBlocked as exc:
             print(f"  BLOCKED {url}: {exc}", flush=True)
         except Exception as exc:  # noqa: BLE001 - one dead hull must not end the run
@@ -298,13 +314,46 @@ def main() -> int:
     unnamed: Counter[str] = Counter()
     priced = unstated = fee_lines = complete_books = fee_books = 0
 
+    # Hull paths this run asked and could not read, carried like the skipped ones.
+    unread: set[str] = set()
+    schedule_refused = 0
+
     for path in visiting:
         result = get(base + path)
         if result is None:
             warnings.append(f"{path}: unread, so this run knows nothing about it")
+            unread.add(path)
             continue
         keep(result, f"{path.strip('/')}.html")
-        book = db.vessel(result.body, path)
+
+        # **The season is the schedule's, not the page's (#157).** The page
+        # states its ten nearest sailings; the rest is what its own schedule
+        # block fetches, asked the way that block asks, with the page as the
+        # Referer. A schedule that would not answer is a season nobody read,
+        # so the hull's last reading is carried rather than replaced with ten.
+        boat_id = db.schedule_id(result.body)
+        schedule = None
+        if boat_id:
+            def ask(spath: str, referer: str = base + path) -> str | None:
+                answered = get(base + spath,
+                               headers=db.SCHEDULE_HEADERS | {"Referer": referer})
+                return answered.body if answered is not None else None
+            entries, notes = db.walk_schedule(ask, boat_id, months[0],
+                                              args.season_end)
+            if entries is not None:
+                schedule, more = db.schedule_departures(
+                    entries, db.page_currency(result.body))
+                warnings.extend(f"{path}: {note}" for note in notes + more)
+        if schedule is None:
+            schedule_refused += 1
+            unread.add(path)
+            warnings.append(f"{path}: the schedule was not read "
+                            f"({'no boatId on the page' if not boat_id else 'refused or unreadable'}); "
+                            f"its last reading is carried")
+            print(f"  {path:<40} schedule not read; last reading carried",
+                  flush=True)
+            continue
+        book = db.vessel(result.body, path, schedule=schedule)
         vessels[book.slug] = book.as_dict() | {"url": base + path}
         kept = 0
         for row in book.departures:
@@ -356,7 +405,7 @@ def main() -> int:
     # the vessel record and anything it sold -- and the skip is named, which
     # is the crawl's `not_asked`: a page nobody opened says nothing, and a
     # book that dropped the hull would read to `promote` as a withdrawal.
-    not_asked = carry_skipped(existing, skip, vessels, departures)
+    not_asked = carry_skipped(existing, skip | unread, vessels, departures)
 
     fresh = {
         "collected": today.isoformat(),
@@ -383,6 +432,14 @@ def main() -> int:
               f"book already. That is below MIN_BOOK_RATIO and this file is "
               f"rebuilt whole, so writing it would delete what the last run "
               f"read. Nothing written.")
+        return 1
+
+    refusal = schedule_refusal(len(visiting), schedule_refused)
+    if refusal:
+        # Carried hulls keep the book above MIN_BOOK_RATIO, so a schedule that
+        # stopped answering fleet-wide would otherwise go green on last week's
+        # season. Said in the seller's terms, so the red job names the cause.
+        print(f"\n{refusal}")
         return 1
 
     args.book.parent.mkdir(parents=True, exist_ok=True)

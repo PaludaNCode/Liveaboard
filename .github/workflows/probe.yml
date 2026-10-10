@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,selectcabin,fixture,flight,search,listprice,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,selectcabin,fixture,flight,page,chunks,schedule,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -539,6 +539,24 @@ jobs:
         run: |
           python3 tools/probe_divebooker_flight.py \
             --vessel "${{ inputs.divebooker_vessel || 'red-sea-aggressor-ii' }}"
+
+      # The whole page, for when the reader stops reading it (#157): every
+      # fixture is a cut-down piece of the old page, which cannot say what the
+      # new one looks like. A census of what the shipped reader finds, then
+      # the bytes as gzip+base64 for tools/land_divebooker.py.
+      - name: Ask the schedule endpoint the page now loads its season from
+        if: contains(inputs.divebooker_ask, 'schedule')
+        run: |
+          python3 tools/probe_divebooker_schedule.py \
+            --vessels "${{ inputs.divebooker_vessel || 'topaz,alsuraya' }}" \
+            --shapes referer,session
+
+      - name: Carry a whole vessel page back
+        if: contains(inputs.divebooker_ask, 'page')
+        run: |
+          python3 tools/probe_divebooker_page.py \
+            --vessels "${{ inputs.divebooker_vessel || 'topaz' }}" \
+            ${{ contains(inputs.divebooker_ask, 'chunks') && '--chunks' || '' }}
 
       # `docs/sources/divebooker.com.md` records "no list price" as a negative
       # -- measured over 219 departures on vessel pages, and the same file's
