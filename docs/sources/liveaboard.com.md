@@ -97,7 +97,13 @@ EUR, and `GBP` works the same way. Ruled out, all answering in USD:
 `currency`, `custcurrency`, `Currency`, `cur`. The switcher itself is
 `setCurrencyAsync('EUR')` in `site-bundle.js`, which is on a CDN this sandbox
 cannot reach. The cookie is the setting, so that code was not needed.
-`PoliteFetcher.headers` carries it.
+
+**And `fetch_cabins.py` did not send it**, so the session took whatever the
+runner's origin defaulted to. On 2026-10-07 that was **GBP** on 884 of 892 pages
+(#157): the ladders were written down as dollars, `promote` dropped them as
+stale and the publish was refused. The fetch now sends the cookie for the
+currency each sailing is asked in (`fetch_cabins.session_currency`), and a page
+whose glyph still names another currency is left unread rather than written.
 
 **Asked for EUR, the price glyph is an entity** (`&#x20AC;`), so `NOW_PRICE`
 read no cabin at all off any EUR page until it learned to take one.
