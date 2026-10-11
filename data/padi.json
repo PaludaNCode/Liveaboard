@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-10",
+ "collected": "2026-10-11",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -45084,12 +45084,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 89,
-    "first": "2026-10-11",
+    "dated": 88,
+    "first": "2026-10-18",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 89,
+    "read": 88,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -45107,12 +45107,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 71,
-    "first": "2026-10-11",
+    "dated": 70,
+    "first": "2026-11-05",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 22,
-    "read": 71,
+    "read": 70,
     "unpriced": 0
    },
    "slug": "bella-3",
@@ -45466,7 +45466,7 @@
   "emperor-superior": {
    "country": "egypt",
    "currency": "EUR",
-   "guests": null,
+   "guests": 26,
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
@@ -45537,12 +45537,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 13,
-    "first": "2026-10-11",
+    "dated": 12,
+    "first": "2026-10-18",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 13,
+    "read": 12,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -45559,12 +45559,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 14,
-    "first": "2026-10-11",
+    "dated": 13,
+    "first": "2026-10-17",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 14,
+    "read": 13,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -45740,12 +45740,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 16,
-    "first": "2026-10-11",
+    "dated": 15,
+    "first": "2026-10-18",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 16,
+    "read": 15,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -46049,12 +46049,12 @@
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 53,
-    "first": "2026-10-11",
+    "dated": 52,
+    "first": "2026-10-18",
     "in_season": 17,
     "last": "2027-12-23",
     "priced": 17,
-    "read": 53,
+    "read": 52,
     "unpriced": 0
    },
    "slug": "snefro-love",
@@ -46073,9 +46073,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-11",
+    "first": "2026-10-14",
     "in_season": 35,
-    "last": "2027-09-22",
+    "last": "2027-09-26",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -46231,13 +46231,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 57,
-    "first": "2026-10-11",
+    "dated": 56,
+    "first": "2026-10-18",
     "in_season": 18,
     "last": "2027-12-26",
     "priced": 0,
-    "read": 57,
-    "unpriced": 57
+    "read": 56,
+    "unpriced": 56
    },
    "slug": "vip-one",
    "specs": {
