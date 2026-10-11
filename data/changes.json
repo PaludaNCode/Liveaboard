@@ -1,6 +1,41 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-11",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "royal-evolution-2027-08-12-0",
+    "boat": "Royal Evolution",
+    "title": "Special Wrecks",
+    "start": "2027-08-12",
+    "price": 1461.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 336,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-11"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-10",
   "added": [],
   "sold_out": [],

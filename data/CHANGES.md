@@ -3,6 +3,18 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-11
+
+```
+changes: HEAD -> 2026-10-11
+===========================
+
+now sold out (1)
+  2027-08-12  Royal Evolution        Special Wrecks                     divebooker.com+liveaboard.com+padi.com
+
+336 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-10
 
 ```
