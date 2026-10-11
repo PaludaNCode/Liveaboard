@@ -9,6 +9,16 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-10-10
 ===========================
 
+fees (1)
+  Queen Sherry           combined_fees    145 EUR / per_trip -> 215 EUR / per_trip
+```
+
+## 2026-10-10
+
+```
+changes: HEAD -> 2026-10-10
+===========================
+
 nothing moved, beyond 719 fare(s) shifting by under 5.
 ```
 
