@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-11",
+ "collected": "2026-10-12",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44856,12 +44856,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 56,
-    "first": "2026-10-12",
+    "dated": 55,
+    "first": "2026-10-19",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -44879,12 +44879,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 55,
-    "first": "2026-10-12",
+    "dated": 54,
+    "first": "2026-10-19",
     "in_season": 17,
     "last": "2027-12-27",
     "priced": 17,
-    "read": 55,
+    "read": 54,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -45265,12 +45265,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 45,
-    "first": "2026-10-12",
+    "dated": 44,
+    "first": "2026-10-17",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 45,
+    "read": 44,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -45605,12 +45605,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 59,
-    "first": "2026-10-12",
+    "dated": 58,
+    "first": "2026-10-19",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -45623,16 +45623,16 @@
   "ghazala-explorer": {
    "country": "egypt",
    "currency": "EUR",
-   "guests": 24,
+   "guests": 26,
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 59,
-    "first": "2026-10-12",
+    "dated": 58,
+    "first": "2026-10-19",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -45758,12 +45758,12 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 23,
+    "dated": 24,
     "first": "2026-10-15",
-    "in_season": 10,
+    "in_season": 9,
     "last": "2027-10-14",
-    "priced": 7,
-    "read": 23,
+    "priced": 6,
+    "read": 24,
     "unpriced": 6
    },
    "slug": "my-independence-ii",
