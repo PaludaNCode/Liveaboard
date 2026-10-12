@@ -1,6 +1,53 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-12",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "grand-discovery-2027-07-31-0",
+    "boat": "Grand Discovery",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-31",
+    "price": 1190.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [],
+  "withdrawn": [
+   {
+    "id": "golden-dolphin-2027-07-15-0",
+    "boat": "Golden Dolphin",
+    "title": "North",
+    "start": "2027-07-15",
+    "price": 1120.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 574,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-12"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-11",
   "added": [],
   "sold_out": [
