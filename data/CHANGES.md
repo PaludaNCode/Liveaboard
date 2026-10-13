@@ -3,6 +3,44 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-13
+
+```
+changes: HEAD -> 2026-10-13
+===========================
+
+now sold out (5)
+  2027-06-19  Emperor Superior       North & Easy                       divebooker.com+liveaboard.com+padi.com
+  2027-07-10  Sunlight               Brothers, Daedalus & Elphinstone   liveaboard.com
+  2027-07-24  Sunlight               South Route Brothers - Daedalus -  liveaboard.com
+  2027-07-31  Sunlight               South Route: Daedalus - Rocky - Za liveaboard.com
+  2027-08-28  Red Sea Blue Force 2   Egypt - North Route                divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (2)
+  2027-05-15  Emperor Superior       Reefs & Wrecks               divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  1,310 EUR -> 1,461 USD
+  2027-05-29  Emperor Superior       Reefs & Wrecks               divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  1,310 EUR -> 1,461 USD
+
+price up (1)
+  2027-06-12  DUNE Silky             1,511 ->   1,618 USD  +107 (+7.1%)  North Brothers
+
+price down (464)
+  2027-07-10  Aphrodite              4,702 ->   4,686 USD  -16 (-0.3%)  Best of Red Sea 2 Weeks
+  2027-05-01  Marselia Star          3,303 ->   3,291 USD  -12 (-0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,743 ->   2,733 USD  -10 (-0.4%)  Best of Egypt
+  2027-07-29  Golden Dolphin IV      2,686 ->   2,676 USD  -10 (-0.4%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,687 ->   2,677 USD  -10 (-0.4%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-31  Emperor Superior       2,642 ->   2,633 USD  -9 (-0.3%)  South & St. John's
+  2027-08-16  Golden Dolphin IV      2,462 ->   2,453 USD  -9 (-0.4%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,462 ->   2,453 USD  -9 (-0.4%)  North - Straits of Tiran - Brother
+  2027-05-27  Royal Evolution        2,367 ->   2,358 USD  -9 (-0.4%)  Brothers, Daedalus, Rocky, St. Joh
+  2027-05-15  Aphrodite              2,295 ->   2,287 USD  -8 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,340 ->   2,332 USD  -8 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-06-05  Aphrodite              2,096 ->   2,088 USD  -8 (-0.4%)  Brothers, Daedalus & Elphinstone
+  ... and 452 more not shown
+
+365 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-12
 
 ```
