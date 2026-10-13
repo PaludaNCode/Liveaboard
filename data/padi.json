@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-12",
+ "collected": "2026-10-13",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44946,12 +44946,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 90,
-    "first": "2026-10-13",
+    "dated": 89,
+    "first": "2026-10-17",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 90,
+    "read": 89,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -45936,12 +45936,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 13,
-    "first": "2026-10-13",
+    "dated": 12,
+    "first": "2026-10-16",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 13,
+    "read": 12,
     "unpriced": 1
    },
    "slug": "reef-voyager",
