@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-09",
+  "collected": "2026-10-13",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -9577,6 +9577,145 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6597&tourID=420553&languageID=1&curr=USD&showPrices=false"
     },
+    "dune-longara::Daedalus - Elphinstone - Fury Shoals (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)": {
+      "boat": "dune-longara",
+      "name": "Daedalus - Elphinstone - Fury Shoals (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)",
+      "tour_id": "420553",
+      "collected": "2026-10-13",
+      "regions": [
+        "Daedalus",
+        "Fury Shoal",
+        "Elphinstone"
+      ],
+      "dive_sites": [
+        "daedalus",
+        "fury shoals",
+        "elphinstone"
+      ],
+      "dives": 18,
+      "guests": 30,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Do you crave stunning underwater landscapes? Dune has added this itinerary to its list for you! Are you looking for wonderful dive sites with amazing fauna? Come aboard one of our boats and explore with us the stunning drop-offs of",
+      "sections": [
+        {
+          "heading": "Daedalus and Elphinstone",
+          "text": ". En route, discover beautiful and colorful coral gardens in the",
+          "is_day": false
+        },
+        {
+          "heading": "Fury Shoals",
+          "text": "area, and make your childhood dream come true at",
+          "is_day": false
+        },
+        {
+          "heading": "Sataya",
+          "text": ", the longest reef in the Egyptian Red Sea, where you will be able to swim with wild and free dolphins! A heaven for photographers and video makers, this cruise offers a wide range of stunning landscapes, flora and fauna, underwater atmospheres, and mesmerizing light effects. Giant Gorgonian sea fans, sharks, underwater caves, coral gardens, and their nudibranchs will make your diver's dreams come true. This itinerary is accessible to any diver with an Advanced Open Water Diver or CMAS Level 2.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1: Arrival Day",
+          "text": "The friendly staff will welcome you upon arrival at the airport. Bus transfer from the airport to the marina. You will then be assigned a cabin and discover the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2: Departure from Port Ghalib",
+          "text": "After breakfast, your guide will tell you everything you need to know about your program of the week, safety recommendations, and, more generally, your life on the boat. Your diving certifications, logbook, and insurance will be checked before leaving the marina. The boat will then sail to the first dive site, 30 minutes away from the marina. Your guide will give you a detailed briefing about your first dive. The second dive will be done in the afternoon. After dinner, the boat will head towards",
+          "is_day": true
+        },
+        {
+          "heading": "Daedalus",
+          "text": "for a seven-hour-long trip.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 3: Daedalus",
+          "text": "At the break of dawn, you will start your day by diving into the drop-offs of",
+          "is_day": true
+        },
+        {
+          "heading": "Daedalus",
+          "text": ". You will do three dives there (at least ten different dives can be organized on this huge reef). You will do two dives on the northern part of the reef to maybe have the opportunity to encounter the hammerhead sharks in the blue. In the afternoon, you will dive on the western side. The light will be perfect at that time of day, and you will be amazed by the coral diversity of this part of the reef. Between the dives, you will have the opportunity to visit the lighthouse with the authorization of the keepers.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 4: Daedalus",
+          "text": "Three more dives will be organized at",
+          "is_day": true
+        },
+        {
+          "heading": "Daedalus",
+          "text": ". After dinner, the boat will head southwest to reach the",
+          "is_day": false
+        },
+        {
+          "heading": "Fury Shoals",
+          "text": "area at the break of dawn.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 5: Fury Shoals",
+          "text": "The",
+          "is_day": true
+        },
+        {
+          "heading": "Fury Shoals",
+          "text": "area is home to many dive sites where you will find stunning coral gardens and drop-offs.",
+          "is_day": false
+        },
+        {
+          "heading": "Sataya (Dolphin House)",
+          "text": "is one of those reefs. It is the longest reef in the Egyptian Red Sea. (2 km) A pod of spinner dolphins lives there, and you will have the opportunity to live a childhood dream: go snorkeling with the dolphins between two dives. A behavioral briefing will be delivered to you to guarantee a respectful encounter with the animals.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 6: Fury Shoals",
+          "text": "You will start the day with two dives in the area before heading north for about six hours after lunch to reach a reef called",
+          "is_day": true
+        },
+        {
+          "heading": "Sheleneyat",
+          "text": ". Upon request and conditions, a dusk or night dive can be organized.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7: Elphinstone Reef",
+          "text": "After a 5-hour sailing during the night, you will reach the mythical",
+          "is_day": true
+        },
+        {
+          "heading": "Elphinstone Reef",
+          "text": "in the",
+          "is_day": false
+        },
+        {
+          "heading": "Marsa Alam",
+          "text": "area. You will do two dives at Elphinstone. After the last dive, you will have the opportunity to rinse all your diving gear on the diving deck at the rear of the boat before sailing for 2 hours to",
+          "is_day": false
+        },
+        {
+          "heading": "Port Ghalib.",
+          "text": "The estimated time of arrival is 2:00 PM. Your guide will tell you all about the leisure activities you can book in the Marsa Alam area to spend an entertaining Friday afternoon.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 8: Departure",
+          "text": "Departure from the boat will be after breakfast or according to your flight and transfer schedules to the airport or hotel. Encounter hammerhead sharks, spinner dolphins, vibrant reef fish, and fascinating nudibranchs amid diverse coral ecosystems and dramatic underwater formations.",
+          "is_day": true
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "The",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "is an exclusive onboard evening event included in the Dune Liveaboard program, which offers guests a unique cultural experience on board. Guests are invited to bring a small snack or culinary specialty from their home country to be shared with other passengers. Drinks are provided, and the event is designed to encourage cultural exchange, creating a gourmet gathering in a relaxed and festive setting. Gala attire is recommended. Guests are advised to check the regulations of their country regarding any food items that may not be permitted in their luggage. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6597&tourID=420553&languageID=1&curr=USD&showPrices=false"
+    },
     "dune-longara::Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)": {
       "boat": "dune-longara",
       "name": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)",
@@ -10844,6 +10983,117 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=387863&languageID=1&curr=USD&showPrices=false"
     },
+    "dune-silky::Golden Triangle (Marsa Ghalib - Safaga)": {
+      "boat": "dune-silky",
+      "name": "Golden Triangle (Marsa Ghalib - Safaga)",
+      "tour_id": "317717",
+      "collected": "2026-10-13",
+      "regions": [
+        "Elphinstone",
+        "The Brothers",
+        "Daedalus",
+        "Safaga"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "brothers",
+        "daedalus",
+        "safaga"
+      ],
+      "dives": 15,
+      "guests": 26,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "This diving safari takes you to discover the most famous Egyptian dive sites.",
+          "text": "You will make fabulous dives on the most legendary sites of Egypt. The name Golden Triangle refers to the geographical position of the dive sites that will be visited during the cruise, placed in the shape of a triangle.",
+          "is_day": false
+        },
+        {
+          "heading": "These three dive sites are :",
+          "text": "the Brothers Islands, Daedalus Reef and Elphinstone Reef, ...hence the acronym BDE.",
+          "is_day": false
+        },
+        {
+          "heading": "The Brothers Islands",
+          "text": "are two islands located 60 km off the coast of Al Qseir in Egyptian territorial waters. These islands are made of volcanic rocks. Big brother is approximately 600m long and topped by a lighthouse built by the British in the 19th century. 4 keepers ensure the lighthouse operates properly and will be happy to welcome you for a visit. In the north of the island are 2 beautiful wrecks that you can discover during your dives: the Numidia (1901) is lying almost vertically against the reef between 10m and 83m and is covered with colorful corals. The Aida II (1958), a military ship supplying the Brothers Islands and bringing the new lighthouse keepers, sank 100m away from the Numidia and lying between 10m and 63m. In this area, you can have the opportunity to encounter a thresher shark... Small Brother is about 200m long. You will see, among other things, a beautiful garden of gorgonian sea fans, black corals, and many pelagic fishes.",
+          "is_day": false
+        },
+        {
+          "heading": "Daedalus Reef",
+          "text": "is 600m long and 300m wide. It lies about 90km off the coast, south of Marsa Alam. It is topped by a lighthouse built by the French in 1863 and modified by the British in 1931. It is also possible to visit the lighthouse and enjoy its breathtaking view of the magnificent reef of Daedalus. At least ten different dives can be organized on this reef that has the greatest coral diversity in the Egyptian Red Sea. North of the reef, a school of hammerhead sharks is very often seen. A large number of pelagic fishes and varied fauna will enhance your dives.",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone",
+          "text": "is 400m long and 30m wide. Strong currents hit the northern and southern plateau bringing nutrients to a vast colony of soft corals. Many shark species, among which the oceanic white tip shark (Carcharhinus Longimanus) are seen in the area. Let yourself be carried away by the currents and enjoy the abundant pelagic fauna.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1",
+          "text": "Our friendly staff welcomes you at the airport. Bus transfer from the airport to the marina. You will, then, be attributed a cabin and discover the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "After breakfast, your guide will tell you everything you need to know about your program of the week, safety recommendations, and, more generally, your life on the boat. Your diving certifications, logbook, and insurance will be checked before leaving the marina. The boat will then sail to the first dive site, 30 minutes away from the marina. Your guide will give you a detailed briefing about your first dive. The second dive will be done in the afternoon. After dinner, the boat will sail for 2 hours to Port Ghalib. This program is based on a departure from Port Ghalib, it can be modified without prior notice by the captain and/or the guide according to the weather conditions.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "According to the weather forecast, you will do two or three dives on the stunning dop-offs of Elphinstone. Then the boat will sail back to Abu Dabbab to spend the night in a protected area. If a night dive has not been organized the day before, then we will organize it this day.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "According to the weather forecast and customers' requests, you will do two or three more dives on Daedalus before sailing toward the coast. It will take about seven hours to reach the site of Abu Dabbab where you will spend the night. According to your time of arrival, a night dive may be organized.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "Arrived early in the morning, you will do three daytime dives on the amazing drop-off of Daedalus, home of the hammerhead shark. A visit to the lighthouse will be organized by the guide with the authorization of the keepers.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "Arrived the day before on-site, you will do three daytime dives on the stunning drop-offs of the Brothers Islands. Due to new regulations aimed at protecting the marine ecosystem, safari boats are only allowed to spend one day on the Brothers' site. You will then sail all night long to reach Daedalus at the break of dawn.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "According to the weather forecast and your flight schedules, you will do one or two more dives in the morning. After the last dive, you will have the possibility to rinse all your diving gear on the diving deck at the rear of the boat before sailing towards the Brothers Islands for a six-hour-long trip. This program may be subject to change according to weather conditions and the marina you will depart from.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Departure from the boat will be after breakfast or according to your flight and transfer schedules to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Important notice:",
+          "text": "This program may be subject to changes according to the conditions. According to new legislation that came into force in February 2019, no ship can stay overnight at the Brothers. The day we spend at the Brothers can be between Monday and Thursday.",
+          "is_day": false
+        },
+        {
+          "heading": "Important notice",
+          "text": "This program may be subject to changes according to the conditions. According to new legislation that came into force in February 2019, no ship can stay overnight at the Brothers. The day we spend at the Brothers can be between Monday and Thursday.",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "The",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "is an exclusive onboard evening event included in the Dune Liveaboard program, which offers guests a unique cultural experience on board. Guests are invited to bring a small snack or culinary specialty from their home country to be shared with other passengers. Drinks are provided, and the event is designed to encourage cultural exchange, creating a gourmet gathering in a relaxed and festive setting. Gala attire is recommended. Guests are advised to check the regulations of their country regarding any food items that may not be permitted in their luggage. (*) the itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=317717&languageID=1&curr=USD&showPrices=false"
+    },
     "dune-silky::Golden Triangle (Safaga - Safaga)": {
       "boat": "dune-silky",
       "name": "Golden Triangle (Safaga - Safaga )",
@@ -10949,6 +11199,112 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=387855&languageID=1&curr=USD&showPrices=false"
+    },
+    "dune-silky::Golden Triangle Cruise (Safaga - Marsa Ghalib)": {
+      "boat": "dune-silky",
+      "name": "Golden Triangle Cruise (Safaga - Marsa Ghalib)",
+      "tour_id": "378500",
+      "collected": "2026-10-13",
+      "regions": [
+        "Elphinstone",
+        "Safaga",
+        "The Brothers",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "safaga",
+        "brothers",
+        "daedalus"
+      ],
+      "dives": 15,
+      "guests": 26,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "This diving safari takes you to discover the most famous Egyptian dive sites.",
+          "text": "You will make fabulous dives on the most legendary sites of Egypt. The name Golden Triangle refers to the geographical position of the dive sites that will be visited during the cruise, placed in the shape of a triangle.",
+          "is_day": false
+        },
+        {
+          "heading": "These three dive sites are :",
+          "text": "the Brothers Islands, Daedalus Reef and Elphinstone Reef, ...hence the acronym BDE.",
+          "is_day": false
+        },
+        {
+          "heading": "The Brothers Islands",
+          "text": "are two islands located 60 km off the coast of Al Qseir in Egyptian territorial waters. These islands are made of volcanic rocks. Big brother is approximately 600m long and topped by a lighthouse built by the British in the 19th century. 4 keepers ensure the lighthouse operates properly and will be happy to welcome you for a visit. In the north of the island are 2 beautiful wrecks that you can discover during your dives: the Numidia (1901) is lying almost vertically against the reef between 10m and 83m and is covered with colorful corals. The Aida II (1958), a military ship supplying the Brothers Islands and bringing the new lighthouse keepers, sank 100m away from the Numidia and lying between 10m and 63m. In this area, you can have the opportunity to encounter a thresher shark... Small Brother is about 200m long. You will see, among other things, a beautiful garden of gorgonian sea fans, black corals, and many pelagic fishes.",
+          "is_day": false
+        },
+        {
+          "heading": "Daedalus Reef",
+          "text": "is 600m long and 300m wide. It lies about 90km off the coast, south of Marsa Alam. It is topped by a lighthouse built by the French in 1863 and modified by the British in 1931. It is also possible to visit the lighthouse and to enjoy its breathtaking view of the magnificent reef of Daedalus. At least ten different dives can be organized on this reef that has the greatest coral diversity in the Egyptian Red Sea. North of the reef, a school of hammerhead sharks is very often seen. A large number of pelagic fishes and varied fauna will enhance your dives.",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone",
+          "text": "is 400m long and 30m wide. Strong currents hit the northern and southern plateau bringing nutrients to a vast colony of soft corals. Many shark species, among which the oceanic white tip shark (Carcharhinus Longimanus) are seen in the area. Let yourself be carried away by the currents and enjoy the abundant pelagic fauna.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1",
+          "text": "Our friendly staff welcomes you at the airport. Bus transfer from the airport to the marina. You will, then, be attributed a cabin and discover the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "After breakfast, your guide will tell you everything you need to know about your program of the week, safety recommendations, and, more generally, your life on the boat. Your diving certifications, logbook, and insurance will be checked before leaving the marina. The boat will then sail to the first dive site, 30 minutes away from the marina. Your guide will give you a detailed briefing about your first dive. The second dive will be done in the afternoon. After dinner, the boat will head towards the Brothers Islands for a six-hour-long trip. This program may be subject to change according to weather conditions and the marina you will depart from.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "Arrived the day before on-site, you will do three daytime dives on the stunning drop-offs of the Brothers Islands. Due to new regulations aimed at protecting the marine ecosystem, safari boats are only allowed to spend one day on the Brothers' site. You will then sail all night long to reach Daedalus at the break of dawn.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "Arrived early in the morning, you will do three daytime dives on the amazing drop-off of Daedalus, home of the hammerhead shark. A visit to the lighthouse will be organized by the guide with the authorization of the keepers.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "According to the weather forecast and customers' requests, you will do two or three more dives on Daedalus before sailing toward the coast. It will take about seven hours to reach the site of Abu Dabbab where you will spend the night. According to your time of arrival, a night dive may be organized.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "According to the weather forecast, you will do two or three dives on the stunning dop-offs of Elphinstone. Then the boat will sail back to Abu Dabbab to spend the night in a protected area. If a night dive has not been organized the day before, then we will organize it this day.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "According to the weather forecast and your flight schedules, you will do one or two more dives in the morning. After the last dive, you will have the possibility to rinse all your diving gear on the diving deck at the rear of the boat before sailing for 2 hours to Port Ghalib. This program is based on a departure from Port Ghalib, it can be modified without prior notice by the captain and/or the guide according to the weather conditions.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Departure from the boat will be after breakfast or according to your flight and transfer schedules to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Important notice:",
+          "text": "This program may be subject to changes according to the conditions. According to new legislation that came into force in February 2019, no ship can stay overnight at the Brothers. The day we spend at the Brothers can be between Monday and Thursday. (*) the itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "The",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "is an exclusive onboard evening event included in the Dune Liveaboard program, which offers guests a unique cultural experience on board. Guests are invited to bring a small snack or culinary specialty from their home country to be shared with other passengers. Drinks are provided, and the event is designed to encourage cultural exchange, creating a gourmet gathering in a relaxed and festive setting. Gala attire is recommended. Guests are advised to check the regulations of their country regarding any food items that may not be permitted in their luggage.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=378500&languageID=1&curr=USD&showPrices=false"
     },
     "dune-silky::North - Tiran (Safaga - Safaga)": {
       "boat": "dune-silky",
@@ -11198,6 +11554,155 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=387852&languageID=1&curr=USD&showPrices=false"
+    },
+    "dune-silky::North Brothers (Port Ghalib - Safaga)": {
+      "boat": "dune-silky",
+      "name": "North Brothers (Port Ghalib - Safaga)",
+      "tour_id": "387857",
+      "collected": "2026-10-13",
+      "regions": [
+        "Ras Mohammed",
+        "Safaga",
+        "Abu Nuhas",
+        "Thistlegorm"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "safaga",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "dives": 18,
+      "guests": 26,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "A classic one-way Red Sea route from Port Ghalib north to Safaga, built around the legendary Brother Islands. Highlights include the wrecks of Abu Nuhas, still carrying their nineteenth and twentieth-century cargo; the iconic SS Thistlegorm; the sheer drop-offs and reef fish of Ras Mohamed National Park; and North Brothers itself, with its dramatic walls, resident sharks and historic lighthouse.",
+      "sections": [
+        {
+          "heading": "Day 1 – Port Ghalib Embarkation",
+          "text": "Arrive in Port Ghalib and board Dune Longara. Check-in from 15:00, cabin allocation and a welcome briefing before dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Departure & El Gouna Area",
+          "text": "Safety briefing and certification checks, before the boat leaves the marina and heads to the first dive site, followed by two further dives as the boat sails north towards the El Gouna area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Abu Nuhas",
+          "text": "Two wreck dives at Abu Nuhas in the morning, before sailing north for a third dive; a night dive may be added on request.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Thistlegorm",
+          "text": "A full day exploring the SS Thistlegorm, the iconic World War II cargo wreck, now an underwater museum teeming with marine life.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Ras Mohamed National Park",
+          "text": "Two dawn dives on the dizzying drop-offs of Ras Mohamed National Park, among thousands of colourful reef fish, with a third dive after lunch on a coral garden or wreck site.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – North Brothers",
+          "text": "Three dives on the magnificent drop-offs of North Brothers, with an optional lighthouse tour, before the boat sails south towards Safaga overnight.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Final Dives near Safaga",
+          "text": "A final day of diving on the reefs around Safaga, 2-3 dives depending on routing, weather and sea conditions, before returning to the marina in the evening.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Safaga Disembarkation",
+          "text": "Check out at 10:00, after breakfast or according to flight schedules, with transfer to the airport. Divers on this route can expect hammerhead, thresher and oceanic whitetip sharks at North Brothers, colourful reef fish and drop-offs at Ras Mohamed, and the historic wrecks of Abu Nuhas and the Thistlegorm, now thriving artificial reefs. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=387857&languageID=1&curr=USD&showPrices=false"
+    },
+    "dune-silky::North Brothers (Safaga - Marsa Ghalib)": {
+      "boat": "dune-silky",
+      "name": "North Brothers (Safaga - Marsa Ghalib)",
+      "tour_id": "317718",
+      "collected": "2026-10-13",
+      "regions": [
+        "Safaga",
+        "Thistlegorm",
+        "The Brothers",
+        "Ras Mohammed",
+        "Salem Express"
+      ],
+      "dive_sites": [
+        "safaga",
+        "thistlegorm",
+        "brothers",
+        "ras mohammed",
+        "salem express"
+      ],
+      "dives": 17,
+      "guests": 26,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Our friendly staff welcomes you at the airport. Bus transfer from the airport to the marina. You will, then, be attributed a cabin and discover the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "After breakfast, your guide will tell you everything you need to know about your program of the week, safety recommendations, and, more generally, your life on the boat. Your diving certifications, logbook, and insurance will be checked before leaving the marina. The boat will then sail to the first dive site, which is quite a distance away from the marina. Your guide will give you a detailed briefing about your first dive. After lunch, you will do your second dive. You will then keep sailing where you will spend a quiet and peaceful night.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "Arrived the day before on-site, you will do your first two dives in the morning. After lunch, you will sail north for two hours before reaching the site where you will do the third dive of the day. Upon request, a night dive may be added. For a quiet and peaceful night, you will spend the night away from the waves, moored behind a big reef. This program may be subject to change according to weather conditions.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "On this day, you will do two to three dives on the mythical wreck of the Thistlegorm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "At sunrise, the captain and his crew will sail towards the tip of Sinai where you will make at least two dives in the magnificent Ras Mohamed reserve. The third dive will potentially be on the site of Shaab Mahmoud. After dinner, you will sail at night to reach the Brothers Islands in the early morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "Arrived in the early morning, you will make three dives during the day on the magnificent drop-offs of the Brothers. A tour of the lighthouse can be organized by your guide according to agreements with the guards on site. The captain and his crew will then sail for around five hours to arrive at night in the Safaga area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "For the last day at sea, your guide will suggest two more dives. The return of the boat is planned for the afternoon. You can then take advantage of the aft platform of the boat to rinse your equipment or go for a walk. Other activities will be offered depending on your flight schedule.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Departure from the boat will be after breakfast or according to your flight and transfer schedules to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "The Brothers are 2 islands located 60 km off the village of Quseir, in Egyptian territorial waters. These islands are made up of volcanic rocks. On the approximately 600 m long large island is a lighthouse built in the 19th century by the English. 4 guards on-site ensure its proper functioning and are delighted to welcome you for the visit to the lighthouse. To the north of the island are 2 beautiful wrecks that you can discover during your dives. Numidia (1901) very concretion, is between 12 and 83 meters deep. The wreckage is almost vertical. A vertiginous dive on a very colorful drop-off. The Aïda 2 (1958), an Egyptian army boat supplying the islands and carrying the relief of the guards, is barely 100 meters from the Numidia at a depth of 30 to 63 m. It is not uncommon to come across a thresher shark in this area. The small island, made of the same rock as the big one, is about 200 m long. It's a real nugget. Between the Gorgonian garden, black coral, and passage of pelagics, you will be enchanted by the richness of this reef.",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "The",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "is an exclusive onboard evening event included in the Dune Liveaboard program, which offers guests a unique cultural experience on board. Guests are invited to bring a small snack or culinary specialty from their home country to be shared with other passengers. Drinks are provided, and the event is designed to encourage cultural exchange, creating a gourmet gathering in a relaxed and festive setting. Gala attire is recommended. Guests are advised to check the regulations of their country regarding any food items that may not be permitted in their luggage.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=317718&languageID=1&curr=USD&showPrices=false"
     },
     "dune-silky::North Brothers (Safaga - Safaga)": {
       "boat": "dune-silky",
@@ -11619,6 +12124,86 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=387851&languageID=1&curr=USD&showPrices=false"
+    },
+    "dune-silky::The Mixed South: Daedalus - Rocky / Zabargad - St. Johns (Marsa Ghalib - Marsa Ghalib)": {
+      "boat": "dune-silky",
+      "name": "The Mixed South: Daedalus - Rocky / Zabargad - St. Johns (Marsa Ghalib - Marsa Ghalib)",
+      "tour_id": "317719",
+      "collected": "2026-10-13",
+      "regions": [
+        "Fury Shoal",
+        "Daedalus",
+        "Zabargad",
+        "St. Johns",
+        "Elphinstone",
+        "Rocky"
+      ],
+      "dive_sites": [
+        "fury shoals",
+        "daedalus",
+        "zabargad",
+        "st johns",
+        "elphinstone",
+        "rocky island"
+      ],
+      "dives": 18,
+      "guests": 26,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Reception at the airport, transfer by bus from the airport to the marina, installation in the cabins, and discovery of the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "After breakfast, a welcome briefing (organization of the week, safety instructions on board...) will be presented to you by the guide. Your diving documents and insurance will be checked before leaving the marina. The captain will sail to the first dive site 30 minutes from departure. The briefing of the check-dive dive will be presented to you by the guide. The second dive will be done during the afternoon. In the early evening, after dinner, the boat will start its journey towards Daedalus. About 7 hours of navigation will be required. Depending on the weather this program can be modified.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "At sunrise, you will start your day of diving on the Daedalus falls. Your guide will suggest three dives. This reef offers you ten different dives. You will make 2 dives north of the reef for perhaps the chance to observe hammerhead sharks. In the afternoon, you will dive west of the reef where the coral diversity is impressive. This slope also offers perfect light in the afternoon. Between dives, you will have the opportunity to visit the Daedalus lighthouse. In the early evening, after dinner, the boat will continue its journey all night south to arrive in the early morning under the Tropic of Cancer at Rocky Island and Zabargad.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "You will make three dives around the Rocky and Zabargad islands. The navigation times between the sites vary from 30 to 45 minutes between the islands. The dive sites are carefully chosen by your guide depending on the weather and the number of boats on the sites.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "In the early morning, the captain and his crew will take you to Saint John's sites. Three dives will be offered to you. Navigation times between sites vary between 30 minutes and 1 hour 30 minutes in the Saint John's area. The dive sites are carefully chosen by your guide depending on the weather and the number of boats on the sites.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "That day, we will start the ascent to the north. On the way, we will stop at Sataya (Dolphin house) located in the Fury Shoals area, where you may have the opportunity to swim with the dolphins. We will then continue our ascent to the Sheleneyat site in the Wadi Gemal area, where the third dive of the day will take place at dusk or at night.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "In the early morning, you will arrive in the Marsa Alam area, on the mythical Elphinstone Reef. You will make 2 dives there, before sailing another two hours to arrive in the early afternoon at the Port Ghalib marina. You can use the platform to rinse your equipment. Your guide will also suggest various extra diving activities to keep you busy on Friday afternoon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "The departure of the boat will be after breakfast or according to your flight schedules and transfer to the airport or hotel. The last dive of the trip will be on the penultimate day. Divers are recommended to wait for 24hours before flying after athe last dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "The",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "is an exclusive onboard evening event included in the Dune Liveaboard program, which offers guests a unique cultural experience on board. Guests are invited to bring a small snack or culinary specialty from their home country to be shared with other passengers. Drinks are provided, and the event is designed to encourage cultural exchange, creating a gourmet gathering in a relaxed and festive setting. Gala attire is recommended. Guests are advised to check the regulations of their country regarding any food items that may not be permitted in their luggage. Please note that the itineraries are examples only, We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6063&tourID=317719&languageID=1&curr=USD&showPrices=false"
     },
     "dune-titan::North - Tiran (Safaga - Safaga)": {
       "boat": "dune-titan",
@@ -13893,6 +14478,131 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6342&tourID=359951&languageID=1&curr=USD&showPrices=false"
+    },
+    "eriny::Sinai Wrecks One Week - 7N Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
+      "boat": "eriny",
+      "name": "Sinai Wrecks One Week - 7N Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh)",
+      "tour_id": "444818",
+      "collected": "2026-10-13",
+      "regions": [
+        "Ras Mohammed",
+        "Shark and Yolanda",
+        "Abu Nuhas",
+        "Thistlegorm"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 20 minimum logged dives required.",
+      "min_logged_dives": 20,
+      "intro": "A week-long diving safari starting and ending in",
+      "sections": [
+        {
+          "heading": "Sharm El Sheikh",
+          "text": "concentrating on some of the best wrecks worldwide such as",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1",
+          "text": "Afternoon/Evening: transfer to Travco and embark. Welcome on board, cabin arrangement, and boat–briefing. Permission work with port authority, sailing very early next morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 2 - 7",
+          "text": "Morning: sail to nearby",
+          "is_day": false
+        },
+        {
+          "heading": "Temple or Ras Katy",
+          "text": "for a check dive. Sail into the",
+          "is_day": false
+        },
+        {
+          "heading": "Gulf of Suez",
+          "text": "passing",
+          "is_day": false
+        },
+        {
+          "heading": "Yolanda Reef",
+          "text": "which is named after a 74 m long Cypriot freighter that struck the reef on the 1st of April 1980. The wreck lay partially submerged on the reef top until a storm caused it to drop. Most of the ship finally has fallen over the drop-off, leaving a huge scar in the slope between",
+          "is_day": false
+        },
+        {
+          "heading": "Shark and Yolanda Reef.",
+          "text": "However, a quantity of the cargo remains for the amusement of the divers: bathtubs, toilets, and bathroom fittings. Continue with the historical",
+          "is_day": false
+        },
+        {
+          "heading": "Wrecks of Dunraven",
+          "text": ". Recovered in the early 1970s, the more than 125-year-old wreck is largely intact, totally covered in corals, and rich in marine life. The most famous of the Red Sea wrecks be even worldwide is the",
+          "is_day": false
+        },
+        {
+          "heading": "Thistlegorm",
+          "text": ". The wreck first gained fame when Jacques Cousteau dived it in 1956 but left the actual location a mystery until it was rediscovered in 1992. Lying upright on the seabed at 33 m, the 127 m long and 18 m wide wreck is impressive. Close to",
+          "is_day": false
+        },
+        {
+          "heading": "Sha’ab Ali",
+          "text": "in the early hours of 22 February 1881, the 78 m-long Kingston ran aground at the northern edge of the reef that is known as",
+          "is_day": false
+        },
+        {
+          "heading": "Shag Rock.",
+          "text": "Crossing the Gulf of Suez will take you to",
+          "is_day": false
+        },
+        {
+          "heading": "Abu Nuhas",
+          "text": ", a paradise for wreck lovers which is best known for the abundance of ancient and modern wrecks that lie here:",
+          "is_day": false
+        },
+        {
+          "heading": "Giannis D, Carnatic, Chrisoula K, and Kimon M. All",
+          "text": "are located on the northern side of the reef, a sandy seafloor at the bottom of a steep sloping coral reef filled with table corals. The reef is very exposed to the prevailing wind and waves and was named after the oldest wreck which was carrying copper (Nuhas in Arabic). Sailing over to",
+          "is_day": false
+        },
+        {
+          "heading": "Gubal Island,",
+          "text": "you find the little",
+          "is_day": false
+        },
+        {
+          "heading": "Wreck of the Barge",
+          "text": ". During the day the wide open wreck is covered in soft corals and fish life, at night it is entirely different and becomes an outstanding site. If weather permits you can dive the Ulysses or the Rosalie Moller. Only two days after the sinking of the",
+          "is_day": false
+        },
+        {
+          "heading": "Thistlegorm",
+          "text": ", the",
+          "is_day": false
+        },
+        {
+          "heading": "Rosalie Moller",
+          "text": "was also lying at anchor when hit and went down upright. The location outside of",
+          "is_day": false
+        },
+        {
+          "heading": "Gubal Island",
+          "text": "is extremely exposed to the sea, wind, and waves. The dive is deep, bottom time is limited and visibility is lower than elsewhere so this dive is only for very experienced divers. In between wreck dives you will also visit some outstanding reefs at",
+          "is_day": false
+        },
+        {
+          "heading": "National Park",
+          "text": ".",
+          "is_day": false
+        },
+        {
+          "heading": "Day 8",
+          "text": "Depending on your check-out and flight time return to Travco and disembark. (*) the itinerary description provided by the boat operator. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics and are at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6342&tourID=444818&languageID=1&curr=USD&showPrices=false"
     },
     "eriny::Wreck & Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
       "boat": "eriny",
@@ -17578,6 +18288,50 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390001&languageID=1&curr=USD&showPrices=false"
+    },
+    "hammerhead-ii::North Wrecks: Abu Nuhas - SS Thistlegorm (Hurghada - Hurghada)": {
+      "boat": "hammerhead-ii",
+      "name": "North Wrecks: Abu Nuhas - SS Thistlegorm (Hurghada - Hurghada)",
+      "tour_id": "444815",
+      "collected": "2026-10-13",
+      "regions": [
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Ras Mohammed"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "thistlegorm",
+        "ras mohammed"
+      ],
+      "dives": 9,
+      "guests": 32,
+      "experience": "Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "A northern Red Sea voyage combining wrecks, reefs, and classic liveaboard diving.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in and General Briefing.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "1* Shoab Elerg. 1* Giannis D \"Wreck\". 1* Mahmoudat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "1* Ras Muhammad. 2* SS Thistlegorm \"Wreck\". 1* SS Thistlegorm Night Dive \"Wreck\".",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "1* Carnatic \"Wreck\". 1* Um Gamar. Check-out. Explore vibrant coral reefs teeming with tropical fish, with chances to encounter barracudas, moray eels, turtles, and other fascinating Red Sea marine life. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=444815&languageID=1&curr=USD&showPrices=false"
     },
     "hammerhead-ii::Northernmost: Abu Nuhas - SS Thistlegorm - Ras Mohammed - Tiran Island - Dahab (Hurghada - Hurghada)": {
       "boat": "hammerhead-ii",
@@ -32650,6 +33404,7 @@
     "299505": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
     "299506": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
     "299507": "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+    "317720": "dune-silky::Golden Triangle (Marsa Ghalib - Safaga)",
     "323493": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "323497": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "323498": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
@@ -32730,6 +33485,8 @@
     "374488": "blue-seas::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
     "374489": "blue-seas::St. Johns (Port Ghalib - Port Ghalib)",
     "374490": "blue-seas::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
+    "378501": "dune-silky::The Mixed South: Daedalus - Rocky / Zabargad - St. Johns (Marsa Ghalib - Marsa Ghalib)",
+    "378502": "dune-silky::North Brothers (Marsa Ghalib - Safaga)",
     "382617": "blue-pearl::North & Brothers (Hurghada - Hurghada)",
     "382618": "blue-pearl::North & Tiran (Hurghada - Hurghada)",
     "382619": "blue-pearl::North & Tiran (Hurghada - Hurghada)",
@@ -32741,6 +33498,12 @@
     "383281": "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)",
     "383282": "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)",
     "383283": "hammerhead-ii::Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
+    "386756": "dune-silky::North Ras Mohammed (Safaga - Safaga)",
+    "386757": "dune-silky::Golden Triangle (Safaga - Safaga)",
+    "386758": "dune-silky::North Ras Mohammed (Safaga - Safaga)",
+    "386759": "dune-silky::North Ras Mohammed (Safaga - Safaga)",
+    "387844": "dune-silky::Fury Shoals & Dolphins Trip (Marsa Ghalib - Marsa Ghalib)",
+    "387845": "dune-silky::Fury Shoals & Dolphins Trip (Marsa Ghalib - Marsa Ghalib)",
     "389382": "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)",
     "390002": "hammerhead-ii::Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)",
     "391517": "iceberg::Hurghada North (Hurghada - Hurghada)",
@@ -32765,9 +33528,17 @@
     "412446": "odyssey::The Golden Loop: North - Brother - Safaga (Hurghada - Hurghada)",
     "412447": "odyssey::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "412448": "odyssey::Best of Tiran (Hurghada - Hurghada)",
+    "417401": "dune-longara::Saint John’s Reef (Port Ghalib - Port Ghalib)",
+    "417405": "dune-longara::Ultra South Reef Elba (Port Ghalib - Port Ghalib)",
+    "417406": "dune-longara::Ultra South Reef Elba (Port Ghalib - Port Ghalib)",
+    "417442": "dune-longara::Best of Egypt (Safaga - Port Ghalib)",
+    "417443": "dune-longara::Golden Triangle (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)",
+    "418142": "dune-longara::Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
     "419973": "ghazala-explorer::Get Wrecked (Hurghada - Hurghada)",
     "420265": "hammerhead-ii::Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
+    "421208": "dune-longara::Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
     "424855": "ghazala-explorer::North: Wrecks & Reefs (Hurghada - Hurghada)",
+    "424856": "ghazala-explorer::North & Safaga (Hurghada - Hurghada)",
     "425606": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
     "425607": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
     "425608": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
@@ -32786,6 +33557,7 @@
     "427142": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "428125": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
     "428126": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
+    "428378": "dune-longara::Saint John’s Reef (Port Ghalib - Port Ghalib)",
     "434820": "golden-imperial::North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
     "434824": "golden-imperial::Brother Islands - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "435584": "new-sambo::Sataya Overnight (Hamata - Hamata)",
@@ -32818,8 +33590,14 @@
     "442006": "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "442007": "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "442339": "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+    "442765": "dune-longara::Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
     "442843": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "442926": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
-    "443591": "golden-imperial::Clean up Safari: North - Safaga - Brother Islands - Elphinstone (Hurghada - Port Ghalib)"
+    "443591": "golden-imperial::Clean up Safari: North - Safaga - Brother Islands - Elphinstone (Hurghada - Port Ghalib)",
+    "444813": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
+    "444814": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
+    "444817": "eriny::Sinai Classic One Week (Sharm El Sheikh - Sharm El Sheikh)",
+    "444819": "eriny::Sinai Wrecks One Week - 7N Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh)",
+    "444820": "eriny::Sinai Wrecks One Week - 7N Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh)"
   }
 }
