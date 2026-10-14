@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-13",
+ "collected": "2026-10-14",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -30893,6 +30893,92 @@
    },
    "title": "Brothers - Safaga - Best of North - Tiran (Hurghada - Hurghada) 14 nights"
   },
+  "independence-ii::Brothers - Strait of Tiran excluding wrecks (Port Ghalib - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers",
+    "tiran"
+   ],
+   "dives": 28,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 275.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 75.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 240.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Strait of Tiran excluding wrecks (Port Ghalib - Hurghada)",
+   "nights": 10,
+   "padi_id": 23538,
+   "padi_slug": "daedalus-elphinstone-brothers-port-ghalib-hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Strait of Tiran excluding wrecks (Port Ghalib - Hurghada) 10 Nights"
+  },
   "independence-ii::Daedalus - Elphinstone - Brothers (Port Ghalib - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
@@ -31235,6 +31321,93 @@
     "recommended_logged_dives": 50
    },
    "title": "Rocky Island - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib) 11 nights"
+  },
+  "independence-ii::Rocky Island - Elba Reef - St. John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dive_sites": [
+    "rocky island",
+    "st johns",
+    "elphinstone"
+   ],
+   "dives": 32,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 275.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 75.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 240.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Rocky Island - Elba Reef - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 12,
+   "padi_id": 23539,
+   "padi_slug": "brothers-strait-of-tiran-excluding-wrecks-port-gha",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky Island - Elba Reef - St. John's - Elphinstone (Port Ghalib - Port Ghalib) 12 Nights"
   },
   "independence-ii::Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)": {
    "boat": "independence-ii",
@@ -45470,12 +45643,12 @@
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 89,
+    "dated": 90,
     "first": "2026-10-17",
     "in_season": 15,
-    "last": "2028-12-01",
+    "last": "2028-12-08",
     "priced": 15,
-    "read": 89,
+    "read": 90,
     "unpriced": 0
    },
    "slug": "mv-emperor-superior",
@@ -45762,9 +45935,9 @@
     "first": "2026-10-15",
     "in_season": 9,
     "last": "2027-10-14",
-    "priced": 6,
+    "priced": 7,
     "read": 24,
-    "unpriced": 6
+    "unpriced": 4
    },
    "slug": "my-independence-ii",
    "specs": {
@@ -46073,9 +46246,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-14",
+    "first": "2026-10-18",
     "in_season": 35,
-    "last": "2027-09-26",
+    "last": "2027-09-29",
     "priced": 35,
     "read": 100,
     "unpriced": 0
