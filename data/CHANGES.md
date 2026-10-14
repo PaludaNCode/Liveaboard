@@ -3,6 +3,53 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-14
+
+```
+changes: HEAD -> 2026-10-14
+===========================
+
+new departures (8)
+  2027-05-01  Bismarck               Sataya (Fury Shoals) - St. John's       1,568 USD liveaboard.com
+  2027-05-15  Bismarck               Abu Nuhas, Ras Mohammed & Tiran         1,568 USD liveaboard.com
+  2027-05-22  Bismarck               Tiran, Ras Mohammed & SS Thistlego      1,568 USD liveaboard.com
+  2027-05-29  Bismarck               Abu Nuhas, Ras Mohammed & Tiran         1,568 USD liveaboard.com
+  2027-06-05  Bismarck               Safaga, Brothers, Abu Nuhas & SS T      1,568 USD liveaboard.com
+  2027-06-12  Bismarck               Safaga, Brothers & Ras Mohammed         1,568 USD liveaboard.com
+  2027-06-19  Bismarck               Tiran, Ras Mohammed & SS Thistlego      1,568 USD liveaboard.com
+  2027-08-05  Alia Soul              South                                   1,008 USD liveaboard.com
+
+now sold out (3)
+  2027-06-19  Emperor Asmaa          Famous Five                        liveaboard.com+padi.com
+  2027-06-27  Tala                   Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-08-04  Alia Soul              Marine Park North: Brothers - Daed liveaboard.com
+
+price up (480)
+  2027-07-10  Aphrodite              4,686 ->   4,703 USD  +17 (+0.4%)  Best of Red Sea 2 Weeks
+  2027-05-01  Marselia Star          3,291 ->   3,303 USD  +12 (+0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,733 ->   2,744 USD  +11 (+0.4%)  Best of Egypt
+  2027-07-31  Queen Sherry           2,677 ->   2,688 USD  +11 (+0.4%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-31  Emperor Superior       2,633 ->   2,643 USD  +10 (+0.4%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,676 ->   2,686 USD  +10 (+0.4%)  Daedalus, Rocky Island, Zabargad, 
+  2027-05-15  Aphrodite              2,287 ->   2,296 USD  +9 (+0.4%)  Brothers, Daedalus & Elphinstone
+  2027-07-31  Aphrodite              2,175 ->   2,184 USD  +9 (+0.4%)  Brothers, Safaga Reefs
+  2027-08-07  Aphrodite              2,231 ->   2,240 USD  +9 (+0.4%)  North Classic
+  2027-08-14  Aphrodite              2,231 ->   2,240 USD  +9 (+0.4%)  North Classic
+  2027-07-24  Aphrodite              2,287 ->   2,296 USD  +9 (+0.4%)  North Dolphins
+  2027-08-21  Aphrodite              2,287 ->   2,296 USD  +9 (+0.4%)  North Wrecks
+  ... and 468 more not shown
+
+price down (3)
+  2027-07-15  Emperor Elite          1,791 ->   1,785 USD  -6 (-0.3%)  Simply the Best
+  2027-07-22  Emperor Elite          1,791 ->   1,785 USD  -6 (-0.3%)  Simply the Best
+  2027-07-08  Emperor Elite          1,735 ->   1,729 USD  -6 (-0.3%)  South & St. John's
+
+vessels seen for the first time (1)
+  Bismarck
+
+304 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-13
 
 ```
