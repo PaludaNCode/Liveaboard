@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-14",
+ "collected": "2026-10-15",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -412,6 +412,204 @@
    },
    "title": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Hurghada) 7 Nights"
   },
+  "all-star-red-sea::Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "tax_vat",
+      "note": "10% (of the trip cost) VAT Mandatory Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 177.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "marine_park",
+      "included": true,
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22660,
+   "padi_slug": "brothers-daedalus-elphinstone-shark-week-hurghada",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Port ghalib) 7 Nights"
+  },
+  "all-star-red-sea::Brothers - Daedalus - Elphinstone: SHARK WEEK (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "tax_vat",
+      "note": "10% (of the trip cost) VAT Mandatory Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 177.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "marine_park",
+      "included": true,
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22661,
+   "padi_slug": "brothers-daedalus-elphinstone-shark-week-hurghad-2",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Port ghalib - Port ghalib) 7 Nights"
+  },
   "all-star-red-sea::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
@@ -510,6 +708,105 @@
     "recommended_logged_dives": 50
    },
    "title": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts"
+  },
+  "all-star-red-sea::Daedalus & Fury Shoal (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "tax_vat",
+      "note": "10% (of the trip cost) VAT Mandatory Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 177.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "marine_park",
+      "included": true,
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus & Fury Shoal (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22666,
+   "padi_slug": "daedalus-st-johns-shark-week-port-ghalib-port-ghal",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & Fury Shoal (Port ghalib - Port ghalib) 7 Nights"
   },
   "all-star-red-sea::Daedalus & Rocky/Zabargad (Port ghalib - Port ghalib)": {
    "boat": "all-star-red-sea",
@@ -610,6 +907,105 @@
    },
    "title": "Daedalus & Rocky/Zabargad (Port ghalib - Port ghalib) 7 Nights"
   },
+  "all-star-red-sea::Daedalus & Rocky/Zabargad: SHARK WEEK (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "tax_vat",
+      "note": "10% (of the trip cost) VAT Mandatory Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 177.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "marine_park",
+      "included": true,
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus & Rocky/Zabargad: SHARK WEEK (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22662,
+   "padi_slug": "brothers-daedalus-elphinstone-shark-week-port-ghal",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & Rocky/Zabargad: SHARK WEEK (Port ghalib - Port ghalib) 7 Nights"
+  },
   "all-star-red-sea::Daedalus & St. Johns (Port ghalib - Port ghalib)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
@@ -708,6 +1104,105 @@
     "recommended_logged_dives": 50
    },
    "title": "Daedalus & St. Johns (Port ghalib - Port ghalib) 7 Nights"
+  },
+  "all-star-red-sea::Daedalus & St. Johns: SHARK WEEK (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "tax_vat",
+      "note": "10% (of the trip cost) VAT Mandatory Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 177.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "marine_park",
+      "included": true,
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus & St. Johns: SHARK WEEK (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22665,
+   "padi_slug": "daedalus-st-johns-port-ghalib-port-ghalib-7-nigh-3",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & St. Johns: SHARK WEEK (Port ghalib - Port ghalib) 7 Nights"
   },
   "all-star-red-sea::North & Brothers (Hurghada - Hurghada)": {
    "boat": "all-star-red-sea",
@@ -1012,6 +1507,107 @@
     "recommended_logged_dives": 50
    },
    "title": "North (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-red-sea::South (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "st johns",
+    "sataya",
+    "sataya reef",
+    "fury shoals"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "tax_vat",
+      "note": "10% (of the trip cost) VAT Mandatory Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 177.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "marine_park",
+      "included": true,
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "South (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22667,
+   "padi_slug": "daedalus-fury-shoal-port-ghalib-port-ghalib-7-ni-2",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "South (Port ghalib - Port ghalib) 7 Nights"
   },
   "all-star-red-sea::Ultimate Red Sea (Port ghalib - Hurghada)": {
    "boat": "all-star-red-sea",
@@ -1623,6 +2219,93 @@
    },
    "title": "Daedalus - St. John\u2019s \u2013 Elphinstone.(Port Ghalib - Port Ghalib) 7 Nights"
   },
+  "alsuraya::Deadalus - Sataya - Fury Shoal (Port Ghalib - Port Ghalib)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal",
+    "thistlegorm",
+    "brothers",
+    "small crack",
+    "ras mohammed"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 150.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "private_guide",
+      "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 25.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Deadalus - Sataya - Fury Shoal (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22578,
+   "padi_slug": "north-and-brothers-hurghada-port-ghalib-7-nights",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deadalus - Sataya - Fury Shoal (Port Ghalib - Port Ghalib) 7 Nights"
+  },
   "alsuraya::Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
@@ -1883,6 +2566,180 @@
     "recommended_logged_dives": 50
    },
    "title": "North and Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "alsuraya::North and Brothers (Hurghada - Port Ghalib)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal",
+    "thistlegorm",
+    "brothers",
+    "small crack",
+    "ras mohammed"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "private_guide",
+      "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 25.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North and Brothers (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22577,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-2",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North and Brothers (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "alsuraya::North and Brothers (Port Ghalib - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal",
+    "thistlegorm",
+    "brothers",
+    "small crack",
+    "ras mohammed"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "private_guide",
+      "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 25.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North and Brothers (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 22821,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-4",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North and Brothers (Port Ghalib - Hurghada) 7 Nights"
   },
   "alsuraya::North and Straits of Tiran (Hurghada - Hurghada)": {
    "boat": "alsuraya",
@@ -45052,12 +45909,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 54,
+    "dated": 72,
     "first": "2026-10-19",
     "in_season": 17,
-    "last": "2027-12-27",
+    "last": "2028-06-26",
     "priced": 17,
-    "read": 54,
+    "read": 72,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -45074,12 +45931,12 @@
    "name": "Alsuraya",
    "operator": null,
    "sailings": {
-    "dated": 59,
-    "first": "2026-10-15",
+    "dated": 58,
+    "first": "2026-10-24",
     "in_season": 18,
     "last": "2028-09-02",
     "priced": 17,
-    "read": 59,
+    "read": 58,
     "unpriced": 2
    },
    "slug": "alsuraya",
@@ -45302,13 +46159,13 @@
    "name": "MY Blue",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 52,
-    "first": "2026-10-15",
+    "dated": 51,
+    "first": "2026-10-22",
     "in_season": 14,
     "last": "2027-12-30",
     "priced": 12,
-    "read": 52,
-    "unpriced": 7
+    "read": 51,
+    "unpriced": 6
    },
    "slug": "my-blue",
    "specs": {
@@ -45370,12 +46227,12 @@
    "name": "MY Blue Pearl",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 56,
-    "first": "2026-10-15",
+    "dated": 55,
+    "first": "2026-10-22",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "my-blue-pearl",
@@ -45393,12 +46250,12 @@
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 53,
-    "first": "2026-10-15",
+    "dated": 52,
+    "first": "2026-10-22",
     "in_season": 16,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 53,
+    "read": 52,
     "unpriced": 0
    },
    "slug": "my-blue-seas",
@@ -45416,18 +46273,18 @@
    "name": "MY Blue Storm",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 56,
-    "first": "2026-10-15",
+    "dated": 55,
+    "first": "2026-10-22",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 56,
+    "read": 55,
     "unpriced": 1
    },
    "slug": "my-blue-storm",
    "specs": {
     "cabins": 11,
-    "length_m": 40,
+    "length_m": 39,
     "nitrox_free": true
    }
   },
@@ -45620,12 +46477,12 @@
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 74,
-    "first": "2026-10-15",
+    "dated": 73,
+    "first": "2026-10-22",
     "in_season": 13,
     "last": "2028-07-20",
     "priced": 13,
-    "read": 74,
+    "read": 73,
     "unpriced": 0
    },
    "slug": "mv-emperor-elite",
@@ -45689,9 +46546,9 @@
    "operator": "EXPLORER VENTURES",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-15",
+    "first": "2026-10-22",
     "in_season": 17,
-    "last": "2028-11-16",
+    "last": "2028-11-23",
     "priced": 17,
     "read": 100,
     "unpriced": 0
@@ -45868,12 +46725,12 @@
    "name": "MY Heaven Saphir",
    "operator": null,
    "sailings": {
-    "dated": 60,
-    "first": "2026-10-15",
+    "dated": 59,
+    "first": "2026-10-22",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 60,
+    "read": 59,
     "unpriced": 1
    },
    "slug": "my-heaven-saphir",
@@ -45931,12 +46788,12 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 24,
-    "first": "2026-10-15",
+    "dated": 23,
+    "first": "2026-10-22",
     "in_season": 9,
     "last": "2027-10-14",
     "priced": 7,
-    "read": 24,
+    "read": 23,
     "unpriced": 4
    },
    "slug": "my-independence-ii",
@@ -46131,12 +46988,12 @@
    "name": "MS Royal Evolution",
    "operator": null,
    "sailings": {
-    "dated": 47,
-    "first": "2026-10-15",
+    "dated": 46,
+    "first": "2026-10-22",
     "in_season": 13,
     "last": "2028-04-27",
     "priced": 13,
-    "read": 47,
+    "read": 46,
     "unpriced": 0
    },
    "slug": "ms-royal-evolution",
