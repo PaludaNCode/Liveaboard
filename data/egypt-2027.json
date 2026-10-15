@@ -26193,13 +26193,16 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "gota abu ramada",
+        "panorama reef",
+        "giftun"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
@@ -26398,7 +26401,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-diamond--brothers-daedalus-and-elphinstone-marsa-alam-marsa-alam",
@@ -26407,13 +26419,16 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "gota abu ramada",
+        "panorama reef",
+        "giftun"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
@@ -26612,7 +26627,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -142079,7 +142103,7 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
@@ -142296,7 +142320,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -142305,7 +142338,7 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
@@ -142522,7 +142555,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent--daedalus-fury-shoals-port-ghalib-port-ghalib",
@@ -143419,10 +143461,12 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
+        "abu nuhas",
+        "thistlegorm",
         "brothers"
       ],
       "region": null,
@@ -143634,7 +143678,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent--north-tour-northern-reefs-wrecks-hurghada-hurghada",
@@ -143643,235 +143696,17 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent",
       "nights": 7,
-      "dives": 0,
+      "dives": 15,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
-      "summary": "The unique hull design of the 34m MY Sea Serpent ensures the smoothest voyage to&nbsp;the best&nbsp;Red Sea diving destinations, including the spectacular Brother Islands, Elphinstone Reef and Daedalus.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "EUR"
-          },
-          "note": "National Park Fees"
-        },
-        {
-          "code": "gratuities",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "EUR"
-          },
-          "note": "Gratuities"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "extra_dives",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": null,
-          "note": "Extra Dives: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 175.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 450.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 175.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 350.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 600.0,
-            "currency": "EUR"
-          },
-          "note": "Naturalist Guide"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": null,
-          "note": "VAT: stated as included"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": null,
-          "note": "Airport Transfer: stated as included"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": null,
-          "note": "Nitrox: stated as included"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
-        }
-      ]
-    },
-    {
-      "id": "sea-serpent--rocky-zabargad-st-john-s-port-ghalib-port-ghalib",
-      "name": "Rocky - Zabargad - St. John's (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zabargad & St. John's",
-      "operator_id": "sea-serpent-fleet",
-      "boat_id": "sea-serpent",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Port Ghalib",
-      "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
-        "st johns",
-        "rocky island"
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
+        "sha'ab el erg",
+        "gubal",
+        "rosalie moller",
+        "carless reef"
       ],
       "region": null,
       "summary": "The unique hull design of the 34m MY Sea Serpent ensures the smoothest voyage to&nbsp;the best&nbsp;Red Sea diving destinations, including the spectacular Brother Islands, Elphinstone Reef and Daedalus.",
@@ -144082,7 +143917,252 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
+    },
+    {
+      "id": "sea-serpent--rocky-zabargad-st-john-s-port-ghalib-port-ghalib",
+      "name": "Rocky - Zabargad - St. John's (Port Ghalib - Port Ghalib)",
+      "title": "Rocky, Zabargad & St. John's",
+      "operator_id": "sea-serpent-fleet",
+      "boat_id": "sea-serpent",
+      "nights": 7,
+      "dives": 18,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "elphinstone",
+        "zabargad",
+        "rocky island",
+        "st johns"
+      ],
+      "region": null,
+      "summary": "The unique hull design of the 34m MY Sea Serpent ensures the smoothest voyage to&nbsp;the best&nbsp;Red Sea diving destinations, including the spectacular Brother Islands, Elphinstone Reef and Daedalus.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=8/2027",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 175.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 175.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 600.0,
+            "currency": "EUR"
+          },
+          "note": "Naturalist Guide"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-contessa--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -145401,7 +145481,7 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-excellence",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -145618,7 +145698,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-excellence--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -145627,7 +145716,7 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-excellence",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
@@ -145844,7 +145933,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-excellence--daedalus-fury-shoals-port-ghalib-port-ghalib",
@@ -146089,11 +146187,13 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-excellence",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoals"
+        "fury shoals",
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Itineraries aboard the MY Sea Serpent Excellence include the famous sites of the Red Sea, such as the Tiran Strait, the Brother Islands, Daedalus, and Elphinstone. The Sea Serpent Excellence is fitted with 12 en-suite cabins.",
@@ -146304,7 +146404,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-excellence--st-john-s-port-ghalib-port-ghalib",
@@ -146313,11 +146422,14 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-excellence",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns"
+        "st johns",
+        "fury shoals",
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Itineraries aboard the MY Sea Serpent Excellence include the famous sites of the Red Sea, such as the Tiran Strait, the Brother Islands, Daedalus, and Elphinstone. The Sea Serpent Excellence is fitted with 12 en-suite cabins.",
@@ -146528,7 +146640,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-grand--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -146953,234 +147074,14 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-grand",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
-      ],
-      "region": null,
-      "summary": "Exploring the wreck of the SS Thistlegorm is about as comfortable as it can possibly get while sailing aboard the huge 45m MY Sea Serpent Grand. Her 14 luxury en-suite cabins ensure maximum comfort.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "EUR"
-          },
-          "note": "National Park Fees"
-        },
-        {
-          "code": "gratuities",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "EUR"
-          },
-          "note": "Gratuities"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "extra_dives",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": null,
-          "note": "Extra Dives: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 175.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 450.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 175.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 350.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 600.0,
-            "currency": "EUR"
-          },
-          "note": "Naturalist Guide"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": null,
-          "note": "VAT: stated as included"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": null,
-          "note": "Airport Transfer: stated as included"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": null,
-          "note": "Nitrox: stated as included"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-10-11",
-            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
-        }
-      ]
-    },
-    {
-      "id": "sea-serpent-grand--north-safaga-hurghada-hurghada",
-      "name": "North & Safaga (Hurghada - Hurghada)",
-      "title": "North & Safaga",
-      "operator_id": "sea-serpent-fleet",
-      "boat_id": "sea-serpent-grand",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Hurghada",
-      "port_to": "Hurghada",
-      "dive_sites": [
+        "brothers",
+        "abu nuhas",
+        "sha'ab el erg",
+        "thistlegorm",
         "safaga"
       ],
       "region": null,
@@ -147392,7 +147293,254 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
+    },
+    {
+      "id": "sea-serpent-grand--north-safaga-hurghada-hurghada",
+      "name": "North & Safaga (Hurghada - Hurghada)",
+      "title": "North & Safaga",
+      "operator_id": "sea-serpent-fleet",
+      "boat_id": "sea-serpent-grand",
+      "nights": 7,
+      "dives": 18,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "elphinstone",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "safaga",
+        "panorama reef"
+      ],
+      "region": null,
+      "summary": "Exploring the wreck of the SS Thistlegorm is about as comfortable as it can possibly get while sailing aboard the huge 45m MY Sea Serpent Grand. Her 14 luxury en-suite cabins ensure maximum comfort.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=8/2027",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 175.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 175.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 600.0,
+            "currency": "EUR"
+          },
+          "note": "Naturalist Guide"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-11",
+            "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-grand--north-tiran-hurghada-hurghada",
@@ -147819,12 +147967,18 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-grand",
       "nights": 7,
-      "dives": 0,
+      "dives": 21,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "ras mohammed",
         "tiran",
-        "dahab"
+        "dahab",
+        "gabr el bint",
+        "blue hole",
+        "thistlegorm",
+        "abu nuhas",
+        "carless reef"
       ],
       "region": null,
       "summary": "Exploring the wreck of the SS Thistlegorm is about as comfortable as it can possibly get while sailing aboard the huge 45m MY Sea Serpent Grand. Her 14 luxury en-suite cabins ensure maximum comfort.",
@@ -148035,7 +148189,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "seawolf-dominator--deep-south-st-john-s-port-ghalib-port-ghalib",
@@ -165827,12 +165990,14 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "ss-glorious-miss-nouran",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "fury shoals"
+        "fury shoals",
+        "elphinstone",
+        "sataya"
       ],
       "region": null,
       "summary": "The Sea Serpent Glorious Miss Nouran liveaboard operates in the Egyptian Red Sea and has 13 ensuite cabins for up to 26 guests. Itineraries visit favorite sites such as Daedalus, Brothers, Elphinstone, and the SS Thistlegorm.",
@@ -166037,7 +166202,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "ss-glorious-miss-nouran--fury-shoals-port-ghalib-port-ghalib",
@@ -166915,11 +167089,12 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "ss-serena-dreams",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "safaga"
       ],
       "region": null,
       "summary": "Join the fantastic Sea Serpent Serena Dreams for a Red Sea diving liveaboard to remember. Built by divers for divers to offer unforgettable diving in the Red Sea. 9 en-suite guest cabins accommodate 18 passengers.",
@@ -167130,7 +167305,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "ss-serena-dreams--north-brothers-hurghada-hurghada",
@@ -167556,11 +167740,16 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "ss-serena-dreams",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga"
+        "elphinstone",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "safaga",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Join the fantastic Sea Serpent Serena Dreams for a Red Sea diving liveaboard to remember. Built by divers for divers to offer unforgettable diving in the Red Sea. 9 en-suite guest cabins accommodate 18 passengers.",
@@ -167771,7 +167960,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "ss-serena-dreams--north-tiran-hurghada-hurghada",
@@ -167780,11 +167978,16 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "ss-serena-dreams",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran"
+        "tiran",
+        "abu nuhas",
+        "sha'ab el erg",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal"
       ],
       "region": null,
       "summary": "Join the fantastic Sea Serpent Serena Dreams for a Red Sea diving liveaboard to remember. Built by divers for divers to offer unforgettable diving in the Red Sea. 9 en-suite guest cabins accommodate 18 passengers.",
@@ -167995,7 +168198,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "ss-serena-dreams--north-tour-northern-reefs-wrecks-hurghada-hurghada",
