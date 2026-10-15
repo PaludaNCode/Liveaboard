@@ -3,6 +3,70 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-15
+
+```
+changes: HEAD -> 2026-10-15
+===========================
+
+new departures (36)
+  2027-05-01  Sea Serpent Contessa   Brothers, Daedalus & Elphinstone        1,768 USD liveaboard.com
+  2027-05-06  Sea Serpent Excellence St. John's                              1,536 USD liveaboard.com
+  2027-05-08  SS Glorious Miss Noura Rocky, Zabargad & St. John's            1,646 USD liveaboard.com
+  2027-05-08  Sea Serpent            North Tour: Northern Reefs & Wreck      1,567 USD liveaboard.com
+  2027-05-08  Sea Serpent Contessa   North & Brothers                        1,768 USD liveaboard.com
+  2027-05-13  SS Serena Dreams       North & Tiran                           1,339 USD liveaboard.com
+  2027-05-13  Sea Serpent Excellence Brothers, Daedalus & Elphinstone        1,585 USD liveaboard.com
+  2027-05-13  Sea Serpent Grand      North & Brothers                        1,741 USD liveaboard.com
+  2027-05-15  SS Glorious Miss Noura Brothers, Daedalus & Elphinstone        1,646 USD liveaboard.com
+  2027-05-15  Sea Serpent Contessa   North & Brothers                        1,504 USD liveaboard.com
+  2027-05-20  SS Serena Dreams       North Tour: Northern Reefs & Wreck      1,466 USD liveaboard.com
+  2027-05-27  SS Serena Dreams       North & Tiran                           1,339 USD liveaboard.com
+  ... and 24 more not shown
+
+now sold out (16)
+  2027-05-01  Vita Xplorer           Daedalus, Zabargad, Rocky Island & liveaboard.com
+  2027-05-15  Vita Xplorer           Daedalus, Zabargad, Rocky Island & liveaboard.com
+  2027-05-17  All Star Scuba Scene   Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-05-22  Vita Xplorer           Daedalus, Zabargad, Rocky Island & liveaboard.com
+  2027-05-29  Vita Xplorer           Daedalus, Zabargad, Rocky Island & liveaboard.com
+  2027-06-05  Vita Xplorer           St. John's Reef                    liveaboard.com
+  2027-06-12  Vita Xplorer           St. John's Reef                    liveaboard.com
+  2027-06-19  DUNE Titan             North Ras Mohammed                 divebooker.com+liveaboard.com+padi.com
+  2027-06-26  Vita Xplorer           St. John's Reef                    liveaboard.com
+  2027-07-03  Vita Xplorer           Ras Mohammed & Brothers            liveaboard.com
+  2027-07-10  Vita Xplorer           Ras Mohammed & Brothers            liveaboard.com
+  2027-08-07  Vita Xplorer           Tiran & North Ras Mohammed         liveaboard.com
+  ... and 4 more not shown
+
+re-listed — same sailing, new row (1)
+  2027-08-02  All Star Scuba Scene   North                        padi.com -> liveaboard.com+padi.com
+
+price up (54)
+  2027-06-19  Sea Serpent Contessa   1,376 ->   1,768 USD  +392 (+28.5%)  North Tour: Northern Reefs & Wreck
+  2027-05-22  Sea Serpent            1,449 ->   1,679 USD  +230 (+15.9%)  Daedalus & Fury Shoals
+  2027-05-01  Sea Serpent            1,505 ->   1,735 USD  +230 (+15.3%)  North & Brothers
+  2027-05-29  Sea Serpent Contessa   1,544 ->   1,768 USD  +224 (+14.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-26  Sea Serpent Contessa   1,544 ->   1,768 USD  +224 (+14.5%)  Brothers, Daedalus & Elphinstone
+  2027-07-22  Sea Serpent Contessa   1,544 ->   1,768 USD  +224 (+14.5%)  North & Brothers
+  2027-05-22  Sea Serpent Contessa   1,376 ->   1,600 USD  +224 (+16.3%)  North Tour: Northern Reefs & Wreck
+  2027-05-22  Sea Serpent Excellen   1,583 ->   1,807 USD  +224 (+14.2%)  Daedalus & Fury Shoals
+  2027-05-20  Sea Serpent Grand      1,712 ->   1,936 USD  +224 (+13.1%)  North & Tiran
+  2027-05-01  SS Glorious Miss Nou   1,544 ->   1,768 USD  +224 (+14.5%)  Fury Shoals
+  2027-05-29  SS Glorious Miss Nou   1,544 ->   1,768 USD  +224 (+14.5%)  Fury Shoals
+  2027-07-03  SS Glorious Miss Nou   1,712 ->   1,936 USD  +224 (+13.1%)  Rocky, Zabargad & St. John's
+  ... and 42 more not shown
+
+price down (2)
+  2027-07-22  Sea Serpent Grand      1,824 ->   1,741 USD  -83 (-4.6%)  Brothers, Daedalus & Elphinstone
+  2027-07-15  Sea Serpent Grand      1,712 ->   1,646 USD  -66 (-3.9%)  North & Tiran
+
+vessels seen for the first time (1)
+  Blue Diamond
+
+28 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-14
 
 ```
