@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-15",
+ "collected": "2026-10-16",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -46966,12 +46966,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 12,
-    "first": "2026-10-16",
+    "dated": 11,
+    "first": "2026-10-24",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 12,
+    "read": 11,
     "unpriced": 1
    },
    "slug": "reef-voyager",
@@ -47193,12 +47193,12 @@
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 100,
-    "first": "2026-10-16",
+    "dated": 99,
+    "first": "2026-10-23",
     "in_season": 16,
     "last": "2028-12-28",
     "priced": 16,
-    "read": 100,
+    "read": 99,
     "unpriced": 0
    },
    "slug": "mv-tala",
