@@ -3,6 +3,51 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-16
+
+```
+changes: HEAD -> 2026-10-16
+===========================
+
+new departures (10)
+  2027-05-08  Bismarck               Safaga, Daedalus & Brothers             1,570 USD liveaboard.com
+  2027-06-26  Bismarck               Safaga, Daedalus & Brothers             1,570 USD liveaboard.com
+  2027-07-03  Bismarck               Brothers, Daedalus & Elphinstone        1,570 USD liveaboard.com
+  2027-07-10  Bismarck               Abu Nuhas, Ras Mohammed, Tiran & D      1,570 USD liveaboard.com
+  2027-07-17  Bismarck               Abu Nuhas, Ras Mohammed & Tiran         1,570 USD liveaboard.com
+  2027-07-24  Bismarck               Safaga, Daedalus & Brothers             1,570 USD liveaboard.com
+  2027-08-07  Bismarck               Safaga, Daedalus & Brothers             1,570 USD liveaboard.com
+  2027-08-14  Bismarck               Safaga, Brothers, Abu Nuhas & SS T      1,570 USD liveaboard.com
+  2027-08-21  Bismarck               Abu Nuhas, Ras Mohammed, Tiran & D      1,570 USD liveaboard.com
+  2027-08-28  Bismarck               Brothers, Daedalus & Elphinstone        1,570 USD liveaboard.com
+
+now sold out (3)
+  2027-05-22  New Sambo              Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-05-29  New Sambo              Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-08-21  AVO                    Brothers - Daedalus - Elphinstone  liveaboard.com+padi.com
+
+bookable again (2)
+  2027-06-19  Emperor Superior       North & Easy                       divebooker.com+liveaboard.com+padi.com
+  2027-07-03  Discovery I            North Wrecks, Ras Mohammed & Tiran divebooker.com+liveaboard.com+padi.com
+
+withdrawn (1)
+  2027-05-15  New Sambo              Brothers, Daedalus & Elphinstone   liveaboard.com
+
+re-listed — same sailing, new row (2)
+  2027-05-16  New Sambo              Sataya Mini-Safari           padi.com -> liveaboard.com+padi.com  570 EUR -> 527 USD  Mini-Safari Sataya -> Sataya Mini-Safari
+  2027-05-19  New Sambo              Sataya Mini-Safari           padi.com -> liveaboard.com+padi.com  470 EUR -> 527 USD  Mini-Safari Sataya -> Sataya Mini-Safari
+
+price up (3)
+  2027-06-05  AVO                    1,701 ->   1,810 USD  +109 (+6.4%)  Dahab Sinai
+  2027-07-10  Aphrodite              4,703 ->   4,710 USD  +7 (+0.1%)  Best of Red Sea 2 Weeks
+  2027-05-01  Marselia Star          3,303 ->   3,308 USD  +5 (+0.2%)  CCR Reefs, Wrecks and Canyons Trip
+
+price down (1)
+  2027-07-29  Golden Dolphin IV      2,686 ->   2,680 USD  -6 (-0.2%)  Daedalus, Rocky Island, Zabargad, 
+
+904 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-15
 
 ```
