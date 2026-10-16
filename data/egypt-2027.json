@@ -20499,14 +20499,15 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "bismarck",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "abu nuhas",
         "ras mohammed",
         "tiran",
-        "dahab"
+        "dahab",
+        "blue hole"
       ],
       "region": null,
       "summary": "Experience luxury and adventure aboard the Bismarck, a 46-meter Red Sea liveaboard offering 17 cabins and thrilling dives in sites like Brothers, Daedalus, and Ras Muhammad.",
@@ -20666,7 +20667,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "bismarck--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -21423,13 +21433,15 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "bismarck",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "safaga"
+        "safaga",
+        "panorama reef",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience luxury and adventure aboard the Bismarck, a 46-meter Red Sea liveaboard offering 17 cabins and thrilling dives in sites like Brothers, Daedalus, and Ras Muhammad.",
@@ -21589,7 +21601,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "bismarck--safaga-daedalus-brothers-port-ghalib-hurghada",
@@ -21598,13 +21619,14 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "bismarck",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "safaga"
+        "safaga",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience luxury and adventure aboard the Bismarck, a 46-meter Red Sea liveaboard offering 17 cabins and thrilling dives in sites like Brothers, Daedalus, and Ras Muhammad.",
@@ -21764,7 +21786,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "bismarck--sataya-fury-shoals-st-john-s-port-ghalib-port-ghalib",

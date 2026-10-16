@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-15",
+  "collected": "2026-10-16",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -3798,6 +3798,73 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6459&tourID=445047&languageID=1&curr=USD&showPrices=false"
     },
+    "bismarck::Abu Nuhas - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)": {
+      "boat": "bismarck",
+      "name": "Abu Nuhas - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)",
+      "tour_id": "445586",
+      "collected": "2026-10-16",
+      "regions": [
+        "Ras Mohammed",
+        "Abu Dabab",
+        "Jackson Reef",
+        "Abu Nuhas",
+        "Straits Of Tiran"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "abu dabab",
+        "tiran",
+        "abu nuhas"
+      ],
+      "dives": 19,
+      "guests": 34,
+      "experience": "Open Water - 25 minimum logged dives required.",
+      "min_logged_dives": 25,
+      "intro": "Explore the Red Sea’s best with dives at the iconic wrecks of Abu Nuhas, the vibrant coral gardens of Ras Mohammed, the crystal-clear waters of Tiran Island, and the stunning reefs and canyons of Dahab. An unforgettable loop from Hurghada to Hurghada, combining adventure, history, and breathtaking marine life.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in from 2:00 PM",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "3 Dives in Hurghada and 1 in Sheab Abu Nuhas.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "4 Dives, 1 in Abu Nuhas, 1 dive Ras Mohammed, 1 in Tiran Island, 1 night dive in Tiran.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "4 Dives in North Dahab, including 1 night dive",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "4 Dives, 1 dive in Blue Hole, 2 dives in northern Dahab, and 1 night dive in Tiran.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "4 Dives, 1 dive in Jackson Reef, 3 Dives in Ras Mohammed, and 1 night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 Dives in Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check-out at 12:00 PM. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6459&tourID=445586&languageID=1&curr=USD&showPrices=false"
+    },
     "bismarck::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
       "boat": "bismarck",
       "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
@@ -4184,6 +4251,131 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6459&tourID=372468&languageID=1&curr=USD&showPrices=false"
+    },
+    "bismarck::Safaga - Daedalus - Brothers (Hurghada - Marsa Ghalib)": {
+      "boat": "bismarck",
+      "name": "Safaga - Daedalus - Brothers (Hurghada - Marsa Ghalib)",
+      "tour_id": "445584",
+      "collected": "2026-10-16",
+      "regions": [
+        "Safaga",
+        "The Brothers",
+        "Abu Dabab",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "safaga",
+        "brothers",
+        "abu dabab",
+        "daedalus"
+      ],
+      "dives": 19,
+      "guests": 34,
+      "experience": "Open Water - 25 minimum logged dives required.",
+      "min_logged_dives": 25,
+      "intro": "Sail from Hurghada to Marsa Ghalib, diving the best of the Red Sea. Start with vibrant reefs in Safaga, then head to Daedalus for thrilling pelagic encounters. End with the dramatic walls and wrecks of the Brothers Islands- a perfect mix of color, current, and big fish action.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "3 Dives, 1 in Abo Hashish and 1 in Abo Soma.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "4 Dives, 2 in Abu El Kifan, 1 in Panorama Reef, and 1 night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "3 Dives in Brothers Islands.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 5 & 6:",
+          "text": "6 Dives in Daedalus Reef",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 Dives, 1 in Sheab Marsa Alam and 1 in Abu Dabab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6459&tourID=445584&languageID=1&curr=USD&showPrices=false"
+    },
+    "bismarck::Safaga - Daedalus - Brothers (Port Ghalib - Hurghada)": {
+      "boat": "bismarck",
+      "name": "Safaga – Daedalus – Brothers (Port Ghalib – Hurghada)",
+      "tour_id": "445393",
+      "collected": "2026-10-16",
+      "regions": [
+        "Safaga",
+        "Daedalus",
+        "The Brothers"
+      ],
+      "dive_sites": [
+        "safaga",
+        "daedalus",
+        "brothers"
+      ],
+      "dives": 19,
+      "guests": 34,
+      "experience": "Advanced Open Water - 25 minimum logged dives required.",
+      "min_logged_dives": 25,
+      "intro": "Experience the best of the Red Sea on this loop from Hurghada, diving the colorful reefs of Safaga, the remote pelagic hotspot of Daedalus Reef, and the dramatic walls of the Brothers Islands. Expect thrilling drift dives, vibrant corals, and possible encounters with hammerheads and oceanic whitetips.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in at 14:00.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "3 dives, 1 in Abo Hashish and 1 in Abo Soma.",
+          "is_day": true
+        },
+        {
+          "heading": "3:",
+          "text": "4 dives, 2 in Abu El Kifan, 1 in Panorama Reef, and 1 night dive",
+          "is_day": false
+        },
+        {
+          "heading": "Day 4:",
+          "text": "3 dives in Brothers Islands.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 5-6:",
+          "text": "6 dives in Daedalus Reef.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives, 1 in Sheab, Marsa Alam, and 1 in Abu Dabab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out at 11:00.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "The offshore reefs of the Brothers Islands and Daedalus are among the best places in the Red Sea for shark encounters, with oceanic whitetip, grey reef, silky, and thresher sharks, as well as schooling scalloped hammerheads in the early morning at Daedalus. The steep walls are covered in vibrant soft corals, sea fans, and black corals, alive with clouds of anthias, Napoleon wrasse, and schools of barracuda, jacks, and tuna. Around Safaga, reefs such as Panorama Reef and Abu El Kifan offer colorful coral gardens, turtles, and the chance of dolphins, while Abu Dabab is famous for its green turtles and the occasional dugong grazing on the seagrass beds. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6459&tourID=445393&languageID=1&curr=USD&showPrices=false"
     },
     "bismarck::Sataya (Fury Shoals) - St. John's (Port Ghalib - Port Ghalib)": {
       "boat": "bismarck",
@@ -36018,6 +36210,7 @@
     "437067": "discovery-i::North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
     "437465": "blue-pearl::North & Wrecks (Hurghada - Hurghada)",
     "437565": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
+    "437567": "blue-seas::Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
     "438085": "blue::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
     "438086": "blue::St. Johns (Port Ghalib - Port Ghalib)",
     "438087": "blue::Brothers, Daedalus and Elphinstone (Port Ghalib - Port Ghalib)",
