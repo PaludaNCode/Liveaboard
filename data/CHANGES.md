@@ -3,6 +3,33 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-17
+
+```
+changes: HEAD -> 2026-10-17
+===========================
+
+bookable again (1)
+  2027-07-17  Blue Horizon           Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+price up (74)
+  2027-07-29  Golden Dolphin IV      2,680 ->   2,696 USD  +16 (+0.6%)  Daedalus, Rocky Island, Zabargad, 
+  2027-08-23  Ghazala Adventure      1,754 ->   1,765 USD  +11 (+0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-14  Ghazala Explorer       1,754 ->   1,765 USD  +11 (+0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-26  Sea Serpent Contessa   1,764 ->   1,775 USD  +11 (+0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-19  Sea Serpent Contessa   1,764 ->   1,775 USD  +11 (+0.6%)  North Tour: Northern Reefs & Wreck
+  2027-05-19  Alia Soul              1,844 ->   1,854 USD  +10 (+0.5%)  Marine Park South: Daedalus - Rock
+  2027-07-10  Aphrodite              4,710 ->   4,720 USD  +10 (+0.2%)  Best of Red Sea 2 Weeks
+  2027-06-12  DUNE Silky             1,620 ->   1,630 USD  +10 (+0.6%)  North Brothers
+  2027-06-05  DUNE Silky             1,620 ->   1,630 USD  +10 (+0.6%)  North Dahab Tiran
+  2027-08-30  Ghazala Adventure      1,676 ->   1,686 USD  +10 (+0.6%)  North & Brothers
+  2027-08-02  Ghazala Adventure      1,676 ->   1,686 USD  +10 (+0.6%)  North, Tiran & Dahab
+  2027-08-16  Ghazala Adventure      1,637 ->   1,647 USD  +10 (+0.6%)  North, Tiran & Dahab
+  ... and 62 more not shown
+
+835 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-16
 
 ```
