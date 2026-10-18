@@ -1,6 +1,53 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-18",
+  "added": [],
+  "sold_out": [],
+  "returned": [
+   {
+    "id": "hammerhead-ii-2027-06-26-0",
+    "boat": "Hammerhead II",
+    "title": "Brothers Light",
+    "start": "2027-06-26",
+    "price": 929.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [
+   {
+    "id": "hammerhead-ii-2027-06-26-0",
+    "boat": "Hammerhead II",
+    "title": "Brothers Light",
+    "start": "2027-06-26",
+    "was": 1230.0,
+    "now": 929.0,
+    "currency": "USD",
+    "delta": -301.0,
+    "pct": -24.471544715447155
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 333,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-18"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-17",
   "added": [],
   "sold_out": [],
