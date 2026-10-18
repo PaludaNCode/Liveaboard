@@ -9,6 +9,17 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-10-17
 ===========================
 
+fees (2)
+  Sinaistar              course           150-300 EUR / per_trip -> 200-300 EUR / per_trip
+  Star Jet               combined_fees    100-130 EUR / per_trip -> 100-180 EUR / per_trip
+```
+
+## 2026-10-17
+
+```
+changes: HEAD -> 2026-10-17
+===========================
+
 bookable again (1)
   2027-07-17  Blue Horizon           Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
 
