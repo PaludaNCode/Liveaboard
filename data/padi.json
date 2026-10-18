@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-17",
+ "collected": "2026-10-18",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -45999,13 +45999,13 @@
    "name": "MY Andromeda",
    "operator": null,
    "sailings": {
-    "dated": 1,
+    "dated": 3,
     "first": "2026-10-31",
     "in_season": 0,
-    "last": "2026-10-31",
+    "last": "2027-04-01",
     "priced": 0,
-    "read": 1,
-    "unpriced": 0
+    "read": 3,
+    "unpriced": 2
    },
    "slug": "my-andromeda",
    "specs": {
@@ -46026,9 +46026,9 @@
     "first": "2026-10-24",
     "in_season": 18,
     "last": "2028-12-30",
-    "priced": 4,
+    "priced": 6,
     "read": 99,
-    "unpriced": 78
+    "unpriced": 75
    },
    "slug": "my-anemone",
    "specs": {
@@ -46114,12 +46114,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 88,
-    "first": "2026-10-18",
+    "dated": 87,
+    "first": "2026-10-25",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 88,
+    "read": 87,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -46567,12 +46567,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 12,
-    "first": "2026-10-18",
+    "dated": 11,
+    "first": "2026-10-21",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 12,
+    "read": 11,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -46770,12 +46770,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 15,
-    "first": "2026-10-18",
+    "dated": 14,
+    "first": "2026-10-26",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 15,
+    "read": 14,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -46834,12 +46834,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-10-18",
+    "first": "2026-10-20",
     "in_season": 20,
-    "last": "2028-06-10",
+    "last": "2028-06-17",
     "priced": 17,
     "read": 100,
-    "unpriced": 31
+    "unpriced": 32
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -47057,12 +47057,12 @@
    "name": "Serenity",
    "operator": null,
    "sailings": {
-    "dated": 59,
-    "first": "2026-10-17",
+    "dated": 58,
+    "first": "2026-10-24",
     "in_season": 14,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "serenity",
@@ -47079,12 +47079,12 @@
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 52,
-    "first": "2026-10-18",
+    "dated": 51,
+    "first": "2027-01-07",
     "in_season": 17,
     "last": "2027-12-23",
     "priced": 17,
-    "read": 52,
+    "read": 51,
     "unpriced": 0
    },
    "slug": "snefro-love",
@@ -47103,9 +47103,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-18",
+    "first": "2026-10-21",
     "in_season": 35,
-    "last": "2027-09-29",
+    "last": "2027-10-03",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -47171,12 +47171,12 @@
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
-    "dated": 54,
-    "first": "2026-10-17",
+    "dated": 53,
+    "first": "2026-10-24",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 0,
-    "read": 54,
+    "read": 53,
     "unpriced": 39
    },
    "slug": "south-moon-1",
