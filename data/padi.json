@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-19",
+ "collected": "2026-10-20",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -7619,6 +7619,111 @@
     "recommended_logged_dives": 20
    },
    "title": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh) 3 nights"
+  },
+  "bella-2::Sinai Classic- Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "bella-2",
+   "boat_name": "Bella 2",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Coast Guard Fee",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "gear_rental",
+      "note": "Full scuba set: Weight Belt/Weights/Tank(s), Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "included": true,
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Sinai Classic- Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 16469,
+   "padi_slug": "reef-and-wrecks-sharm-el-sheikh-sharm-el-sheikh-2",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Sinai Classic- Northern Wrecks and Reefs (Sharm El Sheikh - Sharm El Sheikh) 7 nights"
   },
   "bella-3::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "bella-3",
@@ -43367,6 +43472,91 @@
    },
    "title": "Best of Sinai (Sharm El Sheikh - Sharm El Sheikh) - 7 Nights"
   },
+  "south-moon-1::The Golden Route: Dahab & More (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "south-moon-1",
+   "boat_name": "South Moon 1",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran",
+    "dahab",
+    "blue hole",
+    "bells",
+    "gabr el bint",
+    "ras abu galum"
+   ],
+   "dives": 20,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, scheduled times only)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "The Golden Route: Dahab & More (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 23487,
+   "padi_slug": "best-of-sinai-sharm-el-sheikh-sharm-el-sheikh-7-2",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "The Golden Route: Dahab & More (Sharm El Sheikh - Sharm El Sheikh) - 7 Nights"
+  },
   "tala::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "tala",
    "boat_name": "MV Tala",
@@ -46045,12 +46235,12 @@
    "name": "M/Y Aphrodite",
    "operator": null,
    "sailings": {
-    "dated": 54,
+    "dated": 55,
     "first": "2026-10-24",
-    "in_season": 17,
+    "in_season": 18,
     "last": "2027-12-25",
-    "priced": 17,
-    "read": 54,
+    "priced": 18,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "my-aphrodite",
@@ -46114,12 +46304,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 87,
+    "dated": 88,
     "first": "2026-10-25",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 87,
+    "read": 88,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -46318,13 +46508,13 @@
    "name": "MY Cassiopeia Glory",
    "operator": null,
    "sailings": {
-    "dated": 1,
+    "dated": 2,
     "first": "2026-11-07",
     "in_season": 0,
-    "last": "2026-11-07",
+    "last": "2027-03-07",
     "priced": 0,
-    "read": 1,
-    "unpriced": 1
+    "read": 2,
+    "unpriced": 2
    },
    "slug": "my-cassiopeia-glory",
    "specs": {
@@ -46834,12 +47024,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-10-20",
+    "first": "2026-10-22",
     "in_season": 20,
-    "last": "2028-06-17",
+    "last": "2028-06-24",
     "priced": 17,
     "read": 100,
-    "unpriced": 32
+    "unpriced": 33
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -47171,12 +47361,12 @@
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
-    "dated": 53,
+    "dated": 54,
     "first": "2026-10-24",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 0,
-    "read": 53,
+    "read": 54,
     "unpriced": 39
    },
    "slug": "south-moon-1",
@@ -47193,12 +47383,12 @@
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 99,
+    "dated": 98,
     "first": "2026-10-23",
     "in_season": 16,
     "last": "2028-12-28",
     "priced": 16,
-    "read": 99,
+    "read": 98,
     "unpriced": 0
    },
    "slug": "mv-tala",
