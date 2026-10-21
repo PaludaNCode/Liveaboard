@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-20",
+ "collected": "2026-10-21",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -46144,9 +46144,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-21",
+    "first": "2026-10-25",
     "in_season": 31,
-    "last": "2027-11-30",
+    "last": "2027-12-04",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -46166,12 +46166,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 88,
-    "first": "2026-10-21",
+    "dated": 87,
+    "first": "2026-10-25",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 88,
+    "read": 87,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -46757,12 +46757,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 11,
-    "first": "2026-10-21",
+    "dated": 10,
+    "first": "2026-10-25",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 11,
+    "read": 10,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -47293,9 +47293,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-21",
+    "first": "2026-10-25",
     "in_season": 35,
-    "last": "2027-10-03",
+    "last": "2027-10-06",
     "priced": 35,
     "read": 100,
     "unpriced": 0
