@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: "Run one job rather than all of them (all/probe/padi/unread/gear/divebooker)"
+        description: "Run one job rather than all of them (all/probe/padi/unread/gear/divebooker), or sites, which runs only when named"
         type: string
         default: "all"
       gear_vessels:
@@ -615,3 +615,23 @@ jobs:
             /tmp/divebooker.json
             /tmp/divebooker-html
           retention-days: 7
+
+  # Which trip names a reef the vocabulary cannot place. Its own job, and only
+  # when asked for by name: the divebooker job above always runs two probes
+  # before its optional steps, and this question is one hull's page and its
+  # schedule. `divebooker_vessel` takes the hull path as the search links it
+  # (`gypsy-haz486`), comma separated for more than one. Added 2026-10-22,
+  # when the publish refused a reading over *Tubbataha Reef*.
+  sites:
+    if: inputs.only == 'sites'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Which trip names a reef nothing can place
+        run: |
+          python3 tools/probe_divebooker_sites.py \
+            --hulls "${{ inputs.divebooker_vessel }}"
