@@ -2,6 +2,39 @@
  {
   "before": "HEAD",
   "after": "2026-10-22",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "cu-2027-07-31-0",
+    "boat": "CU",
+    "title": "St. John's & Fury Shoals",
+    "start": "2027-07-31",
+    "price": 1460.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 4,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-22"
+ },
+ {
+  "before": "HEAD",
+  "after": "2026-10-22",
   "added": [
    {
     "id": "blue-diamond-2027-08-28-0",

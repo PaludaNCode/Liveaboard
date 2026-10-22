@@ -9,6 +9,18 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-10-22
 ===========================
 
+now sold out (1)
+  2027-07-31  CU                     St. John's & Fury Shoals           liveaboard.com
+
+4 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
+## 2026-10-22
+
+```
+changes: HEAD -> 2026-10-22
+===========================
+
 !! 1 vessel(s) lost every departure at once — most likely a failed fetch, not a cancelled season
   Bismarck
 

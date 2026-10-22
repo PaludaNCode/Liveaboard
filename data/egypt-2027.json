@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-10-22",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 685 of 1320 sailings and the entry bar on 260 of 495 trips; where the two disagree about the bar the stricter is shown. On 191 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 43 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 685 of 1320 sailings and the entry bar on 260 of 496 trips; where the two disagree about the bar the stricter is shown. On 191 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 43 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-10-21",
@@ -19596,8 +19596,8 @@
         "tiran"
       ],
       "region": null,
-      "summary": "The Bella 2 is a 35-meter/115-foot-long liveaboard taking 24 guests on diving safaris in Egypt&rsquo;s Red Sea, including Brothers, Daedalus, Elphinstone reefs, the Thistegorm wreck, and more.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/bella-2?m=8/2027",
+      "summary": null,
+      "source_url": null,
       "fees": [
         {
           "code": "service_charge",
@@ -19953,8 +19953,8 @@
         "ras katy"
       ],
       "region": null,
-      "summary": "The Bella 2 is a 35-meter/115-foot-long liveaboard taking 24 guests on diving safaris in Egypt&rsquo;s Red Sea, including Brothers, Daedalus, Elphinstone reefs, the Thistegorm wreck, and more.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/bella-2?m=8/2027",
+      "summary": null,
+      "source_url": null,
       "fees": [
         {
           "code": "service_charge",
@@ -20311,8 +20311,8 @@
         "ras um sid"
       ],
       "region": null,
-      "summary": "The Bella 3 is a 32-meter/105-foot-long liveaboard taking 20 guests on diving safaris in Egypt&rsquo;s Red Sea, including Brothers, Daedalus, Elphinstone reefs, the Thistegorm wreck, and more.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/bella-3?m=8/2027",
+      "summary": null,
+      "source_url": null,
       "fees": [
         {
           "code": "service_charge",
@@ -47446,6 +47446,238 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
+    },
+    {
+      "id": "cu--st-johns-fury-shoals-hurghada-hurghada",
+      "name": "St. Johns - Fury Shoals (Hurghada - Hurghada)",
+      "title": "St. John's & Fury Shoals",
+      "operator_id": "horus-star-fleet",
+      "boat_id": "cu",
+      "nights": 7,
+      "dives": 16,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "daedalus",
+        "rocky island",
+        "zabargad",
+        "sataya",
+        "elphinstone"
+      ],
+      "region": null,
+      "summary": "Dive the Red Sea aboard the CU, a 38m (125-foot) liveaboard offering superb itineraries to iconic wrecks and reefs, professional service, and relaxed diving year-round.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/cu?m=8/2027",
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 80.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 400.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 400.0,
+            "currency": "EUR"
+          },
+          "note": "Snorkeling Guide"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": null,
+          "note": "Environment Tax: stated as included"
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": null,
+          "note": "Fuel Surcharge: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-10-18",
+            "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "note": "Full equipment hire: BCD, Dive Light, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
+        }
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
       },
       "dives_read": true
     },
@@ -78624,8 +78856,8 @@
         "gubal"
       ],
       "region": null,
-      "summary": "The Eriny is a liveaboard offering 10 air-conditioned ensuite cabins, top-notch facilities, and expertly curated Red Sea itineraries featuring sites like the Thistlegorm, Abu Nuhas, and Tiran Strait.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/eriny?m=8/2027",
+      "summary": null,
+      "source_url": null,
       "fees": [
         {
           "code": "service_charge",
@@ -79013,8 +79245,8 @@
         "gubal"
       ],
       "region": null,
-      "summary": "The Eriny is a liveaboard offering 10 air-conditioned ensuite cabins, top-notch facilities, and expertly curated Red Sea itineraries featuring sites like the Thistlegorm, Abu Nuhas, and Tiran Strait.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/eriny?m=8/2027",
+      "summary": null,
+      "source_url": null,
       "fees": [
         {
           "code": "service_charge",
@@ -208231,6 +208463,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208258,6 +208491,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208285,6 +208519,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208312,6 +208547,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208339,6 +208575,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208366,6 +208603,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208393,6 +208631,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208420,6 +208659,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208447,6 +208687,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208474,6 +208715,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208501,6 +208743,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208528,6 +208771,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208555,6 +208799,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208582,6 +208827,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208609,6 +208855,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208636,6 +208883,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208663,6 +208911,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208690,6 +208939,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208717,6 +208967,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208744,6 +208995,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208771,6 +209023,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208798,6 +209051,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208825,6 +209079,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208852,6 +209107,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208879,6 +209135,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208906,6 +209163,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208933,6 +209191,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208960,6 +209219,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -208987,6 +209247,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209014,6 +209275,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209041,6 +209303,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209068,6 +209331,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209095,6 +209359,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209122,6 +209387,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209149,6 +209415,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209176,6 +209443,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209203,6 +209471,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209230,6 +209499,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209257,6 +209527,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209284,6 +209555,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209311,6 +209583,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209338,6 +209611,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209365,6 +209639,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209392,6 +209667,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209419,6 +209695,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209446,6 +209723,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209473,6 +209751,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209500,6 +209779,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209527,6 +209807,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209554,6 +209835,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209581,6 +209863,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209608,6 +209891,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209635,6 +209919,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -209662,6 +209947,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -223172,51 +223458,6 @@
       ]
     },
     {
-      "id": "cu-2027-07-31-0",
-      "itinerary_id": "cu--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-07-31",
-      "end": "2027-08-07",
-      "price": {
-        "amount": 1460.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/cu?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-10-22",
-        "url": "https://www.liveaboard.com/diving/egypt/cu?m=7/2027"
-      },
-      "berths": [
-        [
-          0,
-          0,
-          [
-            [
-              50,
-              1300,
-              0,
-              100
-            ],
-            [
-              51,
-              1399,
-              0,
-              null
-            ],
-            [
-              52,
-              1500,
-              0,
-              100
-            ]
-          ],
-          0
-        ]
-      ]
-    },
-    {
       "id": "cu-2027-05-08-0",
       "itinerary_id": "cu--north-hurghada-hurghada",
       "start": "2027-05-08",
@@ -223713,6 +223954,51 @@
       ]
     },
     {
+      "id": "cu-2027-07-31-0",
+      "itinerary_id": "cu--st-johns-fury-shoals-hurghada-hurghada",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1460.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/cu?m=07/2027",
+      "availability": "sold_out",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-10-22",
+        "url": "https://www.liveaboard.com/diving/egypt/cu?m=7/2027"
+      },
+      "berths": [
+        [
+          0,
+          0,
+          [
+            [
+              50,
+              1300,
+              0,
+              100
+            ],
+            [
+              51,
+              1399,
+              0,
+              null
+            ],
+            [
+              52,
+              1500,
+              0,
+              100
+            ]
+          ],
+          0
+        ]
+      ]
+    },
+    {
       "id": "destiny-2027-06-19-0",
       "itinerary_id": "destiny--brothers-daedalus-elphinstone-hurghada-hurghada",
       "start": "2027-06-19",
@@ -224004,7 +224290,7 @@
       "start": "2027-07-10",
       "end": "2027-07-17",
       "price": {
-        "amount": 1415.0,
+        "amount": 1414.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -224012,7 +224298,7 @@
       "provenance": {
         "kind": "scraped",
         "source_id": "liveaboard.com",
-        "retrieved": "2026-10-18",
+        "retrieved": "2026-10-22",
         "url": "https://www.liveaboard.com/diving/egypt/destiny?m=7/2027"
       },
       "promotion": "10% Off",
@@ -224543,6 +224829,150 @@
       }
     },
     {
+      "id": "destiny-2027-07-03-0",
+      "itinerary_id": "destiny--north-tiran-hurghada-hurghada",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 1414.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-10-22",
+        "url": "https://www.liveaboard.com/diving/egypt/destiny?m=7/2027"
+      },
+      "promotion": "10% Off",
+      "divebooker_price": {
+        "amount": 1414.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-21",
+        "url": "https://divebooker.com/destiny-haz523"
+      },
+      "berths": [
+        [
+          0,
+          9,
+          [
+            [
+              53,
+              1257,
+              5,
+              80
+            ],
+            [
+              54,
+              1257,
+              4,
+              80
+            ],
+            [
+              55,
+              1382,
+              2,
+              80
+            ],
+            [
+              56,
+              1382,
+              6,
+              80
+            ],
+            [
+              27,
+              1446,
+              2,
+              80
+            ]
+          ],
+          19,
+          "2026-10-20"
+        ],
+        [
+          2,
+          null,
+          [
+            [
+              9,
+              1259,
+              4,
+              null
+            ],
+            [
+              8,
+              2518,
+              4,
+              null
+            ],
+            [
+              7,
+              1259,
+              5,
+              null
+            ],
+            [
+              8,
+              2518,
+              5,
+              null
+            ],
+            [
+              7,
+              1385,
+              6,
+              null
+            ],
+            [
+              8,
+              2770,
+              6,
+              null
+            ],
+            [
+              9,
+              1385,
+              2,
+              null
+            ],
+            [
+              8,
+              2770,
+              2,
+              null
+            ],
+            [
+              9,
+              1448,
+              2,
+              null
+            ],
+            [
+              8,
+              2897,
+              2,
+              null
+            ]
+          ],
+          19
+        ]
+      ],
+      "sale": {
+        "sellers": [
+          0,
+          2
+        ],
+        "pct": 10,
+        "was": 1397
+      }
+    },
+    {
       "id": "destiny-2027-08-28-0",
       "itinerary_id": "destiny--north-tiran-hurghada-hurghada",
       "start": "2027-08-28",
@@ -224683,150 +225113,6 @@
         ],
         "pct": 10,
         "was": 1398
-      }
-    },
-    {
-      "id": "destiny-2027-07-03-0",
-      "itinerary_id": "destiny--north-tiran-hurghada-hurghada",
-      "start": "2027-07-03",
-      "end": "2027-07-10",
-      "price": {
-        "amount": 1415.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-10-18",
-        "url": "https://www.liveaboard.com/diving/egypt/destiny?m=7/2027"
-      },
-      "promotion": "10% Off",
-      "divebooker_price": {
-        "amount": 1414.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-10-21",
-        "url": "https://divebooker.com/destiny-haz523"
-      },
-      "berths": [
-        [
-          0,
-          9,
-          [
-            [
-              53,
-              1257,
-              5,
-              80
-            ],
-            [
-              54,
-              1257,
-              4,
-              80
-            ],
-            [
-              55,
-              1382,
-              2,
-              80
-            ],
-            [
-              56,
-              1382,
-              6,
-              80
-            ],
-            [
-              27,
-              1446,
-              2,
-              80
-            ]
-          ],
-          19,
-          "2026-10-20"
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              9,
-              1259,
-              4,
-              null
-            ],
-            [
-              8,
-              2518,
-              4,
-              null
-            ],
-            [
-              7,
-              1259,
-              5,
-              null
-            ],
-            [
-              8,
-              2518,
-              5,
-              null
-            ],
-            [
-              7,
-              1385,
-              6,
-              null
-            ],
-            [
-              8,
-              2770,
-              6,
-              null
-            ],
-            [
-              9,
-              1385,
-              2,
-              null
-            ],
-            [
-              8,
-              2770,
-              2,
-              null
-            ],
-            [
-              9,
-              1448,
-              2,
-              null
-            ],
-            [
-              8,
-              2897,
-              2,
-              null
-            ]
-          ],
-          19
-        ]
-      ],
-      "sale": {
-        "sellers": [
-          0,
-          2
-        ],
-        "pct": 10,
-        "was": 1397
       }
     },
     {
@@ -224978,7 +225264,7 @@
       "start": "2027-07-17",
       "end": "2027-07-24",
       "price": {
-        "amount": 1415.0,
+        "amount": 1414.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -224986,7 +225272,7 @@
       "provenance": {
         "kind": "scraped",
         "source_id": "liveaboard.com",
-        "retrieved": "2026-10-18",
+        "retrieved": "2026-10-22",
         "url": "https://www.liveaboard.com/diving/egypt/destiny?m=7/2027"
       },
       "promotion": "10% Off",
@@ -225609,7 +225895,7 @@
       "start": "2027-07-24",
       "end": "2027-07-31",
       "price": {
-        "amount": 1415.0,
+        "amount": 1414.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -225617,7 +225903,7 @@
       "provenance": {
         "kind": "scraped",
         "source_id": "liveaboard.com",
-        "retrieved": "2026-10-18",
+        "retrieved": "2026-10-22",
         "url": "https://www.liveaboard.com/diving/egypt/destiny?m=7/2027"
       },
       "promotion": "10% Off",
@@ -240180,6 +240466,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240207,6 +240494,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240234,6 +240522,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240261,6 +240550,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240288,6 +240578,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240315,6 +240606,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240342,6 +240634,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240369,6 +240662,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240396,6 +240690,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240423,6 +240718,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240450,6 +240746,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240477,6 +240774,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240504,6 +240802,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240531,6 +240830,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240558,6 +240858,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240585,6 +240886,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240612,6 +240914,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
@@ -240639,6 +240942,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
       },
       "padi_only": true,
+      "not_asked": true,
       "berths": [
         [
           1,
