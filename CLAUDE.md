@@ -1669,7 +1669,10 @@ Break these and the site starts lying quietly rather than failing loudly.
   page it exists to correct. So `KEEP_DAYS` stays at a week, nothing is
   computed across readings, and the view lists refreshes. It is for visitors as
   well as for us, which is why it is a view rather than a link, and why it is
-  the plain list rather than the clever one.
+  the plain list rather than the clever one. **A question across readings is
+  answered in `docs/`, never on a row**: `tools/fill_and_price.py` asked #6's —
+  does a fare rise as a sailing fills — of the git log, and the answer, *no
+  likelier than after its places grow*, is `docs/fill-and-price.md`.
 - **A change report is rendered, never transcribed.** `changes.compare` builds
   a report of dataclasses; `changes.render` flattens it to text for the log and
   `CHANGES.md`, and `changes.as_dict` emits the same comparison as data into
