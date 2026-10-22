@@ -317,16 +317,20 @@ parsed announced 126 sailings as newly sold out, and nobody had looked before.
 
 ## Next
 
-Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). One is
-open:
+Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). None
+is open.
 
-- **#6** whether an operator raises a sailing's price as its berths sell. Every
-  reading is a commit — the dataset has 426 of them over 54 days since
-  2026-08-27 — and each holds the quoted fare and the places beside it, so the
-  question is answerable from the git log with no crawl. What it produces is a
-  finding in `docs/`, never a mark on the page: the history view reports what
-  the sellers did and does not grade it, which is why the sparkline and the
-  *moved since first seen* badge #6 first proposed were declined.
+**#6** is answered, and the answer is no. On all three sellers a fare is no
+likelier to rise after a sailing's places fall than after they grow:
+liveaboard.com 6 rises in 314 fills against 5 in 138, PADI 3 in 249 against 7
+in 152, over 54 days of the dataset's own commits.
+[`tools/fill_and_price.py`](tools/fill_and_price.py) reads that off the git log
+with no crawl, and [`docs/fill-and-price.md`](docs/fill-and-price.md) holds the
+finding, the nine sailings that did rise and what each looked like. Nothing of
+it reaches the page: the history view reports what the sellers did and does not
+grade it, which is why the sparkline and the *moved since first seen* badge #6
+first proposed were declined. Fills are rare seven months out, so it is worth
+re-running as the season nears.
 
 **#151** is done. A fee line stating a figure and no period now takes its unit
 from another seller's book where the two figures are exactly equal, and the
