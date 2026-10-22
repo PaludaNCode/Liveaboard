@@ -581,6 +581,7 @@ Each of these cost a cycle at least once.
 | Does `robots.txt` state a `Crawl-delay`? | **No.** The pace is ours to choose. | `tools/probe_crawl.py` |
 | Does `?page=2` return a second page of results? | **No.** Byte-identical to page 1, `pageCount:0`, all results already present. | a live probe; noted in `liveaboard_com.py` |
 | Are charter-only vessels reachable? | **No.** The search pages never link them, so they are invisible to the crawl however many requests it makes. Heaven Saphir and MY Anemone are the known examples — which means "67 boats" is the fleet bookable **by the berth**, not the Egyptian fleet ([#55](https://github.com/PaludaNCode/Liveaboard/issues/55)). | `tools/probe_crawl.py` |
+| Can a vessel leave the listings while its page stays up? | **Yes.** Bismarck dropped out of all six listings on 2026-10-19; on 2026-10-22 its page still answered 200 with a `Product` node and no `Event` on any of the four season months, and the other 80 linked vessels were exactly the 10-18 fleet. Discovery was the listings alone, so the crawl never opened the page: the 17 sailings left without anybody reading it, and the boat fell out of `data/barren.json` as well as the dataset. `discover()` now also asks for every vessel the last run read (`known_vessels`, from the candidate and the barren record) that no listing links, and names them in the run log. A vessel this site does not know answers **404**, so the direct ask catches the error rather than letting `run` end the crawl on it. | a live fetch of the four months and all six listings, 2026-10-22 |
 | Does a destination listing carry a priced offer? | **No.** `/diving/egypt` and `/diving/egypt/red-sea` are overviews. Boat links only. | a live run |
 | Does the fee disclosure text name any dive site? | **No.** Checked for Emperor Asmaa and Emperor Elite — no reef mentioned. | `data/fees.json` disclosure text |
 | Is there a per-trip dive count on the page? | **Partly.** 61 of 317 itineraries state one; the rest is derived from nights and carries no new information ([#50](https://github.com/PaludaNCode/Liveaboard/issues/50)). | `tools/probe_dives.py` |
@@ -650,6 +651,15 @@ Python's `urllib.robotparser` discards them: `can_fetch()` returns `True` for
 every path in the file. Delete that one line locally and `/BookingStep1` flips
 to `False`. Both readings were checked. (The indentation is a red herring —
 stripping it changes nothing. It is the blank line.)
+
+**That reading belongs to Python 3.12 and earlier.** On 2026-10-22,
+`PoliteFetcher.allowed()` for a `?m=` vessel page said `True` on 3.11.17 and
+3.12.3 and `False` on 3.13.16, against the same file: 3.13's parser keeps the
+orphaned rules. The workflows pin 3.11. Moving them to 3.13 would refuse every
+season-month fetch as `FetchBlocked`, which the crawl carries for
+`CARRY_MAX_DAYS` and then drops, so the whole first source would empty a
+fortnight after the upgrade. A local run on a 3.13 interpreter refuses the same
+pages today.
 
 **The decision — the owner's, taken 2026-08-30 with the alternatives and their
 prices in front of him: carry on, and write it down.** That is what this

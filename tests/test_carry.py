@@ -12,6 +12,9 @@ The barren skip list then did the same thing with nothing going wrong at all:
 it holds a vessel back for a week to save four requests, and AVO's and Blue's
 three sailings were dropped and reported as withdrawn by a run that simply
 never asked. A probe found all three still on sale.
+
+And a third, with no page involved at all: a vessel no listing links any more
+is never fetched, so it is neither read nor skipped. Bismarck, 2026-10-19.
 """
 
 from __future__ import annotations
@@ -196,6 +199,199 @@ class TestASkippedVesselIsNotAWithdrawnOne(unittest.TestCase):
         from liveaboard.cli import BARREN_RECHECK_DAYS
 
         self.assertGreater(CARRY_MAX_DAYS, BARREN_RECHECK_DAYS)
+
+
+class TestAVesselTheListingsStopLinkingIsStillAsked(unittest.TestCase):
+    """Discovery was the listings, and a listing is not an inventory.
+
+    On 2026-10-19 liveaboard.com stopped linking Bismarck from all six
+    listings while its page stayed up, with a Product node and no Event in the
+    season. The crawl never opened it, so the boat was neither selling nor
+    barren: its 17 sailings left in a run that had not looked, the boat left
+    the dataset and `data/barren.json` together, and the publish gate refused
+    four refreshes running over a PADI alias with no boat left to name. The
+    sailings were right to go. Nothing in the run could have known that.
+    """
+
+    LISTING = '<a href="/diving/egypt/alia-soul">A</a>'
+    PRODUCT = ('<script type="application/ld+json">{"@type":"Product",'
+               '"name":"%s","description":"A vessel."}</script>')
+    EVENT = ('<script type="application/ld+json">{"@type":"Event",'
+             '"name":"North","startDate":"2027-05-06","endDate":"2027-05-13",'
+             '"offers":{"@type":"Offer","price":"1400","priceCurrency":"EUR",'
+             '"availability":"InStock"}}</script>')
+
+    def _adapter(self, known, skip=frozenset(), listing=LISTING):
+        from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter
+
+        class Stub(LiveaboardComAdapter):
+            def _listing_urls(self):
+                return iter(["https://www.liveaboard.com/diving/search/egypt/may/2027"])
+
+        adapter = Stub(_FetcherReturning(listing))
+        adapter.known_vessels = frozenset(known)
+        adapter.skip_vessels = frozenset(skip)
+        return adapter
+
+    def test_a_known_vessel_no_listing_links_is_still_asked(self):
+        urls = list(self._adapter({"alia-soul", "bismarck"}).discover())
+        self.assertEqual(len([u for u in urls if "/bismarck?" in u]), 4,
+                         "one request per season month, as for a linked vessel")
+        self.assertEqual(len([u for u in urls if "/alia-soul?" in u]), 4,
+                         "a linked vessel is asked once, not again as a known one")
+
+    def test_the_run_log_names_it(self):
+        """Said out loud for the skip list's reason: a listing that stops
+        linking boats is news about the source, and a count would hide which."""
+        adapter = self._adapter({"bismarck"})
+        list(adapter.discover())
+        self.assertTrue(
+            [n for n in adapter._notes if "linked by no listing" in n and "bismarck" in n],
+            adapter._notes,
+        )
+
+    def test_one_the_barren_list_holds_back_is_carried_rather_than_asked(self):
+        adapter = self._adapter({"bismarck"}, skip={"bismarck"})
+        urls = list(adapter.discover())
+        self.assertFalse([u for u in urls if "bismarck" in u])
+        self.assertEqual(len([u for u in adapter._unread if "bismarck" in u]), 4)
+
+    def test_listings_that_link_nothing_send_it_nowhere(self):
+        """A crawl that cannot see the listings should come back empty and say
+        so, not go on re-reading yesterday's fleet and never meet a new boat."""
+        urls = list(self._adapter({"bismarck"}, listing="").discover())
+        self.assertFalse([u for u in urls if "bismarck" in u])
+
+    def test_only_this_sources_vessels_are_known(self):
+        from liveaboard.cli import known_vessels
+
+        previous = {"itineraries": [
+            vessel(slug="bismarck"),
+            {"id": "a-padi-trip", "provenance": {"source_id": "padi.com"}},
+        ]}
+        self.assertEqual(
+            known_vessels(previous, {"lady-m": "2026-10-20"}, "liveaboard.com"),
+            {"bismarck", "lady-m"},
+        )
+
+    # The outcome, through the command the refresh runs.
+
+    def scrape(self, pages, previous=None, barren=None):
+        """Run `cmd_scrape` over a stub site; the candidate, barren record and exit.
+
+        ``pages`` maps a vessel slug to its page body, or to an exception the
+        site answers with. Every listing links only alia-soul.
+        """
+        import argparse
+        from unittest import mock
+
+        from liveaboard import cli
+
+        site = _Site(self.LISTING, pages)
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            out, record = tmp / "candidate.json", tmp / "barren.json"
+            if previous is not None:
+                out.write_text(json.dumps(previous), encoding="utf-8")
+            if barren is not None:
+                record.write_text(json.dumps({"vessels": barren}), encoding="utf-8")
+            args = argparse.Namespace(
+                source="liveaboard.com", out=out, snapshots=tmp / "snapshots",
+                archive=tmp / "archive.json", barren=record, recheck_all=False,
+                warnings=0, max_pages=0, diagnose=False,
+            )
+            with mock.patch.object(cli, "PoliteFetcher", lambda **_: site), \
+                    mock.patch("sys.stdout"):
+                code = cli.cmd_scrape(args)
+            candidate = json.loads(out.read_text(encoding="utf-8"))
+            vessels = (json.loads(record.read_text(encoding="utf-8"))["vessels"]
+                       if record.exists() else {})
+        return candidate, vessels, code
+
+    def yesterday(self):
+        url = "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+        day = (date.today() - timedelta(days=1)).isoformat()
+        return {
+            "departures": [departure("bismarck-2027-05-01-0", url=url,
+                                     retrieved=day, slug="bismarck")],
+            "itineraries": [vessel(slug="bismarck", retrieved=day)],
+        }
+
+    def test_an_empty_season_read_off_its_page_is_recorded_as_barren(self):
+        """Bismarck's case: the page answers, and what it says is the answer."""
+        candidate, barren, code = self.scrape(
+            {"alia-soul": self.PRODUCT % "Alia Soul" + self.EVENT,
+             "bismarck": self.PRODUCT % "Bismarck"},
+            previous=self.yesterday(),
+        )
+        self.assertEqual(code, 0)
+        self.assertEqual(barren.get("bismarck"), date.today().isoformat())
+        self.assertFalse([d for d in candidate["departures"]
+                          if d["boat_slug"] == "bismarck"],
+                         "a season the page says is empty is not carried")
+
+    def test_a_page_that_does_not_answer_is_carried_and_the_crawl_finishes(self):
+        """liveaboard.com answers a vessel it does not know with a 404, and an
+        HTTP error inside `run` ends the whole crawl."""
+        import urllib.error
+
+        gone = urllib.error.HTTPError("https://example.test", 404, "Not Found", None, None)
+        candidate, barren, code = self.scrape(
+            {"alia-soul": self.PRODUCT % "Alia Soul" + self.EVENT, "bismarck": gone},
+            previous=self.yesterday(),
+        )
+        self.assertEqual(code, 0)
+        self.assertEqual([d["id"] for d in candidate["departures"]
+                          if d["boat_slug"] == "bismarck"], ["bismarck-2027-05-01-0"])
+        self.assertNotIn("bismarck", barren, "a page nobody read is not an empty one")
+
+    def test_a_barren_verdict_nobody_renews_expires(self):
+        """Otherwise a vessel whose page has gone is asked after daily for
+        ever, and the barren record keeps vouching for it."""
+        import urllib.error
+
+        gone = urllib.error.HTTPError("https://example.test", 404, "Not Found", None, None)
+        old = (date.today() - timedelta(days=CARRY_MAX_DAYS + 1)).isoformat()
+        recent = (date.today() - timedelta(days=2)).isoformat()
+        _, barren, _ = self.scrape(
+            {"alia-soul": self.PRODUCT % "Alia Soul" + self.EVENT, "gone-boat": gone},
+            barren={"gone-boat": old, "lady-m": recent},
+        )
+        self.assertNotIn("gone-boat", barren)
+        self.assertEqual(barren.get("lady-m"), recent,
+                         "a verdict inside its week is held back, not expired")
+
+
+class _Site:
+    """A stub of liveaboard.com: one listing body, and a page per vessel."""
+
+    def __init__(self, listing: str, pages: dict):
+        self.listing = listing
+        self.pages = pages
+        self._cache: dict = {}
+
+    def _robots_for(self, url):
+        return None
+
+    def forget(self, url):
+        self._cache.pop(url, None)
+
+    def get(self, url: str):
+        from datetime import datetime, timezone
+        from urllib.parse import urlparse
+
+        from liveaboard.scrape.base import FetchResult
+
+        path = urlparse(url).path.rstrip("/")
+        if path.startswith("/diving/search/") or path in ("/diving/egypt",
+                                                          "/diving/egypt/red-sea"):
+            body = self.listing
+        else:
+            body = self.pages.get(path.rsplit("/", 1)[-1], "")
+            if isinstance(body, Exception):
+                raise body
+        return FetchResult(url=url, status=200, body=body,
+                           fetched_at=datetime.now(timezone.utc), from_cache=False)
 
 
 class _FetcherReturning:

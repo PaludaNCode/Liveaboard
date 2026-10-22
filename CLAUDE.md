@@ -1305,6 +1305,14 @@ Break these and the site starts lying quietly rather than failing loudly.
   sale. `discover()` records what it skips via `not_looked_at`, so the skip and
   the failure travel down the same channel. `CARRY_MAX_DAYS` outlasts
   `BARREN_RECHECK_DAYS` by design.
+  **A listing that stops linking a vessel is the third way, and a listing is
+  not an inventory.** Bismarck left all six on 2026-10-19 with its page up and
+  its season empty; the crawl never opened it, the boat fell out of the dataset
+  and `barren.json` together, and the publish gate refused four refreshes over
+  a PADI alias with nothing left to name. `discover()` asks for every vessel
+  the last run read (`known_vessels`) that no listing links, and names them. A
+  barren verdict nobody renews within `CARRY_MAX_DAYS` expires, so a vessel
+  whose page has gone is asked after for a fortnight rather than for ever.
 - **And a vessel that sells nothing is not one that prices nothing.**
   `_departure_book` drops a sailing with no date, with no price, and outside
   the window, all three the same way: silently. So twelve mapped PADI vessels
