@@ -760,6 +760,26 @@ Hammerhead I, Icon, Independence III, Omneia Spirit, Sea Treasure, South
 Moon 1, VipOne and seventeen more. That is the answer to *what does a third
 seller add*: a sixth of the Egyptian fleet, by hull.
 
+**And the Egypt search is not only Egypt.** On 2026-10-22 it linked
+`/gypsy-haz486`, which the page titles *Gypsy Liveaboard, Egypt* — the
+`, Egypt` is the search's suffix, not a statement about the boat. Everything
+else on the page is the Philippines: four trips out of Dauin (one out of
+Manila), *Dauin – Tubbataha – Dauin* with six sailings in season, an FAQ
+naming "the major dive locations in the Philippines", and no Event `location`
+at all. Read by `tools/probe_divebooker_sites.py`
+([run 39771064973](https://github.com/PaludaNCode/Liveaboard/actions/runs/39771064973)),
+because the reading the gate refused that morning was a one-day artifact and
+the run log prints no reef list. So the title's country says nothing a reader
+can rely on — the rule *a deal is placed by its vessel, never by the country
+beside it* applies here too — and what keeps such a hull off the page is the
+alias map: an unmapped hull reaches no row and no special, and `promote` names
+it in `unmapped_vessels`. Gypsy is not an Egyptian boat and should not be
+mapped. The reef gate now reads only mapped hulls, for that reason.
+
+Two hulls the same list names **are** Egyptian and unmapped on that day: `avo`
+(7 sailings in season), which is AVO on liveaboard.com, and `new-life` (15),
+which no other seller lists. Mapping them is a person's call, not a probe's.
+
 ## The payload the page streams to itself
 
 Read 2026-09-20 by `tools/probe_divebooker_flight.py` over

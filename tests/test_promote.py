@@ -1479,6 +1479,30 @@ class TestADiveOnAPlaceFoldsIntoIt(unittest.TestCase):
                 self.assertEqual(self.sites(name), ["gota abu ramada"])
 
 
+def _unplaced_reefs(book: dict, alias: dict) -> list[str]:
+    """Every reef on a trip a row can come from that the vocabulary cannot place.
+
+    Through `_sites_from_regions`, which is the route `promote` reads the list
+    by: an entry is placed there that a sentence would not be. A row comes from
+    an in-season sailing that names the trip, on a hull `alias` maps -- the
+    same two joins `promote` makes, and nothing wider.
+    """
+    from liveaboard.promote import _sites_from_regions
+    from liveaboard.scrape.divebooker_com import fee_key
+
+    sold = {(d.get("boat"), fee_key(d.get("trip") or "", d.get("nights")))
+            for d in (book.get("departures") or {}).values()}
+    return sorted({
+        site
+        for slug, vessel in (book.get("vessels") or {}).items()
+        if slug in alias
+        for key, trip in (vessel.get("trips") or {}).items()
+        if (slug, key) in sold
+        for site in trip.get("sites") or []
+        if not _sites_from_regions([site])
+    })
+
+
 class TestTheThirdSellersReefNames(unittest.TestCase):
     """47 names, 353 mentions, and the rule that placed them.
 
@@ -1542,14 +1566,14 @@ class TestTheThirdSellersReefNames(unittest.TestCase):
         """The publication gate half: a name nobody can place is a row the
         site filter cannot reach, and this seller is the only source of a reef
         list on the 33 hulls it alone sells."""
-        from published import raw
+        from pathlib import Path
 
-        from liveaboard.promote import _sites_from_regions
+        from published import raw
 
         from liveaboard.scrape.divebooker_com import fee_key
 
-        # Through `_sites_from_regions`, which is the route `promote` reads
-        # this list by: an entry is placed there that a sentence would not be.
+        # Through `_sites_from_regions` (see `_unplaced_reefs`), which is the
+        # route `promote` reads this list by.
         #
         # **And only over trips a row can come from.** A trip reaches the page
         # through an in-season sailing that names it -- `_divebooker_trip`
@@ -1558,24 +1582,48 @@ class TestTheThirdSellersReefNames(unittest.TestCase):
         # 2026-09-30 the search linked `/test-boat-trip-haz25`, the seller's
         # own "Test Calypso", with one out-of-season sailing whose reef list
         # names *Pecio de Las Calderas*, a Spanish wreck; the gate refused the
-        # whole seller's reading over a row that could not exist.
+        # whole seller's reading over a row that could not exist. The same goes
+        # for a hull the alias map does not know: see the test below.
         book = raw("divebooker.json")
+        # Hand-maintained and outside the gate, like `padi_aliases.json`: no
+        # crawl writes it, and it says which hulls can reach a row at all.
+        alias = json.loads(Path("data/divebooker_aliases.json").read_text())
+        alias = alias.get("aliases") or {}
         sold = {(d.get("boat"), fee_key(d.get("trip") or "", d.get("nights")))
                 for d in (book.get("departures") or {}).values()}
-        unplaced = sorted({
-            site
-            for slug, vessel in book.get("vessels", {}).items()
-            for key, trip in (vessel.get("trips") or {}).items()
-            if (slug, key) in sold
-            for site in trip.get("sites") or []
-            if not _sites_from_regions([site])
-        })
         # And the rule must still see something: a join that silently
         # matched nothing would pass here for the wrong reason.
-        self.assertTrue(any((slug, key) in sold
+        self.assertTrue(any((slug, key) in sold and slug in alias
                             for slug, v in book.get("vessels", {}).items()
                             for key in (v.get("trips") or {})))
-        self.assertEqual(unplaced, [])
+        self.assertEqual(_unplaced_reefs(book, alias), [])
+
+    def test_a_hull_the_alias_map_does_not_know_cannot_hold_the_seller_back(self):
+        """**And only over hulls a row can come from**, which is the same
+        scope taken one step further. On 2026-10-22 the Egypt search linked
+        `/gypsy-haz486` -- *Gypsy Liveaboard, Egypt* by its title, and a
+        Philippine boat by everything else: harbours Dauin and Manila, a FAQ
+        naming "the major dive locations in the Philippines", and a Tubbataha
+        week with six sailings in season. The gate refused the whole reading
+        over *Tubbataha Reef*. But a hull the alias map does not know reaches
+        no row and no special -- `promote` counts it as unmapped and names it
+        -- so its reefs are no filter's business; mapping it is the step that
+        would make them so, and that step is a person's."""
+        book = {
+            "departures": {
+                "gypsy::2027-05-08": {"boat": "gypsy", "start": "2027-05-08",
+                                      "trip": "Dauin - Tubbataha - Dauin",
+                                      "nights": 7},
+            },
+            "vessels": {
+                "gypsy": {"trips": {"Dauin - Tubbataha - Dauin::7": {
+                    "sites": ["Tubbataha Reef"]}}},
+            },
+        }
+        self.assertEqual(_unplaced_reefs(book, {}), [])
+        # The gate still bites the moment the hull can reach a row.
+        self.assertEqual(_unplaced_reefs(book, {"gypsy": "gypsy"}),
+                         ["Tubbataha Reef"])
 
     def test_the_three_names_that_held_the_seller_back_are_placed(self):
         """#153: *Bells*, *Paradise* and *Ras Umm Sid* stopped the third
