@@ -3252,6 +3252,12 @@
     { k: "vessels_new", t: "Vessels new to the page", kind: "name" },
     { k: "vessels_gone", t: "Vessels that lost every departure", kind: "name",
       warn: "Most likely a failed fetch rather than a cancelled season." },
+    /* The same loss with the guess answered: every seller that listed these
+       boats read the page this run and found no sailing in the season. Not a
+       warning, and not a link either -- the boat has no row left to go to. */
+    { k: "vessels_emptied", t: "Vessels with no sailing left", kind: "label",
+      note: "Read, not missed: every seller that listed these boats opened " +
+            "the page this refresh and found no sailing in the season." },
     { k: "months_gone", t: "Vessel-months that emptied", kind: "name",
       warn: "A page that came back unreadable, not a withdrawn month — those " +
             "sailings are missing from the site until the next crawl reads them." },
@@ -3322,6 +3328,10 @@
       tr.appendChild(el("td", "c-boat", "")).appendChild(boatLink(row));
       return tr;
     }
+    if (kind === "label") {
+      tr.appendChild(el("td", "c-boat", row));
+      return tr;
+    }
     if (kind === "fx") {
       tr.appendChild(el("td", "c-boat", row.currency));
       tr.appendChild(el("td", "c-move",
@@ -3378,7 +3388,9 @@
       spec.t + " (" + rows.length +
       ((report.more || {})[spec.k] ? " of " + (rows.length + report.more[spec.k]) : "") +
       ")"));
-    if (spec.warn) wrap.appendChild(el("p", "deals-note", spec.warn));
+    if (spec.warn || spec.note) {
+      wrap.appendChild(el("p", "deals-note", spec.warn || spec.note));
+    }
 
     var table = el("table", "change-table");
     var body = document.createElement("tbody");

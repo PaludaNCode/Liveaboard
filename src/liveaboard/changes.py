@@ -21,7 +21,10 @@ Four distinctions decide whether the report is worth reading:
   500s, or a capped run, removes every departure that vessel sells. Reporting
   eighty withdrawals when a fetch failed is worse than reporting nothing, so a
   vessel that loses *all* its departures at once is called out as a vessel that
-  went missing rather than as eighty separate losses.
+  went missing rather than as eighty separate losses. **Unless the crawl says
+  it read the page**: a seller that opened the vessel this run and found no
+  sailing has answered, and the report says the season emptied instead. The
+  two datasets cannot tell those apart; the crawl's own record can.
 
 * **A fee is a property of the vessel**, so a changed park fee shows up on
   every sailing that boat runs. Fee changes are reported per vessel, once.
@@ -35,6 +38,7 @@ Four distinctions decide whether the report is worth reading:
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -217,6 +221,14 @@ class Report:
     fees: list[FeeMove] = field(default_factory=list)
     vessels_gone: list[str] = field(default_factory=list)
     """Vessels that lost every departure at once -- a failed fetch, most likely."""
+    vessels_emptied: list[str] = field(default_factory=list)
+    """Vessels that lost every departure at once, and every seller that had
+    listed them read the page this run and found no sailing in the season.
+
+    Bismarck on 2026-10-22: all four months read, a Product node and no Event
+    on each, and the report called it a failed fetch because two datasets were
+    all it had. A withdrawal the source stated, reported once per vessel like
+    the guess beside it rather than as a row per sailing."""
     months_gone: list[str] = field(default_factory=list)
     """Vessel-months that emptied while the vessel kept selling other months."""
     vessels_new: list[str] = field(default_factory=list)
@@ -237,7 +249,8 @@ class Report:
         return not any(
             (self.added, self.sold_out, self.withdrawn, self.returned,
              self.relisted, self.price_up, self.price_down, self.fees,
-             self.vessels_gone, self.months_gone, self.vessels_new)
+             self.vessels_gone, self.vessels_emptied, self.months_gone,
+             self.vessels_new)
         )
 
     @property
@@ -339,8 +352,20 @@ def _fees_by_boat(dataset: Dataset) -> dict[str, dict[str, str]]:
     return out
 
 
-def compare(before: Dataset, after: Dataset) -> Report:
-    """Diff two published datasets on identity, not on position."""
+def compare(
+    before: Dataset,
+    after: Dataset,
+    read_empty: Mapping[str, Iterable[str]] | None = None,
+) -> Report:
+    """Diff two published datasets on identity, not on position.
+
+    ``read_empty`` maps a seller's host to the boats its crawl opened this run
+    and found selling nothing in the season -- the crawl's own record, passed
+    in so this stays a function of its arguments. A vessel that lost every
+    departure is reported as emptied rather than missing only where *every*
+    seller that had listed it is in there for it: one seller's answer does not
+    vouch for a fetch the other made.
+    """
     old_deps, old_its, old_boats = _index(before)
     new_deps, new_its, new_boats = _index(after)
     report = Report()
@@ -380,8 +405,22 @@ def compare(before: Dataset, after: Dataset) -> Report:
         boat for boat, ids in old_by_boat.items()
         if len(ids) >= MISSING_VESSEL_MIN and not new_by_boat.get(boat)
     }
+    answered = {host: set(boats) for host, boats in (read_empty or {}).items()}
+    sellers_of: dict[str, set[str]] = {}
+    for dep in old_deps.values():
+        boat = old_its.get(dep.get("itinerary_id"), {}).get("boat_id")
+        if boat in vanished:
+            sellers_of.setdefault(boat, set()).update(_sellers(dep))
+    emptied = {
+        boat for boat in vanished
+        if sellers_of.get(boat)
+        and all(boat in answered.get(host, ()) for host in sellers_of[boat])
+    }
     report.vessels_gone = sorted(
-        old_boats.get(b, {}).get("name") or b for b in vanished
+        old_boats.get(b, {}).get("name") or b for b in vanished - emptied
+    )
+    report.vessels_emptied = sorted(
+        old_boats.get(b, {}).get("name") or b for b in emptied
     )
     report.vessels_new = sorted(
         new_boats.get(b, {}).get("name") or b
@@ -575,6 +614,8 @@ def headline(report: Report) -> str:
         return f"{len(report.months_gone)} vessel-month(s) went unread"
 
     bits: list[str] = []
+    if report.vessels_emptied:
+        bits.append(f"{len(report.vessels_emptied)} vessel(s) with no sailing left")
     if report.vessels_new:
         bits.append(f"{len(report.vessels_new)} new vessel(s)")
     if report.added:
@@ -685,6 +726,7 @@ def as_dict(report: Report, *, before: str = "", after: str = "",
             {"boat": f.boat, "code": f.code, "was": f.was, "now": f.now}
             for f in report.fees]),
         "vessels_gone": capped("vessels_gone", list(report.vessels_gone)),
+        "vessels_emptied": capped("vessels_emptied", list(report.vessels_emptied)),
         "months_gone": capped("months_gone", list(report.months_gone)),
         "vessels_new": capped("vessels_new", list(report.vessels_new)),
         "fx": [{"currency": x.currency, "was": x.was, "now": x.now, "pct": x.pct}
@@ -752,6 +794,17 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
         )
         for name in report.vessels_gone[:limit]:
             lines.append(f"  {name}")
+
+    if report.vessels_emptied:
+        lines.append(
+            f"\n{len(report.vessels_emptied)} vessel(s) with no sailing left in the "
+            "season — read, not missed: every seller that listed them opened the "
+            "page this run and found none"
+        )
+        for name in report.vessels_emptied[:limit]:
+            lines.append(f"  {name}")
+        if len(report.vessels_emptied) > limit:
+            lines.append(f"  ... and {len(report.vessels_emptied) - limit} more not shown")
 
     if report.months_gone:
         lines.append(
