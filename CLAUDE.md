@@ -561,7 +561,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   `promote` reads the list by, **and only over trips an in-season sailing
   names** (312 of 510): on 2026-09-30 the seller's own *Test Calypso* hull
   listed a Spanish wreck on a trip nobody can buy this season, and the gate
-  refused the whole reading over a row that could not exist.
+  refused the whole reading over a row that could not exist. **And only on
+  hulls the alias map knows**, the other join a row needs: on 2026-10-22 the
+  Egypt search linked Gypsy — titled *, Egypt*, sailing the Philippines — and
+  the gate refused the reading over *Tubbataha Reef* on a hull that reaches no
+  row and no special. An unmapped hull is named in `unmapped_vessels` for a
+  person to map or not; until then its reefs are nobody's filter.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is
