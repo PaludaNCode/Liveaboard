@@ -159,6 +159,22 @@ class LiveaboardComAdapter(SourceAdapter):
     default -- the adapter never decides on its own to stop looking at a boat.
     """
 
+    known_vessels: frozenset[str] = frozenset()
+    """Vessels the last run read, asked after even where no listing links them.
+
+    Discovery was the listings and only the listings, so a vessel they stopped
+    linking was never fetched -- neither selling nor barren, just absent, which
+    everything downstream reads as gone. Bismarck left all six listings on
+    2026-10-19 with its page still up and its season empty: the crawl dropped
+    its 17 sailings without opening the page, the boat fell out of the dataset
+    and out of ``data/barren.json`` alike, and the publish gate refused four
+    refreshes running over a PADI alias that no longer named a boat. The
+    sailings were right to go and the run had no way of knowing it.
+
+    Set by the caller from the last candidate and the barren record. Empty by
+    default, which is the listings alone.
+    """
+
     @staticmethod
     def boat_links(html: str) -> set[str]:
         """Vessel paths on a listing page, with regions and dive sites removed."""
@@ -188,8 +204,23 @@ class LiveaboardComAdapter(SourceAdapter):
                 self.note(f"{path}: {count} boats")
             yield url
 
+    def _held_back(self, link: str) -> bool:
+        """Whether the barren list holds this vessel back, recording it if so.
+
+        Skipping the fetch must not delete what the vessel already published.
+        The run is choosing not to look, and not looking is not evidence of
+        absence -- AVO and Blue lost three real, bookable sailings this way,
+        reported as withdrawn by a run that never asked the source.
+        """
+        if link.rstrip("/").rsplit("/", 1)[-1] not in self.skip_vessels:
+            return False
+        for query in SEASON_QUERIES:
+            self.not_looked_at(f"https://{self.host}{link}{query}")
+        return True
+
     def discover(self) -> Iterator[str]:
-        """Crawl the month searches, then each boat page they link to."""
+        """Crawl the month searches, each boat page they link to, then any
+        boat the last run read that none of them links today."""
         seen: set[str] = set()
         skipped = 0
 
@@ -201,15 +232,8 @@ class LiveaboardComAdapter(SourceAdapter):
                 if link in seen:
                     continue
                 seen.add(link)
-                if link.rstrip("/").rsplit("/", 1)[-1] in self.skip_vessels:
+                if self._held_back(link):
                     skipped += 1
-                    # Skipping the fetch must not delete what the vessel
-                    # already published. The run is choosing not to look, and
-                    # not looking is not evidence of absence -- AVO and Blue
-                    # lost three real, bookable sailings this way, reported as
-                    # withdrawn by a run that never asked the source.
-                    for query in SEASON_QUERIES:
-                        self.not_looked_at(f"https://{self.host}{link}{query}")
                     continue
                 if len(seen) > self.max_pages:
                     self.note(f"stopped at {self.max_pages} vessels; more were available")
@@ -218,6 +242,44 @@ class LiveaboardComAdapter(SourceAdapter):
                 # alone, so a single fetch would publish a May-only season.
                 for query in SEASON_QUERIES:
                     yield f"https://{self.host}{link}{query}"
+
+        # Only behind listings that linked something. A run that can see no
+        # listing at all should come back empty and say so, rather than go on
+        # re-reading yesterday's fleet and never meet a new boat again.
+        unlinked = sorted(
+            slug for slug in self.known_vessels
+            if f"/diving/{DESTINATION}/{slug}" not in seen
+        ) if seen else []
+        if unlinked:
+            self.note(
+                f"{len(unlinked)} vessel(s) the last run read are linked by no "
+                f"listing today, so asked for directly: {', '.join(unlinked)}"
+            )
+        for slug in unlinked:
+            link = f"/diving/{DESTINATION}/{slug}"
+            seen.add(link)
+            if self._held_back(link):
+                skipped += 1
+                continue
+            if len(seen) > self.max_pages:
+                self.note(f"stopped at {self.max_pages} vessels; more were available")
+                return
+            pages = [f"https://{self.host}{link}{query}" for query in SEASON_QUERIES]
+            try:
+                # Asked here rather than left to `run`, where an HTTP error
+                # ends the whole crawl: a page no listing links is the one most
+                # likely to be gone, and this site answers a vessel it does not
+                # know with a 404. Cached, so `run` reads it again for nothing.
+                self.fetcher.get(pages[0])
+            except Exception as exc:  # noqa: BLE001 - one dead page must not end the run
+                self.note(
+                    f"{link}: linked by no listing and its page did not answer "
+                    f"({exc}); its season is carried, not dropped"
+                )
+                for url in pages:
+                    self.not_looked_at(url)
+                continue
+            yield from pages
 
         if skipped:
             # Said out loud, every run. A quiet skip list is how a fleet

@@ -267,6 +267,30 @@ def carry_unread(
     return departures, itineraries, notes
 
 
+def known_vessels(
+    previous: dict[str, Any] | None,
+    barren: dict[str, str],
+    source_id: str,
+) -> set[str]:
+    """The vessels a crawl asks after whether or not a listing links them.
+
+    Every vessel this source's last run read -- its candidate holds a record
+    per vessel page, carried ones included -- and every one the barren record
+    holds, because a boat found selling nothing has no departures to put it in
+    the candidate and is exactly the kind a listing stops linking.
+
+    Bounded by the same two clocks as everything else here: a carried record
+    leaves the candidate after ``CARRY_MAX_DAYS``, and so does a barren verdict
+    nobody renews (see ``cmd_scrape``), so a vessel whose page has gone is
+    asked after for a fortnight and then forgotten rather than for ever.
+    """
+    known = set(barren)
+    for row in (previous or {}).get("itineraries") or []:
+        if (row.get("provenance") or {}).get("source_id") == source_id and row.get("id"):
+            known.add(row["id"])
+    return known
+
+
 def cmd_scrape(args: argparse.Namespace) -> int:
     """Run the source adapters and write their raw output.
 
@@ -292,6 +316,16 @@ def cmd_scrape(args: argparse.Namespace) -> int:
             f"when last checked; re-checked after {BARREN_RECHECK_DAYS} days"
         )
 
+    # Read before the crawl as well as after it: what the last run read is
+    # what a listing that stops linking a vessel cannot be allowed to forget.
+    out = Path(args.out)
+    previous = None
+    if out.exists():
+        try:
+            previous = json.loads(out.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            previous = None
+
     for name in selected:
         adapter_cls = ADAPTERS.get(name)
         if adapter_cls is None:
@@ -303,6 +337,10 @@ def cmd_scrape(args: argparse.Namespace) -> int:
             adapter.max_pages = args.max_pages
         if skip_vessels and hasattr(adapter, "skip_vessels"):
             adapter.skip_vessels = frozenset(skip_vessels)
+        if hasattr(adapter, "known_vessels"):
+            adapter.known_vessels = frozenset(
+                known_vessels(previous, barren_record, adapter.source_id)
+            )
         print(f"-- {name}")
         try:
             output = adapter.run()
@@ -325,14 +363,6 @@ def cmd_scrape(args: argparse.Namespace) -> int:
     # Before the empty check: a run whose pages all failed has carried rows to
     # publish, and dropping them because "the scrape produced nothing" is the
     # same deletion one level up.
-    out = Path(args.out)
-    previous = None
-    if out.exists():
-        try:
-            previous = json.loads(out.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            previous = None
-
     carried, carried_boats, carry_notes = carry_unread(
         previous, combined.unread, date.today()
     )
@@ -395,7 +425,21 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         barren_record[slug] = date.today().isoformat()
     for slug in sorted(visited & selling):
         barren_record.pop(slug, None)
-    if barren_record:
+    # And a verdict nobody renews expires, on the carry's clock. A barren
+    # vessel is re-read weekly, linked or not, so one still unrenewed after
+    # CARRY_MAX_DAYS is one whose page has stopped answering -- and with
+    # `known_vessels` reading this record, keeping it would ask after a dead
+    # page every day for ever and call the boat carried while it did.
+    for slug, checked in list(barren_record.items()):
+        try:
+            expired = (date.today() - date.fromisoformat(checked)).days > CARRY_MAX_DAYS
+        except (TypeError, ValueError):
+            expired = True
+        if expired:
+            del barren_record[slug]
+    # Rewritten even when it empties, or the last verdicts would stand in the
+    # file after the run that cleared them.
+    if barren_record or barren_path.exists():
         barren_path.parent.mkdir(parents=True, exist_ok=True)
         barren_path.write_text(
             json.dumps(
