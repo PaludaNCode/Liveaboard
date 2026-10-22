@@ -778,7 +778,13 @@ mapped. The reef gate now reads only mapped hulls, for that reason.
 
 Two hulls the same list names **are** Egyptian and unmapped on that day: `avo`
 (7 sailings in season), which is AVO on liveaboard.com, and `new-life` (15),
-which no other seller lists. Mapping them is a person's call, not a probe's.
+which no other seller lists. Mapping them is a person's call, not a probe's —
+and the owner made it the same day. `avo` -> `avo` by
+`tools/match_divebooker.py`'s own rule (the stated name is our AVO), with all
+7 of its season dates already AVO sailings here; `new-life` -> `new-life`
+under `divebooker_only`, the seller's slug as the id like the 33 before it,
+its eight trips all Red Sea routes. Gypsy and the seller's *Test Calypso* stay
+unmapped on purpose.
 
 ## The payload the page streams to itself
 

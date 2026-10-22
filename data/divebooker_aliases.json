@@ -1,5 +1,5 @@
 {
- "_note": "divebooker.com hull slug -> this site's boat id. Hand-maintained, like data/padi_aliases.json and for the same reason: nothing automatic survives vessel names. `tools/match_divebooker.py` states the rule the first ten were confirmed by -- the vessel name divebooker states, normalised, equals one of ours -- and applies it to the 92 hulls the whole-fleet read found: 47 pairs, every one of them a name match. Two more are a person's: `sea-serpent-glorious-miss-nouran` and `sea-serpent-serena-dreams` are our `ss-` hulls, and the warrant is the operator -- both are Sea Serpent Fleet, as are the four Sea Serpent hulls the rule paired outright. The 33 under `divebooker_only` are Egyptian liveaboards neither of the other two sellers lists at all, and they are mapped to themselves: **the id is this seller's own slug**, because every alternative is a judgement nothing can check. Minting from the stated name gives `c-echo-2` for a hull the seller slugs `c-echo-ii`, `vipone` for `vip-one`, `argo-egypt` keeps a country inside a boat's name, and `south-moon-2` is named *South Moon 1* -- the source contradicting itself, which a person should settle if that hull ever sells anything. A slug is the seller's own word; a prettier id would be ours. All 33 are listed rather than only the six with sailings, on the `padi_only` precedent: an id is a commitment, and a hull that starts selling next week should arrive under one a person chose rather than one a run invented. Six carry season sailings today -- Aml Hayaty 35, Argo 16, Omneia Spirit 14, Independence III 10, Golden Dolphin I 9, Hammerhead I 1 -- and the other 27 publish a page and no departure inside the window. A slug that stops matching must be re-checked by a person, never re-derived.",
+ "_note": "divebooker.com hull slug -> this site's boat id. Hand-maintained, like data/padi_aliases.json and for the same reason: nothing automatic survives vessel names. `tools/match_divebooker.py` states the rule the first ten were confirmed by -- the vessel name divebooker states, normalised, equals one of ours -- and applies it to the 92 hulls the whole-fleet read found: 47 pairs, every one of them a name match. Two more are a person's: `sea-serpent-glorious-miss-nouran` and `sea-serpent-serena-dreams` are our `ss-` hulls, and the warrant is the operator -- both are Sea Serpent Fleet, as are the four Sea Serpent hulls the rule paired outright. The 34 under `divebooker_only` are Egyptian liveaboards neither of the other two sellers lists at all, and they are mapped to themselves: **the id is this seller's own slug**, because every alternative is a judgement nothing can check. Minting from the stated name gives `c-echo-2` for a hull the seller slugs `c-echo-ii`, `vipone` for `vip-one`, `argo-egypt` keeps a country inside a boat's name, and `south-moon-2` is named *South Moon 1* -- the source contradicting itself, which a person should settle if that hull ever sells anything. A slug is the seller's own word; a prettier id would be ours. All 33 are listed rather than only the six with sailings, on the `padi_only` precedent: an id is a commitment, and a hull that starts selling next week should arrive under one a person chose rather than one a run invented. Six carry season sailings today -- Aml Hayaty 35, Argo 16, Omneia Spirit 14, Independence III 10, Golden Dolphin I 9, Hammerhead I 1 -- and the other 27 publish a page and no departure inside the window. A slug that stops matching must be re-checked by a person, never re-derived. Two were mapped on 2026-10-22, after the gate work that week named them unmapped: `avo` by the rule above (its stated name is our AVO, and all 7 of its in-season dates are AVO sailings we already carry), and `new-life`, which no other seller lists and whose eight trips are all Red Sea routes, as its own slug. `gypsy` is listed by the Egypt search and sails the Philippines -- see docs/sources/divebooker.com.md -- and is left unmapped on purpose, as is the seller's own `test-boat-trip`.",
  "aliases": {
   "aldebaran": "aldebaran",
   "alsuraya": "alsuraya",
@@ -10,6 +10,7 @@
   "aphrodite": "aphrodite",
   "argo-egypt": "argo-egypt",
   "ashrafi": "ashrafi",
+  "avo": "avo",
   "bella-2": "bella-2",
   "bella-3": "bella-3",
   "betelgueser": "betelgueser",
@@ -55,6 +56,7 @@
   "lyra": "lyra",
   "mistral": "mistral",
   "neo": "neo",
+  "new-life": "new-life",
   "ocean-lovers": "ocean-lovers",
   "odyssey": "odyssey",
   "omneia-spirit": "omneia-spirit",
@@ -121,6 +123,7 @@
   "lyra",
   "mistral",
   "neo",
+  "new-life",
   "omneia-spirit",
   "sea-treasure",
   "snefro-spirit",
