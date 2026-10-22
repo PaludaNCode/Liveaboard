@@ -58,8 +58,15 @@ jobs:
       # Pinned so the cache key means something: an unpinned install resolves
       # to whatever is current and would restore a browser build the installed
       # Playwright does not speak to.
+      #
+      # And the pin has to know the runner's OS. `ubuntu-latest` became Ubuntu
+      # 26.04 between 10-10 and 10-22, and the old pin refused it outright --
+      # "does not support chromium on ubuntu26.04-x64" -- so this job went red
+      # on the first push after, with nothing in the diff to do with a browser.
+      # 1.64.0 lists ubuntu26.04 among its hosts. Moving the pin moves the cache
+      # key below with it, which is why the two are kept side by side.
       - name: Install Playwright
-        run: pip install --quiet playwright==1.55.0
+        run: pip install --quiet playwright==1.64.0
 
       # The browser, cached. Downloading Chromium took 27-52 seconds of every
       # push -- more than the entire rest of this job, for a file that changes
@@ -69,7 +76,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-1.55.0-${{ runner.os }}
+          key: playwright-1.64.0-${{ runner.os }}
 
       - name: Fetch Chromium
         if: steps.browser.outputs.cache-hit != 'true'
