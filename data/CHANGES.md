@@ -3,6 +3,69 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-22
+
+```
+changes: HEAD -> 2026-10-22
+===========================
+
+!! 1 vessel(s) lost every departure at once — most likely a failed fetch, not a cancelled season
+  Bismarck
+
+new departures (1)
+  2027-08-28  Blue Diamond           North & Tiran                           1,348 USD liveaboard.com
+
+now sold out (9)
+  2027-05-01  Yachtiano              Yachtiano Deluxe                   divebooker.com+liveaboard.com
+  2027-05-05  Amelie                 Mini Safari: Best of Hurghada      liveaboard.com+padi.com
+  2027-05-08  DUNE Silky             North Brothers                     liveaboard.com+padi.com
+  2027-05-08  Sea Serpent Contessa   North & Brothers                   divebooker.com+liveaboard.com
+  2027-05-13  SS Serena Dreams       North & Tiran                      divebooker.com+liveaboard.com
+  2027-05-20  SS Serena Dreams       North Tour: Northern Reefs & Wreck divebooker.com+liveaboard.com
+  2027-05-22  Yachtiano              Yachtiano Deluxe                   divebooker.com+liveaboard.com
+  2027-05-29  Red Sea Blue Force 2   Egypt - North Route                liveaboard.com+padi.com
+  2027-08-08  Tala                   Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+bookable again (7)
+  2027-05-17  All Star Scuba Scene   Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-06-12  Blue Melody            Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-06-12  DUNE Longara           Daedalus, Elphinstone & Fury Shoal divebooker.com+liveaboard.com+padi.com
+  2027-07-17  Aphrodite              North Wrecks                       divebooker.com+liveaboard.com+padi.com
+  2027-07-24  Sunlight               South Route Brothers - Daedalus -  liveaboard.com
+  2027-07-31  Grand Discovery        Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-08-05  Alia Soul              North                              liveaboard.com
+
+withdrawn (3)
+  2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail  liveaboard.com
+  2027-08-04  Alia Soul              Marine Park North: Brothers - Daed liveaboard.com
+  2027-08-15  Iceberg                Hurghada North                     liveaboard.com
+
+price up (6)
+  2027-05-01  Amelie                   489 ->     909 USD  +420 (+85.9%)  Best of Hurghada
+  2027-07-31  Sunshine                 843 ->   1,145 USD  +302 (+35.8%)  North & Tiran
+  2027-07-24  ALSURAYA               1,337 ->   1,572 USD  +235 (+17.6%)  Daedalus, Rocky, Zabargad & Elphin
+  2027-06-05  ALSURAYA               1,194 ->   1,404 USD  +210 (+17.6%)  North & Brothers
+  2027-07-17  Aphrodite              2,103 ->   2,257 USD  +154 (+7.3%)  North Wrecks
+  2027-06-12  Red Sea Blue Force 2   1,562 ->   1,673 USD  +111 (+7.1%)  Extended North
+
+price down (100)
+  2027-07-10  Aphrodite              4,719 ->   2,257 USD  -2,462 (-52.2%)  North - Straits of Tiran
+  2027-06-15  Sunlight               1,742 ->   1,480 USD  -262 (-15.0%)  South Route: Elba Reef Expedition!
+  2027-06-26  Sunlight               1,742 ->   1,480 USD  -262 (-15.0%)  The Ultimate South
+  2027-05-08  Sea Serpent            1,572 ->   1,346 USD  -226 (-14.4%)  North Tour: Northern Reefs & Wreck
+  2027-06-19  Sea Serpent            1,572 ->   1,346 USD  -226 (-14.4%)  North Tour: Northern Reefs & Wreck
+  2027-07-22  Sea Serpent Contessa   1,775 ->   1,549 USD  -226 (-12.7%)  North & Brothers
+  2027-05-22  Sea Serpent Contessa   1,606 ->   1,380 USD  -226 (-14.1%)  North Tour: Northern Reefs & Wreck
+  2027-05-20  Sea Serpent Grand      1,943 ->   1,717 USD  -226 (-11.6%)  North & Tiran
+  2027-07-03  SS Glorious Miss Nou   1,943 ->   1,717 USD  -226 (-11.6%)  Rocky, Zabargad & St. John's
+  2027-06-19  SS Glorious Miss Nou   1,887 ->   1,661 USD  -226 (-12.0%)  St. John's
+  2027-05-20  SS Serena Dreams       1,471 ->   1,245 USD  -226 (-15.4%)  North Tour: Northern Reefs & Wreck
+  2027-07-15  SS Serena Dreams       1,471 ->   1,245 USD  -226 (-15.4%)  North Tour: Northern Reefs & Wreck
+  ... and 88 more not shown
+
+566 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-18
 
 ```
