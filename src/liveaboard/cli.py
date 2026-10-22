@@ -291,6 +291,26 @@ def known_vessels(
     return known
 
 
+def read_empty(
+    candidate: dict[str, Any] | None,
+    barren: dict[str, Any] | None,
+) -> set[str]:
+    """The vessels the last crawl opened and found selling nothing in season.
+
+    The crawl's own record, not a re-derivation: `cmd_scrape` stamps a vessel
+    in the barren record with the day it read the page and saw no sailing, and
+    names the ones it held back instead in `not_asked`. Stamped on the crawl's
+    own day and not held back is a page somebody read -- which a stamp alone
+    is not, since a vessel the skip list holds keeps the stamp it was given.
+    """
+    day = (candidate or {}).get("scraped_at")
+    held = set((candidate or {}).get("not_asked") or [])
+    return {
+        slug for slug, checked in ((barren or {}).get("vessels") or {}).items()
+        if day and checked == day and slug not in held
+    }
+
+
 def cmd_scrape(args: argparse.Namespace) -> int:
     """Run the source adapters and write their raw output.
 
@@ -1041,7 +1061,18 @@ def cmd_changes(args: argparse.Namespace) -> int:
                   else f"no earlier {args.data} at {args.revision}; nothing to compare")
             return 0
 
-    report = compare(before, after)
+    # What the crawl read and found empty, so a season that emptied is not
+    # reported as a fetch that failed. liveaboard.com's crawl is the one that
+    # keeps that record; a seller with no record keeps the guess.
+    def load(path: Path) -> Any:
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return None
+
+    crawled = read_empty(load(Path(args.candidate)), load(Path(args.barren)))
+    report = compare(before, after,
+                     read_empty={LiveaboardComAdapter.source_id: crawled})
     if args.headline:
         print(headline(report))
         return 0
@@ -1198,6 +1229,14 @@ def main(argv: list[str] | None = None) -> int:
     changes.add_argument(
         "--fail-on-missing", action="store_true",
         help="exit non-zero when a vessel loses every departure at once",
+    )
+    changes.add_argument(
+        "--candidate", default=Path("data/candidate.json"), type=Path,
+        help="the crawl whose read-and-empty vessels are not reported as missing",
+    )
+    changes.add_argument(
+        "--barren", default=Path("data/barren.json"), type=Path,
+        help="that crawl's record of vessels it found selling nothing",
     )
     changes.set_defaults(func=cmd_changes)
 

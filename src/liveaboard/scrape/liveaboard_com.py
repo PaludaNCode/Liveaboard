@@ -253,7 +253,8 @@ class LiveaboardComAdapter(SourceAdapter):
         if unlinked:
             self.note(
                 f"{len(unlinked)} vessel(s) the last run read are linked by no "
-                f"listing today, so asked for directly: {', '.join(unlinked)}"
+                f"listing today: {', '.join(unlinked)} -- each asked for "
+                "directly, unless the skip list holds it back"
             )
         for slug in unlinked:
             link = f"/diving/{DESTINATION}/{slug}"

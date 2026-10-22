@@ -21,7 +21,7 @@ now sold out (1)
 changes: HEAD -> 2026-10-22
 ===========================
 
-!! 1 vessel(s) lost every departure at once — most likely a failed fetch, not a cancelled season
+1 vessel(s) with no sailing left in the season — read, not missed: every seller that listed them opened the page this run and found none
   Bismarck
 
 new departures (1)

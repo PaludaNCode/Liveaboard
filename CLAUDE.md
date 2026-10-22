@@ -1721,6 +1721,15 @@ Break these and the site starts lying quietly rather than failing loudly.
   FX move is not a reprice, a vessel losing *every* departure is a failed fetch
   and not a cancelled season, a newly parsed field has not changed, and a
   currency switch is not a price move.
+  **But that guess yields to a reading.** Bismarck's 17 sailings left on
+  2026-10-22 after the crawl had opened all four months and found no Event,
+  and the report called it *most likely a failed fetch* in the commit subject
+  and on the history view, because two datasets were all it saw. `compare`
+  takes `read_empty` — per seller host, the boats that seller read empty this
+  run — and a vanished vessel every one of its sellers vouches for is
+  `vessels_emptied`, *with no sailing left*. The record is the crawl's own:
+  stamped in `barren.json` on its `scraped_at` and not in `not_asked`, since a
+  held-back vessel keeps a stamp it was not given that run.
 - **`render` has no clock.** The same committed inputs must build the same page
   tomorrow, because `TestThePageIsWhatItsDataBuilds` compares the shipped page
   against a fresh render of the data beside it and normalises the build stamp

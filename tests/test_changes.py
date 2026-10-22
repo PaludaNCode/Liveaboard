@@ -501,5 +501,96 @@ class TestRendering(unittest.TestCase):
         self.assertIn("and 15 more not shown", text)
 
 
+class TestASeasonReadEmptyIsNotAFailedFetch(unittest.TestCase):
+    """The crawl that dropped Bismarck's 17 sailings had opened its page.
+
+    On 2026-10-22 the refresh read all four of Bismarck's season months,
+    found a Product node and no Event on each, and stamped the boat barren --
+    and the change log called it *"most likely a failed fetch, not a cancelled
+    season"*, on the history view and in the commit subject. The guess is
+    right when nobody looked. Here somebody did, and the crawl wrote that
+    down; the report only had two datasets in front of it.
+    """
+
+    def deps(self, also_padi=False):
+        return [departure(f"d{i}", start=f"2027-05-{i+1:02}", also_padi=also_padi)
+                for i in range(MISSING_VESSEL_MIN + 2)]
+
+    def test_a_vessel_its_seller_read_empty_is_not_called_missing(self):
+        report = compare(dataset(self.deps()), dataset([]),
+                         read_empty={"liveaboard.com": {"alia-soul"}})
+        self.assertEqual(report.vessels_gone, [])
+        self.assertEqual(report.vessels_emptied, ["Alia Soul"])
+        self.assertEqual(report.withdrawn, [], "one event, reported once")
+        text = render(report)
+        self.assertNotIn("failed fetch", text)
+        self.assertIn("no sailing left", text)
+        self.assertNotIn("lost every departure", headline(report))
+        self.assertEqual(as_dict(report)["vessels_emptied"], ["Alia Soul"])
+
+    def test_one_seller_reading_it_empty_does_not_speak_for_another(self):
+        """PADI's sailings vanishing alongside is a fetch nobody vouched for."""
+        report = compare(dataset(self.deps(also_padi=True)), dataset([]),
+                         read_empty={"liveaboard.com": {"alia-soul"}})
+        self.assertEqual(report.vessels_gone, ["Alia Soul"])
+        self.assertEqual(report.vessels_emptied, [])
+
+    def test_without_the_record_it_is_still_a_missing_vessel(self):
+        report = compare(dataset(self.deps()), dataset([]))
+        self.assertEqual(report.vessels_gone, ["Alia Soul"])
+        self.assertIn("failed fetch", render(report))
+
+    def test_the_crawl_record_names_only_pages_this_run_read(self):
+        """Stamped on the crawl's own day, and not held back by the skip list:
+        the second run on 2026-10-22 kept Bismarck's stamp from the first
+        while never opening the page."""
+        from liveaboard.cli import read_empty
+
+        candidate = {"scraped_at": "2026-10-22", "not_asked": ["lady-m"]}
+        barren = {"vessels": {"bismarck": "2026-10-22", "lady-m": "2026-10-22",
+                              "eriny": "2026-10-15"}}
+        self.assertEqual(read_empty(candidate, barren), {"bismarck"})
+        self.assertEqual(read_empty(None, barren), set())
+
+    def test_the_command_the_publish_runs_reads_the_record(self):
+        import io
+        import json
+        import tempfile
+        from contextlib import redirect_stdout
+        from pathlib import Path
+
+        from liveaboard import cli
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            files = {
+                "before.json": dataset(self.deps()),
+                "after.json": dataset([]),
+                "candidate.json": {"scraped_at": "2026-10-22", "not_asked": []},
+                "barren.json": {"vessels": {"alia-soul": "2026-10-22"}},
+            }
+            for name, body in files.items():
+                (tmp / name).write_text(json.dumps(body), encoding="utf-8")
+            out = io.StringIO()
+            with redirect_stdout(out):
+                code = cli.main([
+                    "changes", "--data", str(tmp / "after.json"),
+                    "--before", str(tmp / "before.json"),
+                    "--candidate", str(tmp / "candidate.json"),
+                    "--barren", str(tmp / "barren.json"), "--fail-on-missing",
+                ])
+        self.assertEqual(code, 0, "a season read empty is not a failed fetch")
+        self.assertIn("no sailing left", out.getvalue())
+
+    def test_the_history_view_draws_it(self):
+        from pathlib import Path
+
+        app = (Path(__file__).resolve().parents[1] / "templates" / "app.js"
+               ).read_text(encoding="utf-8")
+        block = app[app.index("var CHANGE_BLOCKS"):]
+        block = block[: block.index("];")]
+        self.assertIn('k: "vessels_emptied"', block)
+
+
 if __name__ == "__main__":
     unittest.main()
