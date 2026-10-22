@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-10-22",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 685 of 1321 sailings and the entry bar on 265 of 496 trips; where the two disagree about the bar the stricter is shown. On 191 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 43 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 685 of 1336 sailings and the entry bar on 267 of 504 trips; where the two disagree about the bar the stricter is shown. On 191 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 43 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-10-21",
@@ -658,6 +658,15 @@
       "cabins": 12,
       "length_m": 40,
       "year_built": 2015
+    },
+    {
+      "id": "new-life",
+      "name": "New Life Liveaboard, Egypt",
+      "operator_id": "unknown-operator",
+      "guests": null,
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "new-sambo",
@@ -17399,9 +17408,152 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
-      "dives_read": true
+      "dives_read": true,
+      "divebooker_fees": [
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": true,
+          "note": "Scheduled group transfer airport - boat - airport: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "marine_park",
+          "included": false,
+          "note": "Marine Park fee - EUR 250 per person: listed with no price",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "course",
+          "included": false,
+          "note": "Courses: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Crew gratuities: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false
     },
     {
       "id": "avo--dahab-sinai-hurghada-hurghada",
@@ -17626,7 +17778,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
       "dives_read": true,
       "padi_fees": [
@@ -17745,7 +17897,150 @@
           }
         }
       ],
-      "padi_fees_complete": true
+      "padi_fees_complete": true,
+      "divebooker_fees": [
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": true,
+          "note": "Scheduled group transfer airport - boat - airport: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "marine_park",
+          "included": false,
+          "note": "Marine Park fee - EUR 250 per person: listed with no price",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "course",
+          "included": false,
+          "note": "Courses: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Crew gratuities: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false
     },
     {
       "id": "avo--dolphins-fury-shoals-port-ghalib-port-ghalib",
@@ -18655,7 +18950,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
       "dives_read": true,
       "padi_fees": [
@@ -18774,7 +19069,150 @@
           }
         }
       ],
-      "padi_fees_complete": true
+      "padi_fees_complete": true,
+      "divebooker_fees": [
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": true,
+          "note": "Scheduled group transfer airport - boat - airport: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "marine_park",
+          "included": false,
+          "note": "Marine Park fee - EUR 250 per person: listed with no price",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "course",
+          "included": false,
+          "note": "Courses: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Crew gratuities: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false
     },
     {
       "id": "avo--st-john-s-port-ghalib-port-ghalib",
@@ -19000,9 +19438,152 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
-      "dives_read": true
+      "dives_read": true,
+      "divebooker_fees": [
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": true,
+          "note": "Scheduled group transfer airport - boat - airport: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "marine_park",
+          "included": false,
+          "note": "Marine Park fee - EUR 250 per person: listed with no price",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "course",
+          "included": false,
+          "note": "Courses: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Crew gratuities: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false
     },
     {
       "id": "avo--the-best-of-the-south-port-ghalib-port-ghalib",
@@ -19228,7 +19809,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
       "dives_read": true,
       "padi_fees": [
@@ -19347,7 +19928,150 @@
           }
         }
       ],
-      "padi_fees_complete": true
+      "padi_fees_complete": true,
+      "divebooker_fees": [
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": true,
+          "note": "Scheduled group transfer airport - boat - airport: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "marine_park",
+          "included": false,
+          "note": "Marine Park fee - EUR 250 per person: listed with no price",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "course",
+          "included": false,
+          "note": "Courses: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Crew gratuities: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/avo-haz548"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false
     },
     {
       "id": "avo--the-best-of-the-south-classic-hurghada-hurghada",
@@ -117481,6 +118205,2829 @@
       "dives_read": true
     },
     {
+      "id": "new-life--brothers-north",
+      "name": "Brothers & North",
+      "title": "Brothers & North",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--brothers-daedalus-elphinstone",
+      "name": "Brothers, Daedalus, Elphinstone",
+      "title": "Brothers, Daedalus & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--daedalus-fury-shoal",
+      "name": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hamata",
+      "port_to": "Hamata",
+      "dive_sites": [
+        "daedalus",
+        "fury shoals"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--deep-south-red-sea-expedition",
+      "name": "Deep South Red Sea Expedition",
+      "title": "Deep South Red Sea Expedition",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 14,
+      "dives": 40,
+      "port_from": "Hurghada",
+      "port_to": "Hamata",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "rocky island",
+        "zabargad",
+        "st johns",
+        "elba reef",
+        "fury shoals"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--fury-shoal-st-johns",
+      "name": "Fury Shoal & St. Johns",
+      "title": "Fury Shoals & St. John's",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hamata",
+      "port_to": "Hamata",
+      "dive_sites": [
+        "st johns",
+        "fury shoals"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--north-dahab",
+      "name": "North & Dahab",
+      "title": "North & Dahab",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "dahab"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--northern-route-tiran",
+      "name": "Northern Route & Tiran",
+      "title": "Northern Route & Tiran",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "tiran"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
+      "id": "new-life--northern-route-wrecks",
+      "name": "Northern Route & Wrecks",
+      "title": "Northern Route & Wrecks",
+      "operator_id": "unknown-operator",
+      "boat_id": "new-life",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "sha'ab el erg",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal",
+        "abu nuhas",
+        "giftun"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "AOWD or equivalent"
+      },
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": false,
+          "note": "Private guide",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Nitrox 12 Liter TANK (For Certified Divers ): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Transfer HUR Airport Boat per way in limousine",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": true,
+          "note": "Free short-term DAN diving insurance (upon request): stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "port_fees",
+          "included": false,
+          "note": "Port and harbour fees PORT GHALIB: stated with no unit",
+          "tier": "mandatory",
+          "unit_unstated": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "combined_fees",
+          "included": false,
+          "note": "Marine Park fees/Government / environmental fees/Military / security fees",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-10-22",
+            "url": "https://divebooker.com/new-life-haz547"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false,
+      "divebooker_sourced_fees": true
+    },
+    {
       "id": "new-sambo--brother-daedalus-elphinstone-port-ghalib-port-ghalib",
       "name": "Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
       "title": "Brothers, Daedalus & Elphinstone",
@@ -207224,6 +210771,16 @@
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
       },
+      "divebooker_price": {
+        "amount": 1907.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
+      },
       "berths": [
         [
           0,
@@ -207267,85 +210824,6 @@
           null,
           null,
           24
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              7,
-              1614,
-              8,
-              null
-            ],
-            [
-              9,
-              1614,
-              8,
-              null
-            ],
-            [
-              8,
-              2889,
-              8,
-              null
-            ],
-            [
-              8,
-              2889,
-              4,
-              null
-            ],
-            [
-              16,
-              1614,
-              4,
-              null
-            ],
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              9,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              9,
-              1728,
-              4,
-              null
-            ],
-            [
-              8,
-              3092,
-              4,
-              null
-            ]
-          ],
-          24
         ]
       ],
       "sale": {
@@ -207383,6 +210861,16 @@
         "source_id": "padi.com",
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
+      },
+      "divebooker_price": {
+        "amount": 1907.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
       },
       "berths": [
         [
@@ -207427,85 +210915,6 @@
           null,
           null,
           12
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              7,
-              1614,
-              4,
-              null
-            ],
-            [
-              9,
-              1614,
-              4,
-              null
-            ],
-            [
-              8,
-              2889,
-              4,
-              null
-            ],
-            [
-              8,
-              2889,
-              4,
-              null
-            ],
-            [
-              16,
-              1614,
-              4,
-              null
-            ],
-            [
-              7,
-              1700,
-              0,
-              null
-            ],
-            [
-              9,
-              1700,
-              0,
-              null
-            ],
-            [
-              8,
-              3042,
-              0,
-              null
-            ],
-            [
-              9,
-              1728,
-              0,
-              null
-            ],
-            [
-              8,
-              3092,
-              0,
-              null
-            ]
-          ],
-          12
         ]
       ],
       "sale": {
@@ -207543,6 +210952,16 @@
         "source_id": "padi.com",
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
+      },
+      "divebooker_price": {
+        "amount": 1907.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
       },
       "berths": [
         [
@@ -207586,85 +211005,6 @@
           1,
           null,
           null,
-          24
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              7,
-              1614,
-              8,
-              null
-            ],
-            [
-              9,
-              1614,
-              8,
-              null
-            ],
-            [
-              8,
-              2889,
-              8,
-              null
-            ],
-            [
-              8,
-              2889,
-              4,
-              null
-            ],
-            [
-              16,
-              1614,
-              4,
-              null
-            ],
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              9,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              9,
-              1728,
-              4,
-              null
-            ],
-            [
-              8,
-              3092,
-              4,
-              null
-            ]
-          ],
           24
         ]
       ],
@@ -207838,6 +211178,16 @@
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
       },
+      "divebooker_price": {
+        "amount": 1801.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
+      },
       "berths": [
         [
           0,
@@ -207880,85 +211230,6 @@
           1,
           null,
           null,
-          24
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1605,
-              4,
-              null
-            ],
-            [
-              8,
-              2872,
-              4,
-              null
-            ],
-            [
-              7,
-              1519,
-              8,
-              null
-            ],
-            [
-              9,
-              1519,
-              8,
-              null
-            ],
-            [
-              8,
-              2719,
-              8,
-              null
-            ],
-            [
-              8,
-              2719,
-              4,
-              null
-            ],
-            [
-              16,
-              1519,
-              4,
-              null
-            ],
-            [
-              7,
-              1605,
-              4,
-              null
-            ],
-            [
-              9,
-              1605,
-              4,
-              null
-            ],
-            [
-              8,
-              2872,
-              4,
-              null
-            ],
-            [
-              9,
-              1633,
-              4,
-              null
-            ],
-            [
-              8,
-              2922,
-              4,
-              null
-            ]
-          ],
           24
         ]
       ],
@@ -207998,6 +211269,16 @@
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
       },
+      "divebooker_price": {
+        "amount": 1801.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
+      },
       "berths": [
         [
           0,
@@ -208041,85 +211322,6 @@
           null,
           null,
           24
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1605,
-              4,
-              null
-            ],
-            [
-              8,
-              2872,
-              4,
-              null
-            ],
-            [
-              7,
-              1519,
-              8,
-              null
-            ],
-            [
-              9,
-              1519,
-              8,
-              null
-            ],
-            [
-              8,
-              2719,
-              8,
-              null
-            ],
-            [
-              8,
-              2719,
-              4,
-              null
-            ],
-            [
-              16,
-              1519,
-              4,
-              null
-            ],
-            [
-              7,
-              1605,
-              4,
-              null
-            ],
-            [
-              9,
-              1605,
-              4,
-              null
-            ],
-            [
-              8,
-              2872,
-              4,
-              null
-            ],
-            [
-              9,
-              1633,
-              4,
-              null
-            ],
-            [
-              8,
-              2922,
-              4,
-              null
-            ]
-          ],
-          24
         ]
       ],
       "sale": {
@@ -208157,6 +211359,16 @@
         "source_id": "padi.com",
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
+      },
+      "divebooker_price": {
+        "amount": 2014.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
       },
       "berths": [
         [
@@ -208200,85 +211412,6 @@
           1,
           null,
           null,
-          24
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1795,
-              4,
-              null
-            ],
-            [
-              8,
-              3212,
-              4,
-              null
-            ],
-            [
-              7,
-              1709,
-              8,
-              null
-            ],
-            [
-              9,
-              1709,
-              8,
-              null
-            ],
-            [
-              8,
-              3059,
-              8,
-              null
-            ],
-            [
-              8,
-              3059,
-              4,
-              null
-            ],
-            [
-              16,
-              1709,
-              4,
-              null
-            ],
-            [
-              7,
-              1795,
-              4,
-              null
-            ],
-            [
-              9,
-              1795,
-              4,
-              null
-            ],
-            [
-              8,
-              3212,
-              4,
-              null
-            ],
-            [
-              9,
-              1823,
-              4,
-              null
-            ],
-            [
-              8,
-              3262,
-              4,
-              null
-            ]
-          ],
           24
         ]
       ],
@@ -208478,6 +211611,16 @@
         "retrieved": "2026-10-22",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
       },
+      "divebooker_price": {
+        "amount": 1907.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/avo-haz548"
+      },
       "berths": [
         [
           0,
@@ -208520,85 +211663,6 @@
           1,
           null,
           null,
-          22
-        ],
-        [
-          2,
-          null,
-          [
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              7,
-              1614,
-              8,
-              null
-            ],
-            [
-              9,
-              1614,
-              8,
-              null
-            ],
-            [
-              8,
-              2889,
-              8,
-              null
-            ],
-            [
-              8,
-              2889,
-              4,
-              null
-            ],
-            [
-              16,
-              1614,
-              4,
-              null
-            ],
-            [
-              7,
-              1700,
-              4,
-              null
-            ],
-            [
-              9,
-              1700,
-              4,
-              null
-            ],
-            [
-              8,
-              3042,
-              4,
-              null
-            ],
-            [
-              9,
-              1728,
-              2,
-              null
-            ],
-            [
-              8,
-              3092,
-              2,
-              null
-            ]
-          ],
           22
         ]
       ],
@@ -256038,6 +259102,980 @@
               1200,
               8,
               50
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-05-08-divebooker",
+      "itinerary_id": "new-life--brothers-north",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1363.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "sold_out",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1215,
+              0,
+              null
+            ],
+            [
+              8,
+              2430,
+              0,
+              null
+            ],
+            [
+              7,
+              1215,
+              0,
+              null
+            ],
+            [
+              8,
+              2430,
+              0,
+              null
+            ],
+            [
+              7,
+              1215,
+              0,
+              null
+            ],
+            [
+              8,
+              2430,
+              0,
+              null
+            ]
+          ],
+          0
+        ]
+      ],
+      "sale": {
+        "sellers": [
+          2
+        ],
+        "pct": 10,
+        "was": 1349
+      }
+    },
+    {
+      "id": "new-life-2027-05-29-divebooker",
+      "itinerary_id": "new-life--brothers-north",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1402.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1250,
+              8,
+              null
+            ],
+            [
+              8,
+              2500,
+              8,
+              null
+            ],
+            [
+              7,
+              1250,
+              4,
+              null
+            ],
+            [
+              8,
+              2500,
+              4,
+              null
+            ],
+            [
+              7,
+              1250,
+              12,
+              null
+            ],
+            [
+              8,
+              2500,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-07-17-divebooker",
+      "itinerary_id": "new-life--brothers-daedalus-elphinstone",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1350,
+              8,
+              null
+            ],
+            [
+              8,
+              2701,
+              8,
+              null
+            ],
+            [
+              7,
+              1350,
+              4,
+              null
+            ],
+            [
+              8,
+              2701,
+              4,
+              null
+            ],
+            [
+              7,
+              1350,
+              12,
+              null
+            ],
+            [
+              8,
+              2701,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-08-07-divebooker",
+      "itinerary_id": "new-life--daedalus-fury-shoal",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1350,
+              8,
+              null
+            ],
+            [
+              8,
+              2701,
+              8,
+              null
+            ],
+            [
+              7,
+              1350,
+              4,
+              null
+            ],
+            [
+              8,
+              2701,
+              4,
+              null
+            ],
+            [
+              7,
+              1350,
+              12,
+              null
+            ],
+            [
+              8,
+              2701,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-07-24-divebooker",
+      "itinerary_id": "new-life--deep-south-red-sea-expedition",
+      "start": "2027-07-24",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 3507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              3125,
+              8,
+              null
+            ],
+            [
+              8,
+              6252,
+              8,
+              null
+            ],
+            [
+              7,
+              3125,
+              2,
+              null
+            ],
+            [
+              8,
+              6252,
+              2,
+              null
+            ],
+            [
+              7,
+              3125,
+              6,
+              null
+            ],
+            [
+              8,
+              6252,
+              6,
+              null
+            ]
+          ],
+          16
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-08-14-divebooker",
+      "itinerary_id": "new-life--fury-shoal-st-johns",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1350,
+              8,
+              null
+            ],
+            [
+              8,
+              2701,
+              8,
+              null
+            ],
+            [
+              7,
+              1350,
+              4,
+              null
+            ],
+            [
+              8,
+              2701,
+              4,
+              null
+            ],
+            [
+              7,
+              1350,
+              12,
+              null
+            ],
+            [
+              8,
+              2701,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-08-28-divebooker",
+      "itinerary_id": "new-life--fury-shoal-st-johns",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "sold_out",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1350,
+              0,
+              null
+            ],
+            [
+              8,
+              2701,
+              0,
+              null
+            ],
+            [
+              7,
+              1350,
+              0,
+              null
+            ],
+            [
+              8,
+              2701,
+              0,
+              null
+            ],
+            [
+              7,
+              1350,
+              0,
+              null
+            ],
+            [
+              8,
+              2701,
+              0,
+              null
+            ]
+          ],
+          0
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-05-01-divebooker",
+      "itinerary_id": "new-life--north-dahab",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1350,
+              8,
+              null
+            ],
+            [
+              8,
+              2701,
+              8,
+              null
+            ],
+            [
+              7,
+              1350,
+              4,
+              null
+            ],
+            [
+              8,
+              2701,
+              4,
+              null
+            ],
+            [
+              7,
+              1350,
+              12,
+              null
+            ],
+            [
+              8,
+              2701,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-06-19-divebooker",
+      "itinerary_id": "new-life--north-dahab",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1350,
+              8,
+              null
+            ],
+            [
+              8,
+              2701,
+              8,
+              null
+            ],
+            [
+              7,
+              1350,
+              4,
+              null
+            ],
+            [
+              8,
+              2701,
+              4,
+              null
+            ],
+            [
+              7,
+              1350,
+              12,
+              null
+            ],
+            [
+              8,
+              2701,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-07-03-divebooker",
+      "itinerary_id": "new-life--northern-route-tiran",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 1402.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1250,
+              8,
+              null
+            ],
+            [
+              8,
+              2500,
+              8,
+              null
+            ],
+            [
+              7,
+              1250,
+              4,
+              null
+            ],
+            [
+              8,
+              2500,
+              4,
+              null
+            ],
+            [
+              7,
+              1250,
+              12,
+              null
+            ],
+            [
+              8,
+              2500,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-07-10-divebooker",
+      "itinerary_id": "new-life--northern-route-tiran",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1402.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "sold_out",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1250,
+              0,
+              null
+            ],
+            [
+              8,
+              2500,
+              0,
+              null
+            ],
+            [
+              7,
+              1250,
+              0,
+              null
+            ],
+            [
+              8,
+              2500,
+              0,
+              null
+            ],
+            [
+              7,
+              1250,
+              0,
+              null
+            ],
+            [
+              8,
+              2500,
+              0,
+              null
+            ]
+          ],
+          0
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-05-15-divebooker",
+      "itinerary_id": "new-life--northern-route-wrecks",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1202.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1071,
+              8,
+              null
+            ],
+            [
+              8,
+              2143,
+              8,
+              null
+            ],
+            [
+              7,
+              1071,
+              4,
+              null
+            ],
+            [
+              8,
+              2143,
+              4,
+              null
+            ],
+            [
+              7,
+              1071,
+              12,
+              null
+            ],
+            [
+              8,
+              2143,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ],
+      "sale": {
+        "sellers": [
+          2
+        ],
+        "pct": 10,
+        "was": 1188
+      }
+    },
+    {
+      "id": "new-life-2027-05-22-divebooker",
+      "itinerary_id": "new-life--northern-route-wrecks",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1335.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1190,
+              8,
+              null
+            ],
+            [
+              8,
+              2380,
+              8,
+              null
+            ],
+            [
+              7,
+              1190,
+              4,
+              null
+            ],
+            [
+              8,
+              2380,
+              4,
+              null
+            ],
+            [
+              7,
+              1190,
+              12,
+              null
+            ],
+            [
+              8,
+              2380,
+              12,
+              null
+            ]
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-06-12-divebooker",
+      "itinerary_id": "new-life--northern-route-wrecks",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1335.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "sold_out",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1190,
+              0,
+              null
+            ],
+            [
+              8,
+              2380,
+              0,
+              null
+            ],
+            [
+              7,
+              1190,
+              0,
+              null
+            ],
+            [
+              8,
+              2380,
+              0,
+              null
+            ],
+            [
+              7,
+              1190,
+              0,
+              null
+            ],
+            [
+              8,
+              2380,
+              0,
+              null
+            ]
+          ],
+          0
+        ]
+      ]
+    },
+    {
+      "id": "new-life-2027-06-26-divebooker",
+      "itinerary_id": "new-life--northern-route-wrecks",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 1335.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/new-life-haz547",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-10-22",
+        "url": "https://divebooker.com/new-life-haz547"
+      },
+      "divebooker_only": true,
+      "berths": [
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1190,
+              8,
+              null
+            ],
+            [
+              8,
+              2380,
+              8,
+              null
+            ],
+            [
+              7,
+              1190,
+              4,
+              null
+            ],
+            [
+              8,
+              2380,
+              4,
+              null
+            ],
+            [
+              7,
+              1190,
+              12,
+              null
+            ],
+            [
+              8,
+              2380,
+              12,
+              null
             ]
           ],
           24
@@ -309447,19 +313485,17 @@
     "vessels": 96,
     "departures": 998,
     "in_season": 998,
-    "matched": 820,
-    "founded": 88,
+    "matched": 827,
+    "founded": 103,
     "unpriced": 57,
-    "on_unmapped_vessels": 33,
+    "on_unmapped_vessels": 11,
     "unmatched": 57,
     "unmapped_vessels": [
-      "avo",
       "gypsy",
-      "new-life",
       "test-boat-trip"
     ],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 998 in-season sailing(s), 820 land on a row one of the other two sellers founded, keyed on (boat, date), and 88 are rows this seller founded itself, on a date or a hull the other two do not list, and 33 sit on hull(s) the alias map does not know, so nothing can be said about them, and 57 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 998 in-season sailing(s), 827 land on a row one of the other two sellers founded, keyed on (boat, date), and 103 are rows this seller founded itself, on a date or a hull the other two do not list, and 11 sit on hull(s) the alias map does not know, so nothing can be said about them, and 57 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
   },
   "sellers": [
     "liveaboard.com",
@@ -310087,7 +314123,7 @@
         "1": "2026-10-22",
         "2": "2026-10-22"
       },
-      "sailings": 291,
+      "sailings": 293,
       "boats": [
         {
           "boat": "all-star-red-sea",
@@ -310608,6 +314644,21 @@
           "pct": 10
         },
         {
+          "boat": "new-life",
+          "boat_name": "New Life Liveaboard, Egypt",
+          "sailings": 2,
+          "of": 15,
+          "first": "2027-05-08",
+          "last": "2027-05-15",
+          "sellers": [
+            2
+          ],
+          "read": [
+            "2026-10-22"
+          ],
+          "pct": 10
+        },
+        {
           "boat": "ocean-lovers",
           "boat_name": "Ocean Lovers",
           "sailings": 18,
@@ -310878,6 +314929,17 @@
           "price": 1638,
           "was": 2047,
           "url": "https://divebooker.com/aphrodite-haz464"
+        },
+        {
+          "boat": "avo",
+          "boat_name": "AVO",
+          "tag": "SAVE UP TO 30%",
+          "pct": 30,
+          "says": "Selected trips in 2026-2027",
+          "category": "Money Saving Deals",
+          "price": 1041,
+          "was": 1487,
+          "url": "https://divebooker.com/avo-haz548"
         },
         {
           "boat": "blue-horizon",
@@ -311157,7 +315219,7 @@
         }
       ],
       "read": "2026-10-22",
-      "unmatched": 3
+      "unmatched": 2
     },
     "on_sale_changes": {
       "read": "2026-10-22",
@@ -311189,8 +315251,9 @@
     },
     "coverage": {
       "dropped": {
-        "sailings": 48,
+        "sailings": 55,
         "boats": [
+          "AVO",
           "Amelie",
           "Blue Pearl",
           "DUNE Longara",
@@ -311215,6 +315278,13 @@
   },
   "stale_ladders": [
     "amelie 2027-05-01: row 809, divebooker.com ladder starts at 434 (the ladder is behind)",
+    "avo 2027-05-08: row 1708, divebooker.com ladder starts at 1709 (the row is behind)",
+    "avo 2027-06-05: row 1614, divebooker.com ladder starts at 1614 (the row is behind)",
+    "avo 2027-06-19: row 1519, divebooker.com ladder starts at 1519 (the row is behind)",
+    "avo 2027-06-26: row 1614, divebooker.com ladder starts at 1614 (the row is behind)",
+    "avo 2027-07-03: row 1614, divebooker.com ladder starts at 1614 (the row is behind)",
+    "avo 2027-07-24: row 1614, divebooker.com ladder starts at 1614 (the row is behind)",
+    "avo 2027-08-28: row 1519, divebooker.com ladder starts at 1519 (the row is behind)",
     "blue-pearl 2027-07-29: row 1345, divebooker.com ladder starts at 1575 (the row is behind)",
     "discovery-i 2027-07-10: row 765, liveaboard.com ladder starts at 791 (the row is behind)",
     "discovery-i 2027-07-17: row 871, liveaboard.com ladder starts at 902 (the row is behind)",
