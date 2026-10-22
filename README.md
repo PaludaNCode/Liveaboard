@@ -317,24 +317,30 @@ parsed announced 126 sailings as newly sold out, and nobody had looked before.
 
 ## Next
 
-Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). The two
-that are open, and what each would change:
+Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). One is
+open:
 
-- **#151** divebooker states a fee book on 327 itineraries and only **154** of
-  them carry a bill this site can total. The blocker is the *unit*: a figure
-  with a payer and no period — *200–320 EUR per person* — cannot be scaled, and
-  one such line silences the whole bill. Reading the unit off another seller's
-  book at the exactly equal figure closed 28 of them; **117 obligatory lines on
-  27 boats** are still unscaled, and each one is a third column the page cannot
-  print.
-- **#6** price history from the git log. Every run is a commit, so *"this trip
-  was €200 cheaper in March"* costs only the reading — and #48 built the diff.
-  Blocked on elapsed time rather than on code.
+- **#6** whether an operator raises a sailing's price as its berths sell. Every
+  reading is a commit — the dataset has 426 of them over 54 days since
+  2026-08-27 — and each holds the quoted fare and the places beside it, so the
+  question is answerable from the git log with no crawl. What it produces is a
+  finding in `docs/`, never a mark on the page: the history view reports what
+  the sellers did and does not grade it, which is why the sparkline and the
+  *moved since first seen* badge #6 first proposed were declined.
+
+**#151** is done. A fee line stating a figure and no period now takes its unit
+from another seller's book where the two figures are exactly equal, and the
+divebooker bills that reach a Total went from 126 to 154. What is left — 153
+obligatory lines on 30 boats, a figure with a payer and no period — needs the
+seller to say how often it bills them, which no join here can supply, and
+`promote` prints that count on every run.
 
 Three came off this list rather than being done. **#52** (23 trips naming no
 dive site) is down to 2 of 462, and both name no reef in any field. **#47**
 answered itself: gear is priced independently of the boat — flat at about €200,
 so 18% of a cheap berth and 13% of a dear one, which is what the gear toggle
 now puts in the total. **#152** wanted the other 885 divebooker booking ids and
-found there is no row to press: the payload states no id for them, so the cabin
-ladder covers the ten sailings a hull publishes an Event for.
+found there was no row to press: the payload stated no id for them. #157
+answered it from the other side — the schedule the page now fetches states a
+`boatTripId` on every sailing, so the cabin ladder reaches all 998 in the
+season.
