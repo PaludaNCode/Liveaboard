@@ -47,7 +47,7 @@ before deciding what the third seller is allowed to say on the page.
 3. **The operator.** `Product.brand` is `{"name": "Divebooker.com"}` — the
    seller — and `Event.organizer` is the hull (`Bella 2`). No company is named
    anywhere on the page. The operator goes on coming from liveaboard.com's
-   vessel page, and the 33 hulls only this seller lists carry
+   vessel page, and the hulls only this seller lists carry
    `unknown-operator`, which is the honest answer rather than a gap.
 4. ~~**A cabin ladder.**~~ Closed 2026-09-22. No node on the **vessel** page
    states what a room costs or how many are left, which is what this entry
@@ -244,7 +244,13 @@ really is absent.
    honest size of *what a third seller would add in rows*, against ten as
    counted.
 
-9b. **33 hulls this site does not carry at all.** Aml Hayaty, Argo, Ashrafi,
+9b. ~~**33 hulls this site does not carry at all.**~~ Closed, and the entry is
+   kept as it was read. They are minted under `divebooker_only` in
+   `data/divebooker_aliases.json`. There were 34 once New Life was added on
+   2026-10-22, and 8 of them carry 113 sailings on the page that day. What the
+   build log still names, one `::warning::` each, is a hull the alias map does
+   not know: Gypsy, a Philippine boat the Egypt search links, and the seller's
+   own *Test Calypso*. It read: Aml Hayaty, Argo, Ashrafi,
    Bismarck, C Echo 2, Freedom III and IV, Galaxy 720, Golden Dolphin I,
    Hammerhead I, Icon, Independence III, Omneia Spirit, Sea Treasure, South
    Moon 1, VipOne and eighteen others. They are named in the build log, one
@@ -404,7 +410,8 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     flip do not. And the fill only ever *upgrades*, and only where a unit really
     moved: `complete` is the parser's verdict over the page it read.
 
-    **117 obligatory lines on 27 boats still state a figure and no period**, and
+    **117 obligatory lines on 27 boats still state a figure and no period**
+    (153 on 30 by 2026-10-22), and
     `cli` prints that beside the count it fixed on every run — a number of what
     was resolved with nothing beside it reads as *that was everything*, which is
     the truncation this project refuses in its own change log. What they need is
@@ -430,9 +437,10 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     close.
 
     **The detail, kept because it is item 3 from the other end.**
-    The 33 hulls only this seller lists have no liveaboard.com vessel page,
-    so nothing states a company for them and all 29 founded itineraries carry
-    `unknown-operator`. Correct rather than missing: `Product.brand` here
+    The hulls only this seller lists have no liveaboard.com vessel page,
+    so nothing states a company for them: 36 of their 37 itineraries carry
+    `unknown-operator` on 2026-10-22. The 37th is Snefro Spirit's, which PADI
+    sells too and names a company for. Correct rather than missing: `Product.brand` here
     names the seller, and publishing *Divebooker.com* as the operator of an
     Egyptian boat is the mistake a fixture caught once already.
 17. ~~**The vocabulary this seller's reef list speaks.**~~ Closed 2026-09-22
