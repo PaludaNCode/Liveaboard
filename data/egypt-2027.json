@@ -1650,11 +1650,18 @@
       "operator_id": "orca-dive-clubs",
       "boat_id": "alia-soul",
       "nights": 5,
-      "dives": 0,
+      "dives": 12,
       "port_from": "Soma Bay",
       "port_to": "Soma Bay",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "gubal",
+        "ras disha",
+        "sha'ab el erg",
+        "ras mohammed"
+      ],
+      "region": null,
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=8/2027",
       "fees": [
@@ -1845,7 +1852,16 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "alia-soul--south-port-ghalib-port-ghalib",
@@ -9643,17 +9659,11 @@
       "operator_id": "amelie-safari",
       "boat_id": "amelie",
       "nights": 7,
-      "dives": 18,
+      "dives": 21,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "rosalie moller",
-        "gubal",
-        "sha'ab el erg",
-        "giftun",
-        "carless reef",
-        "gota abu ramada"
+        "abu nuhas"
       ],
       "region": null,
       "summary": "With only 12 guests onboard the Amelie Safari offers a more bespoke Red Sea liveaboard experience.Choose from 3 or 7-night dive itineraries.",
@@ -9922,8 +9932,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "OWD or equivalent"
+        "notes": "Open Water - No minimum logged dives required. OWD or equivalent"
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -26957,11 +26968,12 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran"
+        "thistlegorm",
+        "dahab"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
@@ -27160,7 +27172,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -99460,14 +99481,15 @@
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "brothers",
         "thistlegorm",
         "abu nuhas",
-        "safaga"
+        "brothers",
+        "panorama reef",
+        "gota abu ramada"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -99683,8 +99705,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Advanced + 50 dives. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown. AOWD or equivalent"
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -180431,13 +180454,17 @@
       "operator_id": "sadko-travel",
       "boat_id": "sunlight",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
+        "rocky island",
         "zabargad",
-        "rocky island"
+        "abu dabab",
+        "marsa shouna",
+        "fury shoals",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Having undergone a complete renovation in 2019, the MY Sunlight is ready to show off the best of the Red Sea. A choice of routes is available including North, South and Deep South. 10 air-conditioned cabins with ensuite bathrooms cater to 20 guests.",
@@ -180567,7 +180594,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €10/day; BCD €5/day; Dive Computer €10/day; Dive Light €5/day; Drysuit €30/day; Fins €2/day; Mask €2/day; Regulator €5/day; SMB €10/week; Wetsuit €5"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sunlight--south-route-brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -315108,7 +315144,7 @@
     }
   },
   "entry_bar": {
-    "both": 159,
+    "both": 160,
     "disagree": 73,
     "padi_stricter": 38,
     "ours_stricter": 35
