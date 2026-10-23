@@ -29,18 +29,21 @@ Locally: `build`, then open `site/index.html`.
 
 ## Status
 
-Live on real data: **1,269 departures, 462 itineraries, 83 boats, 47
-operators**, every price `scraped`.
+Live on real data: **1,336 departures, 504 itineraries, 86 boats, 48
+operators** on 2026-10-22, every price `scraped`.
 
 **Three sellers are in use, and none of them is the house.** This said
 "padi.com is not wired up" until 2026-08-30, by which point PADI Travel was
 supplying a berth price on 654 sailings — 53 of which it is the only seller of
 — a berth count on 833, the entry bar and stated dive count on 441 trips, and
 the only fee book the 22 vessels liveaboard.com sells no berths on have.
-divebooker.com was read third, in September, and states a fare on **every one
-of the 887 sailings** it lists in this season: 788 land on a row one of the
-other two founded, keyed on `(boat, date)`, and 69 are rows it founded itself
-on a date or a hull neither of the others carries. Reading order is a fact
+divebooker.com was read third, in September, and lists **998 sailings** in
+this season on 2026-10-22, with a fare on 941 of them. 827 land on a row one of
+the other two founded, keyed on `(boat, date)`; 103 are rows it founded itself,
+on a date or a hull neither of the others carries; 11 sit on the two hulls the
+alias map leaves unmapped on purpose, a Philippine boat its Egypt search links
+and its own test hull. The 57 with no fare are routes on request, which are
+enquiries rather than berths anybody priced, so they reach no row. Reading order is a fact
 about this project rather than about any seller, so no seller is ever the
 default and none may speak for another: a row states a discount only from the
 seller whose fare it prints, a row one seller alone lists carries no second
@@ -60,9 +63,12 @@ Prices and availability come from a nightly crawl, PADI's from a second one
 half an hour later (`padi.yml`) and divebooker's from a third (`divebooker.yml`)
 — one source per workflow, so proving a two-request change against one seller
 never costs a sweep of the other two. Fees, rental-gear prices and the vessel
-specification table need a browser on liveaboard.com — the site renders them
-client-side — so they come from a weekly Playwright run and are keyed by
-vessel, because they do not change with the month.
+specification table come from a weekly Playwright run on liveaboard.com, keyed
+by vessel because they do not change with the month. Only the specification
+table needs the browser: its tags are unclosed and parse only from a browser's
+normalised DOM. The fee and gear panels are in the served bytes (probed
+2026-08-31), and moving them off the browser is a change of its own that has
+not been made.
 
 liveaboard.com and padi.com are reachable locally since the allowlist landed
 (#1); divebooker.com is not, so everything this repository knows about what it
@@ -88,7 +94,11 @@ which is the half a code-reading exercise cannot recover.
 
 ## Usage
 
-Python 3.11+, no dependencies.
+Python 3.11+, no dependencies. Crawl on 3.11 or 3.12, which is what the
+workflows pin. 3.13's `urllib.robotparser` reads liveaboard.com's robots.txt
+differently and refuses every season-month page; see
+[`docs/sources/liveaboard.com.md`](docs/sources/liveaboard.com.md) under
+*robots.txt, and the blank line*.
 
 ```bash
 PYTHONPATH=src python3 -m liveaboard.cli check    # validate and summarise
@@ -166,9 +176,10 @@ Sites come from the operator's own description of the trip, then its region
 list, then the trip title, then — last, and only where all three are silent —
 PADI Travel's account of the same week. Last because it is the least
 structured, not because it is the second source to have been read.
-**460 of 462** itineraries name reefs, and the two that do not — a dolphin
-research week and a photography safari — stay blank rather than being guessed
-at (#52, #113). The ordering is the point: a
+**500 of 504** itineraries name reefs on 2026-10-22. Two dolphin weeks and a
+photography safari stay blank because no source names a reef for them, rather
+than being guessed at (#52, #113). The fourth is Alia Soul's *North*, first
+listed that day, whose own description the per-trip book has not read yet. The ordering is the point: a
 source is never merged into one above it, because PADI's blurb says Elphinstone
 and Brothers "are quite distant from one another" on a week that visits neither
 together, and unioning that in is how a St John's week once got badged BDE.
@@ -188,11 +199,13 @@ src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   dataset, render, cli
         scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
                   divebooker_com, itinerary, fees, gear, vessel
-                  (fees, gear and vessel need a browser)
+                  (fees, gear and vessel run in a browser)
 templates/        index.html + style.css + app.js + icon.svg, inlined at build time
 tools/            make_seed, fetch_fx, fetch_itineraries, fetch_deals,
                   fetch_cabins, derive_sales, fetch_padi, fetch_divebooker,
-                  scrape_fees, reparse_candidate, probe_*
+                  scrape_fees, reparse_candidate, fill_and_price, probe_*
+docs/             how a change gets made, what each source states and where,
+                  and findings: fill-and-price, divebooker-limitations
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
 ```
@@ -272,6 +285,13 @@ withdrawn. AVO's and Blue's three sailings went that way, and a probe found
 all three still on sale. A skipped page is now recorded exactly like a failed
 one, because the consequence is identical: the run did not look.
 
+A listing that stops linking a vessel is the third way. A listing is not an
+inventory. On 2026-10-19 Bismarck left all six of the listings the crawl
+discovers vessels from, with its page still up and its season empty. The crawl
+never opened it, and the boat fell out of the dataset and out of the skip list
+together. `discover()` now asks directly for every vessel the last run read
+that no listing links, and names each one in the run log.
+
 Where a page goes unread — skipped, or answering nothing twice — `scrape`
 carries the previous run's departures forward for up to a fortnight, keeping each row's original `retrieved` date so the page still says
 when every price was last read, and noting each carried page in the candidate's
@@ -311,7 +331,9 @@ Four distinctions decide whether it is worth reading, and all four are
 false positives it used to report: a euro figure moving because the ECB moved
 is not an operator repricing; a fare moving by one dollar is the source
 re-rounding (174 of them in one run); a vessel that lost *every* departure at
-once is a failed fetch, not a cancelled season; and a field a parser has just
+once is a failed fetch, not a cancelled season, unless the crawl opened its
+pages and found them empty, which the report then says (*with no sailing
+left*); and a field a parser has just
 learned to read has not changed — the first run after `availability` was
 parsed announced 126 sailings as newly sold out, and nobody had looked before.
 
@@ -340,7 +362,8 @@ seller to say how often it bills them, which no join here can supply, and
 `promote` prints that count on every run.
 
 Three came off this list rather than being done. **#52** (23 trips naming no
-dive site) is down to 2 of 462, and both name no reef in any field. **#47**
+dive site) is down to 4 of 504: three that no source names a reef for, and a
+week first listed on 2026-10-22 whose own description has not been read yet. **#47**
 answered itself: gear is priced independently of the boat — flat at about €200,
 so 18% of a cheap berth and 13% of a dear one, which is what the gear toggle
 now puts in the total. **#152** wanted the other 885 divebooker booking ids and

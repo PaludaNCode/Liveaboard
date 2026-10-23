@@ -329,8 +329,8 @@ Break these and the site starts lying quietly rather than failing loudly.
   than re-spelled), so the refusal is the whole hull. And the fill only ever
   *upgrades*, only where a unit really moved, because `complete` is the parser's
   verdict over the page it read. What did not resolve is stated with what did —
-  117 obligatory lines on 27 boats — for the reason `changes` counts what it
-  truncates.
+  117 obligatory lines on 27 boats when it landed, 153 on 30 by 2026-10-22 —
+  for the reason `changes` counts what it truncates.
   **A borrowed unit is marked wherever it appears**, like the gear estimate:
   `FeeItem.unit_from` names the lending book and the line's own note names
   **both** books, because a named seller beside an unnamed default is the
@@ -527,7 +527,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   list, then its day plan. The list is more structured than PADI's blurb and
   is still behind it, because easier to read is not an argument about being
   right and nothing has measured the two against each other; what it answers
-  is the 33 hulls neither of the others carries, where every source above is
+  is the 34 hulls neither of the others carries, where every source above is
   silent. The plan is behind the list for the same reason PADI's blurb sits
   behind its day plan — prose is prose — and both go through
   `_sites_from_name`, so a reef the fleet's vocabulary cannot place stays
@@ -1784,9 +1784,12 @@ of the job log, so a probe prints its finding last.
 **`/BookingStep1` and the `?m=` selector are disallowed by liveaboard.com's
 robots.txt, and we fetch them anyway** — a blank line after `User-agent: *`
 orphans all 31 rules, so `urllib.robotparser` discards them and `can_fetch()`
-says yes. That is a deliberate call taken 2026-08-30, not an oversight, and the
-reasoning and the price of reversing it are in
-`docs/sources/liveaboard.com.md` under *robots.txt, and the blank line*. Do not
+says yes — **on Python 3.12 and earlier**. 3.13's parser keeps the orphaned
+rules and refuses every `?m=` page, so the workflows pin 3.11 and a crawl on a
+3.13 interpreter would empty the first source within `CARRY_MAX_DAYS`. That is
+a deliberate call taken 2026-08-30, not an oversight, and the reasoning and
+the price of reversing it are in `docs/sources/liveaboard.com.md` under
+*robots.txt, and the blank line*. Do not
 re-derive it as a fresh discovery; do read it before quoting `can_fetch()` as
 permission.
 **Do not write markup parsers for pages nobody has fetched** — run a probe on a
