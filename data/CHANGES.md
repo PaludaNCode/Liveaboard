@@ -3,6 +3,19 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-23
+
+```
+changes: HEAD -> 2026-10-23
+===========================
+
+bookable again (2)
+  2027-06-19  Star Jet               Abu Nuhas, Ras Mohammed, Tiran & D divebooker.com+liveaboard.com
+  2027-06-26  Star Jet               Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com
+
+854 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-22
 
 ```
