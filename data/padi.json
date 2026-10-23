@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-22",
+ "collected": "2026-10-23",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -4476,6 +4476,101 @@
    },
    "title": "North Wrecks - Ras Mohammed - Strait of Tiran (Hurghada - Hurghada) 7 Nights"
   },
+  "anemone::North Wrecks and Brothers Islands (Port Ghalib - Hurghada)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller",
+    "safaga",
+    "panorama reef"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 175.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "included": true,
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wrecks and Brothers Islands (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23564,
+   "padi_slug": "sataya-dolphin-cruise-port-ghalib-port-ghalib-7-2",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Wrecks and Brothers Islands (Port Ghalib \u2013 Hurghada) 7 Nights"
+  },
   "anemone::North Wrecks and Brothers islands (Hurghada - Hurghada)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
@@ -4662,6 +4757,94 @@
     "recommended_logged_dives": 50
    },
    "title": "Saint John's (Port Galib - Port Galib) 7 Nights"
+  },
+  "anemone::Sataya Dolphin Cruise (Port Ghalib - Port Ghalib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dive_sites": [
+    "sataya",
+    "sataya reef"
+   ],
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 175.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "included": true,
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Sataya Dolphin Cruise (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23563,
+   "padi_slug": "brothers-daedalus-elphistone-port-galib-port-galib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Sataya Dolphin Cruise (Port Ghalib \u2013 Port Ghalib) 7 Nights 7 nights"
   },
   "aphrodite::Best of Red Sea (Hurghada - Hurghada)": {
    "boat": "aphrodite",
@@ -46212,13 +46395,13 @@
    "name": "MY Anemone",
    "operator": null,
    "sailings": {
-    "dated": 99,
+    "dated": 97,
     "first": "2026-10-24",
-    "in_season": 18,
+    "in_season": 17,
     "last": "2028-12-30",
     "priced": 6,
-    "read": 99,
-    "unpriced": 75
+    "read": 97,
+    "unpriced": 72
    },
    "slug": "my-anemone",
    "specs": {
@@ -47383,12 +47566,12 @@
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 98,
-    "first": "2026-10-23",
+    "dated": 97,
+    "first": "2026-10-30",
     "in_season": 16,
     "last": "2028-12-28",
     "priced": 16,
-    "read": 98,
+    "read": 97,
     "unpriced": 0
    },
    "slug": "mv-tala",
