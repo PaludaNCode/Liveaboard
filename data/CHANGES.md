@@ -3,6 +3,29 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-24
+
+```
+changes: HEAD -> 2026-10-24
+===========================
+
+new departures (1)
+  2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail       2,693 USD liveaboard.com
+
+now sold out (1)
+  2027-07-31  Sindalahs              Total Solar Eclipse Expedition: El divebooker.com+liveaboard.com
+
+re-listed — same sailing, new row (1)
+  2027-08-07  Red Sea Aggressor IV   St. John's & Daedalus        divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com
+
+price down (3)
+  2027-07-17  DUNE Silky             2,749 ->   2,744 USD  -5 (-0.2%)  Best of Egypt
+  2027-07-29  Golden Dolphin IV      2,692 ->   2,687 USD  -5 (-0.2%)  Daedalus, Rocky Island, Zabargad, 
+  2027-05-01  Marselia Star          3,310 ->   3,305 USD  -5 (-0.2%)  CCR Reefs, Wrecks and Canyons Trip
+
+624 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-23
 
 ```
