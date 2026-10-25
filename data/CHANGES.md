@@ -9,6 +9,15 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-10-24
 ===========================
 
+nothing moved.
+```
+
+## 2026-10-24
+
+```
+changes: HEAD -> 2026-10-24
+===========================
+
 new departures (1)
   2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail       2,693 USD liveaboard.com
 
