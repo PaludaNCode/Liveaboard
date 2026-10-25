@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-24",
+ "collected": "2026-10-25",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -23489,6 +23489,97 @@
    },
    "title": "Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
   },
+  "eriny::North & Brothers (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "eriny",
+   "boat_name": "Eriny",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "ras mohammed"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Cost Gard Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Brothers (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 23578,
+   "padi_slug": "wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh-7-n-3",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Brothers (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
   "eriny::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "eriny",
    "boat_name": "Eriny",
@@ -46423,9 +46514,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-25",
+    "first": "2026-10-29",
     "in_season": 31,
-    "last": "2027-12-04",
+    "last": "2027-12-08",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -46445,12 +46536,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 87,
-    "first": "2026-10-25",
+    "dated": 86,
+    "first": "2026-10-30",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 87,
+    "read": 86,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -46583,12 +46674,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 88,
-    "first": "2026-10-25",
+    "dated": 87,
+    "first": "2026-10-31",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 88,
+    "read": 87,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -47036,12 +47127,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 10,
-    "first": "2026-10-25",
+    "dated": 9,
+    "first": "2026-11-01",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 10,
+    "read": 9,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -47216,12 +47307,12 @@
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 6,
-    "first": "2026-10-25",
+    "dated": 5,
+    "first": "2026-11-01",
     "in_season": 0,
     "last": "2026-11-29",
     "priced": 0,
-    "read": 6,
+    "read": 5,
     "unpriced": 0
    },
    "slug": "high-wave",
@@ -47303,12 +47394,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-10-25",
+    "first": "2026-10-29",
     "in_season": 20,
-    "last": "2028-07-01",
+    "last": "2028-07-08",
     "priced": 17,
     "read": 100,
-    "unpriced": 34
+    "unpriced": 35
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -47572,9 +47663,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-25",
+    "first": "2026-10-28",
     "in_season": 35,
-    "last": "2027-10-06",
+    "last": "2027-10-10",
     "priced": 35,
     "read": 100,
     "unpriced": 0
