@@ -1,6 +1,40 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-25",
+  "added": [],
+  "sold_out": [],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [
+   {
+    "id": "queen-sherry-2027-07-31-0",
+    "boat": "Queen Sherry",
+    "title": "Eclipse & Big Fish: Pelagic Trail Eclipse Totality",
+    "start": "2027-07-31",
+    "was": 2693.0,
+    "now": 2688.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.18566654288897141
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "vessels_emptied": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 423,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-25"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-24",
   "added": [],
   "sold_out": [],

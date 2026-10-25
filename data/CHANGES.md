@@ -3,6 +3,18 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-25
+
+```
+changes: HEAD -> 2026-10-25
+===========================
+
+price down (1)
+  2027-07-31  Queen Sherry           2,693 ->   2,688 USD  -5 (-0.2%)  Eclipse & Big Fish: Pelagic Trail 
+
+423 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-24
 
 ```
