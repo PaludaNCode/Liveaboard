@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-23",
+  "collected": "2026-10-25",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -24101,6 +24101,57 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5521&tourID=412769&languageID=1&curr=USD&showPrices=false"
     },
+    "odyssey::Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "odyssey",
+      "name": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "412450",
+      "collected": "2026-10-25",
+      "regions": [
+        "Zabargad",
+        "St. Johns",
+        "Rocky",
+        "Elphinstone"
+      ],
+      "dive_sites": [
+        "zabargad",
+        "st johns",
+        "rocky island",
+        "elphinstone"
+      ],
+      "dives": 16,
+      "guests": 26,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "This itinerary showcases the remote reefs of Zabargad and Rocky Island with dramatic walls and pristine corals, continues to St. John’s for maze-like reefs and crystal-clear lagoons, and finishes at Elphinstone Reef, renowned for its thrilling drift dives and pelagic encounters.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "MY Odyssey crew will transfer the Guests from the airport to the ship. After a nice welcome briefing by our cruise director, cabin allocation and ship orientation will take place, guests can familiarize themselves with the vessel, set up equipment and get comfortable.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2-6",
+          "text": "Guests can enjoy 3-4 dives daily, including a night dive if possible.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Return to the port. Max 2 dives on the last day.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check out. MY Odyssey crew will transfer the Guests to the Airport.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine life:",
+          "text": "hammerhead and oceanic whitetip sharks, manta rays, and dolphins, along with turtles, napoleon wrasse, and colorful reef fish. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5521&tourID=412450&languageID=1&curr=USD&showPrices=false"
+    },
     "queen-sherry::Brothers, Daedalus, Elphinstone (Hurghada - Marsa Alam)": {
       "boat": "queen-sherry",
       "name": "Brothers, Daedalus, Elphinstone (Hurghada - Marsa Alam)",
@@ -36920,6 +36971,7 @@
     "353493": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353494": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353496": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
+    "353497": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "354404": "sea-serpent-grand::North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
     "362312": "odyssey::Best of Tiran (Hurghada - Hurghada)",
     "362313": "odyssey::Best of Dahab and Tiran (Hurghada - Hurghada)",
@@ -36984,6 +37036,7 @@
     "387845": "dune-silky::Fury Shoals & Dolphins Trip (Marsa Ghalib - Marsa Ghalib)",
     "389382": "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)",
     "390002": "hammerhead-ii::Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)",
+    "390003": "hammerhead-ii::Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)",
     "391517": "iceberg::Hurghada North (Hurghada - Hurghada)",
     "400631": "iceberg::Special Wrecks / Hurghada North (Hurghada - Hurghada)",
     "400632": "iceberg::Hurghada North (Hurghada - Hurghada)",
@@ -37075,6 +37128,7 @@
     "437066": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
     "437067": "discovery-i::North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
     "437068": "discovery-i::North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
+    "437069": "discovery-i::North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
     "437465": "blue-pearl::North & Wrecks (Hurghada - Hurghada)",
     "437565": "blue-seas::Rocky - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
     "437567": "blue-seas::Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
