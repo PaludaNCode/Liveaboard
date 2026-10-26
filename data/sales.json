@@ -1,1777 +1,6 @@
 {
- "collected": "2026-10-25",
+ "collected": "2026-10-26",
  "days": {
-  "2026-10-19": {
-   "on_sale": 93,
-   "read": 353,
-   "sailings": {
-    "alia-soul::2027-05-14": [
-     1099.0,
-     null,
-     "USD"
-    ],
-    "alia-soul::2027-05-26": [
-     1099.0,
-     null,
-     "USD"
-    ],
-    "alia-soul::2027-08-05": [
-     1009.0,
-     null,
-     "USD"
-    ],
-    "all-star-ghani::2027-05-03": [
-     1385.0,
-     null,
-     "USD"
-    ],
-    "all-star-ghani::2027-05-24": [
-     1260.0,
-     null,
-     "USD"
-    ],
-    "all-star-ghani::2027-06-21": [
-     1385.0,
-     null,
-     "USD"
-    ],
-    "all-star-ghani::2027-07-05": [
-     1385.0,
-     null,
-     "USD"
-    ],
-    "all-star-ghani::2027-07-26": [
-     1985.0,
-     null,
-     "USD"
-    ],
-    "all-star-ghani::2027-08-16": [
-     1260.0,
-     null,
-     "USD"
-    ],
-    "all-star-red-sea::2027-05-10": [
-     1756.0,
-     2195.0,
-     "USD"
-    ],
-    "all-star-red-sea::2027-05-31": [
-     1756.0,
-     2195.0,
-     "USD"
-    ],
-    "all-star-red-sea::2027-06-14": [
-     2395.0,
-     null,
-     "USD"
-    ],
-    "all-star-red-sea::2027-06-21": [
-     2395.0,
-     null,
-     "USD"
-    ],
-    "all-star-red-sea::2027-08-09": [
-     2595.0,
-     null,
-     "USD"
-    ],
-    "all-star-red-sea::2027-08-30": [
-     2025.0,
-     null,
-     "USD"
-    ],
-    "alsuraya::2027-05-15": [
-     1287.0,
-     1514.0,
-     "USD"
-    ],
-    "alsuraya::2027-06-05": [
-     1191.0,
-     1402.0,
-     "USD"
-    ],
-    "alsuraya::2027-06-26": [
-     1287.0,
-     1514.0,
-     "USD"
-    ],
-    "alsuraya::2027-07-17": [
-     1287.0,
-     1514.0,
-     "USD"
-    ],
-    "alsuraya::2027-08-14": [
-     1287.0,
-     1514.0,
-     "USD"
-    ],
-    "amelie-adventures::2027-05-09": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-05-21": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-06-15": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-06-27": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-07-09": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-07-21": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-08-02": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-08-14": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie-adventures::2027-08-26": [
-     544.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-05-09": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-05-21": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-06-03": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-06-27": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-07-09": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-07-21": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-08-02": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-08-14": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "amelie::2027-08-26": [
-     488.0,
-     null,
-     "USD"
-    ],
-    "aphrodite::2027-05-01": [
-     2153.0,
-     null,
-     "USD"
-    ],
-    "aphrodite::2027-06-12": [
-     2180.0,
-     null,
-     "USD"
-    ],
-    "aphrodite::2027-07-10": [
-     4709.0,
-     null,
-     "USD"
-    ],
-    "aphrodite::2027-07-31": [
-     2186.0,
-     null,
-     "USD"
-    ],
-    "aphrodite::2027-08-21": [
-     2298.0,
-     null,
-     "USD"
-    ],
-    "avo::2027-05-15": [
-     1916.0,
-     2017.0,
-     "USD"
-    ],
-    "avo::2027-05-22": [
-     1916.0,
-     2017.0,
-     "USD"
-    ],
-    "avo::2027-06-05": [
-     1810.0,
-     1905.0,
-     "USD"
-    ],
-    "avo::2027-06-26": [
-     1810.0,
-     1905.0,
-     "USD"
-    ],
-    "avo::2027-07-17": [
-     1810.0,
-     1905.0,
-     "USD"
-    ],
-    "bismarck::2027-05-01": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "bismarck::2027-05-15": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "bismarck::2027-06-05": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "bismarck::2027-06-26": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "bismarck::2027-07-17": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "bismarck::2027-08-14": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "blue-diamond::2027-06-26": [
-     1458.0,
-     null,
-     "USD"
-    ],
-    "blue-horizon::2027-05-08": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-horizon::2027-05-29": [
-     1715.0,
-     null,
-     "USD"
-    ],
-    "blue-horizon::2027-06-19": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-horizon::2027-07-24": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-horizon::2027-08-14": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-horizon::2027-08-28": [
-     1526.0,
-     null,
-     "USD"
-    ],
-    "blue-melody::2027-05-01": [
-     1715.0,
-     null,
-     "USD"
-    ],
-    "blue-melody::2027-05-22": [
-     1526.0,
-     null,
-     "USD"
-    ],
-    "blue-melody::2027-06-12": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-melody::2027-07-17": [
-     1526.0,
-     null,
-     "USD"
-    ],
-    "blue-melody::2027-08-07": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-melody::2027-08-28": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "blue-pearl::2027-05-20": [
-     1273.0,
-     null,
-     "USD"
-    ],
-    "blue-pearl::2027-06-10": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "blue-pearl::2027-07-01": [
-     1273.0,
-     null,
-     "USD"
-    ],
-    "blue-pearl::2027-07-22": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "blue-pearl::2027-08-12": [
-     1149.0,
-     null,
-     "USD"
-    ],
-    "blue-seas::2027-05-13": [
-     2007.0,
-     null,
-     "USD"
-    ],
-    "blue-seas::2027-07-01": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "blue-seas::2027-07-22": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "blue-seas::2027-08-19": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "blue-storm::2027-05-20": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "blue-storm::2027-06-10": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "blue-storm::2027-07-01": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "blue-storm::2027-07-22": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "blue-storm::2027-08-19": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "blue::2027-05-27": [
-     1592.0,
-     null,
-     "USD"
-    ],
-    "blue::2027-06-17": [
-     1592.0,
-     null,
-     "USD"
-    ],
-    "blue::2027-08-05": [
-     1592.0,
-     null,
-     "USD"
-    ],
-    "carlton::2027-05-29": [
-     1043.0,
-     null,
-     "USD"
-    ],
-    "carlton::2027-06-19": [
-     1043.0,
-     null,
-     "USD"
-    ],
-    "carlton::2027-07-10": [
-     1043.0,
-     null,
-     "USD"
-    ],
-    "carlton::2027-08-11": [
-     667.0,
-     null,
-     "USD"
-    ],
-    "carlton::2027-08-21": [
-     1043.0,
-     null,
-     "USD"
-    ],
-    "cu::2027-05-15": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "cu::2027-06-05": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "cu::2027-06-26": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "cu::2027-07-17": [
-     1458.0,
-     null,
-     "USD"
-    ],
-    "cu::2027-08-07": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "cu::2027-08-28": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "destiny::2027-05-15": [
-     1412.0,
-     1569.0,
-     "USD"
-    ],
-    "destiny::2027-06-09": [
-     1967.0,
-     2185.0,
-     "USD"
-    ],
-    "destiny::2027-06-26": [
-     1412.0,
-     1569.0,
-     "USD"
-    ],
-    "destiny::2027-07-17": [
-     1412.0,
-     1569.0,
-     "USD"
-    ],
-    "destiny::2027-08-21": [
-     1412.0,
-     1569.0,
-     "USD"
-    ],
-    "discovery-i::2027-05-08": [
-     886.0,
-     1043.0,
-     "USD"
-    ],
-    "discovery-i::2027-05-29": [
-     1024.0,
-     1205.0,
-     "USD"
-    ],
-    "discovery-i::2027-06-19": [
-     858.0,
-     1009.0,
-     "USD"
-    ],
-    "discovery-i::2027-07-31": [
-     977.0,
-     1149.0,
-     "USD"
-    ],
-    "discovery-i::2027-08-21": [
-     977.0,
-     1149.0,
-     "USD"
-    ],
-    "discovery-i::2027-08-28": [
-     858.0,
-     1009.0,
-     "USD"
-    ],
-    "discovery-ii::2027-05-15": [
-     1048.0,
-     1233.0,
-     "USD"
-    ],
-    "discovery-ii::2027-06-05": [
-     1001.0,
-     1177.0,
-     "USD"
-    ],
-    "discovery-ii::2027-06-26": [
-     1001.0,
-     1177.0,
-     "USD"
-    ],
-    "discovery-ii::2027-07-17": [
-     1001.0,
-     1177.0,
-     "USD"
-    ],
-    "discovery-ii::2027-08-07": [
-     1001.0,
-     1177.0,
-     "USD"
-    ],
-    "discovery-ii::2027-08-28": [
-     1001.0,
-     1177.0,
-     "USD"
-    ],
-    "dune-longara::2027-05-15": [
-     1738.0,
-     null,
-     "USD"
-    ],
-    "dune-longara::2027-06-05": [
-     1738.0,
-     null,
-     "USD"
-    ],
-    "dune-longara::2027-06-26": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "dune-longara::2027-07-24": [
-     1626.0,
-     null,
-     "USD"
-    ],
-    "dune-longara::2027-08-21": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "dune-silky::2027-05-08": [
-     1626.0,
-     null,
-     "USD"
-    ],
-    "dune-silky::2027-05-29": [
-     1794.0,
-     null,
-     "USD"
-    ],
-    "dune-silky::2027-06-19": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "dune-silky::2027-07-10": [
-     1626.0,
-     null,
-     "USD"
-    ],
-    "dune-silky::2027-08-14": [
-     1626.0,
-     null,
-     "USD"
-    ],
-    "dune-titan::2027-05-08": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "dune-titan::2027-05-29": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "dune-titan::2027-06-12": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "dune-titan::2027-07-10": [
-     1009.0,
-     null,
-     "USD"
-    ],
-    "dune-titan::2027-07-31": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "emperor-asmaa::2027-05-15": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "emperor-asmaa::2027-06-05": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "emperor-asmaa::2027-06-26": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "emperor-asmaa::2027-07-22": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "emperor-asmaa::2027-08-07": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "emperor-elite::2027-05-20": [
-     1794.0,
-     null,
-     "USD"
-    ],
-    "emperor-elite::2027-06-03": [
-     1794.0,
-     null,
-     "USD"
-    ],
-    "emperor-superior::2027-05-15": [
-     1469.0,
-     null,
-     "USD"
-    ],
-    "emperor-superior::2027-06-19": [
-     1469.0,
-     null,
-     "USD"
-    ],
-    "ghazala-adventure::2027-05-03": [
-     1760.0,
-     null,
-     "USD"
-    ],
-    "ghazala-adventure::2027-05-31": [
-     1760.0,
-     null,
-     "USD"
-    ],
-    "ghazala-adventure::2027-06-07": [
-     1755.0,
-     null,
-     "USD"
-    ],
-    "ghazala-adventure::2027-08-09": [
-     1643.0,
-     null,
-     "USD"
-    ],
-    "ghazala-adventure::2027-08-23": [
-     1760.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-05-03": [
-     1659.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-05-24": [
-     1643.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-06-14": [
-     1760.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-06-21": [
-     1643.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-07-05": [
-     1760.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-08-09": [
-     1643.0,
-     null,
-     "USD"
-    ],
-    "ghazala-explorer::2027-08-30": [
-     1659.0,
-     null,
-     "USD"
-    ],
-    "golden-dolphin-iv::2027-06-10": [
-     1793.0,
-     null,
-     "USD"
-    ],
-    "golden-dolphin-iv::2027-07-01": [
-     1681.0,
-     null,
-     "USD"
-    ],
-    "golden-dolphin-iv::2027-07-29": [
-     2690.0,
-     null,
-     "USD"
-    ],
-    "golden-dolphin::2027-05-20": [
-     1261.0,
-     null,
-     "USD"
-    ],
-    "golden-dolphin::2027-07-01": [
-     1121.0,
-     null,
-     "USD"
-    ],
-    "golden-dolphin::2027-08-05": [
-     1192.0,
-     null,
-     "USD"
-    ],
-    "golden-imperial::2027-07-08": [
-     1456.0,
-     null,
-     "USD"
-    ],
-    "grand-discovery::2027-05-08": [
-     1239.0,
-     1458.0,
-     "USD"
-    ],
-    "grand-discovery::2027-05-15": [
-     1215.0,
-     1430.0,
-     "USD"
-    ],
-    "grand-discovery::2027-06-12": [
-     1191.0,
-     1402.0,
-     "USD"
-    ],
-    "grand-discovery::2027-07-10": [
-     1191.0,
-     1402.0,
-     "USD"
-    ],
-    "grand-discovery::2027-07-17": [
-     1167.0,
-     1373.0,
-     "USD"
-    ],
-    "grand-discovery::2027-08-14": [
-     1191.0,
-     1402.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-05-01": [
-     1329.0,
-     1564.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-05-22": [
-     1265.0,
-     1488.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-06-12": [
-     1125.0,
-     1323.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-07-03": [
-     1182.0,
-     1390.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-07-10": [
-     1182.0,
-     1390.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-07-24": [
-     1182.0,
-     1390.0,
-     "USD"
-    ],
-    "hammerhead-ii::2027-08-14": [
-     927.0,
-     null,
-     "USD"
-    ],
-    "iceberg::2027-05-09": [
-     595.0,
-     662.0,
-     "USD"
-    ],
-    "iceberg::2027-05-21": [
-     202.0,
-     null,
-     "USD"
-    ],
-    "iceberg::2027-05-30": [
-     595.0,
-     662.0,
-     "USD"
-    ],
-    "iceberg::2027-06-20": [
-     595.0,
-     662.0,
-     "USD"
-    ],
-    "iceberg::2027-07-02": [
-     202.0,
-     null,
-     "USD"
-    ],
-    "iceberg::2027-07-11": [
-     595.0,
-     662.0,
-     "USD"
-    ],
-    "iceberg::2027-07-23": [
-     202.0,
-     null,
-     "USD"
-    ],
-    "iceberg::2027-08-01": [
-     595.0,
-     662.0,
-     "USD"
-    ],
-    "iceberg::2027-08-29": [
-     595.0,
-     662.0,
-     "USD"
-    ],
-    "jp-marine::2027-05-08": [
-     947.0,
-     1052.0,
-     "USD"
-    ],
-    "jp-marine::2027-05-29": [
-     947.0,
-     1052.0,
-     "USD"
-    ],
-    "jp-marine::2027-06-19": [
-     947.0,
-     1052.0,
-     "USD"
-    ],
-    "jp-marine::2027-07-10": [
-     947.0,
-     1052.0,
-     "USD"
-    ],
-    "jp-marine::2027-08-21": [
-     947.0,
-     1052.0,
-     "USD"
-    ],
-    "marselia-star::2027-05-24": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "marselia-star::2027-06-05": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "marselia-star::2027-08-28": [
-     1458.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-05-16": [
-     527.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-05-29": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-06-05": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-06-26": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-07-17": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-08-07": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "new-sambo::2027-08-28": [
-     1514.0,
-     null,
-     "USD"
-    ],
-    "ocean-lovers::2027-05-01": [
-     1433.0,
-     1592.0,
-     "USD"
-    ],
-    "ocean-lovers::2027-05-22": [
-     1433.0,
-     1592.0,
-     "USD"
-    ],
-    "ocean-lovers::2027-06-12": [
-     1433.0,
-     1592.0,
-     "USD"
-    ],
-    "ocean-lovers::2027-07-03": [
-     1403.0,
-     1558.0,
-     "USD"
-    ],
-    "ocean-lovers::2027-07-24": [
-     1433.0,
-     1592.0,
-     "USD"
-    ],
-    "ocean-lovers::2027-08-14": [
-     1433.0,
-     1592.0,
-     "USD"
-    ],
-    "oceanix::2027-05-08": [
-     1110.0,
-     1233.0,
-     "USD"
-    ],
-    "oceanix::2027-07-24": [
-     1009.0,
-     1121.0,
-     "USD"
-    ],
-    "oceanix::2027-08-07": [
-     1009.0,
-     1121.0,
-     "USD"
-    ],
-    "odyssey::2027-05-15": [
-     1592.0,
-     null,
-     "USD"
-    ],
-    "odyssey::2027-06-05": [
-     1805.0,
-     null,
-     "USD"
-    ],
-    "odyssey::2027-06-26": [
-     1805.0,
-     null,
-     "USD"
-    ],
-    "odyssey::2027-08-07": [
-     1805.0,
-     null,
-     "USD"
-    ],
-    "queen-sherry::2027-05-01": [
-     1183.0,
-     null,
-     "USD"
-    ],
-    "queen-sherry::2027-05-08": [
-     1183.0,
-     null,
-     "USD"
-    ],
-    "queen-sherry::2027-05-15": [
-     1183.0,
-     null,
-     "USD"
-    ],
-    "queen-sherry::2027-07-31": [
-     2691.0,
-     null,
-     "USD"
-    ],
-    "queen-sherry::2027-08-21": [
-     1183.0,
-     null,
-     "USD"
-    ],
-    "queen-sherry::2027-08-28": [
-     1183.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-ii::2027-05-08": [
-     1349.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-ii::2027-05-29": [
-     1349.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-ii::2027-06-19": [
-     1349.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-ii::2027-07-10": [
-     2760.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-ii::2027-08-07": [
-     2760.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-ii::2027-08-28": [
-     2760.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-iv::2027-05-01": [
-     2699.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-iv::2027-05-29": [
-     2699.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-iv::2027-06-19": [
-     2699.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-iv::2027-07-10": [
-     2699.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-iv::2027-08-14": [
-     2699.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-v::2027-05-08": [
-     2799.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-v::2027-05-29": [
-     2799.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-v::2027-06-19": [
-     2799.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-v::2027-07-10": [
-     2799.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-v::2027-08-07": [
-     2799.0,
-     null,
-     "USD"
-    ],
-    "red-sea-aggressor-v::2027-08-28": [
-     2799.0,
-     null,
-     "USD"
-    ],
-    "red-sea-blue-force-2::2027-05-08": [
-     1671.0,
-     null,
-     "USD"
-    ],
-    "red-sea-blue-force-2::2027-05-29": [
-     1558.0,
-     null,
-     "USD"
-    ],
-    "red-sea-blue-force-2::2027-06-19": [
-     1671.0,
-     null,
-     "USD"
-    ],
-    "red-sea-blue-force-2::2027-07-10": [
-     1558.0,
-     null,
-     "USD"
-    ],
-    "red-sea-blue-force-2::2027-07-31": [
-     1671.0,
-     null,
-     "USD"
-    ],
-    "red-sea-blue-force-2::2027-08-21": [
-     1671.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-05-06": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-05-20": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-07-08": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-07-22": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-08-12": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-08-19": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "red-sea-explorer::2027-08-26": [
-     1570.0,
-     null,
-     "USD"
-    ],
-    "royal-evolution::2027-05-20": [
-     1664.0,
-     1849.0,
-     "USD"
-    ],
-    "royal-evolution::2027-06-17": [
-     1513.0,
-     1681.0,
-     "USD"
-    ],
-    "royal-evolution::2027-07-08": [
-     1513.0,
-     1681.0,
-     "USD"
-    ],
-    "royal-evolution::2027-08-19": [
-     1462.0,
-     1625.0,
-     "USD"
-    ],
-    "safy-mar::2027-05-01": [
-     1704.0,
-     null,
-     "USD"
-    ],
-    "safy-mar::2027-05-22": [
-     1704.0,
-     null,
-     "USD"
-    ],
-    "safy-mar::2027-06-19": [
-     1626.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-contessa::2027-05-08": [
-     1770.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-contessa::2027-05-29": [
-     1770.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-contessa::2027-06-12": [
-     1410.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-contessa::2027-06-19": [
-     1770.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-excellence::2027-05-13": [
-     1586.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-excellence::2027-05-22": [
-     1810.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-grand::2027-05-27": [
-     1743.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent-grand::2027-07-15": [
-     1648.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent::2027-06-12": [
-     1477.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent::2027-07-03": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "sea-serpent::2027-07-17": [
-     1477.0,
-     null,
-     "USD"
-    ],
-    "serenity::2027-05-08": [
-     1060.0,
-     1514.0,
-     "USD"
-    ],
-    "serenity::2027-05-29": [
-     1060.0,
-     1514.0,
-     "USD"
-    ],
-    "serenity::2027-06-19": [
-     1020.0,
-     1458.0,
-     "USD"
-    ],
-    "serenity::2027-07-03": [
-     1060.0,
-     1514.0,
-     "USD"
-    ],
-    "serenity::2027-08-14": [
-     1020.0,
-     1458.0,
-     "USD"
-    ],
-    "sinaistar::2027-05-15": [
-     981.0,
-     null,
-     "USD"
-    ],
-    "sinaistar::2027-06-05": [
-     942.0,
-     null,
-     "USD"
-    ],
-    "sinaistar::2027-06-26": [
-     942.0,
-     null,
-     "USD"
-    ],
-    "sinaistar::2027-08-21": [
-     942.0,
-     null,
-     "USD"
-    ],
-    "sindalahs::2027-05-08": [
-     1451.0,
-     1814.0,
-     "USD"
-    ],
-    "sindalahs::2027-06-05": [
-     1451.0,
-     1814.0,
-     "USD"
-    ],
-    "sindalahs::2027-06-26": [
-     1535.0,
-     1919.0,
-     "USD"
-    ],
-    "sindalahs::2027-08-28": [
-     1612.0,
-     2015.0,
-     "USD"
-    ],
-    "snefro-love::2027-05-20": [
-     784.0,
-     null,
-     "USD"
-    ],
-    "snefro-love::2027-06-10": [
-     784.0,
-     null,
-     "USD"
-    ],
-    "snefro-love::2027-07-01": [
-     784.0,
-     null,
-     "USD"
-    ],
-    "snefro-love::2027-07-22": [
-     784.0,
-     null,
-     "USD"
-    ],
-    "snefro-love::2027-08-12": [
-     784.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-05-02": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-05-12": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-05-23": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-06-06": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-06-27": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-07-04": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-07-14": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-07-25": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-08-04": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-08-15": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-pearl::2027-08-25": [
-     653.0,
-     null,
-     "USD"
-    ],
-    "snefro-spirit::2027-05-08": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-spirit::2027-05-29": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-spirit::2027-06-19": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-spirit::2027-07-10": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-spirit::2027-07-31": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-spirit::2027-08-21": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-target::2027-05-15": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-target::2027-06-05": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-target::2027-06-26": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "snefro-target::2027-08-21": [
-     1344.0,
-     null,
-     "USD"
-    ],
-    "ss-glorious-miss-nouran::2027-05-01": [
-     1770.0,
-     null,
-     "USD"
-    ],
-    "ss-glorious-miss-nouran::2027-05-15": [
-     1648.0,
-     null,
-     "USD"
-    ],
-    "ss-glorious-miss-nouran::2027-05-22": [
-     1882.0,
-     null,
-     "USD"
-    ],
-    "ss-glorious-miss-nouran::2027-06-12": [
-     1546.0,
-     null,
-     "USD"
-    ],
-    "ss-glorious-miss-nouran::2027-07-03": [
-     1939.0,
-     null,
-     "USD"
-    ],
-    "ss-glorious-miss-nouran::2027-07-17": [
-     1648.0,
-     null,
-     "USD"
-    ],
-    "ss-serena-dreams::2027-05-06": [
-     1636.0,
-     null,
-     "USD"
-    ],
-    "ss-serena-dreams::2027-05-27": [
-     1341.0,
-     null,
-     "USD"
-    ],
-    "ss-serena-dreams::2027-06-17": [
-     1341.0,
-     null,
-     "USD"
-    ],
-    "ss-serena-dreams::2027-07-15": [
-     1468.0,
-     null,
-     "USD"
-    ],
-    "star-jet::2027-05-08": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "star-jet::2027-05-29": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "star-jet::2027-06-19": [
-     1233.0,
-     null,
-     "USD"
-    ],
-    "star-jet::2027-07-03": [
-     1177.0,
-     null,
-     "USD"
-    ],
-    "star-jet::2027-07-24": [
-     1177.0,
-     null,
-     "USD"
-    ],
-    "star-jet::2027-08-14": [
-     1177.0,
-     null,
-     "USD"
-    ],
-    "sunlight::2027-05-15": [
-     858.0,
-     1009.0,
-     "USD"
-    ],
-    "sunlight::2027-06-26": [
-     1477.0,
-     1738.0,
-     "USD"
-    ],
-    "sunlight::2027-07-24": [
-     858.0,
-     1009.0,
-     "USD"
-    ],
-    "sunlight::2027-07-31": [
-     1144.0,
-     1345.0,
-     "USD"
-    ],
-    "sunlight::2027-08-28": [
-     858.0,
-     1009.0,
-     "USD"
-    ],
-    "sunshine::2027-05-01": [
-     715.0,
-     841.0,
-     "USD"
-    ],
-    "sunshine::2027-05-22": [
-     715.0,
-     841.0,
-     "USD"
-    ],
-    "sunshine::2027-06-19": [
-     715.0,
-     841.0,
-     "USD"
-    ],
-    "sunshine::2027-07-10": [
-     762.0,
-     897.0,
-     "USD"
-    ],
-    "sunshine::2027-07-31": [
-     715.0,
-     841.0,
-     "USD"
-    ],
-    "sunshine::2027-08-07": [
-     715.0,
-     841.0,
-     "USD"
-    ],
-    "sunshine::2027-08-28": [
-     715.0,
-     841.0,
-     "USD"
-    ],
-    "tala::2027-05-30": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "tala::2027-06-20": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "tala::2027-07-11": [
-     1289.0,
-     null,
-     "USD"
-    ],
-    "tala::2027-08-01": [
-     1402.0,
-     null,
-     "USD"
-    ],
-    "tala::2027-08-22": [
-     1177.0,
-     null,
-     "USD"
-    ],
-    "topaz::2027-05-08": [
-     1433.0,
-     1592.0,
-     "USD"
-    ],
-    "topaz::2027-05-29": [
-     1403.0,
-     1558.0,
-     "USD"
-    ],
-    "topaz::2027-06-19": [
-     1325.0,
-     1558.0,
-     "USD"
-    ],
-    "topaz::2027-06-26": [
-     1544.0,
-     1715.0,
-     "USD"
-    ],
-    "topaz::2027-07-17": [
-     1325.0,
-     1558.0,
-     "USD"
-    ],
-    "topaz::2027-08-07": [
-     1274.0,
-     1592.0,
-     "USD"
-    ],
-    "topaz::2027-08-28": [
-     2001.0,
-     2355.0,
-     "USD"
-    ],
-    "unity::2027-05-08": [
-     1211.0,
-     null,
-     "USD"
-    ],
-    "unity::2027-06-05": [
-     1211.0,
-     null,
-     "USD"
-    ],
-    "unity::2027-07-03": [
-     1211.0,
-     null,
-     "USD"
-    ],
-    "unity::2027-07-24": [
-     1211.0,
-     null,
-     "USD"
-    ],
-    "unity::2027-08-28": [
-     1211.0,
-     null,
-     "USD"
-    ],
-    "vita-xplorer::2027-05-15": [
-     1345.0,
-     null,
-     "USD"
-    ],
-    "vita-xplorer::2027-06-05": [
-     1205.0,
-     null,
-     "USD"
-    ],
-    "vita-xplorer::2027-06-26": [
-     1205.0,
-     null,
-     "USD"
-    ],
-    "vita-xplorer::2027-08-07": [
-     1205.0,
-     null,
-     "USD"
-    ],
-    "vita-xplorer::2027-08-28": [
-     1205.0,
-     null,
-     "USD"
-    ],
-    "yachtiano::2027-05-01": [
-     1682.0,
-     null,
-     "USD"
-    ],
-    "yachtiano::2027-06-19": [
-     1682.0,
-     null,
-     "USD"
-    ],
-    "yachtiano::2027-07-10": [
-     1682.0,
-     null,
-     "USD"
-    ],
-    "yachtiano::2027-07-31": [
-     1682.0,
-     null,
-     "USD"
-    ],
-    "yachtiano::2027-08-14": [
-     1682.0,
-     null,
-     "USD"
-    ]
-   }
-  },
   "2026-10-20": {
    "on_sale": 99,
    "read": 357,
@@ -20857,6 +19086,3547 @@
      "USD"
     ],
     "yachtiano::2027-08-28": [
+     1681.0,
+     null,
+     "USD"
+    ]
+   }
+  },
+  "2026-10-26": {
+   "on_sale": 164,
+   "read": 707,
+   "sailings": {
+    "alia-soul::2027-05-05": [
+     1155.0,
+     null,
+     "USD"
+    ],
+    "alia-soul::2027-06-02": [
+     1849.0,
+     null,
+     "USD"
+    ],
+    "alia-soul::2027-08-05": [
+     1009.0,
+     null,
+     "USD"
+    ],
+    "all-star-ghani::2027-05-10": [
+     1260.0,
+     null,
+     "USD"
+    ],
+    "all-star-ghani::2027-05-31": [
+     1260.0,
+     null,
+     "USD"
+    ],
+    "all-star-ghani::2027-06-14": [
+     1320.0,
+     null,
+     "USD"
+    ],
+    "all-star-ghani::2027-07-19": [
+     1585.0,
+     null,
+     "USD"
+    ],
+    "all-star-ghani::2027-08-02": [
+     1985.0,
+     null,
+     "USD"
+    ],
+    "all-star-ghani::2027-08-23": [
+     1385.0,
+     null,
+     "USD"
+    ],
+    "all-star-red-sea::2027-05-17": [
+     1756.0,
+     2195.0,
+     "USD"
+    ],
+    "all-star-red-sea::2027-06-07": [
+     2395.0,
+     null,
+     "USD"
+    ],
+    "all-star-red-sea::2027-06-28": [
+     2395.0,
+     null,
+     "USD"
+    ],
+    "all-star-red-sea::2027-07-19": [
+     2595.0,
+     null,
+     "USD"
+    ],
+    "all-star-red-sea::2027-07-26": [
+     2595.0,
+     null,
+     "USD"
+    ],
+    "all-star-red-sea::2027-08-16": [
+     2025.0,
+     null,
+     "USD"
+    ],
+    "alsuraya::2027-05-01": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-05-15": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-05-22": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-06-05": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "alsuraya::2027-06-12": [
+     1121.0,
+     1401.0,
+     "USD"
+    ],
+    "alsuraya::2027-06-19": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-06-26": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-07-03": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-07-10": [
+     1121.0,
+     1401.0,
+     "USD"
+    ],
+    "alsuraya::2027-07-17": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-07-24": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "alsuraya::2027-08-14": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-08-21": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "alsuraya::2027-08-28": [
+     1211.0,
+     1513.0,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-01": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-05": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-09": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-13": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-17": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-21": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-25": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-05-29": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-06-11": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-06-15": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-06-19": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-06-23": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-06-27": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-01": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-05": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-09": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-13": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-17": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-21": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-25": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-07-29": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-02": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-06": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-10": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-14": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-18": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-22": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-26": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie-adventures::2027-08-30": [
+     544.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-01": [
+     907.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-05": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-09": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-13": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-17": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-21": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-25": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-05-29": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-03": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-07": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-11": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-15": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-19": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-23": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-06-27": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-01": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-05": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-09": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-13": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-17": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-21": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-25": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-07-29": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-02": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-06": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-10": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-14": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-18": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-22": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-26": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "amelie::2027-08-30": [
+     488.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-05-08": [
+     2219.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-05-15": [
+     2298.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-05-29": [
+     2343.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-06-05": [
+     2098.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-06-12": [
+     2179.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-06-19": [
+     2179.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-06-26": [
+     2179.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-07-03": [
+     2298.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-07-10": [
+     2253.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-07-17": [
+     2253.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-07-24": [
+     2298.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-07-31": [
+     2186.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-08-07": [
+     2242.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-08-14": [
+     2242.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-08-21": [
+     2298.0,
+     null,
+     "USD"
+    ],
+    "aphrodite::2027-08-28": [
+     2152.0,
+     null,
+     "USD"
+    ],
+    "avo::2027-05-08": [
+     1916.0,
+     2016.0,
+     "USD"
+    ],
+    "avo::2027-05-22": [
+     1916.0,
+     2016.0,
+     "USD"
+    ],
+    "avo::2027-06-05": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-06-12": [
+     1703.0,
+     1792.0,
+     "USD"
+    ],
+    "avo::2027-06-19": [
+     1703.0,
+     1792.0,
+     "USD"
+    ],
+    "avo::2027-06-26": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-07-03": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-07-10": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-07-17": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-07-24": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-08-21": [
+     1809.0,
+     1904.0,
+     "USD"
+    ],
+    "avo::2027-08-28": [
+     1703.0,
+     1792.0,
+     "USD"
+    ],
+    "blue-diamond::2027-06-05": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "blue-diamond::2027-06-26": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "blue-diamond::2027-08-07": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "blue-diamond::2027-08-28": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "blue-horizon::2027-06-05": [
+     1743.0,
+     null,
+     "USD"
+    ],
+    "blue-horizon::2027-07-10": [
+     1505.0,
+     null,
+     "USD"
+    ],
+    "blue-horizon::2027-07-31": [
+     1715.0,
+     null,
+     "USD"
+    ],
+    "blue-melody::2027-05-08": [
+     1743.0,
+     null,
+     "USD"
+    ],
+    "blue-melody::2027-05-29": [
+     1743.0,
+     null,
+     "USD"
+    ],
+    "blue-melody::2027-06-19": [
+     1743.0,
+     null,
+     "USD"
+    ],
+    "blue-melody::2027-07-24": [
+     1715.0,
+     null,
+     "USD"
+    ],
+    "blue-melody::2027-08-14": [
+     1743.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-05-06": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-05-13": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-05-20": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-05-27": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-06-03": [
+     1149.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-06-10": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-06-17": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-06-24": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-07-01": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-07-08": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-07-15": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-07-22": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-08-12": [
+     1149.0,
+     null,
+     "USD"
+    ],
+    "blue-pearl::2027-08-19": [
+     1272.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-05-03": [
+     1950.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-07-01": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-07-08": [
+     1334.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-07-15": [
+     1334.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-07-22": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-07-29": [
+     1765.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-08-05": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-08-12": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-08-19": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-seas::2027-08-26": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-05-06": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-05-13": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-05-20": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-05-27": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-06-17": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-06-24": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-07-08": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-08-05": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue-storm::2027-08-26": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-05-06": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-05-13": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-05-20": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-05-27": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-06-03": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-06-10": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-06-17": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-06-24": [
+     1446.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-07-08": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-07-22": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-08-12": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "blue::2027-08-26": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-05-02": [
+     667.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-05-15": [
+     1042.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-06-05": [
+     1042.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-06-26": [
+     1042.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-07-29": [
+     667.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-08-16": [
+     667.0,
+     null,
+     "USD"
+    ],
+    "carlton::2027-08-28": [
+     1042.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-05-01": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-05-08": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-05-15": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-05-22": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-05-29": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-06-05": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-06-12": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-06-19": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-06-26": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-07-03": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-07-24": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-08-07": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-08-14": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-08-21": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "cu::2027-08-28": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "destiny::2027-05-01": [
+     1568.0,
+     null,
+     "USD"
+    ],
+    "destiny::2027-05-22": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-05-29": [
+     1512.0,
+     null,
+     "USD"
+    ],
+    "destiny::2027-06-09": [
+     1966.0,
+     2185.0,
+     "USD"
+    ],
+    "destiny::2027-06-12": [
+     1512.0,
+     null,
+     "USD"
+    ],
+    "destiny::2027-07-03": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-07-10": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-07-17": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-07-24": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-08-14": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-08-21": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "destiny::2027-08-28": [
+     1411.0,
+     1568.0,
+     "USD"
+    ],
+    "discovery-i::2027-05-15": [
+     1024.0,
+     1205.0,
+     "USD"
+    ],
+    "discovery-i::2027-06-05": [
+     857.0,
+     1009.0,
+     "USD"
+    ],
+    "discovery-i::2027-06-26": [
+     857.0,
+     1009.0,
+     "USD"
+    ],
+    "discovery-i::2027-07-31": [
+     977.0,
+     1149.0,
+     "USD"
+    ],
+    "discovery-i::2027-08-07": [
+     977.0,
+     1149.0,
+     "USD"
+    ],
+    "discovery-i::2027-08-21": [
+     977.0,
+     1149.0,
+     "USD"
+    ],
+    "discovery-ii::2027-05-01": [
+     1048.0,
+     1233.0,
+     "USD"
+    ],
+    "discovery-ii::2027-05-22": [
+     1048.0,
+     1233.0,
+     "USD"
+    ],
+    "discovery-ii::2027-06-12": [
+     1000.0,
+     1177.0,
+     "USD"
+    ],
+    "discovery-ii::2027-07-03": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "discovery-ii::2027-07-24": [
+     1000.0,
+     1177.0,
+     "USD"
+    ],
+    "discovery-ii::2027-08-14": [
+     1000.0,
+     1177.0,
+     "USD"
+    ],
+    "dune-longara::2027-05-01": [
+     1625.0,
+     null,
+     "USD"
+    ],
+    "dune-longara::2027-05-22": [
+     1737.0,
+     null,
+     "USD"
+    ],
+    "dune-longara::2027-06-12": [
+     1737.0,
+     null,
+     "USD"
+    ],
+    "dune-longara::2027-07-10": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "dune-longara::2027-08-07": [
+     1625.0,
+     null,
+     "USD"
+    ],
+    "dune-longara::2027-08-28": [
+     1737.0,
+     null,
+     "USD"
+    ],
+    "dune-silky::2027-05-15": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "dune-silky::2027-06-05": [
+     1625.0,
+     null,
+     "USD"
+    ],
+    "dune-silky::2027-06-26": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "dune-silky::2027-07-10": [
+     1625.0,
+     null,
+     "USD"
+    ],
+    "dune-silky::2027-07-17": [
+     2746.0,
+     null,
+     "USD"
+    ],
+    "dune-silky::2027-08-21": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-05-01": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-05-08": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-05-15": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-05-22": [
+     1289.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-05-29": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-06-05": [
+     1289.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-06-12": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-06-19": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-06-26": [
+     1009.0,
+     null,
+     "USD"
+    ],
+    "dune-titan::2027-07-17": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-05-01": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-05-08": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-05-15": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-05-22": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-05-29": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-06-12": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-08-07": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-08-14": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-08-21": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "emperor-asmaa::2027-08-28": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "emperor-elite::2027-05-06": [
+     1737.0,
+     null,
+     "USD"
+    ],
+    "emperor-elite::2027-05-27": [
+     1793.0,
+     null,
+     "USD"
+    ],
+    "emperor-elite::2027-06-03": [
+     1793.0,
+     null,
+     "USD"
+    ],
+    "emperor-elite::2027-06-17": [
+     1737.0,
+     null,
+     "USD"
+    ],
+    "emperor-elite::2027-06-24": [
+     1793.0,
+     null,
+     "USD"
+    ],
+    "emperor-elite::2027-07-22": [
+     1793.0,
+     null,
+     "USD"
+    ],
+    "emperor-superior::2027-05-15": [
+     1468.0,
+     null,
+     "USD"
+    ],
+    "emperor-superior::2027-05-22": [
+     1468.0,
+     null,
+     "USD"
+    ],
+    "emperor-superior::2027-05-29": [
+     1468.0,
+     null,
+     "USD"
+    ],
+    "emperor-superior::2027-07-31": [
+     2645.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-05-03": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-05-10": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-05-24": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-05-31": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-06-07": [
+     1754.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-06-14": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-06-21": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-07-05": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-07-12": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-07-19": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-07-26": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-08-02": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-08-09": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-08-16": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-08-23": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-adventure::2027-08-30": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-05-03": [
+     1659.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-05-10": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-05-24": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-05-31": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-06-14": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-06-21": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-07-05": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-07-12": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-07-26": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-08-02": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-08-09": [
+     1642.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-08-16": [
+     1760.0,
+     null,
+     "USD"
+    ],
+    "ghazala-explorer::2027-08-30": [
+     1659.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin-iv::2027-06-17": [
+     896.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin-iv::2027-07-01": [
+     1680.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin-iv::2027-07-22": [
+     1680.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin-iv::2027-07-29": [
+     2689.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin-iv::2027-08-16": [
+     2465.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-05-06": [
+     1261.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-05-13": [
+     1332.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-05-20": [
+     1261.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-05-27": [
+     1332.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-06-03": [
+     1261.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-06-17": [
+     1332.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-07-01": [
+     1121.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-07-22": [
+     1192.0,
+     null,
+     "USD"
+    ],
+    "golden-dolphin::2027-08-05": [
+     1192.0,
+     null,
+     "USD"
+    ],
+    "golden-imperial::2027-06-17": [
+     841.0,
+     null,
+     "USD"
+    ],
+    "golden-imperial::2027-06-24": [
+     1541.0,
+     null,
+     "USD"
+    ],
+    "golden-imperial::2027-07-08": [
+     1456.0,
+     null,
+     "USD"
+    ],
+    "golden-imperial::2027-08-12": [
+     2465.0,
+     null,
+     "USD"
+    ],
+    "grand-discovery::2027-05-01": [
+     1239.0,
+     1457.0,
+     "USD"
+    ],
+    "grand-discovery::2027-05-08": [
+     1239.0,
+     1457.0,
+     "USD"
+    ],
+    "grand-discovery::2027-05-15": [
+     1215.0,
+     1429.0,
+     "USD"
+    ],
+    "grand-discovery::2027-05-22": [
+     1239.0,
+     1457.0,
+     "USD"
+    ],
+    "grand-discovery::2027-05-29": [
+     1239.0,
+     1457.0,
+     "USD"
+    ],
+    "grand-discovery::2027-06-05": [
+     1167.0,
+     1373.0,
+     "USD"
+    ],
+    "grand-discovery::2027-06-12": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-06-19": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-07-03": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-07-10": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-07-17": [
+     1167.0,
+     1373.0,
+     "USD"
+    ],
+    "grand-discovery::2027-07-24": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-07-31": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-08-07": [
+     1167.0,
+     1373.0,
+     "USD"
+    ],
+    "grand-discovery::2027-08-14": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "grand-discovery::2027-08-21": [
+     1191.0,
+     1401.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-05-01": [
+     1265.0,
+     1488.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-05-08": [
+     1329.0,
+     1564.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-05-22": [
+     1265.0,
+     1488.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-05-29": [
+     1181.0,
+     1390.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-06-19": [
+     1067.0,
+     1255.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-06-26": [
+     927.0,
+     null,
+     "USD"
+    ],
+    "hammerhead-ii::2027-07-10": [
+     1181.0,
+     1390.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-07-31": [
+     1181.0,
+     1390.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-08-07": [
+     1359.0,
+     1598.0,
+     "USD"
+    ],
+    "hammerhead-ii::2027-08-14": [
+     927.0,
+     null,
+     "USD"
+    ],
+    "hammerhead-ii::2027-08-21": [
+     1181.0,
+     1390.0,
+     "USD"
+    ],
+    "iceberg::2027-05-07": [
+     202.0,
+     null,
+     "USD"
+    ],
+    "iceberg::2027-05-16": [
+     595.0,
+     661.0,
+     "USD"
+    ],
+    "iceberg::2027-05-28": [
+     202.0,
+     null,
+     "USD"
+    ],
+    "iceberg::2027-06-27": [
+     595.0,
+     661.0,
+     "USD"
+    ],
+    "iceberg::2027-07-09": [
+     202.0,
+     null,
+     "USD"
+    ],
+    "iceberg::2027-07-18": [
+     595.0,
+     661.0,
+     "USD"
+    ],
+    "iceberg::2027-07-30": [
+     202.0,
+     null,
+     "USD"
+    ],
+    "iceberg::2027-08-06": [
+     202.0,
+     null,
+     "USD"
+    ],
+    "jp-marine::2027-05-15": [
+     946.0,
+     1051.0,
+     "USD"
+    ],
+    "jp-marine::2027-06-05": [
+     946.0,
+     1051.0,
+     "USD"
+    ],
+    "jp-marine::2027-06-26": [
+     946.0,
+     1051.0,
+     "USD"
+    ],
+    "jp-marine::2027-07-17": [
+     946.0,
+     1051.0,
+     "USD"
+    ],
+    "jp-marine::2027-08-07": [
+     946.0,
+     1051.0,
+     "USD"
+    ],
+    "jp-marine::2027-08-28": [
+     946.0,
+     1051.0,
+     "USD"
+    ],
+    "marselia-star::2027-05-01": [
+     3307.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-05-24": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-05-29": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-06-05": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-07-24": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-08-07": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-08-14": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "marselia-star::2027-08-28": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-05-19": [
+     527.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-05-22": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-05-29": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-06-05": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-06-12": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-06-19": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-07-03": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-07-24": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-08-07": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-08-14": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-08-21": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "new-sambo::2027-08-28": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "ocean-lovers::2027-05-01": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-05-08": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-05-15": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-05-22": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-05-29": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-06-05": [
+     1402.0,
+     1558.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-06-12": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-06-19": [
+     1402.0,
+     1558.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-06-26": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-07-10": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-07-24": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-07-31": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-08-14": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-08-21": [
+     1402.0,
+     1558.0,
+     "USD"
+    ],
+    "ocean-lovers::2027-08-28": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "oceanix::2027-05-08": [
+     1110.0,
+     1233.0,
+     "USD"
+    ],
+    "oceanix::2027-05-15": [
+     1009.0,
+     1121.0,
+     "USD"
+    ],
+    "oceanix::2027-05-22": [
+     1110.0,
+     1233.0,
+     "USD"
+    ],
+    "oceanix::2027-08-07": [
+     1009.0,
+     1121.0,
+     "USD"
+    ],
+    "oceanix::2027-08-21": [
+     1110.0,
+     1233.0,
+     "USD"
+    ],
+    "odyssey::2027-05-01": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-05-08": [
+     1704.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-05-15": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-05-22": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-05-29": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-06-05": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-06-12": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-06-19": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-06-26": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-07-03": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-07-10": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-07-17": [
+     2410.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-08-07": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-08-14": [
+     1704.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-08-21": [
+     1592.0,
+     null,
+     "USD"
+    ],
+    "odyssey::2027-08-28": [
+     1805.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-05-01": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-05-08": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-05-15": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-05-22": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-05-29": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-06-05": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-06-12": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-06-26": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-07-03": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-07-10": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-07-17": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-07-24": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-07-31": [
+     2690.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-08-07": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-08-14": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-08-21": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "queen-sherry::2027-08-28": [
+     1183.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-05-15": [
+     1399.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-06-05": [
+     1349.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-06-26": [
+     1349.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-07-03": [
+     1349.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-07-17": [
+     2760.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-08-14": [
+     2760.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-08-28": [
+     2760.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-05-15": [
+     2699.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-06-05": [
+     2699.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-06-26": [
+     2699.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-07-17": [
+     2699.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-08-07": [
+     2699.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-08-21": [
+     2699.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-v::2027-05-15": [
+     2799.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-v::2027-05-29": [
+     2799.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-v::2027-06-05": [
+     2799.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-v::2027-06-26": [
+     2799.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-v::2027-07-17": [
+     2799.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-v::2027-08-14": [
+     2799.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-05-15": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-06-05": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-07-03": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-07-10": [
+     1558.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-07-17": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-07-24": [
+     1558.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-07-31": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-08-07": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-08-14": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-08-21": [
+     1670.0,
+     null,
+     "USD"
+    ],
+    "red-sea-blue-force-2::2027-08-28": [
+     1558.0,
+     null,
+     "USD"
+    ],
+    "red-sea-explorer::2027-06-03": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "red-sea-explorer::2027-06-17": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "red-sea-explorer::2027-07-15": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "red-sea-explorer::2027-08-12": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "red-sea-explorer::2027-08-19": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "red-sea-explorer::2027-08-26": [
+     1569.0,
+     null,
+     "USD"
+    ],
+    "royal-evolution::2027-05-03": [
+     2304.0,
+     2560.0,
+     "USD"
+    ],
+    "royal-evolution::2027-05-13": [
+     1664.0,
+     1848.0,
+     "USD"
+    ],
+    "royal-evolution::2027-05-20": [
+     1664.0,
+     1848.0,
+     "USD"
+    ],
+    "royal-evolution::2027-05-27": [
+     2370.0,
+     2633.0,
+     "USD"
+    ],
+    "royal-evolution::2027-06-24": [
+     1512.0,
+     1680.0,
+     "USD"
+    ],
+    "royal-evolution::2027-07-01": [
+     1512.0,
+     1680.0,
+     "USD"
+    ],
+    "royal-evolution::2027-07-08": [
+     1512.0,
+     1680.0,
+     "USD"
+    ],
+    "royal-evolution::2027-07-15": [
+     1512.0,
+     1680.0,
+     "USD"
+    ],
+    "royal-evolution::2027-08-12": [
+     1462.0,
+     1624.0,
+     "USD"
+    ],
+    "royal-evolution::2027-08-19": [
+     1462.0,
+     1624.0,
+     "USD"
+    ],
+    "royal-evolution::2027-08-26": [
+     1462.0,
+     1624.0,
+     "USD"
+    ],
+    "safy-mar::2027-05-01": [
+     1704.0,
+     null,
+     "USD"
+    ],
+    "safy-mar::2027-05-22": [
+     1704.0,
+     null,
+     "USD"
+    ],
+    "safy-mar::2027-05-29": [
+     1625.0,
+     null,
+     "USD"
+    ],
+    "safy-mar::2027-06-12": [
+     1659.0,
+     null,
+     "USD"
+    ],
+    "sea-friend::2027-05-08": [
+     1962.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-05-15": [
+     1315.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-05-22": [
+     1378.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-06-05": [
+     1315.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-06-12": [
+     1220.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-06-19": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-06-26": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-07-22": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-contessa::2027-08-14": [
+     1220.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-excellence::2027-05-06": [
+     1347.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-excellence::2027-05-13": [
+     1396.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-excellence::2027-05-22": [
+     1585.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-excellence::2027-05-29": [
+     1252.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-excellence::2027-08-05": [
+     1396.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-grand::2027-05-20": [
+     1714.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-grand::2027-06-03": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-grand::2027-06-10": [
+     1552.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-grand::2027-07-15": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent-grand::2027-07-22": [
+     1552.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent::2027-05-01": [
+     1512.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent::2027-05-08": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent::2027-05-22": [
+     1456.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent::2027-06-19": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent::2027-07-03": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "sea-serpent::2027-07-17": [
+     1286.0,
+     null,
+     "USD"
+    ],
+    "serenity::2027-05-15": [
+     706.0,
+     1009.0,
+     "USD"
+    ],
+    "serenity::2027-05-22": [
+     1138.0,
+     1625.0,
+     "USD"
+    ],
+    "serenity::2027-06-05": [
+     1098.0,
+     1569.0,
+     "USD"
+    ],
+    "serenity::2027-06-26": [
+     1177.0,
+     1681.0,
+     "USD"
+    ],
+    "serenity::2027-08-07": [
+     981.0,
+     1401.0,
+     "USD"
+    ],
+    "serenity::2027-08-14": [
+     1020.0,
+     1457.0,
+     "USD"
+    ],
+    "serenity::2027-08-21": [
+     1138.0,
+     1625.0,
+     "USD"
+    ],
+    "sinaistar::2027-05-01": [
+     981.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-05-22": [
+     942.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-06-05": [
+     942.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-06-12": [
+     981.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-06-19": [
+     981.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-06-26": [
+     942.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-08-14": [
+     981.0,
+     null,
+     "USD"
+    ],
+    "sinaistar::2027-08-21": [
+     942.0,
+     null,
+     "USD"
+    ],
+    "sindalahs::2027-05-01": [
+     1535.0,
+     1918.0,
+     "USD"
+    ],
+    "sindalahs::2027-05-08": [
+     1451.0,
+     1813.0,
+     "USD"
+    ],
+    "sindalahs::2027-05-15": [
+     1535.0,
+     1918.0,
+     "USD"
+    ],
+    "sindalahs::2027-05-22": [
+     1451.0,
+     1813.0,
+     "USD"
+    ],
+    "sindalahs::2027-05-29": [
+     1535.0,
+     1918.0,
+     "USD"
+    ],
+    "sindalahs::2027-06-05": [
+     1451.0,
+     1813.0,
+     "USD"
+    ],
+    "sindalahs::2027-06-12": [
+     1535.0,
+     1918.0,
+     "USD"
+    ],
+    "sindalahs::2027-06-19": [
+     1451.0,
+     1813.0,
+     "USD"
+    ],
+    "sindalahs::2027-06-26": [
+     1535.0,
+     1918.0,
+     "USD"
+    ],
+    "sindalahs::2027-07-03": [
+     1451.0,
+     1813.0,
+     "USD"
+    ],
+    "sindalahs::2027-07-10": [
+     1535.0,
+     1918.0,
+     "USD"
+    ],
+    "sindalahs::2027-07-17": [
+     1612.0,
+     2015.0,
+     "USD"
+    ],
+    "sindalahs::2027-07-24": [
+     1451.0,
+     1813.0,
+     "USD"
+    ],
+    "sindalahs::2027-07-31": [
+     1705.0,
+     2131.0,
+     "USD"
+    ],
+    "sindalahs::2027-08-07": [
+     1791.0,
+     2239.0,
+     "USD"
+    ],
+    "sindalahs::2027-08-14": [
+     1612.0,
+     2015.0,
+     "USD"
+    ],
+    "sindalahs::2027-08-21": [
+     1705.0,
+     2131.0,
+     "USD"
+    ],
+    "sindalahs::2027-08-28": [
+     1612.0,
+     2015.0,
+     "USD"
+    ],
+    "snefro-love::2027-05-06": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-05-13": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-05-20": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-05-27": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-06-03": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-06-10": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-06-17": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-06-24": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-07-01": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-07-08": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-07-15": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-07-22": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-07-29": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-08-05": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-08-12": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-08-19": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-love::2027-08-26": [
+     784.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-05-05": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-05-16": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-05-26": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-06-09": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-06-20": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-07-07": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-07-18": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-07-28": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-08-08": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-08-18": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-pearl::2027-08-29": [
+     652.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-05-01": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-05-08": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-05-15": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-05-22": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-05-29": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-06-05": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-06-12": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-06-19": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-06-26": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-07-03": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-07-10": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-07-17": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-07-24": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-07-31": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-08-07": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-08-14": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-08-21": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-spirit::2027-08-28": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-05-01": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-05-08": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-05-15": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-05-22": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-05-29": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-06-05": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-06-12": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-06-19": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-06-26": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-07-03": [
+     1415.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-07-10": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-07-17": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-07-24": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-07-31": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-08-07": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-08-14": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-08-21": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "snefro-target::2027-08-28": [
+     1344.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-05-01": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-05-29": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-06-05": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-06-12": [
+     1546.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-06-19": [
+     1658.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-06-26": [
+     1410.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-07-03": [
+     1714.0,
+     null,
+     "USD"
+    ],
+    "ss-glorious-miss-nouran::2027-07-17": [
+     1457.0,
+     null,
+     "USD"
+    ],
+    "ss-serena-dreams::2027-05-13": [
+     1143.0,
+     null,
+     "USD"
+    ],
+    "ss-serena-dreams::2027-06-03": [
+     1299.0,
+     null,
+     "USD"
+    ],
+    "ss-serena-dreams::2027-06-10": [
+     1242.0,
+     null,
+     "USD"
+    ],
+    "ss-serena-dreams::2027-07-15": [
+     1243.0,
+     null,
+     "USD"
+    ],
+    "ss-serena-dreams::2027-08-19": [
+     1143.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-05-01": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-05-08": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-05-15": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-05-22": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-05-29": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-06-05": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-06-12": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-06-19": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-06-26": [
+     1233.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-07-03": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-07-10": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-07-17": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-07-24": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-07-31": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-08-07": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-08-14": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-08-21": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "star-jet::2027-08-28": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "sunlight::2027-05-01": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "sunlight::2027-05-22": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "sunlight::2027-06-05": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "sunlight::2027-06-15": [
+     1477.0,
+     1737.0,
+     "USD"
+    ],
+    "sunlight::2027-06-26": [
+     1477.0,
+     1737.0,
+     "USD"
+    ],
+    "sunlight::2027-07-10": [
+     1000.0,
+     1177.0,
+     "USD"
+    ],
+    "sunlight::2027-07-17": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "sunlight::2027-08-07": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "sunlight::2027-08-14": [
+     905.0,
+     1065.0,
+     "USD"
+    ],
+    "sunshine::2027-05-08": [
+     762.0,
+     897.0,
+     "USD"
+    ],
+    "sunshine::2027-05-15": [
+     857.0,
+     1009.0,
+     "USD"
+    ],
+    "sunshine::2027-06-05": [
+     810.0,
+     953.0,
+     "USD"
+    ],
+    "sunshine::2027-06-26": [
+     762.0,
+     897.0,
+     "USD"
+    ],
+    "sunshine::2027-07-10": [
+     810.0,
+     953.0,
+     "USD"
+    ],
+    "sunshine::2027-07-17": [
+     762.0,
+     897.0,
+     "USD"
+    ],
+    "sunshine::2027-07-24": [
+     857.0,
+     1009.0,
+     "USD"
+    ],
+    "sunshine::2027-08-14": [
+     857.0,
+     1009.0,
+     "USD"
+    ],
+    "sunshine::2027-08-21": [
+     810.0,
+     953.0,
+     "USD"
+    ],
+    "tala::2027-05-07": [
+     1513.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-05-16": [
+     1289.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-05-23": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-05-30": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-06-06": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-06-13": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-06-20": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-06-27": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-07-04": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-07-11": [
+     1289.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-07-18": [
+     1289.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-07-25": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-08-01": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-08-08": [
+     1401.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-08-15": [
+     1289.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-08-22": [
+     1177.0,
+     null,
+     "USD"
+    ],
+    "tala::2027-08-29": [
+     1356.0,
+     null,
+     "USD"
+    ],
+    "topaz::2027-05-08": [
+     1433.0,
+     1592.0,
+     "USD"
+    ],
+    "topaz::2027-05-15": [
+     1614.0,
+     1793.0,
+     "USD"
+    ],
+    "topaz::2027-05-22": [
+     1353.0,
+     1592.0,
+     "USD"
+    ],
+    "topaz::2027-06-05": [
+     1402.0,
+     1558.0,
+     "USD"
+    ],
+    "topaz::2027-06-12": [
+     1353.0,
+     1592.0,
+     "USD"
+    ],
+    "topaz::2027-07-03": [
+     1324.0,
+     1558.0,
+     "USD"
+    ],
+    "topaz::2027-07-24": [
+     1353.0,
+     1592.0,
+     "USD"
+    ],
+    "topaz::2027-07-31": [
+     1353.0,
+     1592.0,
+     "USD"
+    ],
+    "topaz::2027-08-14": [
+     1273.0,
+     1592.0,
+     "USD"
+    ],
+    "topaz::2027-08-28": [
+     2001.0,
+     2354.0,
+     "USD"
+    ],
+    "unity::2027-05-01": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-05-08": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-05-15": [
+     1311.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-05-29": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-06-05": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-06-12": [
+     1311.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-06-26": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-07-03": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-07-10": [
+     1311.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-07-24": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-07-31": [
+     1216.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-08-21": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "unity::2027-08-28": [
+     1211.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-05-01": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-05-08": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-05-15": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-05-22": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-05-29": [
+     1345.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-06-05": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-06-12": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-06-26": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-07-03": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-07-10": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-07-31": [
+     1387.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-08-07": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-08-14": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-08-21": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "vita-xplorer::2027-08-28": [
+     1205.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-05-08": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-05-22": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-06-05": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-06-26": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-07-17": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-08-07": [
+     1681.0,
+     null,
+     "USD"
+    ],
+    "yachtiano::2027-08-21": [
      1681.0,
      null,
      "USD"
