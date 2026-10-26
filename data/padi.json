@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-25",
+ "collected": "2026-10-26",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -27517,7 +27517,7 @@
     "daedalus",
     "elphinstone"
    ],
-   "dives": 8,
+   "dives": 10,
    "fees": {
     "complete": true,
     "lines": [
@@ -27559,22 +27559,22 @@
      },
      {
       "amount": {
-       "amount": 84.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
        "amount": 5.0,
        "currency": "EUR"
       },
       "basis": "per_dive",
       "code": "nitrox",
       "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 84.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
       "tier": "conditional"
      },
      {
@@ -27598,9 +27598,9 @@
     "unreadable": []
    },
    "name": "Daedalus Light (Marsa Alam - Marsa Alam)",
-   "nights": 3,
-   "padi_id": 21696,
-   "padi_slug": "daedalus-light-marsa-alam-marsa-alam-4-nights",
+   "nights": 4,
+   "padi_id": 21688,
+   "padi_slug": "micro-safari-abu-nuhas-thistlegorm-hurghada-hurgha",
    "port_from": "Marsa Alam",
    "port_to": "Marsa Alam",
    "requirements": {
@@ -27608,7 +27608,7 @@
     "min_logged_dives": 50,
     "recommended_logged_dives": 50
    },
-   "title": "Daedalus Light (Marsa Alam - Marsa Alam) 3 Nights"
+   "title": "Daedalus Light (Marsa Alam - Marsa Alam) 4 Nights"
   },
   "hammerhead-ii::Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
@@ -27917,6 +27917,112 @@
     "recommended_logged_dives": 20
    },
    "title": "Mini Safari :Abu Nuhas - Ras Mohamed - Thistlegorm (Hurghada - Hurghada) 4 Nights"
+  },
+  "hammerhead-ii::Red Sea Charm: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Port Ghalib)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "thistlegorm",
+    "sha'ab el erg",
+    "abu nuhas",
+    "brothers",
+    "panorama reef",
+    "abu kafan",
+    "giftun",
+    "gota abu ramada"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Environment Tax & National Park Fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "note": "Transfer from Marsa Alam airport to Marsa Alam harbour (Round-trip) ADD ONE IF YOU ARE A SINGLE TRAVELLER",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "included": true,
+      "note": "Tips for the crew",
+      "tier": "optional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Red Sea Charm: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23230,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-6",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Charm: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Port Ghalib) 7 Nights"
   },
   "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)": {
    "boat": "hammerhead-ii",
@@ -46446,12 +46552,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 54,
-    "first": "2026-10-26",
+    "dated": 53,
+    "first": "2026-11-02",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 54,
+    "read": 53,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -46469,12 +46575,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 71,
-    "first": "2026-10-26",
+    "dated": 70,
+    "first": "2026-11-02",
     "in_season": 17,
     "last": "2028-06-26",
     "priced": 17,
-    "read": 71,
+    "read": 70,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -47195,12 +47301,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 57,
-    "first": "2026-10-26",
+    "dated": 56,
+    "first": "2026-11-02",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 57,
+    "read": 56,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -47217,12 +47323,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 57,
-    "first": "2026-10-26",
+    "dated": 56,
+    "first": "2026-11-02",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 57,
+    "read": 56,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -47262,13 +47368,13 @@
    "name": "Hammerhead II",
    "operator": null,
    "sailings": {
-    "dated": 59,
+    "dated": 63,
     "first": "2026-10-31",
-    "in_season": 20,
+    "in_season": 22,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 59,
-    "unpriced": 7
+    "read": 63,
+    "unpriced": 11
    },
    "slug": "hammerhead-ii",
    "specs": {
@@ -47330,12 +47436,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 14,
-    "first": "2026-10-26",
+    "dated": 13,
+    "first": "2026-11-01",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 14,
+    "read": 13,
     "unpriced": 1
    },
    "slug": "my-iceberg",
