@@ -3,6 +3,25 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-26
+
+```
+changes: HEAD -> 2026-10-26
+===========================
+
+now sold out (5)
+  2027-06-17  Golden Dolphin         North - Straits of Tiran           liveaboard.com
+  2027-06-19  Star Jet               Abu Nuhas, Ras Mohammed, Tiran & D divebooker.com+liveaboard.com
+  2027-06-24  Golden Imperial        Brothers, Daedalus & Elphinstone   liveaboard.com
+  2027-06-26  Star Jet               Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com
+  2027-07-01  Golden Dolphin IV      South till Dolphin Reef - Elphinst divebooker.com+liveaboard.com
+
+bookable again (1)
+  2027-05-13  Golden Dolphin         North & Brothers                   liveaboard.com
+
+540 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-25
 
 ```
