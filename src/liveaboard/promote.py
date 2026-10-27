@@ -4239,6 +4239,10 @@ SITE_HINTS = (
     # Spelled as the prose spells it, 7 mentions against the third seller's
     # *Umm*, which folds below.
     "bells", "ras um sid",
+    # And one more, which held it back from 2026-10-26: Makadi Bay's reef,
+    # where a drift along the bay's coral garden ends. Not Gota Abu Ramada,
+    # one word away and off Hurghada -- a chip of its own for that reason.
+    "gota abu makadi",
 )
 """Dive-site names operators actually write, in a title or in their own prose.
 
