@@ -3,6 +3,58 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-27
+
+```
+changes: HEAD -> 2026-10-27
+===========================
+
+now sold out (1)
+  2027-05-29  Yachtiano              Yachtiano Deluxe                   divebooker.com+liveaboard.com
+
+bookable again (3)
+  2027-05-29  Blue Horizon           Daedalus & St. John's              divebooker.com+liveaboard.com+padi.com
+  2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail  liveaboard.com
+  2027-07-31  Sunlight               South Route: Daedalus - Rocky - Za liveaboard.com
+
+re-listed — same sailing, new row (3)
+  2027-06-07  Ghazala Explorer       Deep South & St. John's      padi.com -> liveaboard.com+padi.com  1,570 EUR -> 1,754 USD
+  2027-06-28  Ghazala Explorer       North: Wrecks & Reefs        padi.com -> liveaboard.com+padi.com  1,570 EUR -> 1,637 USD
+  2027-07-19  Ghazala Explorer       Daedalus Rocky & St. John's  padi.com -> liveaboard.com+padi.com  1,570 EUR -> 1,754 USD  Daedalus, Rocky & St. Jo -> Daedalus Rocky & St. Joh
+
+price up (32)
+  2027-07-17  DUNE Silky             2,746 ->   3,129 USD  +383 (+13.9%)  Best of Egypt
+  2027-07-31  Sunlight               1,143 ->   1,425 USD  +282 (+24.7%)  South Route: Daedalus - Rocky - Za
+  2027-06-26  DUNE Longara           1,513 ->   1,564 USD  +51 (+3.4%)  Fury Shoals Dolphin Trip
+  2027-08-21  DUNE Longara           1,513 ->   1,564 USD  +51 (+3.4%)  Fury Shoals Dolphin Trip
+  2027-05-22  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Golden Triangle
+  2027-06-05  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Golden Triangle
+  2027-06-19  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Golden Triangle
+  2027-05-15  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Golden Triangle
+  2027-05-08  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Golden Triangle
+  2027-05-29  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Mixed South - Daedalus, Rocky & Za
+  2027-08-14  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Mixed South - Daedalus, Rocky & Za
+  2027-08-28  DUNE Longara           1,737 ->   1,788 USD  +51 (+2.9%)  Mixed South - Daedalus, Rocky & Za
+  ... and 20 more not shown
+
+price down (206)
+  2027-05-01  Marselia Star          3,307 ->   3,297 USD  -10 (-0.3%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-31  Emperor Superior       2,645 ->   2,637 USD  -8 (-0.3%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,689 ->   2,681 USD  -8 (-0.3%)  Daedalus, Rocky Island, Zabargad, 
+  2027-08-16  Golden Dolphin IV      2,465 ->   2,457 USD  -8 (-0.3%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,465 ->   2,457 USD  -8 (-0.3%)  North - Straits of Tiran - Brother
+  2027-07-31  Queen Sherry           2,690 ->   2,682 USD  -8 (-0.3%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-31  Aphrodite              2,186 ->   2,179 USD  -7 (-0.3%)  Brothers, Safaga Reefs
+  2027-06-12  Aphrodite              2,179 ->   2,172 USD  -7 (-0.3%)  North - Straits of Tiran
+  2027-06-26  Aphrodite              2,179 ->   2,172 USD  -7 (-0.3%)  North - Straits of Tiran
+  2027-07-10  Aphrodite              2,253 ->   2,246 USD  -7 (-0.3%)  North - Straits of Tiran
+  2027-06-19  Aphrodite              2,179 ->   2,172 USD  -7 (-0.3%)  North Classic
+  2027-08-07  Aphrodite              2,242 ->   2,235 USD  -7 (-0.3%)  North Classic
+  ... and 194 more not shown
+
+611 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-26
 
 ```
