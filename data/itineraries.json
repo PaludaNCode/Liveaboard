@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-25",
+  "collected": "2026-10-27",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -16955,6 +16955,82 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6070&tourID=426353&languageID=1&curr=USD&showPrices=false"
+    },
+    "ghazala-explorer::Deep South - St John's (Port Ghalib - Port Ghalib)": {
+      "boat": "ghazala-explorer",
+      "name": "Deep South - St John's (Port Ghalib - Port Ghalib)",
+      "tour_id": "447662",
+      "collected": "2026-10-27",
+      "regions": [
+        "St. Johns",
+        "Abu Dabab",
+        "Elphinstone",
+        "Fury Shoal"
+      ],
+      "dive_sites": [
+        "st johns",
+        "abu dabab",
+        "elphinstone",
+        "fury shoals"
+      ],
+      "dives": 20,
+      "guests": 24,
+      "experience": "Advanced Open Water - 25 minimum logged dives required.",
+      "min_logged_dives": 25,
+      "intro": "The stunning reefs and magical canyon formations of Fury Shoal, combined with the chance to swim alongside countless striped dolphins in Sataya lagoon, make this a truly unforgettable itinerary. Marine life along this route is remarkably diverse, with almost guaranteed special encounters at every turn — from rare macro critters and massive green turtles to the elusive dugong and guitar ray. Crystal-clear visibility at St. Johns sets the perfect stage for thrilling shark and pelagic action, making this a deep south experience like no other.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Embark in Port Ghalib and settle into your cabin. Safety/check dive in the afternoon. Welcome dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 2–7:",
+          "text": "3 to 4 dives per day, including a night dive where conditions allow. 2 dives scheduled on crossing days.",
+          "is_day": false
+        },
+        {
+          "heading": "A typical day on board:",
+          "text": "Early light breakfast before the morning dive. Morning dive followed by a full breakfast. Second dive mid-morning. Lunch on board. Third dive in the afternoon, with a fourth dive where possible. Night dive (where conditions and site permit). Dinner on board.",
+          "is_day": false
+        },
+        {
+          "heading": "St. Johns Reef System",
+          "text": "— A vast and pristine reef complex featuring multiple dive sites, including stunning coral gardens, dramatic walls, and sandy plateaus teeming with reef fish, turtles, and sharks.",
+          "is_day": false
+        },
+        {
+          "heading": "Fury Shoal",
+          "text": "— A breathtaking maze of coral gardens and lagoons, home to rays, napoleon wrasse, and an extraordinary variety of reef life.",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone Reef",
+          "text": "— One of Egypt's most iconic dive sites, featuring dramatic walls patrolled by oceanic whitetip sharks, hammerheads, and large pelagic fish.",
+          "is_day": false
+        },
+        {
+          "heading": "Shaab Marsa Alam",
+          "text": "— A sheltered reef known for its resident dugongs grazing in the seagrass beds and frequent turtle sightings.",
+          "is_day": false
+        },
+        {
+          "heading": "Abu Dabab",
+          "text": "— Famous for its gentle dugongs and sea turtles, offering a unique and magical underwater experience in calm, shallow waters.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Final morning dive. Sail back to Port Ghalib. Disembark and farewell.",
+          "is_day": true
+        },
+        {
+          "heading": "Ocean Life:",
+          "text": "This route offers some of the most rewarding marine encounters in the Egyptian Red Sea. Sataya Lagoon is renowned for its large pods of wild spinner and bottlenose dolphins, which frequently join divers in the water. The canyon formations of Fury Shoal teem with napoleon wrasse, eagle rays, and reef sharks, while St. Johns delivers exceptional visibility with whitetip sharks, hammerheads, and schools of barracuda patrolling the blue. Massive green turtles are a near-constant companion throughout, and with luck, the rare dugong and prehistoric guitar ray may also make an appearance. Night dives reveal a hidden world of octopus, cuttlefish, and lionfish emerging after dark. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6070&tourID=447662&languageID=1&curr=USD&showPrices=false"
     },
     "ghazala-explorer::Escorted Get Wrecked Week (Hurghada - Hurghada)": {
       "boat": "ghazala-explorer",
@@ -37079,6 +37155,7 @@
     "424855": "ghazala-explorer::North: Wrecks & Reefs (Hurghada - Hurghada)",
     "424856": "ghazala-explorer::North & Safaga (Hurghada - Hurghada)",
     "424867": "ghazala-explorer::North & Brothers (Hurghada - Hurghada)",
+    "424868": "ghazala-explorer::North & Safaga (Hurghada - Hurghada)",
     "425606": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",
     "425607": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
     "425608": "new-sambo::Sataya Mini-Safari (Hamata - Hamata)",

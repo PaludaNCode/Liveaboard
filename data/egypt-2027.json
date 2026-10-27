@@ -89118,7 +89118,10 @@
       "dive_sites": [
         "st johns",
         "sataya",
-        "fury shoals"
+        "fury shoals",
+        "elphinstone",
+        "shaab marsa alam",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -89346,11 +89349,11 @@
       ],
       "requirements": {
         "min_level": "advanced",
-        "min_logged_dives": 30,
+        "min_logged_dives": 25,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 30 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
+        "notes": "Advanced Open Water - 25 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
       "dives_read": true,
       "padi_fees": [
