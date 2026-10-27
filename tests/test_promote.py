@@ -1553,6 +1553,13 @@ class TestTheThirdSellersReefNames(unittest.TestCase):
                 self.assertEqual(sites, [name.lower()])
                 self.assertNotIn("dahab", sites)
 
+    def test_gota_abu_makadi_is_its_own_reef_and_not_abu_ramadas(self):
+        """The third seller began naming it on 2026-10-26 and the publish
+        refused two mornings. It is Makadi Bay's reef, down the coast from
+        the island off Hurghada whose Gota is a chip already: one word apart,
+        and two places."""
+        self.assertEqual(self.sites("Gota Abu Makadi"), ["gota abu makadi"])
+
     def test_one_name_never_mints_two_chips(self):
         """`panorama` is an alias rather than a hint for this reason: a hint
         matching the bare word would have put *panorama* beside *panorama
