@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-26",
+ "collected": "2026-10-27",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -6362,6 +6362,113 @@
    },
    "title": "BDE - Golden Triangle (Hurghada - Port Ghalib) 7 Nights"
   },
+  "avo::BDE - Golden Triangle (Port Ghalib - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "gota abu ramada",
+    "panorama reef",
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "marsa shouna"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "BDE - Golden Triangle (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23462,
+   "padi_slug": "bde-golden-triangle-hurghada-port-ghalib-7-nights",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE - Golden Triangle (Port Ghalib - Hurghada) 7 Nights"
+  },
   "avo::BDE - Golden Triangle (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
    "boat_name": "MY AVO",
@@ -6465,15 +6572,26 @@
    "dive_sites": [
     "abu dabab",
     "daedalus",
-    "elphinstone"
+    "elphinstone",
+    "shaab marsa alam"
    ],
-   "dives": 11,
+   "dives": 17,
    "fees": {
     "complete": true,
     "lines": [
      {
       "amount": {
-       "amount": 200.0,
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -6541,9 +6659,9 @@
     "unreadable": []
    },
    "name": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
-   "nights": 5,
-   "padi_id": 22931,
-   "padi_slug": "daedalus-elphinstone-port-ghalib-port-ghalib-7-n-4",
+   "nights": 7,
+   "padi_id": 22929,
+   "padi_slug": "the-best-of-the-south-port-ghalib-port-ghalib-7-2",
    "port_from": "Port Ghalib",
    "port_to": "Port Ghalib",
    "requirements": {
@@ -6551,7 +6669,7 @@
     "min_logged_dives": 50,
     "recommended_logged_dives": 50
    },
-   "title": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 5 Nights"
+   "title": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
   },
   "avo::Dahab Sinai (Hurghada - Hurghada)": {
    "boat": "avo",
@@ -46763,7 +46881,7 @@
     "last": "2027-12-25",
     "priced": 15,
     "read": 55,
-    "unpriced": 9
+    "unpriced": 4
    },
    "slug": "my-avo",
    "specs": {
@@ -46916,12 +47034,12 @@
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 51,
+    "dated": 47,
     "first": "2026-10-29",
     "in_season": 16,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 51,
+    "read": 47,
     "unpriced": 0
    },
    "slug": "my-blue-seas",
@@ -46961,12 +47079,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 43,
-    "first": "2026-10-27",
+    "dated": 42,
+    "first": "2026-11-01",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 43,
+    "read": 42,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -47476,12 +47594,12 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 6,
-    "first": "2026-10-27",
+    "dated": 5,
+    "first": "2026-11-03",
     "in_season": 0,
     "last": "2026-12-19",
     "priced": 0,
-    "read": 6,
+    "read": 5,
     "unpriced": 3
    },
    "slug": "my-lady-m",
