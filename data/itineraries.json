@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-27",
+  "collected": "2026-10-28",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -22770,6 +22770,67 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6216&tourID=419710&languageID=1&curr=USD&showPrices=false"
     },
+    "ocean-lovers::Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Hurghada)": {
+      "boat": "ocean-lovers",
+      "name": "10% Off: Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Hurghada)",
+      "tour_id": "419719",
+      "collected": "2026-10-28",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 20,
+      "guests": 32,
+      "experience": "Advanced Open Water - 25 minimum logged dives required.",
+      "min_logged_dives": 25,
+      "intro": "This itinerary is a great combination of what the Red Sea has to offer: drift dives on drop-off walls, relaxing dives in coral gardens, and amazing light play in the caverns of St. Johns. Daedalus Reef: The main attraction on Daedalus Reef is the hammerhead shark, which is usually spotted in big groups. But not to forget about other marine life, such as oceanic white tip sharks, barracudas, tunas, mantas, curious Napoleon fish, Anemone City, and much more. Zabargad: A special highlight is a wreck in the southwest part of Zabargad. This wreck, Hanka, is surrounded by rumors. The main version identifies the Hanka as a Soviet spy boat. The south side of Zabargad offers an unforgettable dive in an amazingly colorful coral garden. Rocky Island is a great spot to find a lot of sharks on the south/east point of the island in all conditions. Rocky Island offers stunning deep walls fully covered in soft corals with plenty of small and large marine life. St. John's dive sites offer a lot of diversity. There are some dive sites with drop-offs and strong currents, and others—coral lagoons at 10-20 meters' depth. St. John's is a great opportunity for everybody, from beginners to advanced divers. Fury Shoal—Sataya includes many well-known dive sites: Sataya, Shaab Maksur, Shaab Claudio, and many more.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Check in from 4 pm. Welcome and Safety Briefing. Dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "1st Dive: Abou Dabab 1. 2nd Dive: Abou Dabab 3. Night Dive: Abou Dabab 3.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "(Daedalus Reef)—3 Dives",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "1st Dive: Rocky Island 2nd Dive: Rocky Island 3rd Dive: Zabargad Island Night Dive: Dangerous Reef",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "1st Dive: Habily Ali. 2nd Dive: Soghayara. 3rd Dive: Um el Kharareem (St. John’s caves). Night Dive: Satayeh taht el reeh (Southeast).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "1st Dive: Satayeh taht el reeh (Southeast). Between 1st and 2nd dives: Dolphin. 2nd Dive: El Maksour. 3rd Dive: Abu Galawa Saghier. Night Dive: Seyal",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "1st Dive: Elphinstone. 2nd Dive: Marsa El Shouna.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Breakfast. Check-out at 10:00 am at the latest.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Grey reef, silvertip, and oceanic whitetip sharks and seasonal hammerheads patrol deep walls and blue water. Expect manta rays, eagle rays, barracuda, tuna, and jackfish in strong currents around Daedalus and Elphinstone. Rocky, Zabargad, St. Johns, and Fury Shoals feature pristine coral reefs with turtles, moray eels, Napoleon wrasse, clouds of anthias, and rich macro life across untouched reef systems. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6216&tourID=419719&languageID=1&curr=USD&showPrices=false"
+    },
     "ocean-lovers::Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Port Ghalib)": {
       "boat": "ocean-lovers",
       "name": "10% Off: Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Port Ghalib)",
@@ -22819,6 +22880,74 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6216&tourID=419707&languageID=1&curr=USD&showPrices=false"
+    },
+    "ocean-lovers::North Reefs - Wrecks & Tiran (Hurghada - Hurghada)": {
+      "boat": "ocean-lovers",
+      "name": "North Reefs - Wrecks & Tiran (Hurghada - Hurghada)",
+      "tour_id": "345919",
+      "collected": "2026-10-28",
+      "regions": [
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Gordon Reef",
+        "Jackson Reef",
+        "Woodhouse Reef",
+        "Ras Mohammed"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "thistlegorm",
+        "tiran",
+        "ras mohammed"
+      ],
+      "dives": 21,
+      "guests": 32,
+      "experience": "Advanced Open Water - 15 minimum logged dives required.",
+      "min_logged_dives": 15,
+      "intro": "This journey gives you the chance to see famous Red Sea wrecks and immaculate reefs as well as the Tiran diving area which is made up of four main reefs that form the top of an underwater bridge near the entrance to the Gulf of Aqaba. These reefs, which bear the names of four British cartographers (Jackson, Woodhouse, Thomas, and Gordon), are renowned throughout the world for their astounding coral diversity and for being a haven for numerous huge pelagic fish due to the strong southwesterly currents. The most famous wreck, SS Thistlegorm, is the most well-known Red Sea wreck. German aircraft bombed the 129-metre English freighter on October 6, 1941. She constructed a man-made reef today on a sandy bottom at a maximum depth of 32 metres. She is particularly well-liked by giant schooling fish and is home to a huge variety of marine species. The barrier that Shaab Mahmoud is creating has a small crack in the middle of it. Drift alongside stunning corals and colourful marine life around the outside wall. To get up and through the crack, look for a sand slope. You can fly through the 5-metre-deep passage when the current is perfectly right and be launched into the sandy lagoon! Gubal Island: The 'Bluff Point' near the gateway to the Straits of Gubal gets its name from the turbulence created by the strong currents that beat along the island's eastern wall. On the reef 300 metres north of the lighthouse, the wreck of the \"Ulysses\" is located. Its depth ranges from 5 to 25 metres. Divers can find \"The Barge\" wreck south of the lighthouse, which offers divers a unique and enjoyable night dive. All varieties of nighttime creatures are protected by the wreck's skeleton. Abu Nuhas: Also called the \"Ships Graveyard,\" this reef is dangerously situated close to the Gulf of Suez's busiest shipping routes. More ships have been lost on this reef than any other nearby. On the north side, a steeply sloping reef covered in layers of table corals has four wrecks The Giannis D, Carnatic, Chrisoula K, and Kimon M all lying on a sandy seafloor. A secure anchorage for liveaboards is located on the southern side, which also offers amazing night dives. Dolphins are regular visitors to this reef. At the extremity of the Sinai Peninsula, there is a dive location known as Ras Mohamed Reef. A vertical wall that descends into the abyss connects two little ergs. You may drift along the wall at Shark Reef, which is covered in vibrant corals. As you approach Yolanda Reef, a plateau dotted with little ergs and coral outcrops appears. As you circle the reef further, you will come across the wreckage of the Yolanda, complete with its cargo of bathrooms and toilets. Keep an eye on the blue since large fish inhabit the entire territory! Jackson Reef is the farthest reef, and a cargo wreck on its northern side serves as a sharp warning to ships navigating the congested straight. The moorings on the south side, which are protected from the main wave and currents, are where dives are typically conducted. As you travel north, you will come across an impressive forest of Gorgonia fan coral at depths of 20 to 30 metres, along with a wide variety of reef species. Of the four reefs in the Strait of Tiran, Woodhouse Reef is the longest. It is a drift diving site and is frequently dived from south to north. It is home to reef sharks and eagle rays. There is a wall to the south of the reef that drops off to around 30 metres and is entirely covered in coral. At around 25 metres along the reef, there is a canyon that expands into a coral garden with a sandy bottom. The smallest reef in the Strait is Thomas Reef, and diving there is dependent on the weather because of the extremely strong currents. With a sizable plateau at around 25 metres on the southeastern side, the ends are vertical walls. On the sand areas of this plateau, there are frequently sleeping sharks, and the colourful coral has a fence made of Gorgonia fans at the end. The most southerly of the four reefs, Gordon Reef, has a different topography from the others, with a shallow plateau and drop-offs. Large schools of grouper and a large variety of reef fish may be seen here. At a depth of 4 to 5 metres, an eel garden can be seen on the sandy bottom. The wreck Lovilla, which is practically parallel to the wreck on Jackson Reef and is located at the top of the reef with its lighthouse.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in from 4 pm. Welcome and Safety Briefing. Dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "1st dive - Poseidon Reef. 2nd dive - Abu Nuhas (Giannis D. wreck). 3rd dive - Shaab Mahmoud (night dive).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "1st dive - Dunraven wreck. 2nd dive - Ras Mohamed. 3rd dive - Ras Mohamed. 4th dive - Gordon Reef (night dive).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "1st dive - Jackson Reef. 2nd dive - Thomas Reef. 3rd dive - Thistlegorm wreck. 4th dive - Thistlegorm (night dive).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "1st dive - Thistlegorm wreck. 2nd dive - Kingston wreck. 3rd dive - Gubal Island. 4th dive - The Barge (night dive).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "1st dive - Ulysses wreck. 2nd dive - Abu Nuhas (Carnatic wreck). 3rd dive - Abu Nuhas ( Chrisoula K. wreck). 4th dive - Dolphin House (night dive)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "1st dive - Dolphin House. 2nd dive - El Mina Wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Breakfast. Check-out latest at 10 am. (*) the itinerary description provided by the boat operator. The northern Red Sea offers an incredible mix of history and marine life, making it a dream destination for divers. Along the North Wreck and Tiran route, you’ll explore legendary wrecks like the Thistlegorm, Giannis D, and Carnatic—now thriving artificial reefs teeming with life. Schools of batfish, barracudas, and snappers glide around the corals, while moray eels and lionfish hide among the wreck structures. In Tiran and Ras Mohammed National Park, crystal-clear waters reveal vibrant reefs where you might spot turtles, eagle rays, and even reef sharks. Depending on the season, playful dolphins and graceful manta rays often make an appearance, adding to the magic of this unforgettable diving adventure. The last dive will be on the penultimate day of the trip at around 10 am. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6216&tourID=345919&languageID=1&curr=USD&showPrices=false"
     },
     "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)": {
       "boat": "ocean-lovers",
@@ -37013,6 +37142,12 @@
     "335633": "red-sea-aggressor-iv::St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
     "335634": "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Marsa Alam)",
     "335635": "red-sea-aggressor-iv::St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
+    "345914": "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
+    "345916": "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
+    "345917": "ocean-lovers::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+    "345918": "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
+    "345920": "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
+    "345921": "ocean-lovers::North Reefs - Wrecks & Tiran (Hurghada - Hurghada)",
     "348010": "sunlight::South Route Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
     "351876": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
     "351877": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
@@ -37146,6 +37281,10 @@
     "417442": "dune-longara::Best of Egypt (Safaga - Port Ghalib)",
     "417443": "dune-longara::Golden Triangle (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)",
     "418142": "dune-longara::Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
+    "419693": "ocean-lovers::Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Port Ghalib)",
+    "419694": "ocean-lovers::Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+    "419695": "ocean-lovers::Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Port Ghalib)",
+    "419696": "ocean-lovers::Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
     "419973": "ghazala-explorer::Get Wrecked (Hurghada - Hurghada)",
     "420265": "hammerhead-ii::Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
     "421208": "dune-longara::Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
