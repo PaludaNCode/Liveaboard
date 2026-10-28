@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-27",
+ "collected": "2026-10-28",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -14069,6 +14069,94 @@
    },
    "title": "St.Johns (Port Ghalib - Port Ghalib) 7 Nights"
   },
+  "blue::Brother, Daedalus and Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 135.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from closest airport (round-trip; except of night flights)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brother, Daedalus and Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 14218,
+   "padi_slug": "brother-daedalus-and-elphinstone-port-ghalib-port",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother, Daedalus and Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
   "blue::Brother, Daedalus and Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
@@ -14332,6 +14420,182 @@
     "recommended_logged_dives": 50
    },
    "title": "Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib) 7 nights"
+  },
+  "blue::Brothers - North - Tiran (Hurghada - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dive_sites": [
+    "tiran",
+    "brothers",
+    "ras mohammed"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 135.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from closest airport (round-trip; except of night flights)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - North - Tiran (Hurghada -  Hurghada)",
+   "nights": 7,
+   "padi_id": 14222,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-3",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - North - Tiran (Hurghada -  Hurghada) 7 nights"
+  },
+  "blue::Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 135.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from closest airport (round-trip; except of night flights)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22187,
+   "padi_slug": "brother-daedalus-and-elphinstone-port-ghalib-hurgh",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers-Daedalus-Elphinstone (Hurghada - Hurghada) 7 Nights"
   },
   "blue::Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)": {
    "boat": "blue",
@@ -14772,6 +15036,95 @@
     "recommended_logged_dives": 50
    },
    "title": "North & Tiran (Hurghada- Hurghada) 7 nights"
+  },
+  "blue::North & Turkia (Hurghada - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "turkia",
+    "ras mohammed"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 135.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from closest airport (round-trip; except of night flights)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Turkia (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14223,
+   "padi_slug": "north-and-tiran-hurghada-hurghada-7-nights-3",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Turkia (Hurghada - Hurghada) 7 nights"
   },
   "blue::North - Tiran - Dahab (Hurghada - Hurghada)": {
    "boat": "blue",
@@ -33475,6 +33828,92 @@
    },
    "title": "Mini Safari Fury shoals & sataya (Hamata - Hamata) 3 nights"
   },
+  "lady-m::Sataya Reef (Hamata - Hamata)": {
+   "boat": "lady-m",
+   "boat_name": "MY Lady M",
+   "dive_sites": [
+    "fury shoals",
+    "sataya"
+   ],
+   "dives": 16,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "hyperbaric_levy",
+      "note": "Hyperbaric chamber contribution",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 15.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Sataya Reef (Hamata - Hamata)",
+   "nights": 7,
+   "padi_id": 21276,
+   "padi_slug": "mini-safari-fury-shoals-sataya-hamata-hamata-3-nig",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Sataya Reef (Hamata - Hamata) 7 nights"
+  },
   "new-sambo::BDE - Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
@@ -46943,12 +47382,12 @@
    "name": "MY Blue",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 50,
+    "dated": 54,
     "first": "2026-10-29",
-    "in_season": 14,
+    "in_season": 17,
     "last": "2027-12-30",
-    "priced": 12,
-    "read": 50,
+    "priced": 15,
+    "read": 54,
     "unpriced": 5
    },
    "slug": "my-blue",
@@ -47594,13 +48033,13 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 5,
+    "dated": 7,
     "first": "2026-11-03",
     "in_season": 0,
-    "last": "2026-12-19",
+    "last": "2026-12-27",
     "priced": 0,
-    "read": 5,
-    "unpriced": 3
+    "read": 7,
+    "unpriced": 4
    },
    "slug": "my-lady-m",
    "specs": {
@@ -47620,10 +48059,10 @@
     "dated": 100,
     "first": "2026-10-29",
     "in_season": 20,
-    "last": "2028-07-08",
+    "last": "2028-06-24",
     "priced": 17,
     "read": 100,
-    "unpriced": 35
+    "unpriced": 34
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -47887,9 +48326,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-10-28",
+    "first": "2026-11-01",
     "in_season": 35,
-    "last": "2027-10-10",
+    "last": "2027-10-13",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -48045,13 +48484,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 54,
-    "first": "2026-10-28",
+    "dated": 53,
+    "first": "2026-11-04",
     "in_season": 18,
     "last": "2027-12-26",
     "priced": 0,
-    "read": 54,
-    "unpriced": 54
+    "read": 53,
+    "unpriced": 53
    },
    "slug": "vip-one",
    "specs": {
