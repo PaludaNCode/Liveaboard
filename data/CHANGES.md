@@ -3,6 +3,55 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-28
+
+```
+changes: HEAD -> 2026-10-28
+===========================
+
+now sold out (2)
+  2027-05-13  Sea Serpent Grand      North & Brothers                   divebooker.com+liveaboard.com
+  2027-06-26  Sinaistar              North Reefs, Wrecks & Tiran        divebooker.com+liveaboard.com
+
+bookable again (1)
+  2027-06-05  Blue Horizon           Rocky, Zabargad & St. John's       divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (1)
+  2027-05-17  Ghazala Explorer       Escorted Get Wrecked Week    padi.com -> liveaboard.com+padi.com  1,623 EUR -> 1,806 USD  Get Wrecked -> Escorted Get Wrecked Wee
+
+price up (15)
+  2027-05-05  Alia Soul              1,151 ->   1,836 USD  +685 (+59.5%)  Marine Park North: Brothers - Daed
+  2027-05-08  ALSURAYA               1,252 ->   1,324 USD  +72 (+5.8%)  Daedalus, Rocky, Zabargad & Elphin
+  2027-05-01  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-06-19  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-21  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-14  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-05-22  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-28  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Daedalus, Sataya & Fury Shoals
+  2027-05-15  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Daedalus, St. John's & Elphinstone
+  2027-06-26  ALSURAYA               1,207 ->   1,277 USD  +70 (+5.8%)  Daedalus, St. John's & Elphinstone
+  2027-07-17  ALSURAYA               1,211 ->   1,277 USD  +66 (+5.5%)  Brothers, Daedalus & Elphinstone
+  2027-07-03  ALSURAYA               1,211 ->   1,277 USD  +66 (+5.5%)  Brothers, Daedalus & Elphinstone
+  ... and 3 more not shown
+
+price down (567)
+  2027-05-01  Marselia Star          3,297 ->   3,283 USD  -14 (-0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             3,129 ->   3,116 USD  -13 (-0.4%)  Best of Egypt
+  2027-05-29  MY Odyssey Liveaboar   1,805 ->   1,792 USD  -13 (-0.7%)  Brothers, Daedalus & Elphinstone
+  2027-05-20  Blue                   1,592 ->   1,580 USD  -12 (-0.8%)  Brothers, Daedalus & Elphinstone
+  2027-05-06  Blue                   1,592 ->   1,580 USD  -12 (-0.8%)  Daedalus & Fury Shoals
+  2027-05-27  Blue                   1,592 ->   1,580 USD  -12 (-0.8%)  Daedalus, Rocky & Zabargad
+  2027-05-13  Blue                   1,592 ->   1,580 USD  -12 (-0.8%)  Rocky, Zabargad & St. John's
+  2027-05-08  MY Odyssey Liveaboar   1,704 ->   1,692 USD  -12 (-0.7%)  Best of Dahab and Tiran
+  2027-05-15  MY Odyssey Liveaboar   1,592 ->   1,580 USD  -12 (-0.8%)  Best of Tiran
+  2027-05-22  MY Odyssey Liveaboar   1,592 ->   1,580 USD  -12 (-0.8%)  Fury Shoals
+  2027-05-01  MY Odyssey Liveaboar   1,592 ->   1,580 USD  -12 (-0.8%)  The Golden Loop: North - Brothers 
+  2027-05-08  Red Sea Blue Force 2   1,670 ->   1,658 USD  -12 (-0.7%)  Extended North
+  ... and 555 more not shown
+
+286 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-27
 
 ```
