@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-10-29",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 690 of 1338 sailings and the entry bar on 274 of 511 trips; where the two disagree about the bar the stricter is shown. On 185 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 43 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 690 of 1338 sailings and the entry bar on 275 of 511 trips; where the two disagree about the bar the stricter is shown. On 185 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 43 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-10-28",
@@ -157098,11 +157098,16 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-excellence",
       "nights": 7,
-      "dives": 20,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga"
+        "elphinstone",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "safaga",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Itineraries aboard the MY Sea Serpent Excellence include the famous sites of the Red Sea, such as the Tiran Strait, the Brother Islands, Daedalus, and Elphinstone. The Sea Serpent Excellence is fitted with 12 en-suite cabins.",
@@ -157320,8 +157325,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent"
+        "notes": "AOWD or equivalent Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced + 50 dives. The stricter is shown."
       },
+      "dives_read": true,
       "divebooker_fees": [
         {
           "amount": null,
@@ -171522,11 +171528,15 @@
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 8,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
-      "dive_sites": [],
-      "region": "southern route",
+      "dive_sites": [
+        "rocky island",
+        "zabargad",
+        "st johns"
+      ],
+      "region": null,
       "summary": "The Serenity is a 33-meter/108-foot liveaboard taking 24 guests on diving trips through Egypt&rsquo;s Red Sea in 12 spacious air-conditioned cabins with ensuite facilities.",
       "source_url": "https://www.liveaboard.com/diving/egypt/serenity?m=8/2027",
       "fees": [
@@ -171681,7 +171691,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sinaistar--brothers-daedalus-elphinstone-hurghada-hurghada",

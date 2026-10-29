@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-28",
+  "collected": "2026-10-29",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -28162,6 +28162,60 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5481&tourID=445297&languageID=1&curr=USD&showPrices=false"
     },
+    "sea-serpent-excellence::North & Safaga (Hurghada - Hurghada)": {
+      "boat": "sea-serpent-excellence",
+      "name": "North & Safaga (Hurghada - Hurghada)",
+      "tour_id": "445298",
+      "collected": "2026-10-29",
+      "regions": [
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Safaga"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "thistlegorm",
+        "safaga"
+      ],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "This Red Sea diving safari travels as far North as Gubal Islands and Rosalie Moeller wreck and as far South as Panorama reef and Salem Express, combining the best Hurghada and Safaga has to offer. Dive the famous four wrecks of Abu Nuhas, the Ships’ Graveyard. This reef lies close to the ship-lane toward the Suez Canal and has claimed more ships than any other in the Red Sea. The wrecks are very scenic, covered in corals and they are fantastic for photography, especially the Carnatic, having sunk in 1869. The recently discovered Rosalie Moeller is a World War II wreck and one of the highlights of this cruise. The Rosalie Moeller was a British coal cargo, sunk in 1941 by German Bombers on a scouting mission off the island of Crete. You will also be visiting the wreck of Salem Express, one of the largest accessible wrecks in the Red Sea. Recent growths of hard & soft corals, along with a variety of reef fish who have taken shelter among the rubble, give this dive a new and much-appreciated feel. This Red Sea diving safari has a lot to offer for reef lovers as well, as Safaga is renowned for its less-visited fresh sites and its beautiful coral gardens. Sites like Panorama Reef, which is celebrated as much as Elphinstone, for the variety of life it offers and the chance to spot large pelagics.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Arrival and check-in onboard after 17:00, dinner, and a night spent onboard in the Marina.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Departure in the morning around 08:00 - 09:00, 2 check dives, possible",
+          "is_day": true
+        },
+        {
+          "heading": "night dive",
+          "text": "in the area.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 3-6",
+          "text": "3-4 dives possible per day including 1 night dive where possible",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Last diving day with",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check out after breakfast and transfer to the airport. This itinerary is based on 7 nights spent on board. Due to the schedule of the boat, there is a possibility that we will offer 6 nights onboard and 1 night in a 4* hotel. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5481&tourID=445298&languageID=1&curr=USD&showPrices=false"
+    },
     "sea-serpent-excellence::North Tour: Northern Reefs & Wrecks (Hurghada - Hurghada)": {
       "boat": "sea-serpent-excellence",
       "name": "North Tour: Northern Reefs & Wrecks (Hurghada - Hurghada)",
@@ -28226,6 +28280,54 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5481&tourID=365884&languageID=1&curr=USD&showPrices=false"
+    },
+    "sea-serpent-excellence::Rocky - Zabargad - St. John's (Port Ghalib - Port Ghalib)": {
+      "boat": "sea-serpent-excellence",
+      "name": "Rocky - Zabargad - St. John's (Port Ghalib - Port Ghalib)",
+      "tour_id": "438988",
+      "collected": "2026-10-29",
+      "regions": [
+        "Fury Shoal",
+        "Zabargad",
+        "St. Johns",
+        "Elphinstone",
+        "Rocky"
+      ],
+      "dive_sites": [
+        "fury shoals",
+        "zabargad",
+        "st johns",
+        "elphinstone",
+        "rocky island"
+      ],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "Enjoy the majesty of the off-shore reefs and the splendor of the coastal zones. The sheer walls of",
+      "sections": [
+        {
+          "heading": "Elphinstone Reef",
+          "text": "plunge steeply into the blue richly decorated with soft and fan corals. The north plateau is home to schooling hammerhead and grey reef sharks with frequent sightings of the inquisitive oceanic white-tip sharks.",
+          "is_day": false
+        },
+        {
+          "heading": "Rocky and Zabargad Islands",
+          "text": "lie close together to the south-east of Ras Banas. Rocky’s shear walls are covered in a stunning forest of soft and fan corals. Juvenile white-tip sharks can be observed sleeping under huge, very scenic overhangs. Mantas, hammerhead and grey reef sharks often visit the island and napoleon fish dance in your bubbles. Z",
+          "is_day": false
+        },
+        {
+          "heading": "abargad Island,",
+          "text": "amazing in its spectacular beauty, was used as a precious stone mine in ancient times. Along its southern side, a shallow shelf displays a large number of high pinnacles completely covered in soft corals and clouds of anthias offering amazing diving. The drop-off offers hammerhead, grey reef shark and manta sightings. On its north-eastern side, a small shallow wreck can be dived upon.",
+          "is_day": false
+        },
+        {
+          "heading": "St John",
+          "text": "is a collection of small reefs offering some of the best diving in the Red Sea. Habili Ali will make even the most experienced of divers sigh with wonder when admiring the forests of huge fan corals and black corals that populate its walls. At its western end grey reef, silver-tip and big schools of hammerhead sharks may be observed. Have also a lookout for the curious and impressive Hump-head parrotfish that are typical for the St John area. The above itinerary is only a plan and it is to provide an idea as to which sites may be most likely visited during the trip. There may be deviations from this plan due to weather conditions, the captain’s decisions, the dive guides’ suggestions, the guests’ requests and qualifications and other factors that may hinder the safety of the crew and the guests. This itinerary is based on 7 nights spent on board. Due to the schedule of the boat, there is a possibility that we will offer 6 nights onboard and 1 night in a 4* hotel.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5481&tourID=438988&languageID=1&curr=USD&showPrices=false"
     },
     "sea-serpent-excellence::St. John's (Port Ghalib - Port Ghalib)": {
       "boat": "sea-serpent-excellence",
@@ -30104,6 +30206,60 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6173&tourID=366861&languageID=1&curr=USD&showPrices=false"
+    },
+    "serenity::Solar Eclipse 2027: Deep South (Port Ghalib - Port Ghalib)": {
+      "boat": "serenity",
+      "name": "Solar Eclipse 2027: Deep South (Port Ghalib - Port Ghalib)",
+      "tour_id": "448073",
+      "collected": "2026-10-29",
+      "regions": [
+        "Zabargad",
+        "St. Johns",
+        "Rocky"
+      ],
+      "dive_sites": [
+        "zabargad",
+        "st johns",
+        "rocky island"
+      ],
+      "dives": 19,
+      "guests": 22,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This special 8-night liveaboard departure from Port Ghalib combines the rare experience of a solar eclipse with the remote reefs of the Red Sea's Deep South. The route explores St. John's, Rocky Island, and Zabargad, some of the most beautiful reefs Guests can experience in the Red Sea, far from the busier northern dive sites. This trip is suited to experienced divers looking for a once-in-a-lifetime combination of an astronomical event and world-class southern Red Sea diving.",
+      "sections": [
+        {
+          "heading": "Highlights:",
+          "text": "Solar Eclipse Deep South - St. John's, Rocky, Zabargad: One of the most beautiful reefs Guests can experience in the Red Sea",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1: Port Ghalib - Embarkation",
+          "text": "Check-in at Port Ghalib from 18:00. Guests settle into their cabins and prepare their dive equipment for the week ahead.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 - 7: Diving Adventures",
+          "text": "Possible Dive Sites: St. John's, Rocky Island, and Zabargad. A highlight of the trip: Guests witness the solar eclipse on 2 August 2027.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8: Port Ghalib",
+          "text": "The final dives of the trip, followed by the return to Port Ghalib.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 9: Port Ghalib - Disembarkation",
+          "text": "Check-out at 09:00. Complimentary transfers to Marsa Alam Airport or nearby hotels (within 20 km north or south of Port Ghalib).",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Dolphins, reef sharks, turtles, Napoleon wrasse, barracudas, schooling reef fish, and colourful hard and soft corals typical of the southern Red Sea. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6173&tourID=448073&languageID=1&curr=USD&showPrices=false"
     },
     "sinaistar::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
       "boat": "sinaistar",
@@ -37197,6 +37353,7 @@
     "363979": "sea-serpent-excellence::Fury Shoals (Port Ghalib - Port Ghalib)",
     "365891": "sea-serpent-excellence::St. John's (Port Ghalib - Port Ghalib)",
     "366841": "serenity::North & Tiran (Hurghada - Hurghada)",
+    "366842": "serenity::Safaga and Hurghada (Hurghada - Hurghada)",
     "371319": "vita-xplorer::Brothers Daedalus Elphinstone (Hurghada, Marriott - Hurghada, Marriott)",
     "371320": "vita-xplorer::North Ras Mohamed (Hurghada, Marriot - Hurghada, Marriot)",
     "371321": "vita-xplorer::Tiran & North Ras Mohamed (Hurghada, Marriott - Hurghada, Marriott)",
@@ -37248,7 +37405,9 @@
     "389382": "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)",
     "390002": "hammerhead-ii::Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)",
     "390003": "hammerhead-ii::Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)",
+    "390004": "hammerhead-ii::Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)",
     "391517": "iceberg::Hurghada North (Hurghada - Hurghada)",
+    "391705": "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Marsa Alam)",
     "400631": "iceberg::Special Wrecks / Hurghada North (Hurghada - Hurghada)",
     "400632": "iceberg::Hurghada North (Hurghada - Hurghada)",
     "400633": "iceberg::Hurghada North (Hurghada - Hurghada)",
@@ -37270,6 +37429,8 @@
     "411538": "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Marsa Alam)",
     "411891": "alia-soul::Marine Park North: Brothers - Daedalus & Elphinstone (Port Ghalib - Safaga/Soma Bay)",
     "411903": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
+    "412435": "serenity::North and Wrecks (Hurghada - Hurghada)",
+    "412437": "serenity::North and Wrecks (Hurghada - Hurghada)",
     "412445": "odyssey::Best of Dahab and Tiran (Hurghada - Hurghada)",
     "412446": "odyssey::The Golden Loop: North - Brother - Safaga (Hurghada - Hurghada)",
     "412447": "odyssey::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
