@@ -1,5 +1,5 @@
 {
-  "collected": "2026-10-29",
+  "collected": "2026-10-30",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -3992,6 +3992,31 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439707&languageID=1&curr=USD&showPrices=false"
+    },
+    "bella-2::Deep North Dahab Route (Sharm El Sheikh - Sharm El Sheikh)": {
+      "boat": "bella-2",
+      "name": "Deep North Dahab Route (Sharm El Sheikh - Sharm El Sheikh)",
+      "tour_id": "448555",
+      "collected": "2026-10-30",
+      "regions": [
+        "Abu Dabab"
+      ],
+      "dive_sites": [
+        "abu dabab"
+      ],
+      "dives": 18,
+      "guests": 22,
+      "experience": "Advanced Open Water - 20 minimum logged dives required.",
+      "min_logged_dives": 20,
+      "intro": "Embarking on a diving adventure along the Deep North Dahab Route from Sharm El Sheikh offers divers the opportunity to explore some of the most captivating underwater landscapes of the Red Sea. Here's a brief overview of what to expect when diving this route:",
+      "sections": [
+        {
+          "heading": "Route Highlights:",
+          "text": "Blue Hole: The iconic Blue Hole is a renowned diving site near Dahab, characterized by its impressive depth and stunning underwater archway. Divers can descend into the abyss, encountering vibrant coral formations and an abundance of marine life along the way. The Canyon: Another highlight of the Deep North Dahab Route is The Canyon, an awe-inspiring underwater gorge teeming with marine biodiversity. Divers can navigate through this natural wonder, observing colorful reef fish, moray eels, and occasional pelagic species. Bells and Eel Garden: These sites offer diverse underwater topography, including coral gardens, sandy bottoms, and rocky outcrops. Divers can explore winding passages and swim-throughs, encountering an array of marine creatures, from delicate nudibranchs to elusive octopuses. Lighthouse Reef: Lighthouse Reef boasts vibrant coral reefs and an abundance of marine life, including reef sharks, turtles, and schools of tropical fish. Divers can explore the reef's numerous dive sites, each offering unique underwater vistas and encounters. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6239&tourID=448555&languageID=1&curr=USD&showPrices=false"
     },
     "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
       "boat": "bella-2",
