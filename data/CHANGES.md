@@ -3,6 +3,41 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-30
+
+```
+changes: HEAD -> 2026-10-30
+===========================
+
+price up (539)
+  2027-07-17  DUNE Silky             3,122 ->   3,134 USD  +12 (+0.4%)  Best of Egypt
+  2027-05-01  Marselia Star          3,290 ->   3,302 USD  +12 (+0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-05-13  Blue Seas              1,992 ->   2,003 USD  +11 (+0.6%)  Rocky - Elba - St. John's - Elphin
+  2027-07-29  Blue Seas              1,753 ->   1,763 USD  +10 (+0.6%)  Daedalus & Fury Shoals
+  2027-05-03  Blue Seas              1,937 ->   1,947 USD  +10 (+0.5%)  Rocky - Elba - St. John's - Elphin
+  2027-07-31  Queen Sherry           2,676 ->   2,686 USD  +10 (+0.4%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-10  Aphrodite              2,241 ->   2,250 USD  +9 (+0.4%)  North - Straits of Tiran
+  2027-07-17  Aphrodite              2,241 ->   2,250 USD  +9 (+0.4%)  North Wrecks
+  2027-06-10  Blue                   1,580 ->   1,589 USD  +9 (+0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-17  Blue                   1,580 ->   1,589 USD  +9 (+0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-03  Blue                   1,580 ->   1,589 USD  +9 (+0.6%)  St. John's
+  2027-07-31  Emperor Superior       2,632 ->   2,641 USD  +9 (+0.3%)  South & St. John's
+  ... and 527 more not shown
+
+price down (9)
+  2027-07-15  Emperor Elite          1,784 ->   1,074 USD  -710 (-39.8%)  Simply the Best
+  2027-07-22  Emperor Elite          1,784 ->   1,074 USD  -710 (-39.8%)  Simply the Best
+  2027-07-08  Emperor Elite          1,728 ->   1,041 USD  -687 (-39.8%)  South & St. John's
+  2027-08-07  Emperor Superior       1,572 ->     947 USD  -625 (-39.8%)  Famous Five Cruise
+  2027-07-22  Emperor Asmaa          1,503 ->     907 USD  -596 (-39.7%)  Simply the Best
+  2027-08-28  Emperor Asmaa          1,503 ->     907 USD  -596 (-39.7%)  Simply the Best
+  2027-08-21  Emperor Asmaa          1,503 ->     907 USD  -596 (-39.7%)  Southern Solitude
+  2027-08-28  Emperor Superior       1,461 ->     880 USD  -581 (-39.8%)  Get Wrecked
+  2027-08-14  Emperor Asmaa          1,447 ->     873 USD  -574 (-39.7%)  South & St. John's
+
+342 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-29
 
 ```
