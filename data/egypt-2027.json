@@ -222528,13 +222528,13 @@
             [
               7,
               1514,
-              10,
+              12,
               null
             ],
             [
               8,
               2725,
-              10,
+              12,
               null
             ],
             [
@@ -222574,7 +222574,7 @@
               null
             ]
           ],
-          22
+          24
         ]
       ]
     },
@@ -227680,13 +227680,13 @@
             [
               7,
               1189,
-              11,
+              12,
               null
             ],
             [
               8,
               2140,
-              11,
+              12,
               null
             ],
             [
@@ -227726,7 +227726,7 @@
               null
             ]
           ],
-          21
+          22
         ]
       ]
     },
@@ -229488,13 +229488,13 @@
             [
               7,
               1189,
-              9,
+              10,
               null
             ],
             [
               8,
               2140,
-              9,
+              10,
               null
             ],
             [
@@ -229534,7 +229534,7 @@
               null
             ]
           ],
-          15
+          16
         ]
       ]
     },
@@ -240898,17 +240898,17 @@
             [
               9,
               1070,
-              0,
+              2,
               null
             ],
             [
               8,
               1889,
-              0,
+              2,
               null
             ]
           ],
-          14
+          16
         ]
       ],
       "sale": {
@@ -247417,29 +247417,29 @@
             [
               7,
               809,
-              7,
+              1,
               null
             ],
             [
               8,
               2023,
-              7,
+              1,
               null
             ],
             [
               7,
               899,
-              8,
+              7,
               null
             ],
             [
               8,
               2398,
-              8,
+              7,
               null
             ]
           ],
-          15
+          8
         ]
       ],
       "sale": {
@@ -249368,24 +249368,6 @@
             [
               7,
               1698,
-              2,
-              null
-            ],
-            [
-              9,
-              1698,
-              2,
-              null
-            ],
-            [
-              8,
-              2698,
-              2,
-              null
-            ],
-            [
-              7,
-              1698,
               5,
               null
             ],
@@ -249412,9 +249394,27 @@
               3597,
               2,
               null
+            ],
+            [
+              7,
+              1698,
+              0,
+              null
+            ],
+            [
+              9,
+              1698,
+              0,
+              null
+            ],
+            [
+              8,
+              2698,
+              0,
+              null
             ]
           ],
-          22
+          20
         ]
       ]
     },
@@ -250067,18 +250067,6 @@
             ],
             [
               7,
-              576,
-              2,
-              null
-            ],
-            [
-              9,
-              576,
-              2,
-              null
-            ],
-            [
-              7,
               611,
               2,
               null
@@ -250088,9 +250076,21 @@
               2773,
               2,
               null
+            ],
+            [
+              7,
+              576,
+              0,
+              null
+            ],
+            [
+              9,
+              576,
+              0,
+              null
             ]
           ],
-          18
+          16
         ]
       ],
       "sale": {
@@ -255523,13 +255523,13 @@
             [
               7,
               1568,
-              4,
+              2,
               null
             ],
             [
               8,
               2510,
-              4,
+              2,
               null
             ],
             [
@@ -255569,7 +255569,7 @@
               null
             ]
           ],
-          5
+          3
         ]
       ]
     },
@@ -255791,6 +255791,61 @@
           1,
           null,
           null,
+          0
+        ],
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1568,
+              0,
+              null
+            ],
+            [
+              8,
+              2510,
+              0,
+              null
+            ],
+            [
+              8,
+              1568,
+              0,
+              null
+            ],
+            [
+              7,
+              1668,
+              0,
+              null
+            ],
+            [
+              8,
+              2670,
+              0,
+              null
+            ],
+            [
+              7,
+              1719,
+              0,
+              null
+            ],
+            [
+              9,
+              1719,
+              0,
+              null
+            ],
+            [
+              8,
+              2750,
+              0,
+              null
+            ]
+          ],
           0
         ]
       ]
@@ -258893,13 +258948,13 @@
             [
               7,
               1104,
-              6,
+              4,
               null
             ],
             [
               8,
               1949,
-              6,
+              4,
               null
             ],
             [
@@ -258939,7 +258994,7 @@
               null
             ]
           ],
-          30
+          28
         ]
       ],
       "sale": {
@@ -259059,13 +259114,13 @@
             [
               9,
               1379,
-              4,
+              2,
               null
             ],
             [
               8,
               2435,
-              4,
+              2,
               null
             ],
             [
@@ -259081,7 +259136,7 @@
               null
             ]
           ],
-          36
+          34
         ]
       ],
       "sale": {
@@ -259177,25 +259232,25 @@
             [
               7,
               1104,
-              12,
+              10,
               null
             ],
             [
               8,
               1949,
-              12,
+              10,
               null
             ],
             [
               7,
               1325,
-              12,
+              10,
               null
             ],
             [
               8,
               2338,
-              12,
+              10,
               null
             ],
             [
@@ -259223,7 +259278,7 @@
               null
             ]
           ],
-          36
+          32
         ]
       ],
       "sale": {
@@ -260609,13 +260664,13 @@
             [
               7,
               1249,
-              12,
+              6,
               null
             ],
             [
               8,
               2203,
-              12,
+              6,
               null
             ],
             [
@@ -260643,7 +260698,7 @@
               null
             ]
           ],
-          36
+          30
         ]
       ],
       "sale": {
@@ -261262,29 +261317,29 @@
             [
               7,
               1179,
-              0,
+              4,
               null
             ],
             [
               8,
               2063,
-              0,
+              4,
               null
             ],
             [
               9,
               1179,
-              0,
+              2,
               null
             ],
             [
               8,
               2063,
-              0,
+              2,
               null
             ]
           ],
-          12
+          18
         ]
       ]
     },
@@ -261528,17 +261583,17 @@
             [
               9,
               975,
-              4,
+              2,
               null
             ],
             [
               8,
               1708,
-              4,
+              2,
               null
             ]
           ],
-          32
+          30
         ]
       ]
     },
@@ -273000,60 +273055,60 @@
           [
             [
               7,
+              1678,
+              2,
+              null
+            ],
+            [
+              7,
               1608,
-              8,
+              14,
               null
             ],
             [
               8,
               2735,
-              8,
+              14,
               null
             ],
             [
               9,
               1678,
-              2,
+              4,
               null
             ],
             [
               8,
               2854,
+              4,
+              null
+            ],
+            [
+              7,
+              1678,
+              4,
+              null
+            ],
+            [
+              9,
+              1678,
+              4,
+              null
+            ],
+            [
+              7,
+              1678,
               2,
               null
             ],
             [
-              7,
-              1678,
-              0,
-              null
-            ],
-            [
-              7,
-              1678,
-              0,
-              null
-            ],
-            [
               9,
               1678,
-              0,
-              null
-            ],
-            [
-              7,
-              1678,
-              0,
-              null
-            ],
-            [
-              9,
-              1678,
-              0,
+              2,
               null
             ]
           ],
-          10
+          26
         ]
       ]
     },
@@ -274001,6 +274056,67 @@
           null,
           null,
           26
+        ],
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1489,
+              2,
+              null
+            ],
+            [
+              7,
+              1419,
+              14,
+              null
+            ],
+            [
+              8,
+              2412,
+              14,
+              null
+            ],
+            [
+              9,
+              1489,
+              4,
+              null
+            ],
+            [
+              8,
+              2530,
+              4,
+              null
+            ],
+            [
+              7,
+              1489,
+              4,
+              null
+            ],
+            [
+              9,
+              1489,
+              4,
+              null
+            ],
+            [
+              7,
+              1489,
+              2,
+              null
+            ],
+            [
+              9,
+              1489,
+              2,
+              null
+            ]
+          ],
+          26
         ]
       ]
     },
@@ -274254,6 +274370,67 @@
           1,
           null,
           null,
+          26
+        ],
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              2248,
+              2,
+              null
+            ],
+            [
+              7,
+              2148,
+              14,
+              null
+            ],
+            [
+              8,
+              3652,
+              14,
+              null
+            ],
+            [
+              9,
+              2248,
+              4,
+              null
+            ],
+            [
+              8,
+              3822,
+              4,
+              null
+            ],
+            [
+              7,
+              2248,
+              4,
+              null
+            ],
+            [
+              9,
+              2248,
+              4,
+              null
+            ],
+            [
+              7,
+              2248,
+              2,
+              null
+            ],
+            [
+              9,
+              2248,
+              2,
+              null
+            ]
+          ],
           26
         ]
       ]
@@ -290047,6 +290224,49 @@
             ]
           ],
           0
+        ],
+        [
+          2,
+          null,
+          [
+            [
+              7,
+              1159,
+              0,
+              null
+            ],
+            [
+              8,
+              2086,
+              0,
+              null
+            ],
+            [
+              7,
+              1233,
+              0,
+              null
+            ],
+            [
+              8,
+              2221,
+              0,
+              null
+            ],
+            [
+              9,
+              1233,
+              0,
+              null
+            ],
+            [
+              8,
+              2221,
+              0,
+              null
+            ]
+          ],
+          0
         ]
       ]
     },
@@ -291291,41 +291511,41 @@
             [
               7,
               1268,
-              14,
+              0,
               null
             ],
             [
               8,
               1903,
-              14,
+              0,
               null
             ],
             [
               7,
               1369,
-              2,
+              0,
               null
             ],
             [
               8,
               2003,
-              2,
+              0,
               null
             ],
             [
               9,
               1369,
-              6,
+              0,
               null
             ],
             [
               8,
               2003,
-              6,
+              0,
               null
             ]
           ],
-          22
+          0
         ]
       ]
     },
@@ -324545,7 +324765,7 @@
   ],
   "berths_read": "2026-10-31",
   "padi_berths_read": "2026-10-31",
-  "divebooker_berths_read": "2026-10-30",
+  "divebooker_berths_read": "2026-10-31",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing, and -- only where it is not berths_read -- the day that seller's ladder was read]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
     "read": "2026-10-31",
