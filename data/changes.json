@@ -1,6 +1,286 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-31",
+  "added": [],
+  "sold_out": [],
+  "returned": [
+   {
+    "id": "odyssey-2027-05-22-0",
+    "boat": "MY Odyssey Liveaboard",
+    "title": "Fury Shoals",
+    "start": "2027-05-22",
+    "price": 1591.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [
+   {
+    "id": "golden-dolphin-iv-2027-07-29-0",
+    "boat": "Golden Dolphin IV",
+    "title": "Daedalus, Rocky Island, Zabargad, St. John's & Elphinstone",
+    "start": "2027-07-29",
+    "was": 2675.0,
+    "now": 2688.0,
+    "currency": "USD",
+    "delta": 13.0,
+    "pct": 0.48598130841121495
+   },
+   {
+    "id": "golden-dolphin-iv-2027-07-22-0",
+    "boat": "Golden Dolphin IV",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "was": 1672.0,
+    "now": 1680.0,
+    "currency": "USD",
+    "delta": 8.0,
+    "pct": 0.4784688995215311
+   },
+   {
+    "id": "golden-dolphin-iv-2027-07-01-0",
+    "boat": "Golden Dolphin IV",
+    "title": "South till Dolphin Reef - Elphinstone",
+    "start": "2027-07-01",
+    "was": 1672.0,
+    "now": 1680.0,
+    "currency": "USD",
+    "delta": 8.0,
+    "pct": 0.4784688995215311
+   },
+   {
+    "id": "new-sambo-2027-06-26-0",
+    "boat": "New Sambo",
+    "title": "Deep South",
+    "start": "2027-06-26",
+    "was": 1505.0,
+    "now": 1513.0,
+    "currency": "USD",
+    "delta": 8.0,
+    "pct": 0.53156146179402
+   },
+   {
+    "id": "sea-serpent-grand-2027-06-10-0",
+    "boat": "Sea Serpent Grand",
+    "title": "North - Straits of Tiran - Dahab",
+    "start": "2027-06-10",
+    "was": 1544.0,
+    "now": 1552.0,
+    "currency": "USD",
+    "delta": 8.0,
+    "pct": 0.5181347150259068
+   },
+   {
+    "id": "alsuraya-2027-06-05-0",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-06-05",
+    "was": 1394.0,
+    "now": 1401.0,
+    "currency": "USD",
+    "delta": 7.0,
+    "pct": 0.5021520803443328
+   },
+   {
+    "id": "new-sambo-2027-06-05-0",
+    "boat": "New Sambo",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-05",
+    "was": 1338.0,
+    "now": 1345.0,
+    "currency": "USD",
+    "delta": 7.0,
+    "pct": 0.523168908819133
+   },
+   {
+    "id": "new-sambo-2027-06-12-0",
+    "boat": "New Sambo",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-12",
+    "was": 1338.0,
+    "now": 1345.0,
+    "currency": "USD",
+    "delta": 7.0,
+    "pct": 0.523168908819133
+   },
+   {
+    "id": "new-sambo-2027-06-19-0",
+    "boat": "New Sambo",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-19",
+    "was": 1338.0,
+    "now": 1345.0,
+    "currency": "USD",
+    "delta": 7.0,
+    "pct": 0.523168908819133
+   },
+   {
+    "id": "sea-serpent-grand-2027-06-03-0",
+    "boat": "Sea Serpent Grand",
+    "title": "North & Safaga",
+    "start": "2027-06-03",
+    "was": 1450.0,
+    "now": 1457.0,
+    "currency": "USD",
+    "delta": 7.0,
+    "pct": 0.4827586206896552
+   },
+   {
+    "id": "alsuraya-2027-06-19-0",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-19",
+    "was": 1280.0,
+    "now": 1286.0,
+    "currency": "USD",
+    "delta": 6.0,
+    "pct": 0.46875
+   },
+   {
+    "id": "alsuraya-2027-06-26-0",
+    "boat": "ALSURAYA",
+    "title": "Daedalus, St. John's & Elphinstone",
+    "start": "2027-06-26",
+    "was": 1280.0,
+    "now": 1286.0,
+    "currency": "USD",
+    "delta": 6.0,
+    "pct": 0.46875
+   },
+   {
+    "id": "alsuraya-2027-06-12-0",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-06-12",
+    "was": 1185.0,
+    "now": 1191.0,
+    "currency": "USD",
+    "delta": 6.0,
+    "pct": 0.5063291139240507
+   },
+   {
+    "id": "queen-sherry-2027-06-05-0",
+    "boat": "Queen Sherry",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-05",
+    "was": 1176.0,
+    "now": 1182.0,
+    "currency": "USD",
+    "delta": 6.0,
+    "pct": 0.5102040816326531
+   },
+   {
+    "id": "queen-sherry-2027-06-26-0",
+    "boat": "Queen Sherry",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-26",
+    "was": 1176.0,
+    "now": 1182.0,
+    "currency": "USD",
+    "delta": 6.0,
+    "pct": 0.5102040816326531
+   },
+   {
+    "id": "queen-sherry-2027-06-12-0",
+    "boat": "Queen Sherry",
+    "title": "Golden Mix: Daedalus, Sataya, St. John's, Rocky, Zabargad",
+    "start": "2027-06-12",
+    "was": 1176.0,
+    "now": 1182.0,
+    "currency": "USD",
+    "delta": 6.0,
+    "pct": 0.5102040816326531
+   }
+  ],
+  "price_down": [
+   {
+    "id": "ghazala-adventure-2027-08-30-0",
+    "boat": "Ghazala Adventure",
+    "title": "North & Brothers",
+    "start": "2027-08-30",
+    "was": 1679.0,
+    "now": 1345.0,
+    "currency": "USD",
+    "delta": -334.0,
+    "pct": -19.892793329362714
+   },
+   {
+    "id": "ghazala-adventure-2027-07-12-0",
+    "boat": "Ghazala Adventure",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-12",
+    "was": 1757.0,
+    "now": 1549.0,
+    "currency": "USD",
+    "delta": -208.0,
+    "pct": -11.838360842344905
+   },
+   {
+    "id": "ghazala-adventure-2027-08-23-0",
+    "boat": "Ghazala Adventure",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-23",
+    "was": 1757.0,
+    "now": 1583.0,
+    "currency": "USD",
+    "delta": -174.0,
+    "pct": -9.903244166192374
+   },
+   {
+    "id": "ghazala-adventure-2027-08-02-0",
+    "boat": "Ghazala Adventure",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-08-02",
+    "was": 1679.0,
+    "now": 1513.0,
+    "currency": "USD",
+    "delta": -166.0,
+    "pct": -9.8868374032162
+   },
+   {
+    "id": "ghazala-adventure-2027-08-16-0",
+    "boat": "Ghazala Adventure",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-08-16",
+    "was": 1640.0,
+    "now": 1478.0,
+    "currency": "USD",
+    "delta": -162.0,
+    "pct": -9.878048780487806
+   },
+   {
+    "id": "ghazala-adventure-2027-08-09-0",
+    "boat": "Ghazala Adventure",
+    "title": "North: Wrecks & Reefs",
+    "start": "2027-08-09",
+    "was": 1640.0,
+    "now": 1478.0,
+    "currency": "USD",
+    "delta": -162.0,
+    "pct": -9.878048780487806
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "vessels_emptied": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 809,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-31"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-10-30",
   "added": [],
   "sold_out": [],

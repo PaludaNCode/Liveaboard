@@ -3,6 +3,41 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-31
+
+```
+changes: HEAD -> 2026-10-31
+===========================
+
+bookable again (1)
+  2027-05-22  MY Odyssey Liveaboard  Fury Shoals                        divebooker.com+liveaboard.com+padi.com
+
+price up (16)
+  2027-07-29  Golden Dolphin IV      2,675 ->   2,688 USD  +13 (+0.5%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-22  Golden Dolphin IV      1,672 ->   1,680 USD  +8 (+0.5%)  Brothers, Daedalus & Elphinstone
+  2027-07-01  Golden Dolphin IV      1,672 ->   1,680 USD  +8 (+0.5%)  South till Dolphin Reef - Elphinst
+  2027-06-26  New Sambo              1,505 ->   1,513 USD  +8 (+0.5%)  Deep South
+  2027-06-10  Sea Serpent Grand      1,544 ->   1,552 USD  +8 (+0.5%)  North - Straits of Tiran - Dahab
+  2027-06-05  ALSURAYA               1,394 ->   1,401 USD  +7 (+0.5%)  North & Brothers
+  2027-06-05  New Sambo              1,338 ->   1,345 USD  +7 (+0.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-12  New Sambo              1,338 ->   1,345 USD  +7 (+0.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-19  New Sambo              1,338 ->   1,345 USD  +7 (+0.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-03  Sea Serpent Grand      1,450 ->   1,457 USD  +7 (+0.5%)  North & Safaga
+  2027-06-19  ALSURAYA               1,280 ->   1,286 USD  +6 (+0.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-26  ALSURAYA               1,280 ->   1,286 USD  +6 (+0.5%)  Daedalus, St. John's & Elphinstone
+  ... and 4 more not shown
+
+price down (6)
+  2027-08-30  Ghazala Adventure      1,679 ->   1,345 USD  -334 (-19.9%)  North & Brothers
+  2027-07-12  Ghazala Adventure      1,757 ->   1,549 USD  -208 (-11.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-23  Ghazala Adventure      1,757 ->   1,583 USD  -174 (-9.9%)  Brothers, Daedalus & Elphinstone
+  2027-08-02  Ghazala Adventure      1,679 ->   1,513 USD  -166 (-9.9%)  North, Tiran & Dahab
+  2027-08-16  Ghazala Adventure      1,640 ->   1,478 USD  -162 (-9.9%)  North, Tiran & Dahab
+  2027-08-09  Ghazala Adventure      1,640 ->   1,478 USD  -162 (-9.9%)  North: Wrecks & Reefs
+
+809 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-30
 
 ```
