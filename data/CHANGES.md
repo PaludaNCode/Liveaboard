@@ -3,6 +3,24 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-01
+
+```
+changes: HEAD -> 2026-11-01
+===========================
+
+price up (7)
+  2027-07-15  Emperor Elite          1,076 ->   1,792 USD  +716 (+66.5%)  Simply the Best
+  2027-07-22  Emperor Elite          1,076 ->   1,792 USD  +716 (+66.5%)  Simply the Best
+  2027-07-08  Emperor Elite          1,042 ->   1,736 USD  +694 (+66.6%)  South & St. John's
+  2027-07-22  Emperor Asmaa            908 ->   1,512 USD  +604 (+66.5%)  Simply the Best
+  2027-08-28  Emperor Asmaa            908 ->   1,512 USD  +604 (+66.5%)  Simply the Best
+  2027-08-21  Emperor Asmaa            908 ->   1,512 USD  +604 (+66.5%)  Southern Solitude
+  2027-08-14  Emperor Asmaa            874 ->   1,456 USD  +582 (+66.6%)  South & St. John's
+
+573 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-10-31
 
 ```
