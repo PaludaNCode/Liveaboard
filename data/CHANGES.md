@@ -9,6 +9,15 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-10-31
 ===========================
 
+nothing moved.
+```
+
+## 2026-10-31
+
+```
+changes: HEAD -> 2026-10-31
+===========================
+
 bookable again (1)
   2027-05-22  MY Odyssey Liveaboard  Fury Shoals                        divebooker.com+liveaboard.com+padi.com
 
