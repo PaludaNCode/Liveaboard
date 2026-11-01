@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-31",
+ "collected": "2026-11-01",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47525,12 +47525,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 86,
-    "first": "2026-11-01",
+    "dated": 85,
+    "first": "2026-11-08",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 86,
+    "read": 85,
     "unpriced": 27
    },
    "slug": "bella-2",
@@ -47706,12 +47706,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 42,
-    "first": "2026-11-01",
+    "dated": 41,
+    "first": "2026-11-07",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 42,
+    "read": 41,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -47978,12 +47978,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 9,
-    "first": "2026-11-01",
+    "dated": 8,
+    "first": "2026-11-09",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 9,
+    "read": 8,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -48158,12 +48158,12 @@
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 5,
-    "first": "2026-11-01",
+    "dated": 4,
+    "first": "2026-11-08",
     "in_season": 0,
     "last": "2026-11-29",
     "priced": 0,
-    "read": 5,
+    "read": 4,
     "unpriced": 0
    },
    "slug": "high-wave",
@@ -48181,12 +48181,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 13,
-    "first": "2026-11-01",
+    "dated": 12,
+    "first": "2026-11-08",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 13,
+    "read": 12,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -48514,9 +48514,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-01",
+    "first": "2026-11-04",
     "in_season": 35,
-    "last": "2027-10-13",
+    "last": "2027-10-17",
     "priced": 35,
     "read": 100,
     "unpriced": 0
