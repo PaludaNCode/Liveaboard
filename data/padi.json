@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-01",
+ "collected": "2026-11-02",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47297,12 +47297,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 53,
-    "first": "2026-11-02",
+    "dated": 52,
+    "first": "2026-11-09",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 53,
+    "read": 52,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -47320,12 +47320,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 70,
-    "first": "2026-11-02",
+    "dated": 69,
+    "first": "2026-11-09",
     "in_season": 17,
     "last": "2028-06-26",
     "priced": 17,
-    "read": 70,
+    "read": 69,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -47365,9 +47365,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-02",
+    "first": "2026-11-06",
     "in_season": 31,
-    "last": "2027-12-12",
+    "last": "2027-12-16",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -48046,12 +48046,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 56,
-    "first": "2026-11-02",
+    "dated": 55,
+    "first": "2026-11-09",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -48068,12 +48068,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 56,
-    "first": "2026-11-02",
+    "dated": 55,
+    "first": "2026-11-09",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
