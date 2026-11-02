@@ -3,6 +3,53 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-02
+
+```
+changes: HEAD -> 2026-11-02
+===========================
+
+new departures (1)
+  2027-06-03  Golden Dolphin IV      North - Straits of Tiran - Dahab        1,784 USD liveaboard.com
+
+now sold out (3)
+  2027-05-15  Destiny                Fury Shoals, Elphinstone & Safaga  divebooker.com+liveaboard.com
+  2027-07-01  Golden Dolphin         North - Straits of Tiran           liveaboard.com
+  2027-07-17  Destiny                North Safaga Brothers              divebooker.com+liveaboard.com
+
+bookable again (4)
+  2027-05-15  AVO                    South Tour                         divebooker.com+liveaboard.com
+  2027-05-15  MY Odyssey Liveaboard  Best of Tiran                      divebooker.com+liveaboard.com+padi.com
+  2027-05-22  AVO                    North Wreck Tour                   divebooker.com+liveaboard.com
+  2027-07-10  AVO                    Turtle Watch Egypt Family & Beginn divebooker.com+liveaboard.com
+
+withdrawn (1)
+  2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail  liveaboard.com
+
+re-listed — same sailing, new row (1)
+  2027-07-29  Blue Pearl             St. John's & Fury Shoals     divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  1,345 EUR -> 1,757 USD
+
+price up (1)
+  2027-05-29  Blue Horizon           1,715 ->   1,743 USD  +28 (+1.6%)  Daedalus & St. John's
+
+price down (645)
+  2027-06-19  Blue Horizon           1,743 ->   1,220 USD  -523 (-30.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-08  Blue Melody            1,743 ->   1,220 USD  -523 (-30.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-15  Blue Melody            1,743 ->   1,220 USD  -523 (-30.0%)  Brothers, Daedalus & Elphinstone
+  2027-06-19  Blue Melody            1,743 ->   1,220 USD  -523 (-30.0%)  Brothers, Daedalus & Elphinstone
+  2027-06-12  Blue Melody            1,743 ->   1,220 USD  -523 (-30.0%)  Brothers, Daedalus & Elphinstone
+  2027-06-05  Blue Melody            1,743 ->   1,220 USD  -523 (-30.0%)  Rocky, Zabargad & St. John's
+  2027-05-22  Blue Melody            1,526 ->   1,068 USD  -458 (-30.0%)  Northern Red Sea & Brothers
+  2027-07-17  Blue Horizon           1,743 ->   1,307 USD  -436 (-25.0%)  Brothers, Daedalus & Elphinstone
+  2027-07-24  Blue Horizon           1,743 ->   1,307 USD  -436 (-25.0%)  Brothers, Daedalus & Elphinstone
+  2027-08-21  Blue Horizon           1,743 ->   1,307 USD  -436 (-25.0%)  Brothers, Daedalus & Elphinstone
+  2027-08-07  Blue Horizon           1,743 ->   1,307 USD  -436 (-25.0%)  Daedalus & St. John's
+  2027-08-14  Blue Horizon           1,743 ->   1,307 USD  -436 (-25.0%)  Rocky, Zabargad & St. John's
+  ... and 633 more not shown
+
+295 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-11-01
 
 ```
