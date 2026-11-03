@@ -41191,8 +41191,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
+        "safaga",
         "brothers",
-        "safaga"
+        "zabargad"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -41393,8 +41394,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Advanced + 50 dives. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown. AOWD or equivalent"
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -46073,7 +46075,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran"
+        "tiran",
+        "zabargad"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -46274,8 +46277,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Advanced + 50 dives. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown. AOWD or equivalent"
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -46737,8 +46741,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Advanced + 50 dives. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown. AOWD or equivalent"
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -326168,7 +326173,7 @@
     }
   },
   "entry_bar": {
-    "both": 162,
+    "both": 165,
     "disagree": 74,
     "padi_stricter": 38,
     "ours_stricter": 36

@@ -1,5 +1,5 @@
 {
-  "collected": "2026-11-02",
+  "collected": "2026-11-03",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -7228,6 +7228,53 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=448650&languageID=1&curr=USD&showPrices=false"
     },
+    "blue-seas::Brothers & Safaga (Port Ghalib - Hurghada)": {
+      "boat": "blue-seas",
+      "name": "Brothers & Safaga (Port Ghalib - Hurghada)",
+      "tour_id": "448944",
+      "collected": "2026-11-03",
+      "regions": [
+        "Safaga",
+        "The Brothers"
+      ],
+      "dive_sites": [
+        "safaga",
+        "brothers"
+      ],
+      "dives": 17,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore the beautiful Brother Islands, where steep drop-offs, wreck diving, and abundant marine life make this one of the most exciting routes in the Red Sea. At Big Brother, divers can explore the overgrown wrecks of the Numidia and the Aida II, while Small Brother has a very high concentration of life in a very small area. Encounters with sharks and large fish are a daily occurrence, with hammerhead, thresher, grey reef, silky, and whitetip reef sharks regularly sighted. The trip is completed with dives at the colorful coral reefs of Safaga, known for their healthy hard and soft corals and relaxed diving conditions.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "A welcome briefing, cabin allocation, and ship orientation will take place before embarking. Guests can familiarize themselves with the vessel, set up their equipment, and get comfortable.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2–6",
+          "text": "Guests can enjoy 2-3 scheduled dives each day at sites in Zabargad Island. Night dives are possible only where permitted.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "The final day of diving includes 1–2 scheduled dives, followed by sailing back to Port Ghalib.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "After breakfast, guests may check out until 12:00 noon, and preparations for disembarkation begin. The crew will say goodbye to guests and arrange transfers to the airport, assisting with check-in for onward flights.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Encounters with sharks and large fish of many different species are a daily occurrence, with hammerhead, thresher, grey reef, silky, and whitetip reef sharks regularly sighted around the Brother Islands. The reef walls and wrecks are covered in soft corals and gorgonians, home to schools of reef fish that bring the whole area to life. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3327&tourID=448944&languageID=1&curr=USD&showPrices=false"
+    },
     "blue-seas::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)": {
       "boat": "blue-seas",
       "name": "Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
@@ -7946,6 +7993,99 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3327&tourID=374480&languageID=1&curr=USD&showPrices=false"
+    },
+    "blue-seas::Tiran Special (Hurghada - Hurghada)": {
+      "boat": "blue-seas",
+      "name": "Tiran Special (Hurghada - Hurghada)",
+      "tour_id": "448945",
+      "collected": "2026-11-03",
+      "regions": [
+        "Gordon Reef",
+        "Jackson Reef",
+        "Straits Of Tiran",
+        "Woodhouse Reef"
+      ],
+      "dive_sites": [
+        "tiran"
+      ],
+      "dives": 17,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore the Strait of Tiran, one of the most classic dive areas in the Red Sea, at the entrance to the Gulf of Aqaba. Dive the four main reefs of Jackson, Woodhouse, Thomas, and Gordon, known for their coral diversity and large pelagic fish. Jackson Reef has the wreck of a freighter and beautiful gorgonian fans, and Woodhouse Reef is known for reef sharks and eagle rays. Thomas Reef’s strong currents make for exciting drift dives, and Gordon Reef has a shallow plateau and an eel garden.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "A welcome briefing, cabin allocation, and ship orientation will take place before embarking. Guests can familiarize themselves with the vessel, set up their equipment, and get comfortable.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2–6",
+          "text": "Guests can enjoy 2-3 scheduled dives each day at sites in Zabargad Island. Night dives are possible only where permitted.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "The final day of diving includes 1–2 scheduled dives, followed by sailing back to Port Ghalib.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "After breakfast, guests may check out until 12:00 noon, and preparations for disembarkation begin. The crew will say goodbye to guests and arrange transfers to the airport, assisting with check-in for onward flights.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Divers can look forward to large schools of fish around the wrecks, along with reef sharks, eagle rays, and large pelagic fish in the Strait of Tiran. Colorful coral gardens and big gorgonian fans make a vivid backdrop, especially at Jackson and Woodhouse reefs. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3327&tourID=448945&languageID=1&curr=USD&showPrices=false"
+    },
+    "blue-seas::Zabargad Special (Port Ghalib - Port Ghalib)": {
+      "boat": "blue-seas",
+      "name": "Zabargad Special (Port Ghalib - Port Ghalib)",
+      "tour_id": "448943",
+      "collected": "2026-11-03",
+      "regions": [
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "zabargad"
+      ],
+      "dives": 17,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Zabargad is a top dive area known for its diversity. Divers can follow steep walls, float over drop-offs, get the open-water feeling on the edges, circle coral towers in the protected shallow area, and explore inlets. There is an unnamed wreck on the north side. The 70 m-long ship lies at a depth of 24 m, and its stern has an intact superstructure: stairs, railings, davits, portholes, hatches, and the bridge make it a picture-perfect wreck.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "A welcome briefing, cabin allocation, and ship orientation will take place before embarking. Guests can familiarize themselves with the vessel, set up their equipment, and get comfortable.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2–6",
+          "text": "Guests can enjoy 2-3 scheduled dives each day at sites in Zabargad Island. Night dives are possible only where permitted.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "The final day of diving includes 1–2 scheduled dives, followed by sailing back to Port Ghalib.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "After breakfast, guests may check out until 12:00 noon, and preparations for disembarkation begin. The crew will say goodbye to guests and arrange transfers to the airport, assisting with check-in for onward flights.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Divers can encounter schools of hammerhead sharks, oceanic whitetip sharks, gray reef sharks, silvertip sharks, thresher sharks, and silky sharks, with manta rays and dolphins also possible. The reefs are full of soft corals, gorgonians, sponges, and black and fan corals, home to barracudas, angelfish, hordes of anthias, groupers, moray eels, and schools of sweetlips. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3327&tourID=448943&languageID=1&curr=USD&showPrices=false"
     },
     "blue-storm::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)": {
       "boat": "blue-storm",
