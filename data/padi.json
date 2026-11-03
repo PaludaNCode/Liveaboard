@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-02",
+ "collected": "2026-11-03",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -48000,12 +48000,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 11,
-    "first": "2026-11-03",
+    "dated": 10,
+    "first": "2026-11-07",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 11,
+    "read": 10,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -48221,13 +48221,13 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 7,
-    "first": "2026-11-03",
+    "dated": 6,
+    "first": "2026-11-12",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 7,
-    "unpriced": 4
+    "read": 6,
+    "unpriced": 3
    },
    "slug": "my-lady-m",
    "specs": {
