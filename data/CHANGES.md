@@ -3,6 +3,43 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-03
+
+```
+changes: HEAD -> 2026-11-03
+===========================
+
+now sold out (5)
+  2027-07-10  Sunshine               North & Safaga                     liveaboard.com
+  2027-07-17  Sunshine               North & Tiran                      liveaboard.com
+  2027-07-24  Sunshine               North & Dahab                      liveaboard.com
+  2027-07-31  Grand Discovery        Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-08-21  Aphrodite              North Wrecks                       divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (4)
+  2027-05-27  Blue Seas              Zabargad Special             divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  1,250 EUR -> 1,399 USD
+  2027-06-10  Blue Seas              Brothers & Safaga            divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  1,190 EUR -> 1,331 USD
+  2027-06-17  Blue Seas              Tiran Special                divebooker.com+padi.com -> divebooker.com+liveaboard.com+padi.com  1,190 EUR -> 1,331 USD
+  2027-07-29  Carlton                Minisafari - Tiran & Ras Moh divebooker.com+liveaboard.com+padi.com -> divebooker.com+padi.com  664 USD -> 595 EUR
+
+price up (289)
+  2027-08-07  Emperor Superior         944 ->   1,578 USD  +634 (+67.2%)  Famous Five Cruise
+  2027-08-28  Emperor Superior         877 ->   1,466 USD  +589 (+67.2%)  Get Wrecked
+  2027-05-01  Marselia Star          3,291 ->   3,301 USD  +10 (+0.3%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             3,124 ->   3,133 USD  +9 (+0.3%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,633 ->   2,641 USD  +8 (+0.3%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,676 ->   2,684 USD  +8 (+0.3%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-30  Serenity               2,510 ->   2,518 USD  +8 (+0.3%)  Solar Eclipse 2027: Deep South
+  2027-05-15  Aphrodite              2,287 ->   2,294 USD  +7 (+0.3%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,332 ->   2,339 USD  +7 (+0.3%)  Brothers, Daedalus & Elphinstone
+  2027-07-31  Aphrodite              2,175 ->   2,182 USD  +7 (+0.3%)  Brothers, Safaga Reefs
+  2027-07-24  Aphrodite              2,287 ->   2,294 USD  +7 (+0.3%)  North Dolphins
+  2027-08-21  Aphrodite              2,287 ->   2,294 USD  +7 (+0.3%)  North Wrecks
+  ... and 277 more not shown
+
+596 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-11-02
 
 ```
