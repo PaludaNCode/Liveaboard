@@ -3,6 +3,74 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-04
+
+```
+changes: HEAD -> 2026-11-04
+===========================
+
+new departures (13)
+  2027-05-06  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-05-13  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-05-20  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-05-27  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-06-24  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-07-01  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-07-08  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-07-15  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-07-17  Alia Soul              Marine Park North: Brothers - Daed      1,846 USD liveaboard.com
+  2027-07-22  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-07-29  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  2027-08-05  Iceberg                Mini-Safari Hurghada North                531 USD liveaboard.com
+  ... and 1 more not shown
+
+now sold out (4)
+  2027-05-01  ALSURAYA               Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-05-01  Amelie                 Best of Hurghada                   liveaboard.com+padi.com
+  2027-05-08  ALSURAYA               Daedalus, Rocky, Zabargad & Elphin divebooker.com+liveaboard.com+padi.com
+  2027-08-28  Blue Melody            Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+bookable again (4)
+  2027-07-10  Sunshine               The Ultimate North                 liveaboard.com
+  2027-07-24  ALSURAYA               Daedalus, Rocky, Zabargad & Elphin divebooker.com+liveaboard.com+padi.com
+  2027-07-24  Blue Melody            Northern Red Sea & Brothers        divebooker.com+liveaboard.com+padi.com
+  2027-07-24  Sunshine               North, Brothers & Safaga           liveaboard.com
+
+withdrawn (12)
+  2027-05-07  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-05-14  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-05-21  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-05-26  Alia Soul              South                              liveaboard.com
+  2027-05-28  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-06-25  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-07-02  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-07-09  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-07-16  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-07-23  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-07-30  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-08-06  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+
+price up (43)
+  2027-07-10  Sunshine                 808 ->   1,426 USD  +618 (+76.5%)  The Ultimate North
+  2027-05-15  MY Odyssey Liveaboar   1,589 ->   1,801 USD  +212 (+13.3%)  Brothers, Daedalus & Elphinstone
+  2027-07-31  Ocean Lovers           1,430 ->   1,589 USD  +159 (+11.1%)  Daedalus, Rocky, Zabargad, St. Joh
+  2027-05-01  Topaz                  1,400 ->   1,555 USD  +155 (+11.1%)  North Wrecks Reefs, Tiran and Daha
+  2027-05-08  ALSURAYA               1,331 ->   1,410 USD  +79 (+5.9%)  Daedalus, Rocky, Zabargad & Elphin
+  2027-05-01  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-06-19  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-07-17  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-21  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-07-03  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-14  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  2027-05-22  ALSURAYA               1,284 ->   1,359 USD  +75 (+5.8%)  Brothers, Daedalus & Elphinstone
+  ... and 31 more not shown
+
+price down (1)
+  2027-07-24  ALSURAYA               1,566 ->   1,410 USD  -156 (-10.0%)  Daedalus, Rocky, Zabargad & Elphin
+
+208 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-11-03
 
 ```
