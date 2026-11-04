@@ -1,5 +1,5 @@
 {
-  "collected": "2026-11-03",
+  "collected": "2026-11-04",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -125,6 +125,72 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6565&tourID=418568&languageID=1&curr=USD&showPrices=false"
+    },
+    "alia-soul::Marine Park North: Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "alia-soul",
+      "name": "Marine Park North: Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "449184",
+      "collected": "2026-11-04",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "The Brothers",
+        "Abu Dabab"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus",
+        "brothers",
+        "abu dabab"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore the northern Red Sea’s legendary sites, from the dramatic walls of Brother’s Islands to the vibrant reefs of Daedalus and Elphinstone. Expect thrilling encounters with sharks, schools of colorful fish, and breathtaking underwater landscapes perfect for divers of all levels.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Check in, overnight stay in the harbour.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Check Abu Dabab, Marsa Trombe, overnight cruise.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "Brothers, overnight stay.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "Brothers, an overnight trip.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "Daedalus, overnight stay.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "Daedalus, an overnight cruise to Abu Dabab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Elphinstone, Port Ghalib, overnight stay in harbour.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check out. This southern Red Sea route is famous for thrilling drift dives, deep walls, and encounters with large pelagic species. At the Brothers Islands, divers often spot oceanic whitetips, thresher sharks, and large tuna patrolling the drop-offs. Daedalus Reef offers a high chance to see schooling hammerheads and occasional manta rays, while Elphinstone is known for its stunning coral walls and sightings of oceanic whitetips and grey reef sharks. Rich coral gardens, anthias clouds, and diverse reef life make every dive vibrant and exciting. This itinerary is ideal for experienced divers seeking big fish action and pristine reefscapes. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6565&tourID=449184&languageID=1&curr=USD&showPrices=false"
     },
     "alia-soul::Marine Park North: Brothers - Daedalus & Elphinstone (Port Ghalib - Safaga/Soma Bay)": {
       "boat": "alia-soul",
@@ -22002,6 +22068,66 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6240&tourID=415710&languageID=1&curr=USD&showPrices=false"
     },
+    "iceberg::Mini-Safari Hurghada North (Hurghada - Hurghada)": {
+      "boat": "iceberg",
+      "name": "Mini-Safari Hurghada North (Hurghada - Hurghada)",
+      "tour_id": "449110",
+      "collected": "2026-11-04",
+      "regions": [
+        "Abu Nuhas"
+      ],
+      "dive_sites": [
+        "abu nuhas"
+      ],
+      "dives": 11,
+      "guests": 8,
+      "experience": "Open Water - 5 minimum logged dives required.",
+      "min_logged_dives": 5,
+      "intro": "Itineraries give easy access to dive the best sites of Hurghada and Northern Hurghada, the unique part of the Red Sea with its number of islands and shallow lagoons, drop-offs, and coral gardens. The trip is perfect for beginners and experienced divers of all levels, wreck lovers, and photographers. This is the perfect trip for breathtaking diving and a relaxed safari. We avoid being with other boats in the same reef and just enjoy it to the maximum, seeing more fish than divers. Expected dive sites depend on the weather conditions and trip duration.",
+      "sections": [
+        {
+          "heading": "At the beginning of your trip.",
+          "text": "The trip begins in Hurghada and ends in Hurghada The closest airport is Hurghada Intl (HRG) Pickup time at the airport is according to your flight. Give yourself enough time to go through immigration and pick up your bags A representative of the Liveaboard will be waiting for you at the arrival hall. Check-in is between 7:00 and 12:00 am",
+          "is_day": false
+        },
+        {
+          "heading": "The end of your trip.",
+          "text": "Your last dives will be on the last day in the morning. It is your responsibility to ensure you respect the 24-hour no-fly time after your last dive! The boat docks back in Hurghada in the afternoon on the last day Check-out is between 3:00 and 7:00 pm",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Check-In between 7:00 am - 12:00 pm, equipment setup, departure, 1-2 dives",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "3 dives + night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "3 dives + night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "2 dives and back to the marina, check-out.",
+          "is_day": true
+        },
+        {
+          "heading": "Some of our highlight dive sites:",
+          "text": "Bluff Point (small Gubal island), Wreck of Ulysses. The Wrecks of Shaab Abu Nuhas: Giannis D, The Carnatic, Chrisoula K, Kimon M. Umm Usk, Siyul Islands, Blind Reef, Shaab El Erg (Dolphin House). Umm, Gamaar Island, Carless Reef, and all sites around. Giftun Islands, Abu Ramada Island, and all reefs around. Wreck of Balena. Abu Hasheesh Island and all the areas around Makadi Bay. The wreck of Hebat Allah and the wreck of Rosalie Moller are only Deep Diver Specialty level",
+          "is_day": false
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "The area is home to vibrant coral reefs and abundant marine species. Divers can expect to see colorful reef fish, turtles, and schooling pelagics. Dolphins are also frequently spotted in these waters. The last dive will be on the last day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6240&tourID=449110&languageID=1&curr=USD&showPrices=false"
+    },
     "iceberg::Overnight Diving & Snorkelling (Hurghada - Hurghada)": {
       "boat": "iceberg",
       "name": "Overnight Diving & Snorkelling (Hurghada - Hurghada)",
@@ -35529,6 +35655,64 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5843&tourID=432955&languageID=1&curr=USD&showPrices=false"
     },
+    "sunshine::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
+      "boat": "sunshine",
+      "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+      "tour_id": "432940",
+      "collected": "2026-11-04",
+      "regions": [
+        "Daedalus",
+        "The Brothers",
+        "Salem Express",
+        "Zabargad",
+        "Elphinstone"
+      ],
+      "dive_sites": [
+        "daedalus",
+        "brothers",
+        "salem express",
+        "zabargad",
+        "elphinstone"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "The Southern Red Sea is a route for those who love the open sea and diving in the strong currents. Diving on the Brothers Islands with their famous wrecks - Aida and Numidia, diving on the Daedalus Reef, located in the middle of the Red Sea, and encountering sharks on the reef of Elphinstone, one of the most famous dive sites in the world.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in is available from 6:00 PM to overnight on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "The boat departs for diving in the morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3-6:",
+          "text": "Up to 3 dives per day exploring the Southern Red Sea.",
+          "is_day": true
+        },
+        {
+          "heading": "Target Route Points:",
+          "text": "Salem Express, Panorama Reef, Little Brother, Big Brother, Elphistone, Zabargad, Daedalus Reef, Middle Reef The Brothers Island and Elphinstone Reef are a great choice for any diver. Wrecks of AIDA and NUMIDIA on the Brothers Islands give a special factor of mystery to the breathtaking underwater landscape, and the Elphinstone Reef is famous for its sharks. If you are lucky, in one of your dives you will meet the Oceanic Whitetip Shark (Longimanus).",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives in the morning, with the last one finishing at around 11 am. Gear washing and arrival back to port at 2 -3 pm. The last evening can be spent on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check-out by 09.00 AM. Please note that the itineraries are examples only. We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so. The last dive will be on the penultimate day of the trip at around 11 am. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5843&tourID=432940&languageID=1&curr=USD&showPrices=false"
+    },
     "sunshine::North + Safaga (Hurghada - Hurghada)": {
       "boat": "sunshine",
       "name": "North + Safaga (Hurghada - Hurghada)",
@@ -35723,6 +35907,143 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5843&tourID=432942&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunshine::North-Brothers-Safaga (Hurghada - Port Ghalib)": {
+      "boat": "sunshine",
+      "name": "15% Off: North-Brothers-Safaga (Hurghada - Port Ghalib)",
+      "tour_id": "433738",
+      "collected": "2026-11-04",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "A spectacular journey through some of the Red Sea’s most famous dive sites. Explore the wrecks of Abu Nuhas and the legendary SS Thistlegorm, dive the reefs of Ras Mohammed, then head south to the iconic Brothers Islands for pristine walls and pelagic encounters. The route continues to Safaga, with sites such as Panorama Reef and a dive at the historic Salem Express. A truly diverse safari combining world-famous wrecks, dramatic walls, vibrant reefs, and unforgettable offshore diving.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in onboard in Hurghada in the evening. Meet the crew, settle into your cabin, prepare diving equipment, and enjoy an overnight stay onboard.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Depart Hurghada and begin the safari with check dives at selected northern Red Sea reefs. Continue towards the Abu Nuhas wreck area for the first exploration dives.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "Explore the famous wrecks of Abu Nuhas, followed by dives at nearby reefs. Enjoy the opportunity to discover historic shipwrecks and vibrant marine life.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "Dive the legendary SS Thistlegorm, one of the Red Sea’s most iconic wrecks. Continue to Ras Mohammed National Park for spectacular reefs, dramatic walls, and abundant marine life.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "Head offshore towards the Brothers Islands. Explore the spectacular walls of Big Brother and Little Brother, with opportunities to encounter oceanic whitetip sharks, hammerheads, and other pelagic species.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "Continue exploring the Brothers Islands, enjoying additional dives along their pristine reefs, steep walls, and famous offshore dive sites.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Cruise south towards Safaga and explore its renowned dive sites, including Panorama Reef and other nearby reefs. Depending on sea conditions and the schedule, visit the historic Salem Express wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Enjoy the final morning dives at selected sites in the Safaga region before returning to port. Disembarkation and check-out by 09:00. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5843&tourID=433738&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunshine::The Ultimate North (Hurghada - Hurghada)": {
+      "boat": "sunshine",
+      "name": "15% Off: The Ultimate North (Hurghada - Hurghada)",
+      "tour_id": "432951",
+      "collected": "2026-11-04",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 30,
+      "guests": 20,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "Our signature safari itinerary, operated only once or twice a year,",
+      "sections": [
+        {
+          "heading": "The Ultimate North",
+          "text": "is Sadko’s unique expedition combining an extraordinary number of iconic Red Sea dive sites in one journey. The route brings together the Northern Wrecks, Ras Mohammed, Tiran, Dahab, SS Turkia Wreck, and Safaga, including legendary sites such as Thistlegorm and Salem Express. From historic wrecks and dramatic walls to pristine reefs and remote expedition sites, this is one of the most diverse and ambitious routes in our programme. It is designed for divers who want to experience the Red Sea far beyond a standard liveaboard itinerary.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Check-in after 18:00, gear preparation, and overnight stay onboard in Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Morning departure, 1–2 check dives at Shaab El Erg and Gubal Island, followed by navigation to SS Turkia.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "Three dives at SS Turkia, followed by sailing back to Thistlegorm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "Two dives at Thistlegorm, a third dive at SS Dunraven, and a night dive at Beacon Rock.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "Morning dive at Ras Mohammed, second and third dives in the Straits of Tiran, and a night dive at Gabr Elbint in Dahab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "Three dives in Dahab, followed by sailing back to The Temple.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Morning dive at Ras Mohammed National Park, followed by second, third, and night dives at Abu Nuhas.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Morning dive at Abu Nuhas, afternoon dive at Dolphin House, and third and night dives at Small Giftun.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 9:",
+          "text": "Visit to Salem Express, Abu Kafan, and Shaab Sheer in the Safaga region.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 10:",
+          "text": "Continue to Middle Reef, Panorama Reef, and Tobia Arbaa for an unforgettable night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 11:",
+          "text": "Last two dives of the week at Ras Abu Soma and Abu Hasheesh. Return to Hurghada at approximately 14:00.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 12:",
+          "text": "Check-out before 09:00. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5843&tourID=432951&languageID=1&curr=USD&showPrices=false"
     },
     "tala::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
       "boat": "tala",
@@ -38224,6 +38545,7 @@
     "345918": "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
     "345920": "ocean-lovers::North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
     "345921": "ocean-lovers::North Reefs - Wrecks & Tiran (Hurghada - Hurghada)",
+    "347964": "sunshine::North - Tiran (Hurghada - Hurghada)",
     "348010": "sunlight::South Route Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
     "351876": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
     "351877": "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
@@ -38259,6 +38581,7 @@
     "353494": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353496": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "353497": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
+    "353498": "emperor-asmaa::Reefs and Wrecks (Hurghada - Hurghada)",
     "354404": "sea-serpent-grand::North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
     "357882": "aphrodite::Best of Red Sea 2 Weeks (Hurghada - Hurghada)",
     "357887": "aphrodite::North Classic (Hurghada - Hurghada)",
@@ -38418,6 +38741,7 @@
     "427139": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "427141": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "427142": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+    "427147": "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)",
     "427293": "sea-serpent-excellence::St. John's (Port Ghalib - Port Ghalib)",
     "427294": "ss-glorious-miss-nouran::Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
     "427295": "sea-serpent::Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
@@ -38427,6 +38751,12 @@
     "428378": "dune-longara::Saint John’s Reef (Port Ghalib - Port Ghalib)",
     "428694": "alia-soul::North (Safaga/Soma Bay - Safaga/Soma Bay)",
     "428695": "alia-soul::North (Safaga/Soma Bay - Safaga/Soma Bay)",
+    "432933": "sunshine::North - Tiran (Hurghada - Hurghada)",
+    "432934": "sunshine::North - Tiran (Hurghada - Hurghada)",
+    "432935": "sunshine::North - Tiran (Hurghada - Hurghada)",
+    "432937": "sunshine::Brothers + Safaga (Hurghada - Hurghada)",
+    "432938": "sunshine::North - Tiran (Hurghada - Hurghada)",
+    "432939": "sunshine::Brothers + Safaga (Hurghada - Hurghada)",
     "432979": "sunlight::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "432980": "sunlight::North - Tiran (Hurghada - Hurghada)",
     "432981": "sunlight::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
@@ -38481,6 +38811,8 @@
     "441786": "golden-imperial::Brother Islands - Daedalus - Elphinstone (Hurghada - Hurghada)",
     "442006": "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "442007": "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+    "442161": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
+    "442162": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
     "442339": "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
     "442381": "avo::North - Ras Mohammed (Hurghada - Hurghada)",
     "442382": "avo::North and Brothers (Hurghada - Hurghada)",
@@ -38489,7 +38821,10 @@
     "442765": "dune-longara::Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
     "442843": "emperor-asmaa::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "442926": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
+    "442927": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
+    "442928": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
     "443591": "golden-imperial::Clean up Safari: North - Safaga - Brother Islands - Elphinstone (Hurghada - Port Ghalib)",
+    "444733": "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
     "444806": "bismarck::Abu Nuhas - Ras Mohammed - Tiran (Hurghada - Hurghada)",
     "444807": "bismarck::Tiran - Ras Mohammed - SS Thistlegorm (Hurghada - Hurghada)",
     "444813": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
@@ -38511,6 +38846,8 @@
     "445350": "ss-serena-dreams::North & Brothers (Hurghada - Hurghada)",
     "445351": "ss-serena-dreams::North & Tiran (Hurghada - Hurghada)",
     "445352": "ss-serena-dreams::North Tour: Northern Reefs & Wrecks (Hurghada - Hurghada)",
-    "447359": "emperor-elite::Daedalus, Fury and Elphinstone (Marsa Ghalib - Marsa Ghalib)"
+    "446709": "sunshine::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+    "447359": "emperor-elite::Daedalus, Fury and Elphinstone (Marsa Ghalib - Marsa Ghalib)",
+    "448069": "sunshine::North + Safaga (Hurghada - Hurghada)"
   }
 }

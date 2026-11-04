@@ -1001,13 +1001,14 @@
       "operator_id": "orca-dive-clubs",
       "boat_id": "alia-soul",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
@@ -1200,7 +1201,16 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "alia-soul--marine-park-north-brothers-daedalus-elphinstone-port-ghalib-safaga-soma-bay",
@@ -116213,11 +116223,13 @@
       "operator_id": "deep-breath-diving-safari",
       "boat_id": "iceberg",
       "nights": 3,
-      "dives": 0,
+      "dives": 11,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "abu nuhas"
+      ],
+      "region": null,
       "summary": "The Iceberg is a liveaboard taking 8 guests on diving safaris in Egypt&rsquo;s Red Sea. Itineraries range from a single-day trip to week-long trips exploring the northern Red Sea&rsquo;s best dive sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/iceberg?m=8/2027",
       "fees": [
@@ -116414,7 +116426,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 5,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 5 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "iceberg--special-wreck-trip-thistlegorm-abu-nuhas-small-gobal-hurghada-hurghada",
@@ -189416,12 +189437,17 @@
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
-        "safaga"
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
+        "salem express",
+        "safaga",
+        "panorama reef"
       ],
       "region": null,
       "summary": "The M/Y Sunshine yacht offers year-round dive safaris in the Red Sea. 10 en-suite cabins with AC cater to 20 guests. Itineraries are 5-7 nights long and explore the northern and southern routes.",
@@ -189567,7 +189593,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €10/day; BCD €5/day; Dive Computer €10/day; Dive Light €5/day; Drysuit €30/day; Fins €2/day; Mask €2/day; Nitrox tank included; Regulator €5/day; SMB €10/week; Wetsuit €5/day"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sunshine--the-ultimate-north-hurghada-hurghada",
@@ -189576,11 +189611,28 @@
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 11,
-      "dives": 0,
+      "dives": 30,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "gubal",
+        "turkia",
+        "sha'ab el erg",
+        "thistlegorm",
+        "ras mohammed",
+        "tiran",
+        "dahab",
+        "abu nuhas",
+        "giftun",
+        "salem express",
+        "safaga",
+        "shaab sheer",
+        "abu kafan",
+        "panorama reef",
+        "middle reef",
+        "tobia arbaa"
+      ],
+      "region": null,
       "summary": "The M/Y Sunshine yacht offers year-round dive safaris in the Red Sea. 10 en-suite cabins with AC cater to 20 guests. Itineraries are 5-7 nights long and explore the northern and southern routes.",
       "source_url": "https://www.liveaboard.com/diving/egypt/sunshine?m=8/2027",
       "fees": [
@@ -189724,7 +189776,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €10/day; BCD €5/day; Dive Computer €10/day; Dive Light €5/day; Drysuit €30/day; Fins €2/day; Mask €2/day; Nitrox tank included; Regulator €5/day; SMB €10/week; Wetsuit €5/day"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "tala--brothers-daedalus-elphinstone-hurghada-hurghada",
