@@ -375,7 +375,7 @@
       "id": "blue-shades-regency",
       "name": "Blue Shades Regency",
       "operator_id": "blue-shades-diving",
-      "guests": null,
+      "guests": 34,
       "cabins": null,
       "length_m": null,
       "year_built": null
@@ -28394,7 +28394,7 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -28598,7 +28598,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 40,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 40 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-diamond--brothers-daedalus-and-elphinstone-hurghada-marsa-alam",
@@ -29285,12 +29294,13 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
         "daedalus",
-        "sataya"
+        "sataya",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
@@ -29489,7 +29499,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-diamond--elphinstone-abu-dabab-sataya-marsa-alam-marsa-alam",
@@ -29498,13 +29517,14 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
         "elphinstone",
         "sataya",
-        "abu dabab"
+        "abu dabab",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
@@ -29703,7 +29723,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-diamond--north-tiran-hurghada-hurghada",
@@ -30162,11 +30191,14 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
+        "elphinstone",
         "st johns",
+        "sataya",
+        "sataya reef",
         "fury shoals"
       ],
       "region": null,
@@ -30366,7 +30398,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-diamond--st-johns-and-sataya-marsa-alam-marsa-alam",
@@ -30375,12 +30416,15 @@
       "operator_id": "horus-liveaboard",
       "boat_id": "blue-diamond",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
+        "rocky island",
+        "zabargad",
         "st johns",
-        "sataya"
+        "sataya",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
@@ -30579,7 +30623,16 @@
           "unit_unstated": true,
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -48168,7 +48221,7 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -48384,7 +48437,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--abu-nuhas-ras-muhammad-tiran-dahab-hurghada-hurghada",
@@ -48393,14 +48455,15 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "abu nuhas",
+        "ras mohammed",
         "tiran",
         "dahab",
-        "ras mohammed"
+        "blue hole"
       ],
       "region": null,
       "summary": "",
@@ -48610,7 +48673,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -48619,13 +48691,16 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers",
+        "safaga",
+        "abu hashish",
+        "abu dabab"
       ],
       "region": null,
       "summary": "",
@@ -48835,7 +48910,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -48844,13 +48928,16 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "abu dabab",
+        "safaga",
+        "abu hashish"
       ],
       "region": null,
       "summary": "",
@@ -49060,7 +49147,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--rocky-zabrgad-st-john-s-sataya-port-ghalib-port-ghalib",
@@ -49069,13 +49165,18 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
+        "rocky island",
+        "zabargad",
         "sataya",
-        "rocky island"
+        "habili ali",
+        "sataya reef",
+        "fury shoals",
+        "shaab marsa alam",
+        "shaab sharm"
       ],
       "region": null,
       "summary": "",
@@ -49285,7 +49386,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--safaga-brothers-abu-nuhas-ss-thistlegorm-hurghada-hurghada",
@@ -49294,14 +49404,19 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "thistlegorm",
         "abu nuhas",
-        "safaga"
+        "safaga",
+        "gota abu ramada",
+        "salem express",
+        "panorama reef",
+        "middle reef",
+        "gubal"
       ],
       "region": null,
       "summary": "",
@@ -49511,7 +49626,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--safaga-brothers-ras-muhammed-hurghada-hurghada",
@@ -49520,12 +49644,19 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "safaga"
+        "ras mohammed",
+        "safaga",
+        "abu hashish",
+        "salem express",
+        "panorama reef",
+        "middle reef",
+        "thistlegorm",
+        "gubal"
       ],
       "region": null,
       "summary": "",
@@ -49735,7 +49866,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--safaga-daedalus-brothers-hurghada-port-ghalib",
@@ -49744,13 +49884,16 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "safaga"
+        "safaga",
+        "abu hashish",
+        "panorama reef",
+        "abu dabab"
       ],
       "region": null,
       "summary": "",
@@ -49960,7 +50103,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--safaga-daedalus-brothers-port-ghalib-hurghada",
@@ -49969,13 +50121,14 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "safaga"
+        "safaga",
+        "abu dabab"
       ],
       "region": null,
       "summary": "",
@@ -50185,7 +50338,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--sataya-fury-shoals-st-john-s-port-ghalib-port-ghalib",
@@ -50194,13 +50356,14 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
         "fury shoals",
-        "sataya"
+        "sataya",
+        "abu dabab"
       ],
       "region": null,
       "summary": "",
@@ -50410,7 +50573,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-shades-regency--tiran-ras-mohammed-ss-thistlegorm-hurghada-hurghada",
@@ -50419,13 +50591,14 @@
       "operator_id": "blue-shades-diving",
       "boat_id": "blue-shades-regency",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "thistlegorm",
         "ras mohammed",
-        "tiran"
+        "tiran",
+        "abu nuhas"
       ],
       "region": null,
       "summary": "",
@@ -50635,7 +50808,16 @@
           "amount": null,
           "note": "Environment Tax: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 25,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 25 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-storm--brothers-daedalus-and-elphinstone-port-ghalib-port-ghalib",
