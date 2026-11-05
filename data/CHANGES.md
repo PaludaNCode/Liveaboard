@@ -3,6 +3,59 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-05
+
+```
+changes: HEAD -> 2026-11-05
+===========================
+
+new departures (27)
+  2027-05-01  Blue Diamond           St. John's & Sataya                     1,572 USD liveaboard.com
+  2027-05-01  Blue Shades Regency    Sataya (Fury Shoals) - St. John's       1,572 USD liveaboard.com
+  2027-05-08  Blue Shades Regency    Safaga, Daedalus & Brothers             1,572 USD liveaboard.com
+  2027-05-15  Blue Diamond           Daedalus & Sataya                       1,572 USD liveaboard.com
+  2027-05-15  Blue Shades Regency    Abu Nuhas, Ras Mohammed & Tiran         1,572 USD liveaboard.com
+  2027-05-22  Blue Diamond           Elphinstone, Abu Dabab & Sataya         1,516 USD liveaboard.com
+  2027-05-22  Blue Shades Regency    Tiran, Ras Mohammed & SS Thistlego      1,572 USD liveaboard.com
+  2027-05-29  Blue Diamond           Daedalus & Sataya                       1,572 USD liveaboard.com
+  2027-05-29  Blue Shades Regency    Abu Nuhas, Ras Mohammed, Tiran & D      1,572 USD liveaboard.com
+  2027-06-05  Blue Shades Regency    Safaga, Brothers, Abu Nuhas & SS T      1,572 USD liveaboard.com
+  2027-06-12  Blue Shades Regency    Safaga, Brothers & Ras Mohammed         1,572 USD liveaboard.com
+  2027-06-19  Blue Shades Regency    Tiran, Ras Mohammed & SS Thistlego      1,572 USD liveaboard.com
+  ... and 15 more not shown
+
+now sold out (1)
+  2027-06-17  SS Serena Dreams       North & Safaga                     divebooker.com+liveaboard.com
+
+bookable again (3)
+  2027-05-13  SS Serena Dreams       North & Tiran                      divebooker.com+liveaboard.com
+  2027-07-31  CU                     St. John's & Fury Shoals           liveaboard.com
+  2027-07-31  Grand Discovery        Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (1)
+  2027-05-13  Sea Serpent Grand      Brothers / North             divebooker.com+liveaboard.com -> divebooker.com  North & Brothers -> Brothers / North
+
+price up (551)
+  2027-08-07  CU                     1,343 ->   1,460 USD  +117 (+8.7%)  Brothers, Daedalus & Elphinstone
+  2027-08-14  CU                     1,343 ->   1,460 USD  +117 (+8.7%)  Brothers, Daedalus & Elphinstone
+  2027-05-01  Marselia Star          3,300 ->   3,313 USD  +13 (+0.4%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             3,133 ->   3,144 USD  +11 (+0.4%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,640 ->   2,650 USD  +10 (+0.4%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,684 ->   2,694 USD  +10 (+0.4%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-30  Serenity               2,517 ->   2,527 USD  +10 (+0.4%)  Solar Eclipse 2027: Deep South
+  2027-08-16  Golden Dolphin IV      2,460 ->   2,469 USD  +9 (+0.4%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,460 ->   2,469 USD  +9 (+0.4%)  North - Straits of Tiran - Brother
+  2027-07-17  MY Odyssey Liveaboar   2,405 ->   2,414 USD  +9 (+0.4%)  Premium Expedition
+  2027-05-27  Royal Evolution        2,365 ->   2,374 USD  +9 (+0.4%)  Brothers, Daedalus, Rocky, St. Joh
+  2027-07-31  Aphrodite              2,182 ->   2,190 USD  +8 (+0.4%)  Brothers, Safaga Reefs
+  ... and 539 more not shown
+
+vessels seen for the first time (1)
+  Blue Shades Regency
+
+359 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-11-04
 
 ```
