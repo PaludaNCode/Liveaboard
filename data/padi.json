@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-05",
+ "collected": "2026-11-06",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47365,9 +47365,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-06",
+    "first": "2026-11-10",
     "in_season": 31,
-    "last": "2027-12-16",
+    "last": "2027-12-20",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -47387,12 +47387,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 85,
-    "first": "2026-11-06",
+    "dated": 84,
+    "first": "2026-11-10",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 85,
+    "read": 84,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -47911,12 +47911,12 @@
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 87,
-    "first": "2026-11-06",
+    "dated": 86,
+    "first": "2026-11-13",
     "in_season": 15,
     "last": "2028-12-08",
     "priced": 15,
-    "read": 87,
+    "read": 86,
     "unpriced": 0
    },
    "slug": "mv-emperor-superior",
@@ -47934,12 +47934,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 52,
-    "first": "2026-11-06",
+    "dated": 51,
+    "first": "2026-11-15",
     "in_season": 18,
     "last": "2030-10-05",
     "priced": 18,
-    "read": 52,
+    "read": 51,
     "unpriced": 1
    },
    "slug": "eriny",
