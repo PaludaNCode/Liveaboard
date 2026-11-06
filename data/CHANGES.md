@@ -3,6 +3,37 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-06
+
+```
+changes: HEAD -> 2026-11-06
+===========================
+
+now sold out (2)
+  2027-05-15  Serenity               Mini Hurghada                      divebooker.com+liveaboard.com+padi.com
+  2027-05-21  Amelie Adventures      Best of Hurghada                   divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (1)
+  2027-05-25  Amelie Adventures      Best of Hurghada             divebooker.com+liveaboard.com+padi.com -> divebooker.com+padi.com  545 USD -> 485 EUR  Mini Safari: Best of Hur -> Best of Hurghada
+
+price up (25)
+  2027-06-09  Destiny                1,970 ->   2,187 USD  +217 (+11.0%)  North Tiran - Dahab
+  2027-06-19  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  Brothers, Daedalus & Elphinstone
+  2027-06-26  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  Brothers, Daedalus & Elphinstone
+  2027-07-10  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-08  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-15  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  Fury Shoals, Elphinstone & Safaga
+  2027-07-03  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  North & Tiran
+  2027-08-14  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  North & Wrecks
+  2027-08-28  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  North & Wrecks
+  2027-07-17  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  North Safaga Brothers
+  2027-05-22  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  North Tiran - Dahab
+  2027-08-21  Destiny                1,414 ->   1,570 USD  +156 (+11.0%)  North Tiran - Dahab
+  ... and 13 more not shown
+
+900 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-11-05
 
 ```
