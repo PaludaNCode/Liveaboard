@@ -3,6 +3,30 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-11-07
+
+```
+changes: HEAD -> 2026-11-07
+===========================
+
+price down (825)
+  2027-05-01  Marselia Star          3,310 ->   3,288 USD  -22 (-0.7%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             3,141 ->   3,121 USD  -20 (-0.6%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,648 ->   2,630 USD  -18 (-0.7%)  South & St. John's
+  2027-05-27  Royal Evolution        2,374 ->   2,356 USD  -18 (-0.8%)  Brothers, Daedalus, Rocky, St. Joh
+  2027-05-03  Royal Evolution        2,308 ->   2,291 USD  -17 (-0.7%)  Elba Reef & Elba borders
+  2027-08-16  Golden Dolphin IV      2,467 ->   2,451 USD  -16 (-0.6%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,467 ->   2,451 USD  -16 (-0.6%)  North - Straits of Tiran - Brother
+  2027-07-17  MY Odyssey Liveaboar   2,412 ->   2,396 USD  -16 (-0.7%)  Premium Expedition
+  2027-07-30  Serenity               2,524 ->   2,508 USD  -16 (-0.6%)  Solar Eclipse 2027: Deep South
+  2027-05-15  Aphrodite              2,300 ->   2,285 USD  -15 (-0.7%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,345 ->   2,330 USD  -15 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-07-31  Aphrodite              2,188 ->   2,173 USD  -15 (-0.7%)  Brothers, Safaga Reefs
+  ... and 813 more not shown
+
+117 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-11-06
 
 ```
