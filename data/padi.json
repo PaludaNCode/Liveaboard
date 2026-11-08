@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-07",
+ "collected": "2026-11-08",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47525,12 +47525,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 85,
-    "first": "2026-11-08",
+    "dated": 84,
+    "first": "2026-11-14",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 85,
+    "read": 84,
     "unpriced": 27
    },
    "slug": "bella-2",
@@ -48158,12 +48158,12 @@
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 4,
-    "first": "2026-11-08",
+    "dated": 3,
+    "first": "2026-11-15",
     "in_season": 0,
     "last": "2026-11-29",
     "priced": 0,
-    "read": 4,
+    "read": 3,
     "unpriced": 0
    },
    "slug": "high-wave",
@@ -48181,12 +48181,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 12,
-    "first": "2026-11-08",
+    "dated": 11,
+    "first": "2026-11-15",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 12,
+    "read": 11,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -48514,9 +48514,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-08",
+    "first": "2026-11-11",
     "in_season": 35,
-    "last": "2027-10-20",
+    "last": "2027-10-24",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -48604,12 +48604,12 @@
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 96,
-    "first": "2026-11-08",
+    "dated": 95,
+    "first": "2026-11-15",
     "in_season": 16,
     "last": "2028-12-28",
     "priced": 16,
-    "read": 96,
+    "read": 95,
     "unpriced": 0
    },
    "slug": "mv-tala",
@@ -48645,7 +48645,7 @@
   "unity": {
    "country": "egypt",
    "currency": "EUR",
-   "guests": 24,
+   "guests": null,
    "name": "Unity",
    "operator": null,
    "sailings": {
@@ -48658,12 +48658,7 @@
     "unpriced": 11
    },
    "slug": "unity",
-   "specs": {
-    "cabins": 14,
-    "length_m": 32,
-    "nitrox_free": true,
-    "year_built": 1998
-   }
+   "specs": null
   },
   "vip-one": {
    "country": "egypt",
@@ -48672,13 +48667,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 52,
-    "first": "2026-11-08",
+    "dated": 51,
+    "first": "2026-11-15",
     "in_season": 18,
     "last": "2027-12-26",
     "priced": 0,
-    "read": 52,
-    "unpriced": 52
+    "read": 51,
+    "unpriced": 51
    },
    "slug": "vip-one",
    "specs": {
