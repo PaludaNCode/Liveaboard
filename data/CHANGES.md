@@ -9,6 +9,18 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-11-07
 ===========================
 
+fees (3)
+  Amelie                 nitrox_course    132 EUR / per_trip -> 160 EUR / per_trip
+  Blue Shades Regency    gear_rental      listed, no price -> 210 EUR / per_trip
+  Sinaistar              alcohol          listed, no price -> no longer listed
+```
+
+## 2026-11-07
+
+```
+changes: HEAD -> 2026-11-07
+===========================
+
 price down (825)
   2027-05-01  Marselia Star          3,310 ->   3,288 USD  -22 (-0.7%)  CCR Reefs, Wrecks and Canyons Trip
   2027-07-17  DUNE Silky             3,141 ->   3,121 USD  -20 (-0.6%)  Best of Egypt
