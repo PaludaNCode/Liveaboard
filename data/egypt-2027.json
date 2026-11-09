@@ -331141,35 +331141,11 @@
   "divebooker_berths_read": "2026-11-08",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing, and -- only where it is not berths_read -- the day that seller's ladder was read]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
-    "read": "2026-11-08",
+    "read": "2026-11-09",
     "source": "padi.com",
     "url": "https://travel.padi.com/api/v2/travel/promotions/?country=110&country=120&date=2027-05-01&date=2027-06-01&date=2027-07-01&date=2027-08-01",
     "listing": "https://travel.padi.com/liveaboard-deals/",
     "offers": [
-      {
-        "boat": "red-sea-aggressor-ii",
-        "boat_name": "Red Sea Aggressor II",
-        "title": "Starting at $1349",
-        "kind": "Fixed amount",
-        "value": 1411.0,
-        "price": 1208,
-        "was": 2472,
-        "quoted": 1349.0,
-        "quoted_was": 2760.0,
-        "currency": "USD",
-        "start": "2027-05-01",
-        "end": "2027-05-08",
-        "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
-        "nights": 7,
-        "terms": [
-          "Specials are not retroactive. Specials are subject to change without notice.Money-saving discounts, other promotions, and the non-diver rate do not apply.",
-          "The below specials do not apply to group reservations, unless stated otherwise.",
-          "Booking Dates: Oct 26 - Nov 30, 2026",
-          "Travel Dates: Apr 24 - May 01 | May 01 - May 08 | May 08 - May 15 | May 22 - May 29 | May 29 - Jun 05 | Jun 05 - Jun 12 | Jun 19 - Jun 26 | Jun 26 - Jul 03 | Jul 03 - Jul 10, 2027",
-          "The 'starting at' price is based on deluxe accommodations",
-          "Single supplement (private stateroom) double the above price."
-        ]
-      },
       {
         "boat": "red-sea-blue-force-2",
         "boat_name": "Red Sea Blue Force 2",
@@ -331181,10 +331157,10 @@
         "quoted": 1490.0,
         "quoted_was": 1490.0,
         "currency": "EUR",
-        "start": "2027-05-01",
-        "end": "2027-05-08",
+        "start": "2027-05-08",
+        "end": "2027-05-16",
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/",
-        "nights": 7,
+        "nights": 8,
         "terms": [
           "Valid for bookings made before 30 Nov, 2026",
           "Other money saving specials and discounts do not apply",
@@ -331237,6 +331213,97 @@
         "in_run": true
       },
       {
+        "boat": "grand-discovery",
+        "boat_name": "Grand Discovery",
+        "title": "15% Early Bird",
+        "kind": "Discount %",
+        "value": 15.0,
+        "price": 1041,
+        "was": 1225,
+        "quoted": 1041.25,
+        "quoted_was": 1225.0,
+        "currency": "EUR",
+        "start": "2027-06-05",
+        "end": "2027-06-12",
+        "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
+        "nights": 7,
+        "terms": [
+          "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
+          "Valid until the end of November 2026.",
+          "Other money saving specials and discounts do not apply"
+        ],
+        "in_run": true
+      },
+      {
+        "boat": "red-sea-aggressor-ii",
+        "boat_name": "Red Sea Aggressor II",
+        "title": "Starting at $1349",
+        "kind": "Fixed amount",
+        "value": 1411.0,
+        "price": 1208,
+        "was": 2472,
+        "quoted": 1349.0,
+        "quoted_was": 2760.0,
+        "currency": "USD",
+        "start": "2027-06-05",
+        "end": "2027-06-12",
+        "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
+        "nights": 7,
+        "terms": [
+          "Specials are not retroactive. Specials are subject to change without notice.Money-saving discounts, other promotions, and the non-diver rate do not apply.",
+          "The below specials do not apply to group reservations, unless stated otherwise.",
+          "Booking Dates: Oct 26 - Nov 30, 2026",
+          "Travel Dates: Apr 24 - May 01 | May 01 - May 08 | May 08 - May 15 | May 22 - May 29 | May 29 - Jun 05 | Jun 05 - Jun 12 | Jun 19 - Jun 26 | Jun 26 - Jul 03 | Jul 03 - Jul 10, 2027",
+          "The 'starting at' price is based on deluxe accommodations",
+          "Single supplement (private stateroom) double the above price."
+        ]
+      },
+      {
+        "boat": "alsuraya",
+        "boat_name": "ALSURAYA",
+        "title": "Save 10%",
+        "kind": "Discount %",
+        "value": 10.0,
+        "price": 1125,
+        "was": 1250,
+        "quoted": 1125.0,
+        "quoted_was": 1250.0,
+        "currency": "EUR",
+        "start": "2027-06-12",
+        "end": "2027-06-19",
+        "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
+        "nights": 7,
+        "terms": [
+          "Valid for bookings made before departure date",
+          "Other money saving specials and discounts do not apply",
+          "Applicable to selected departures only"
+        ],
+        "in_run": true
+      },
+      {
+        "boat": "discovery-i",
+        "boat_name": "Discovery I",
+        "title": "15% Early Bird",
+        "kind": "Discount %",
+        "value": 15.0,
+        "price": 765,
+        "was": 900,
+        "quoted": 765.0,
+        "quoted_was": 900.0,
+        "currency": "EUR",
+        "start": "2027-06-12",
+        "end": "2027-06-19",
+        "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
+        "nights": 7,
+        "terms": [
+          "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
+          "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II.",
+          "Valid until the end of November 2026.",
+          "Other money saving specials and discounts do not apply"
+        ],
+        "in_run": true
+      },
+      {
         "boat": "discovery-ii",
         "boat_name": "Discovery II",
         "title": "15% Early Bird",
@@ -331255,28 +331322,6 @@
           "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
           "Valid until the end of November 2026.",
           "Other money saving specials and discounts do not apply"
-        ],
-        "in_run": true
-      },
-      {
-        "boat": "alsuraya",
-        "boat_name": "ALSURAYA",
-        "title": "Save 10%",
-        "kind": "Discount %",
-        "value": 10.0,
-        "price": 1125,
-        "was": 1250,
-        "quoted": 1125.0,
-        "quoted_was": 1250.0,
-        "currency": "EUR",
-        "start": "2027-07-10",
-        "end": "2027-07-17",
-        "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
-        "nights": 7,
-        "terms": [
-          "Valid for bookings made before departure date",
-          "Other money saving specials and discounts do not apply",
-          "Applicable to selected departures only"
         ],
         "in_run": true
       },
@@ -331303,28 +331348,6 @@
         "in_run": true
       },
       {
-        "boat": "grand-discovery",
-        "boat_name": "Grand Discovery",
-        "title": "15% Early Bird",
-        "kind": "Discount %",
-        "value": 15.0,
-        "price": 1041,
-        "was": 1225,
-        "quoted": 1041.25,
-        "quoted_was": 1225.0,
-        "currency": "EUR",
-        "start": "2027-08-07",
-        "end": "2027-08-14",
-        "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
-        "nights": 7,
-        "terms": [
-          "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
-          "Valid until the end of November 2026.",
-          "Other money saving specials and discounts do not apply"
-        ],
-        "in_run": true
-      },
-      {
         "boat": "avo",
         "boat_name": "AVO",
         "title": "5 % OFF",
@@ -331335,37 +331358,14 @@
         "quoted": 1519.05,
         "quoted_was": 1599.0,
         "currency": "EUR",
-        "start": "2027-08-21",
-        "end": "2027-08-28",
+        "start": "2027-08-28",
+        "end": "2027-09-04",
         "url": "https://travel.padi.com/liveaboard/egypt/my-avo/",
         "nights": 7,
         "terms": [
           "Valid for bookings made before departure date",
           "Other money saving specials and discounts do not apply",
           "Applicable to selected departures only"
-        ],
-        "in_run": true
-      },
-      {
-        "boat": "discovery-i",
-        "boat_name": "Discovery I",
-        "title": "15% Early Bird",
-        "kind": "Discount %",
-        "value": 15.0,
-        "price": 765,
-        "was": 900,
-        "quoted": 765.0,
-        "quoted_was": 900.0,
-        "currency": "EUR",
-        "start": "2027-08-28",
-        "end": "2027-09-04",
-        "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
-        "nights": 7,
-        "terms": [
-          "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
-          "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II.",
-          "Valid until the end of November 2026.",
-          "Other money saving specials and discounts do not apply"
         ],
         "in_run": true
       },
@@ -331434,7 +331434,7 @@
         "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/palau-aggressor-ii/"
       }
     ],
-    "previous": "2026-11-07",
+    "previous": "2026-11-08",
     "changes": {
       "new": [],
       "withdrawn": [],
@@ -331454,8 +331454,8 @@
             "quoted": 1125.0,
             "quoted_was": 1250.0,
             "currency": "EUR",
-            "start": "2027-06-12",
-            "end": "2027-06-19",
+            "start": "2027-07-10",
+            "end": "2027-07-17",
             "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
             "nights": 7,
             "terms": [
@@ -331475,8 +331475,8 @@
             "quoted": 1125.0,
             "quoted_was": 1250.0,
             "currency": "EUR",
-            "start": "2027-07-10",
-            "end": "2027-07-17",
+            "start": "2027-06-12",
+            "end": "2027-06-19",
             "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
             "nights": 7,
             "terms": [
@@ -331491,28 +331491,53 @@
             "sailing"
           ],
           "before": {
-            "boat": "discovery-i",
-            "boat_name": "Discovery I",
-            "title": "15% Early Bird",
+            "boat": "avo",
+            "boat_name": "AVO",
+            "title": "5 % OFF",
             "kind": "Discount %",
-            "value": 15.0,
-            "price": 765,
-            "was": 900,
-            "quoted": 765.0,
-            "quoted_was": 900.0,
+            "value": 5.0,
+            "price": 1519,
+            "was": 1599,
+            "quoted": 1519.05,
+            "quoted_was": 1599.0,
             "currency": "EUR",
-            "start": "2027-06-19",
-            "end": "2027-06-26",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
+            "start": "2027-08-21",
+            "end": "2027-08-28",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-avo/",
             "nights": 7,
             "terms": [
-              "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
-              "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II.",
-              "Valid until the end of November 2026.",
-              "Other money saving specials and discounts do not apply"
+              "Valid for bookings made before departure date",
+              "Other money saving specials and discounts do not apply",
+              "Applicable to selected departures only"
             ]
           },
           "after": {
+            "boat": "avo",
+            "boat_name": "AVO",
+            "title": "5 % OFF",
+            "kind": "Discount %",
+            "value": 5.0,
+            "price": 1519,
+            "was": 1599,
+            "quoted": 1519.05,
+            "quoted_was": 1599.0,
+            "currency": "EUR",
+            "start": "2027-08-28",
+            "end": "2027-09-04",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-avo/",
+            "nights": 7,
+            "terms": [
+              "Valid for bookings made before departure date",
+              "Other money saving specials and discounts do not apply",
+              "Applicable to selected departures only"
+            ]
+          }
+        },
+        {
+          "moved": [
+            "sailing"
+          ],
+          "before": {
             "boat": "discovery-i",
             "boat_name": "Discovery I",
             "title": "15% Early Bird",
@@ -331533,6 +331558,28 @@
               "Valid until the end of November 2026.",
               "Other money saving specials and discounts do not apply"
             ]
+          },
+          "after": {
+            "boat": "discovery-i",
+            "boat_name": "Discovery I",
+            "title": "15% Early Bird",
+            "kind": "Discount %",
+            "value": 15.0,
+            "price": 765,
+            "was": 900,
+            "quoted": 765.0,
+            "quoted_was": 900.0,
+            "currency": "EUR",
+            "start": "2027-06-12",
+            "end": "2027-06-19",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
+            "nights": 7,
+            "terms": [
+              "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
+              "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II.",
+              "Valid until the end of November 2026.",
+              "Other money saving specials and discounts do not apply"
+            ]
           }
         },
         {
@@ -331540,27 +331587,6 @@
             "sailing"
           ],
           "before": {
-            "boat": "grand-discovery",
-            "boat_name": "Grand Discovery",
-            "title": "15% Early Bird",
-            "kind": "Discount %",
-            "value": 15.0,
-            "price": 1041,
-            "was": 1225,
-            "quoted": 1041.25,
-            "quoted_was": 1225.0,
-            "currency": "EUR",
-            "start": "2027-06-26",
-            "end": "2027-07-03",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
-            "nights": 7,
-            "terms": [
-              "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
-              "Valid until the end of November 2026.",
-              "Other money saving specials and discounts do not apply"
-            ]
-          },
-          "after": {
             "boat": "grand-discovery",
             "boat_name": "Grand Discovery",
             "title": "15% Early Bird",
@@ -331580,6 +331606,27 @@
               "Valid until the end of November 2026.",
               "Other money saving specials and discounts do not apply"
             ]
+          },
+          "after": {
+            "boat": "grand-discovery",
+            "boat_name": "Grand Discovery",
+            "title": "15% Early Bird",
+            "kind": "Discount %",
+            "value": 15.0,
+            "price": 1041,
+            "was": 1225,
+            "quoted": 1041.25,
+            "quoted_was": 1225.0,
+            "currency": "EUR",
+            "start": "2027-06-05",
+            "end": "2027-06-12",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
+            "nights": 7,
+            "terms": [
+              "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
+              "Valid until the end of November 2026.",
+              "Other money saving specials and discounts do not apply"
+            ]
           }
         },
         {
@@ -331597,8 +331644,8 @@
             "quoted": 1349.0,
             "quoted_was": 2760.0,
             "currency": "USD",
-            "start": "2027-07-03",
-            "end": "2027-07-10",
+            "start": "2027-05-01",
+            "end": "2027-05-08",
             "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
             "nights": 7,
             "terms": [
@@ -331621,8 +331668,8 @@
             "quoted": 1349.0,
             "quoted_was": 2760.0,
             "currency": "USD",
-            "start": "2027-05-01",
-            "end": "2027-05-08",
+            "start": "2027-06-05",
+            "end": "2027-06-12",
             "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
             "nights": 7,
             "terms": [
@@ -331650,10 +331697,10 @@
             "quoted": 1490.0,
             "quoted_was": 1490.0,
             "currency": "EUR",
-            "start": "2027-08-21",
-            "end": "2027-08-29",
+            "start": "2027-05-01",
+            "end": "2027-05-08",
             "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/",
-            "nights": 8,
+            "nights": 7,
             "terms": [
               "Valid for bookings made before 30 Nov, 2026",
               "Other money saving specials and discounts do not apply",
@@ -331671,10 +331718,10 @@
             "quoted": 1490.0,
             "quoted_was": 1490.0,
             "currency": "EUR",
-            "start": "2027-05-01",
-            "end": "2027-05-08",
+            "start": "2027-05-08",
+            "end": "2027-05-16",
             "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/",
-            "nights": 7,
+            "nights": 8,
             "terms": [
               "Valid for bookings made before 30 Nov, 2026",
               "Other money saving specials and discounts do not apply",
