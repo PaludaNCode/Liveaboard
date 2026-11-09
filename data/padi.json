@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-08",
+ "collected": "2026-11-09",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47297,12 +47297,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 52,
-    "first": "2026-11-09",
+    "dated": 51,
+    "first": "2026-11-16",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 52,
+    "read": 51,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -47320,12 +47320,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 69,
-    "first": "2026-11-09",
+    "dated": 68,
+    "first": "2026-11-16",
     "in_season": 17,
     "last": "2028-06-26",
     "priced": 17,
-    "read": 69,
+    "read": 68,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -47706,12 +47706,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 40,
+    "dated": 42,
     "first": "2026-11-17",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 40,
+    "read": 42,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -47729,12 +47729,12 @@
    "name": "MY Cassiopeia Glory",
    "operator": null,
    "sailings": {
-    "dated": 1,
-    "first": "2027-03-07",
+    "dated": 2,
+    "first": "2026-12-26",
     "in_season": 0,
     "last": "2027-03-07",
     "priced": 0,
-    "read": 1,
+    "read": 2,
     "unpriced": 1
    },
    "slug": "my-cassiopeia-glory",
@@ -47978,12 +47978,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 8,
-    "first": "2026-11-09",
+    "dated": 7,
+    "first": "2026-11-15",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 8,
+    "read": 7,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -48046,12 +48046,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 55,
-    "first": "2026-11-09",
+    "dated": 54,
+    "first": "2026-11-16",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 55,
+    "read": 54,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -48068,12 +48068,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 55,
-    "first": "2026-11-09",
+    "dated": 54,
+    "first": "2026-11-16",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 55,
+    "read": 54,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -48377,12 +48377,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 9,
-    "first": "2026-11-09",
+    "dated": 8,
+    "first": "2026-11-14",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 9,
+    "read": 8,
     "unpriced": 1
    },
    "slug": "reef-voyager",
