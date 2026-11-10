@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-09",
+ "collected": "2026-11-10",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47365,9 +47365,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-10",
+    "first": "2026-11-14",
     "in_season": 31,
-    "last": "2027-12-20",
+    "last": "2027-12-24",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -47387,12 +47387,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 84,
-    "first": "2026-11-10",
+    "dated": 83,
+    "first": "2026-11-15",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 84,
+    "read": 83,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -47548,12 +47548,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 69,
-    "first": "2026-11-10",
+    "dated": 68,
+    "first": "2026-11-17",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 22,
-    "read": 69,
+    "read": 68,
     "unpriced": 0
    },
    "slug": "bella-3",
