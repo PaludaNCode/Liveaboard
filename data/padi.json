@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-10",
+ "collected": "2026-11-11",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47888,12 +47888,12 @@
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 70,
+    "dated": 83,
     "first": "2026-11-12",
     "in_season": 13,
-    "last": "2028-07-20",
+    "last": "2028-12-21",
     "priced": 13,
-    "read": 70,
+    "read": 83,
     "unpriced": 0
    },
    "slug": "mv-emperor-elite",
@@ -48000,12 +48000,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 9,
-    "first": "2026-11-11",
+    "dated": 8,
+    "first": "2026-11-18",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 9,
+    "read": 8,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -48514,9 +48514,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-11",
+    "first": "2026-11-15",
     "in_season": 35,
-    "last": "2027-10-24",
+    "last": "2027-10-27",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -48536,13 +48536,13 @@
    "name": "Snefro Spirit",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 33,
-    "first": "2026-11-11",
+    "dated": 32,
+    "first": "2027-04-24",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 33,
-    "unpriced": 1
+    "read": 32,
+    "unpriced": 0
    },
    "slug": "snefro-spirit",
    "specs": {
