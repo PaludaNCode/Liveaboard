@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-12",
+ "collected": "2026-11-13",
  "departures": {
   "all-star-ghani::2026-11-16": {
    "availability": 2,
@@ -1627,7 +1627,7 @@
    "was": 1150.0
   },
   "alsuraya::2026-12-26": {
-   "availability": 0,
+   "availability": 1,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -1952,7 +1952,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-07-24": {
-   "availability": 22,
+   "availability": 21,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-07-31",
@@ -2095,7 +2095,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-10-16": {
-   "availability": 15,
+   "availability": 14,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-10-23",
@@ -7958,20 +7958,20 @@
    "was": 1281.0
   },
   "blue-horizon::2027-02-06": {
-   "availability": 0,
+   "availability": 2,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-02-13",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526463,
-   "price": 1024.8,
+   "price": 1108.8,
    "slug": "mv-blue-horizon",
    "start": "2027-02-06",
-   "was": 1281.0
+   "was": 1386.0
   },
   "blue-horizon::2027-02-13": {
-   "availability": 8,
+   "availability": 9,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-02-20",
@@ -8140,7 +8140,7 @@
    "was": 1526.0
   },
   "blue-horizon::2027-05-22": {
-   "availability": 25,
+   "availability": 24,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-05-29",
@@ -8179,7 +8179,7 @@
    "was": 1743.0
   },
   "blue-horizon::2027-06-12": {
-   "availability": 24,
+   "availability": 22,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-06-19",
@@ -9258,7 +9258,7 @@
    "was": 1155.0
   },
   "blue-melody::2026-12-19": {
-   "availability": 8,
+   "availability": 7,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-12-26",
@@ -9401,7 +9401,7 @@
    "was": 1526.0
   },
   "blue-melody::2027-04-10": {
-   "availability": 14,
+   "availability": 13,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-04-17",
@@ -9518,7 +9518,7 @@
    "was": 1743.0
   },
   "blue-melody::2027-06-12": {
-   "availability": 0,
+   "availability": 14,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-06-19",
@@ -11693,13 +11693,26 @@
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2027-11-25",
-   "itinerary": "Brothers & Tiran (Port Ghalib - Hurghada) 7 Nights",
+   "itinerary": "North & Wrecks (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1557102,
    "price": 1440.0,
    "slug": "my-blue-seas",
    "start": "2027-11-18",
    "was": 1440.0
+  },
+  "blue-seas::2027-11-25": {
+   "availability": 0,
+   "boat": "blue-seas",
+   "currency": "EUR",
+   "end": "2027-12-02",
+   "itinerary": "North & Wrecks (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1557105,
+   "price": 1125.0,
+   "slug": "my-blue-seas",
+   "start": "2027-11-25",
+   "was": 1125.0
   },
   "blue-seas::2027-12-02": {
    "availability": 24,
@@ -11719,7 +11732,7 @@
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2027-12-16",
-   "itinerary": "Brothers & Tiran (Port Ghalib - Hurghada) 7 Nights",
+   "itinerary": "North & Wrecks (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1557095,
    "price": 1070.0,
@@ -11739,6 +11752,19 @@
    "slug": "my-blue-seas",
    "start": "2027-12-16",
    "was": 1070.0
+  },
+  "blue-seas::2027-12-23": {
+   "availability": 24,
+   "boat": "blue-seas",
+   "currency": "EUR",
+   "end": "2027-12-30",
+   "itinerary": "North & Wrecks (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1557107,
+   "price": 1025.0,
+   "slug": "my-blue-seas",
+   "start": "2027-12-23",
+   "was": 1025.0
   },
   "blue-seas::2027-12-30": {
    "availability": 24,
@@ -11793,7 +11819,7 @@
    "was": 1215.0
   },
   "blue-storm::2026-12-10": {
-   "availability": 20,
+   "availability": 22,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-12-17",
@@ -12404,7 +12430,7 @@
    "was": 1215.0
   },
   "blue::2026-11-19": {
-   "availability": 7,
+   "availability": 6,
    "boat": "blue",
    "currency": "EUR",
    "end": "2026-11-26",
@@ -12599,7 +12625,7 @@
    "was": 1420.0
   },
   "blue::2027-04-29": {
-   "availability": 21,
+   "availability": 20,
    "boat": "blue",
    "currency": "EUR",
    "end": "2027-05-06",
@@ -13652,7 +13678,7 @@
    "was": 1080.0
   },
   "discovery-i::2027-01-02": {
-   "availability": 6,
+   "availability": 4,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-01-09",
@@ -15056,7 +15082,7 @@
    "was": 1100.0
   },
   "discovery-ii::2027-05-01": {
-   "availability": 12,
+   "availability": 13,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-05-08",
@@ -15121,7 +15147,7 @@
    "was": 1100.0
   },
   "discovery-ii::2027-06-05": {
-   "availability": 15,
+   "availability": 14,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-06-12",
@@ -15680,7 +15706,7 @@
    "was": 1100.0
   },
   "discovery-ii::2028-06-03": {
-   "availability": 20,
+   "availability": 18,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2028-06-10",
@@ -16161,17 +16187,17 @@
    "was": 1600.0
   },
   "dune-longara::2027-04-17": {
-   "availability": 1,
+   "availability": 5,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-04-24",
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1557148,
-   "price": 1650.0,
+   "price": 1450.0,
    "slug": "dune-longara",
    "start": "2027-04-17",
-   "was": 1650.0
+   "was": 1450.0
   },
   "dune-longara::2027-04-24": {
    "availability": 26,
@@ -17162,7 +17188,7 @@
    "was": 1600.0
   },
   "dune-silky::2026-11-14": {
-   "availability": 3,
+   "availability": 2,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -17201,7 +17227,7 @@
    "was": 1450.0
   },
   "dune-silky::2026-12-05": {
-   "availability": 7,
+   "availability": 6,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -17656,7 +17682,7 @@
    "was": 1650.0
   },
   "dune-silky::2027-10-09": {
-   "availability": 19,
+   "availability": 24,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -18579,7 +18605,7 @@
    "was": 1200.0
   },
   "dune-titan::2027-05-08": {
-   "availability": 15,
+   "availability": 14,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -18618,7 +18644,7 @@
    "was": 1150.0
   },
   "dune-titan::2027-05-29": {
-   "availability": 28,
+   "availability": 26,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-06-05",
@@ -18865,7 +18891,7 @@
    "was": 1250.0
   },
   "dune-titan::2027-11-06": {
-   "availability": 30,
+   "availability": 0,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-11-13",
@@ -19944,7 +19970,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-07-22": {
-   "availability": 13,
+   "availability": 15,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-07-29",
@@ -20854,7 +20880,7 @@
    "was": 1400.0
   },
   "emperor-elite::2027-03-18": {
-   "availability": 22,
+   "availability": 24,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-03-25",
@@ -20893,7 +20919,7 @@
    "was": 1550.0
   },
   "emperor-elite::2027-04-08": {
-   "availability": 24,
+   "availability": 22,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-04-15",
@@ -20971,7 +20997,7 @@
    "was": 1600.0
   },
   "emperor-elite::2027-05-20": {
-   "availability": 19,
+   "availability": 21,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-05-27",
@@ -21140,7 +21166,7 @@
    "was": 1700.0
   },
   "emperor-elite::2027-09-30": {
-   "availability": 24,
+   "availability": 18,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-10-07",
@@ -21283,7 +21309,7 @@
    "was": 1300.0
   },
   "emperor-elite::2027-12-23": {
-   "availability": 12,
+   "availability": 14,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-12-30",
@@ -21296,7 +21322,7 @@
    "was": 1300.0
   },
   "emperor-elite::2027-12-30": {
-   "availability": 14,
+   "availability": 12,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2028-01-06",
@@ -21335,7 +21361,7 @@
    "was": 1400.0
   },
   "emperor-elite::2028-03-02": {
-   "availability": 22,
+   "availability": 24,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2028-03-09",
@@ -21647,7 +21673,7 @@
    "was": 1650.0
   },
   "emperor-elite::2028-09-28": {
-   "availability": 22,
+   "availability": 24,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2028-10-05",
@@ -21775,19 +21801,6 @@
    "slug": "mv-emperor-elite",
    "start": "2028-12-21",
    "was": 1300.0
-  },
-  "emperor-superior::2026-11-13": {
-   "availability": 9,
-   "boat": "emperor-superior",
-   "currency": "EUR",
-   "end": "2026-11-20",
-   "itinerary": "Famous Five (Hurghada- Hurghada) 7 nights",
-   "nights": 7,
-   "padi_id": 1524961,
-   "price": 1510.0,
-   "slug": "mv-emperor-superior",
-   "start": "2026-11-13",
-   "was": 1510.0
   },
   "emperor-superior::2026-11-20": {
    "availability": 8,
@@ -22219,7 +22232,7 @@
    "was": 1410.0
   },
   "emperor-superior::2027-10-02": {
-   "availability": 17,
+   "availability": 15,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2027-10-09",
@@ -22258,7 +22271,7 @@
    "was": 1510.0
   },
   "emperor-superior::2027-10-23": {
-   "availability": 16,
+   "availability": 14,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -22739,7 +22752,7 @@
    "was": 1410.0
   },
   "emperor-superior::2028-09-23": {
-   "availability": 23,
+   "availability": 21,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2028-09-30",
@@ -25768,7 +25781,7 @@
    "was": 1300.0
   },
   "ghazala-explorer::2026-12-07": {
-   "availability": 1,
+   "availability": 2,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2026-12-14",
@@ -27042,7 +27055,7 @@
    "was": 1350.0
   },
   "grand-discovery::2027-10-09": {
-   "availability": 15,
+   "availability": 20,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -27068,7 +27081,7 @@
    "was": 1350.0
   },
   "grand-discovery::2027-10-23": {
-   "availability": 34,
+   "availability": 36,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -29382,7 +29395,7 @@
    "was": 1299.0
   },
   "independence-ii::2027-05-29": {
-   "availability": 8,
+   "availability": 2,
    "boat": "independence-ii",
    "currency": "EUR",
    "end": "2027-06-10",
@@ -29459,6 +29472,32 @@
    "start": "2027-09-04",
    "was": 1959.0
   },
+  "independence-ii::2027-09-16": {
+   "availability": 21,
+   "boat": "independence-ii",
+   "currency": "EUR",
+   "end": "2027-09-23",
+   "itinerary": "Brothers \u2013 Daedalus \u2013 Elphinstone (Hurghada - Port Ghalib) 7 nights",
+   "nights": 7,
+   "padi_id": 1562748,
+   "price": 1349.0,
+   "slug": "my-independence-ii",
+   "start": "2027-09-16",
+   "was": 1349.0
+  },
+  "independence-ii::2027-09-23": {
+   "availability": 21,
+   "boat": "independence-ii",
+   "currency": "EUR",
+   "end": "2027-09-30",
+   "itinerary": "Daedalus - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
+   "nights": 7,
+   "padi_id": 1562747,
+   "price": 1349.0,
+   "slug": "my-independence-ii",
+   "start": "2027-09-23",
+   "was": 1349.0
+  },
   "lady-m::2026-11-16": {
    "availability": 22,
    "boat": "lady-m",
@@ -29499,7 +29538,7 @@
    "was": 470.0
   },
   "new-sambo::2026-11-18": {
-   "availability": 10,
+   "availability": 6,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2026-11-20",
@@ -29512,7 +29551,7 @@
    "was": 470.0
   },
   "new-sambo::2026-11-22": {
-   "availability": 20,
+   "availability": 18,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2026-11-23",
@@ -29554,108 +29593,173 @@
    "availability": 20,
    "boat": "new-sambo",
    "currency": "EUR",
-   "end": "2026-12-01",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
+   "end": "2026-11-30",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
    "padi_id": 1549974,
-   "price": 470.0,
+   "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
    "start": "2026-11-29",
-   "was": 470.0
+   "was": 250.0
+  },
+  "new-sambo::2026-12-01": {
+   "availability": 20,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2026-12-02",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1562098,
+   "price": 250.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2026-12-01",
+   "was": 250.0
+  },
+  "new-sambo::2026-12-03": {
+   "availability": 20,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2026-12-04",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1562724,
+   "price": 250.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2026-12-03",
+   "was": 250.0
   },
   "new-sambo::2026-12-06": {
-   "availability": 0,
+   "availability": 20,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2026-12-07",
    "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
    "nights": 1,
-   "padi_id": 1549979,
+   "padi_id": 1562725,
    "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
    "start": "2026-12-06",
    "was": 250.0
   },
   "new-sambo::2026-12-08": {
-   "availability": 0,
+   "availability": 8,
    "boat": "new-sambo",
    "currency": "EUR",
-   "end": "2026-12-15",
-   "itinerary": "Fury Shoals (Hamata - Hamata) 7 nights / 8 days",
-   "nights": 7,
-   "padi_id": 1549981,
+   "end": "2026-12-09",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1562722,
    "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
    "start": "2026-12-08",
+   "was": 250.0
+  },
+  "new-sambo::2026-12-10": {
+   "availability": 14,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2026-12-11",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1549979,
+   "price": 250.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2026-12-10",
    "was": 250.0
   },
   "new-sambo::2026-12-13": {
    "availability": 20,
    "boat": "new-sambo",
    "currency": "EUR",
-   "end": "2026-12-15",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
-   "padi_id": 1549982,
-   "price": 470.0,
+   "end": "2026-12-14",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1562723,
+   "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
    "start": "2026-12-13",
-   "was": 470.0
+   "was": 250.0
   },
-  "new-sambo::2026-12-16": {
+  "new-sambo::2026-12-15": {
+   "availability": 20,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2026-12-16",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1549981,
+   "price": 250.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2026-12-15",
+   "was": 250.0
+  },
+  "new-sambo::2026-12-17": {
    "availability": 20,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2026-12-18",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
-   "padi_id": 1561080,
-   "price": 470.0,
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1549982,
+   "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
-   "start": "2026-12-16",
-   "was": 470.0
+   "start": "2026-12-17",
+   "was": 250.0
   },
   "new-sambo::2026-12-20": {
    "availability": 20,
    "boat": "new-sambo",
    "currency": "EUR",
-   "end": "2026-12-22",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
-   "padi_id": 1549985,
-   "price": 470.0,
+   "end": "2026-12-21",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1561080,
+   "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
    "start": "2026-12-20",
-   "was": 470.0
+   "was": 250.0
   },
-  "new-sambo::2026-12-23": {
+  "new-sambo::2026-12-22": {
+   "availability": 20,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2026-12-23",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
+   "padi_id": 1549985,
+   "price": 250.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2026-12-22",
+   "was": 250.0
+  },
+  "new-sambo::2026-12-24": {
    "availability": 20,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2026-12-25",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
    "padi_id": 1561081,
-   "price": 470.0,
+   "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
-   "start": "2026-12-23",
-   "was": 470.0
+   "start": "2026-12-24",
+   "was": 250.0
   },
   "new-sambo::2026-12-27": {
-   "availability": 20,
+   "availability": 16,
    "boat": "new-sambo",
    "currency": "EUR",
-   "end": "2026-12-29",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
+   "end": "2026-12-28",
+   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
+   "nights": 1,
    "padi_id": 1549984,
-   "price": 470.0,
+   "price": 250.0,
    "slug": "new-sambo-safari-boat-2",
    "start": "2026-12-27",
-   "was": 470.0
+   "was": 250.0
   },
   "new-sambo::2026-12-30": {
-   "availability": 14,
+   "availability": 10,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-01-01",
@@ -29731,6 +29835,32 @@
    "slug": "new-sambo-safari-boat-2",
    "start": "2027-01-30",
    "was": 1050.0
+  },
+  "new-sambo::2027-02-07": {
+   "availability": 18,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2027-02-09",
+   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
+   "nights": 2,
+   "padi_id": 1559167,
+   "price": 470.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2027-02-07",
+   "was": 470.0
+  },
+  "new-sambo::2027-02-10": {
+   "availability": 20,
+   "boat": "new-sambo",
+   "currency": "EUR",
+   "end": "2027-02-12",
+   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
+   "nights": 2,
+   "padi_id": 1549965,
+   "price": 470.0,
+   "slug": "new-sambo-safari-boat-2",
+   "start": "2027-02-10",
+   "was": 470.0
   },
   "new-sambo::2027-02-13": {
    "availability": 20,
@@ -29824,7 +29954,7 @@
    "was": 1050.0
   },
   "new-sambo::2027-04-10": {
-   "availability": 20,
+   "availability": 0,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-04-17",
@@ -29893,7 +30023,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-05-29",
-   "itinerary": "BDE \u2013 Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 nights / 8 days",
+   "itinerary": "Fury Shoals (Hamata - Hamata) 7 nights / 8 days",
    "nights": 7,
    "padi_id": 1559172,
    "price": 1200.0,
@@ -29902,7 +30032,7 @@
    "was": 1200.0
   },
   "new-sambo::2027-05-29": {
-   "availability": 20,
+   "availability": 0,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-06-05",
@@ -29958,7 +30088,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-07-03",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559177,
    "price": 1350.0,
@@ -29971,7 +30101,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-07-10",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559202,
    "price": 1350.0,
@@ -29984,7 +30114,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-07-17",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559208,
    "price": 1350.0,
@@ -29997,7 +30127,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-07-24",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559194,
    "price": 1350.0,
@@ -30010,7 +30140,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-07-31",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559218,
    "price": 1350.0,
@@ -30023,7 +30153,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-08-07",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559203,
    "price": 1350.0,
@@ -30036,7 +30166,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-08-14",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559214,
    "price": 1350.0,
@@ -30045,11 +30175,11 @@
    "was": 1350.0
   },
   "new-sambo::2027-08-14": {
-   "availability": 20,
+   "availability": 0,
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-08-21",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559181,
    "price": 1350.0,
@@ -30062,7 +30192,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-08-28",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559196,
    "price": 1350.0,
@@ -30075,7 +30205,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-09-04",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559211,
    "price": 1350.0,
@@ -30088,7 +30218,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-09-11",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559201,
    "price": 1350.0,
@@ -30101,7 +30231,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-09-18",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559206,
    "price": 1350.0,
@@ -30114,7 +30244,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-09-25",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559209,
    "price": 1350.0,
@@ -30127,7 +30257,7 @@
    "boat": "new-sambo",
    "currency": "EUR",
    "end": "2027-10-02",
-   "itinerary": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights",
+   "itinerary": "Deep South - St John - Rocky & Zabargad (Hamata - Hamata) 7 Nights",
    "nights": 7,
    "padi_id": 1559215,
    "price": 1350.0,
@@ -30504,26 +30634,26 @@
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-05-22",
-   "itinerary": "Best of Tiran (Hurghada - Hurghada) 7 nights",
+   "itinerary": "BDE  (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1551655,
-   "price": 1420.0,
+   "price": 1610.0,
    "slug": "my-odyssey",
    "start": "2027-05-15",
-   "was": 1420.0
+   "was": 1610.0
   },
   "odyssey::2027-05-22": {
    "availability": 16,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-05-29",
-   "itinerary": "The Golden Loop North/Brother (Hurghada - Hurghada) 7 nights",
+   "itinerary": "Fury Shoal (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1551662,
-   "price": 1520.0,
+   "price": 1420.0,
    "slug": "my-odyssey",
    "start": "2027-05-22",
-   "was": 1520.0
+   "was": 1420.0
   },
   "odyssey::2027-05-29": {
    "availability": 20,
@@ -33542,7 +33672,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-12-26": {
-   "availability": 15,
+   "availability": 12,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-01-04",
@@ -36168,7 +36298,7 @@
    "was": 2349.0
   },
   "royal-evolution::2027-05-13": {
-   "availability": 12,
+   "availability": 14,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2027-05-20",
@@ -36753,7 +36883,7 @@
    "was": 1090.0
   },
   "seawolf-dominator::2027-05-22": {
-   "availability": 17,
+   "availability": 19,
    "boat": "seawolf-dominator",
    "currency": "EUR",
    "end": "2027-05-29",
@@ -37611,7 +37741,7 @@
    "was": 1470.0
   },
   "seawolf-steel::2027-10-09": {
-   "availability": 28,
+   "availability": 14,
    "boat": "seawolf-steel",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -37754,20 +37884,20 @@
    "was": 2350.0
   },
   "serenity::2026-11-14": {
-   "availability": 0,
+   "availability": 2,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-21",
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1537406,
-   "price": 1400.0,
+   "price": 1647.0,
    "slug": "serenity",
    "start": "2026-11-14",
-   "was": 1400.0
+   "was": 1647.0
   },
   "serenity::2026-11-21": {
-   "availability": 4,
+   "availability": 3,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-28",
@@ -37871,7 +38001,7 @@
    "was": 1250.0
   },
   "serenity::2027-01-16": {
-   "availability": 13,
+   "availability": 14,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-01-23",
@@ -38495,7 +38625,7 @@
    "was": 679.0
   },
   "snefro-love::2027-01-21": {
-   "availability": 18,
+   "availability": 16,
    "boat": "snefro-love",
    "currency": "EUR",
    "end": "2027-01-25",
@@ -39210,7 +39340,7 @@
    "was": 529.0
   },
   "snefro-pearl::2026-12-06": {
-   "availability": 6,
+   "availability": 4,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-12-09",
@@ -40406,7 +40536,7 @@
    "was": 582.0
   },
   "snefro-pearl::2027-10-24": {
-   "availability": 12,
+   "availability": 10,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2027-10-27",
@@ -40881,10 +41011,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1550240,
-   "price": 1169.0,
+   "price": 1099.0,
    "slug": "snefro-target",
    "start": "2026-11-28",
-   "was": 1169.0
+   "was": 1099.0
   },
   "snefro-target::2026-12-05": {
    "availability": 14,
@@ -40894,23 +41024,23 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1554235,
-   "price": 1169.0,
+   "price": 1099.0,
    "slug": "snefro-target",
    "start": "2026-12-05",
-   "was": 1169.0
+   "was": 1099.0
   },
   "snefro-target::2026-12-12": {
-   "availability": 16,
+   "availability": 14,
    "boat": "snefro-target",
    "currency": "EUR",
    "end": "2026-12-19",
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1554237,
-   "price": 1169.0,
+   "price": 1099.0,
    "slug": "snefro-target",
    "start": "2026-12-12",
-   "was": 1169.0
+   "was": 1099.0
   },
   "snefro-target::2026-12-19": {
    "availability": 0,
@@ -43045,7 +43175,7 @@
    "was": 1460.0
   },
   "topaz::2027-03-20": {
-   "availability": 9,
+   "availability": 7,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-03-27",
@@ -43474,7 +43604,7 @@
    "was": 1360.0
   },
   "topaz::2027-11-20": {
-   "availability": 28,
+   "availability": 12,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-11-27",
