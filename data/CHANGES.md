@@ -9,6 +9,22 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-11-07
 ===========================
 
+fees (7)
+  Amelie Adventures      fuel_surcharge   not listed -> 10 EUR / per_day
+  Amelie Adventures      port_fees        20 EUR / per_trip -> 25 EUR / per_trip
+  Golden Dolphin         gear_rental      135 EUR / per_week -> 150-302.5 EUR / per_trip
+  Golden Dolphin IV      gear_rental      135 EUR / per_week -> 150-302.5 EUR / per_trip
+  Golden Imperial        course           150-265 EUR / per_trip -> 120-265 EUR / per_trip
+  Golden Imperial        gear_rental      150 EUR / per_week -> 150-302.5 EUR / per_trip
+  Hammerhead II          combined_fees    80 EUR / per_trip -> 80-170 EUR / per_trip
+```
+
+## 2026-11-07
+
+```
+changes: HEAD -> 2026-11-07
+===========================
+
 fees (3)
   Amelie                 nitrox_course    132 EUR / per_trip -> 160 EUR / per_trip
   Blue Shades Regency    gear_rental      listed, no price -> 210 EUR / per_trip
