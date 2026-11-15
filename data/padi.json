@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-14",
+ "collected": "2026-11-15",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -12347,6 +12347,80 @@
     "recommended_logged_dives": 50
    },
    "title": "Daedalus - Rockys & Zabargad (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "blue-seas::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "brothers"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 135.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from closest airport (round-trip; except of night flights)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23619,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-24",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
   },
   "blue-seas::North & Safaga (Hurghada - Hurghada)": {
    "boat": "blue-seas",
@@ -47470,12 +47544,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 83,
-    "first": "2026-11-15",
+    "dated": 82,
+    "first": "2026-11-18",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 83,
+    "read": 82,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -48017,12 +48091,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 51,
-    "first": "2026-11-15",
+    "dated": 50,
+    "first": "2026-11-21",
     "in_season": 18,
     "last": "2030-10-05",
     "priced": 18,
-    "read": 51,
+    "read": 50,
     "unpriced": 1
    },
    "slug": "eriny",
@@ -48061,12 +48135,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 7,
-    "first": "2026-11-15",
+    "dated": 6,
+    "first": "2026-11-22",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 7,
+    "read": 6,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -48219,13 +48293,13 @@
    "name": "MY Heaven Saphir",
    "operator": null,
    "sailings": {
-    "dated": 55,
-    "first": "2026-11-19",
+    "dated": 100,
+    "first": "2026-11-15",
     "in_season": 17,
-    "last": "2027-12-30",
+    "last": "2028-11-02",
     "priced": 17,
-    "read": 55,
-    "unpriced": 1
+    "read": 100,
+    "unpriced": 2
    },
    "slug": "my-heaven-saphir",
    "specs": {
@@ -48241,12 +48315,12 @@
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 3,
-    "first": "2026-11-15",
+    "dated": 2,
+    "first": "2026-11-22",
     "in_season": 0,
     "last": "2026-11-29",
     "priced": 0,
-    "read": 3,
+    "read": 2,
     "unpriced": 0
    },
    "slug": "high-wave",
@@ -48264,12 +48338,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 11,
-    "first": "2026-11-15",
+    "dated": 10,
+    "first": "2026-11-22",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 11,
+    "read": 10,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -48328,12 +48402,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-11-15",
+    "first": "2026-11-18",
     "in_season": 20,
-    "last": "2028-06-10",
+    "last": "2028-06-17",
     "priced": 17,
     "read": 100,
-    "unpriced": 30
+    "unpriced": 31
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -48597,9 +48671,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-15",
+    "first": "2026-11-18",
     "in_season": 35,
-    "last": "2027-10-27",
+    "last": "2027-10-31",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -48687,12 +48761,12 @@
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 96,
-    "first": "2026-11-15",
+    "dated": 95,
+    "first": "2026-11-22",
     "in_season": 16,
     "last": "2028-12-28",
     "priced": 16,
-    "read": 96,
+    "read": 95,
     "unpriced": 0
    },
    "slug": "mv-tala",
@@ -48750,13 +48824,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 51,
-    "first": "2026-11-15",
+    "dated": 50,
+    "first": "2026-11-21",
     "in_season": 18,
     "last": "2027-12-26",
     "priced": 0,
-    "read": 51,
-    "unpriced": 51
+    "read": 50,
+    "unpriced": 50
    },
    "slug": "vip-one",
    "specs": {
