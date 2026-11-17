@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-16",
+ "collected": "2026-11-17",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -5450,6 +5450,82 @@
     "recommended_logged_dives": 20
    },
    "title": "North \u2013 Straits of Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "aphrodite::North - Tiran - Dahab (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "tiran",
+    "dahab"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 190.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23067,
+   "padi_slug": "north-classic-hurghada-hurghada-7-nights",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
   },
   "aphrodite::North Brother Islands (Hurghada - Port Ghalib)": {
    "boat": "aphrodite",
@@ -47818,13 +47894,13 @@
    "name": "M/Y Aphrodite",
    "operator": null,
    "sailings": {
-    "dated": 52,
+    "dated": 92,
     "first": "2026-11-21",
     "in_season": 18,
-    "last": "2027-12-25",
+    "last": "2028-12-30",
     "priced": 18,
-    "read": 52,
-    "unpriced": 0
+    "read": 92,
+    "unpriced": 4
    },
    "slug": "my-aphrodite",
    "specs": {
@@ -47910,12 +47986,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 66,
-    "first": "2026-11-17",
+    "dated": 65,
+    "first": "2026-11-20",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 22,
-    "read": 66,
+    "read": 65,
     "unpriced": 0
    },
    "slug": "bella-3",
@@ -48068,12 +48144,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 42,
-    "first": "2026-11-17",
+    "dated": 41,
+    "first": "2026-11-24",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 42,
+    "read": 41,
     "unpriced": 0
    },
    "slug": "my-carlton",
