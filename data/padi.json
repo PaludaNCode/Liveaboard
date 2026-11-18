@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-17",
+ "collected": "2026-11-18",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -5153,6 +5153,79 @@
    },
    "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Port Ghalib - Hurghada) 7 nights"
   },
+  "aphrodite::Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 210.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23625,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgh-10",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
   "aphrodite::Brothers, Safaga Reefs (Port Ghalib - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
@@ -5225,6 +5298,76 @@
     "recommended_logged_dives": 50
    },
    "title": "Brothers, Safaga Reefs (Port Ghalib - Hurghada) 7 nights"
+  },
+  "aphrodite::Daedalus Reef (Hurghada - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 210.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus Reef (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23627,
+   "padi_slug": "daedalus-reef-hurghada-port-ghalib-7-nights",
+   "port_from": "Hurghada Marina",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus Reef (Hurghada - Port Ghalib) 7 nights"
   },
   "aphrodite::Deep South, St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "aphrodite",
@@ -5600,6 +5743,80 @@
     "recommended_logged_dives": 50
    },
    "title": "North Brother Islands (Hurghada - Port Ghalib) 7 nights"
+  },
+  "aphrodite::North Brother Islands (Port Ghalib - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Brother Islands (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23626,
+   "padi_slug": "north-brother-islands-hurghada-port-ghalib-7-night",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brother Islands (Port Ghalib - Hurghada) 7 nights"
   },
   "aphrodite::North Classic (Hurghada - Hurghada)": {
    "boat": "aphrodite",
@@ -47803,9 +48020,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-18",
+    "first": "2026-11-23",
     "in_season": 31,
-    "last": "2027-12-28",
+    "last": "2028-01-02",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -47825,12 +48042,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 82,
-    "first": "2026-11-18",
+    "dated": 81,
+    "first": "2026-11-22",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 82,
+    "read": 81,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -47900,7 +48117,7 @@
     "last": "2028-12-30",
     "priced": 18,
     "read": 92,
-    "unpriced": 4
+    "unpriced": 0
    },
    "slug": "my-aphrodite",
    "specs": {
@@ -48438,12 +48655,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 8,
-    "first": "2026-11-18",
+    "dated": 7,
+    "first": "2026-11-25",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 8,
+    "read": 7,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -48551,12 +48768,12 @@
    "name": "Hammerhead II",
    "operator": null,
    "sailings": {
-    "dated": 60,
-    "first": "2026-11-18",
+    "dated": 59,
+    "first": "2026-11-21",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 60,
+    "read": 59,
     "unpriced": 11
    },
    "slug": "hammerhead-ii",
@@ -48683,12 +48900,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-11-18",
+    "first": "2026-11-22",
     "in_season": 20,
-    "last": "2028-06-17",
+    "last": "2028-06-24",
     "priced": 17,
     "read": 100,
-    "unpriced": 31
+    "unpriced": 32
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -48815,13 +49032,13 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 7,
-    "first": "2026-11-18",
+    "dated": 6,
+    "first": "2026-11-21",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 7,
-    "unpriced": 1
+    "read": 6,
+    "unpriced": 0
    },
    "slug": "reef-voyager",
    "specs": {
@@ -48952,9 +49169,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-18",
+    "first": "2026-11-22",
     "in_season": 35,
-    "last": "2027-10-31",
+    "last": "2027-11-03",
     "priced": 35,
     "read": 100,
     "unpriced": 0
