@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-19",
+ "collected": "2026-11-20",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -48203,12 +48203,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 65,
-    "first": "2026-11-20",
+    "dated": 64,
+    "first": "2026-11-25",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 22,
-    "read": 65,
+    "read": 64,
     "unpriced": 0
    },
    "slug": "bella-3",
@@ -48361,12 +48361,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 41,
+    "dated": 40,
     "first": "2026-11-24",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 41,
+    "read": 40,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -48566,12 +48566,12 @@
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 85,
-    "first": "2026-11-20",
+    "dated": 84,
+    "first": "2026-11-27",
     "in_season": 15,
     "last": "2028-12-08",
     "priced": 15,
-    "read": 85,
+    "read": 84,
     "unpriced": 0
    },
    "slug": "mv-emperor-superior",
