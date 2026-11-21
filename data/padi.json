@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-20",
+ "collected": "2026-11-21",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -47997,12 +47997,12 @@
    "name": "Alsuraya",
    "operator": null,
    "sailings": {
-    "dated": 54,
-    "first": "2026-11-21",
+    "dated": 53,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2028-09-02",
     "priced": 17,
-    "read": 54,
+    "read": 53,
     "unpriced": 2
    },
    "slug": "alsuraya",
@@ -48088,12 +48088,12 @@
    "name": "MY Anemone",
    "operator": null,
    "sailings": {
-    "dated": 93,
-    "first": "2026-11-21",
+    "dated": 92,
+    "first": "2026-11-28",
     "in_season": 17,
     "last": "2028-12-30",
     "priced": 6,
-    "read": 93,
+    "read": 92,
     "unpriced": 70
    },
    "slug": "my-anemone",
@@ -48111,12 +48111,12 @@
    "name": "M/Y Aphrodite",
    "operator": null,
    "sailings": {
-    "dated": 92,
-    "first": "2026-11-21",
+    "dated": 91,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2028-12-30",
     "priced": 18,
-    "read": 92,
+    "read": 91,
     "unpriced": 0
    },
    "slug": "my-aphrodite",
@@ -48134,12 +48134,12 @@
    "name": "MY Ashrafi",
    "operator": null,
    "sailings": {
-    "dated": 6,
-    "first": "2026-11-21",
+    "dated": 5,
+    "first": "2026-11-28",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 6,
+    "read": 5,
     "unpriced": 0
    },
    "slug": "my-ashrafi",
@@ -48157,12 +48157,12 @@
    "name": "MY AVO",
    "operator": null,
    "sailings": {
-    "dated": 48,
-    "first": "2026-11-21",
+    "dated": 47,
+    "first": "2026-11-28",
     "in_season": 14,
     "last": "2027-12-25",
     "priced": 11,
-    "read": 48,
+    "read": 47,
     "unpriced": 4
    },
    "slug": "my-avo",
@@ -48248,9 +48248,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 16,
-    "last": "2029-03-31",
+    "last": "2029-04-07",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -48271,9 +48271,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 16,
-    "last": "2029-03-10",
+    "last": "2029-03-17",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -48407,9 +48407,9 @@
    "operator": "DISCOVERY DIVERS",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 18,
-    "last": "2028-10-14",
+    "last": "2028-10-21",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -48429,12 +48429,12 @@
    "name": "MY Discovery II",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 88,
-    "first": "2026-11-21",
+    "dated": 87,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2028-11-25",
     "priced": 18,
-    "read": 88,
+    "read": 87,
     "unpriced": 0
    },
    "slug": "my-discovery-ii",
@@ -48474,12 +48474,12 @@
    "name": "DUNE Silky",
    "operator": "DUNE",
    "sailings": {
-    "dated": 93,
-    "first": "2026-11-21",
+    "dated": 92,
+    "first": "2026-11-28",
     "in_season": 17,
     "last": "2028-12-30",
     "priced": 17,
-    "read": 93,
+    "read": 92,
     "unpriced": 4
    },
    "slug": "dune-silky",
@@ -48497,12 +48497,12 @@
    "name": "DUNE Titan",
    "operator": "DUNE",
    "sailings": {
-    "dated": 96,
-    "first": "2026-11-21",
+    "dated": 95,
+    "first": "2026-11-28",
     "in_season": 14,
     "last": "2028-12-30",
     "priced": 14,
-    "read": 96,
+    "read": 95,
     "unpriced": 0
    },
    "slug": "dune-titan",
@@ -48520,12 +48520,12 @@
    "name": "MV Emperor Asmaa",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 85,
-    "first": "2026-11-21",
+    "dated": 84,
+    "first": "2027-01-15",
     "in_season": 16,
     "last": "2028-11-18",
     "priced": 16,
-    "read": 85,
+    "read": 84,
     "unpriced": 0
    },
    "slug": "mv-emperor-asmaa",
@@ -48589,12 +48589,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 50,
-    "first": "2026-11-21",
+    "dated": 49,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2030-10-05",
     "priced": 18,
-    "read": 50,
+    "read": 49,
     "unpriced": 1
    },
    "slug": "eriny",
@@ -48678,13 +48678,13 @@
    "name": "MY Galaxy",
    "operator": null,
    "sailings": {
-    "dated": 10,
-    "first": "2026-11-21",
+    "dated": 9,
+    "first": "2026-11-28",
     "in_season": 1,
     "last": "2027-10-23",
     "priced": 0,
-    "read": 10,
-    "unpriced": 8
+    "read": 9,
+    "unpriced": 7
    },
    "slug": "my-galaxy",
    "specs": {
@@ -48747,9 +48747,9 @@
    "operator": "DISCOVERY DIVERS",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 18,
-    "last": "2028-10-14",
+    "last": "2028-10-21",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -48768,13 +48768,13 @@
    "name": "Hammerhead II",
    "operator": null,
    "sailings": {
-    "dated": 59,
-    "first": "2026-11-21",
+    "dated": 58,
+    "first": "2026-11-28",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 59,
-    "unpriced": 11
+    "read": 58,
+    "unpriced": 10
    },
    "slug": "hammerhead-ii",
    "specs": {
@@ -48921,12 +48921,12 @@
    "name": "MY Odyssey",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 42,
-    "first": "2026-11-21",
+    "dated": 41,
+    "first": "2026-11-28",
     "in_season": 17,
     "last": "2027-12-04",
     "priced": 17,
-    "read": 42,
+    "read": 41,
     "unpriced": 0
    },
    "slug": "my-odyssey",
@@ -48945,9 +48945,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 18,
-    "last": "2029-03-31",
+    "last": "2029-04-07",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -48967,9 +48967,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 18,
-    "last": "2029-03-31",
+    "last": "2029-04-07",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -48989,9 +48989,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-21",
+    "first": "2026-11-28",
     "in_season": 18,
-    "last": "2029-03-31",
+    "last": "2029-04-07",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -49010,12 +49010,12 @@
    "name": "Red Sea Blue Force 2",
    "operator": "BLUE FORCE",
    "sailings": {
-    "dated": 87,
-    "first": "2026-11-21",
+    "dated": 86,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2028-12-30",
     "priced": 18,
-    "read": 87,
+    "read": 86,
     "unpriced": 0
    },
    "slug": "red-sea-blue-force-2",
@@ -49032,13 +49032,13 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 6,
-    "first": "2026-11-21",
-    "in_season": 0,
-    "last": "2026-12-26",
+    "dated": 14,
+    "first": "2026-11-28",
+    "in_season": 2,
+    "last": "2027-12-25",
     "priced": 0,
-    "read": 6,
-    "unpriced": 0
+    "read": 14,
+    "unpriced": 5
    },
    "slug": "reef-voyager",
    "specs": {
@@ -49077,12 +49077,12 @@
    "name": "MY Seawolf Dominator",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
-    "dated": 46,
-    "first": "2026-11-21",
+    "dated": 45,
+    "first": "2026-11-28",
     "in_season": 17,
     "last": "2027-12-25",
     "priced": 17,
-    "read": 46,
+    "read": 45,
     "unpriced": 0
    },
    "slug": "my-seawolf-dominator",
@@ -49100,12 +49100,12 @@
    "name": "Seawolf Steel",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
-    "dated": 47,
-    "first": "2026-11-21",
+    "dated": 46,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 47,
+    "read": 46,
     "unpriced": 2
    },
    "slug": "seawolf-steel",
@@ -49123,12 +49123,12 @@
    "name": "Serenity",
    "operator": null,
    "sailings": {
-    "dated": 54,
-    "first": "2026-11-21",
+    "dated": 53,
+    "first": "2026-11-28",
     "in_season": 14,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 54,
+    "read": 53,
     "unpriced": 0
    },
    "slug": "serenity",
@@ -49214,12 +49214,12 @@
    "name": "Snefro Target",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 58,
-    "first": "2026-11-21",
+    "dated": 57,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 58,
+    "read": 57,
     "unpriced": 0
    },
    "slug": "snefro-target",
@@ -49237,12 +49237,12 @@
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
-    "dated": 50,
-    "first": "2026-11-21",
+    "dated": 49,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 0,
-    "read": 50,
+    "read": 49,
     "unpriced": 39
    },
    "slug": "south-moon-1",
@@ -49281,13 +49281,13 @@
    "name": "Topaz",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 56,
-    "first": "2026-11-21",
+    "dated": 55,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2028-09-09",
     "priced": 17,
-    "read": 56,
-    "unpriced": 18
+    "read": 55,
+    "unpriced": 17
    },
    "slug": "topaz",
    "specs": {
@@ -49304,12 +49304,12 @@
    "name": "Unity",
    "operator": null,
    "sailings": {
-    "dated": 49,
-    "first": "2026-11-21",
+    "dated": 48,
+    "first": "2026-11-28",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 49,
+    "read": 48,
     "unpriced": 10
    },
    "slug": "unity",
@@ -49322,13 +49322,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 50,
-    "first": "2026-11-21",
+    "dated": 49,
+    "first": "2026-11-29",
     "in_season": 18,
     "last": "2027-12-26",
     "priced": 0,
-    "read": 50,
-    "unpriced": 50
+    "read": 49,
+    "unpriced": 49
    },
    "slug": "vip-one",
    "specs": {
