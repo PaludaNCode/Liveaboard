@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-21",
+ "collected": "2026-11-22",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -48042,12 +48042,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 81,
-    "first": "2026-11-22",
+    "dated": 80,
+    "first": "2026-11-26",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 81,
+    "read": 80,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -48180,12 +48180,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 83,
-    "first": "2026-11-22",
+    "dated": 82,
+    "first": "2026-11-29",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 83,
+    "read": 82,
     "unpriced": 27
    },
    "slug": "bella-2",
@@ -48633,12 +48633,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 6,
-    "first": "2026-11-22",
+    "dated": 5,
+    "first": "2026-11-28",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 6,
+    "read": 5,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -48813,12 +48813,12 @@
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 2,
-    "first": "2026-11-22",
+    "dated": 1,
+    "first": "2026-11-29",
     "in_season": 0,
     "last": "2026-11-29",
     "priced": 0,
-    "read": 2,
+    "read": 1,
     "unpriced": 0
    },
    "slug": "high-wave",
@@ -48836,12 +48836,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 10,
-    "first": "2026-11-22",
+    "dated": 9,
+    "first": "2026-11-29",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 10,
+    "read": 9,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -48900,12 +48900,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-11-22",
+    "first": "2026-11-24",
     "in_season": 20,
-    "last": "2028-06-24",
+    "last": "2028-07-01",
     "priced": 17,
     "read": 100,
-    "unpriced": 32
+    "unpriced": 33
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -49032,12 +49032,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 14,
+    "dated": 58,
     "first": "2026-11-28",
-    "in_season": 2,
+    "in_season": 19,
     "last": "2027-12-25",
-    "priced": 0,
-    "read": 14,
+    "priced": 17,
+    "read": 58,
     "unpriced": 5
    },
    "slug": "reef-voyager",
@@ -49169,9 +49169,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-22",
+    "first": "2026-11-25",
     "in_season": 35,
-    "last": "2027-11-03",
+    "last": "2027-11-07",
     "priced": 35,
     "read": 100,
     "unpriced": 0
@@ -49259,12 +49259,12 @@
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 95,
-    "first": "2026-11-22",
+    "dated": 94,
+    "first": "2026-12-03",
     "in_season": 16,
     "last": "2028-12-28",
     "priced": 16,
-    "read": 95,
+    "read": 94,
     "unpriced": 0
    },
    "slug": "mv-tala",
