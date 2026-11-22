@@ -9,6 +9,18 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-11-07
 ===========================
 
+fees (3)
+  Iceberg                combined_fees    140 EUR / per_trip -> 50-140 EUR / per_trip
+  New Sambo              marine_park      25-60 EUR / per_trip -> 25-145 EUR / per_trip
+  New Sambo              service_charge   30 EUR / per_trip -> 30-100 EUR / per_trip
+```
+
+## 2026-11-07
+
+```
+changes: HEAD -> 2026-11-07
+===========================
+
 fees (7)
   Amelie Adventures      fuel_surcharge   not listed -> 10 EUR / per_day
   Amelie Adventures      port_fees        20 EUR / per_trip -> 25 EUR / per_trip
