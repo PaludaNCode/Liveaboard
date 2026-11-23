@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-22",
+ "collected": "2026-11-23",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -7266,6 +7266,116 @@
    },
    "title": "ELBA (Port Ghalib - Port Ghalib) 7 Nights"
   },
+  "avo::NORTH WRECK TOUR - Marine Biology - Sophie Steinhausen (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "sha'ab el erg",
+    "ras mohammed",
+    "tiran",
+    "thistlegorm",
+    "gubal",
+    "abu nuhas",
+    "rosalie moller",
+    "gota abu ramada",
+    "giftun"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 300.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "NORTH WRECK TOUR - Marine Biology - Sophie Steinhausen (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23595,
+   "padi_slug": "south-tour-marine-biology-sophie-steinhausen-port",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "NORTH WRECK TOUR - Marine Biology - Sophie Steinhausen (Hurghada - Hurghada) 7 Nights"
+  },
   "avo::North Ras Mohamed (Hurghada - Hurghada)": {
    "boat": "avo",
    "boat_name": "MY AVO",
@@ -7673,6 +7783,103 @@
     "recommended_logged_dives": 50
    },
    "title": "Saint John\u00b4s (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "avo::TURTLE WATCH EGYPT Family & Beginner Tour (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 10,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "TURTLE WATCH EGYPT Family & Beginner Tour (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23596,
+   "padi_slug": "turtle-watch-egypt-family-beginner-tour-port-ghali",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "TURTLE WATCH EGYPT Family & Beginner Tour (Hurghada - Hurghada) 7 Nights"
   },
   "avo::The Best of the South (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
@@ -47952,12 +48159,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 50,
-    "first": "2026-11-23",
+    "dated": 49,
+    "first": "2026-11-30",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 50,
+    "read": 49,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -47975,12 +48182,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 67,
-    "first": "2026-11-23",
+    "dated": 66,
+    "first": "2026-11-30",
     "in_season": 17,
     "last": "2028-06-26",
     "priced": 17,
-    "read": 67,
+    "read": 66,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -48020,9 +48227,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-11-23",
+    "first": "2026-11-30",
     "in_season": 31,
-    "last": "2028-01-02",
+    "last": "2028-01-06",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -48097,12 +48304,7 @@
     "unpriced": 70
    },
    "slug": "my-anemone",
-   "specs": {
-    "cabins": 16,
-    "length_m": 45,
-    "nitrox_free": true,
-    "year_built": 2022
-   }
+   "specs": null
   },
   "aphrodite": {
    "country": "egypt",
@@ -48157,12 +48359,12 @@
    "name": "MY AVO",
    "operator": null,
    "sailings": {
-    "dated": 47,
+    "dated": 51,
     "first": "2026-11-28",
-    "in_season": 14,
+    "in_season": 18,
     "last": "2027-12-25",
-    "priced": 11,
-    "read": 47,
+    "priced": 15,
+    "read": 51,
     "unpriced": 4
    },
    "slug": "my-avo",
@@ -48701,12 +48903,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 53,
-    "first": "2026-11-23",
+    "dated": 52,
+    "first": "2026-11-30",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 53,
+    "read": 52,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -48723,12 +48925,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 53,
-    "first": "2026-11-23",
+    "dated": 52,
+    "first": "2026-11-30",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 53,
+    "read": 52,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
