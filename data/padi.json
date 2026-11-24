@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-23",
+ "collected": "2026-11-24",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -38847,10 +38847,10 @@
    "boat": "reef-voyager",
    "boat_name": "Reef Voyager",
    "dive_sites": [
-    "ras katy",
     "ras mohammed",
     "thistlegorm",
-    "ras um sid"
+    "tiran",
+    "gubal"
    ],
    "dives": 10,
    "fees": {
@@ -38858,7 +38858,7 @@
     "lines": [
      {
       "amount": {
-       "amount": 70.0,
+       "amount": 80.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -38868,7 +38868,7 @@
      },
      {
       "amount": {
-       "amount": 60.0,
+       "amount": 70.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -38923,9 +38923,9 @@
     "unreadable": []
    },
    "name": "Mini Safari - Ras Mohamed - Thistlegorm  (Sharm el Sheikh - Sharm el Sheikh)",
-   "nights": 3,
-   "padi_id": 22867,
-   "padi_slug": "sharm-ras-mohamed-brothers-islands-sharm-el-sheikh",
+   "nights": 4,
+   "padi_id": 23628,
+   "padi_slug": "mini-safari-ras-mohamed-thistlegorm-sharm-el-she-4",
    "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
    "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
@@ -38933,7 +38933,7 @@
     "min_logged_dives": 20,
     "recommended_logged_dives": 20
    },
-   "title": "Mini Safari - Ras Mohamed - Thistlegorm  (Sharm el Sheikh - Sharm el Sheikh) 3 Nights"
+   "title": "Mini Safari - Ras Mohamed - Thistlegorm  (Sharm el Sheikh - Sharm el Sheikh) 4 Nights"
   },
   "reef-voyager::North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "reef-voyager",
@@ -48563,12 +48563,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 40,
-    "first": "2026-11-24",
+    "dated": 39,
+    "first": "2026-12-08",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 40,
+    "read": 39,
     "unpriced": 0
    },
    "slug": "my-carlton",
@@ -49011,7 +49011,7 @@
   "high-wave": {
    "country": "egypt",
    "currency": "EUR",
-   "guests": 24,
+   "guests": null,
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
@@ -49024,12 +49024,7 @@
     "unpriced": 0
    },
    "slug": "high-wave",
-   "specs": {
-    "cabins": 12,
-    "length_m": 34,
-    "nitrox_free": false,
-    "year_built": 2023
-   }
+   "specs": null
   },
   "iceberg": {
    "country": "egypt",
@@ -49078,12 +49073,12 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 4,
-    "first": "2026-11-24",
+    "dated": 3,
+    "first": "2026-12-02",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 4,
+    "read": 3,
     "unpriced": 3
    },
    "slug": "my-lady-m",
@@ -49102,12 +49097,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-11-24",
+    "first": "2026-11-26",
     "in_season": 20,
-    "last": "2028-07-01",
+    "last": "2028-07-08",
     "priced": 17,
     "read": 100,
-    "unpriced": 33
+    "unpriced": 34
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -49238,9 +49233,9 @@
     "first": "2026-11-28",
     "in_season": 19,
     "last": "2027-12-25",
-    "priced": 17,
+    "priced": 18,
     "read": 58,
-    "unpriced": 5
+    "unpriced": 3
    },
    "slug": "reef-voyager",
    "specs": {
