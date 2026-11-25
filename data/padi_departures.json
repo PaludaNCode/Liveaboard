@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-24",
+ "collected": "2026-11-25",
  "departures": {
   "all-star-ghani::2026-11-30": {
    "availability": 24,
@@ -1718,7 +1718,7 @@
    "was": 1250.0
   },
   "alsuraya::2027-05-01": {
-   "availability": 0,
+   "availability": 19,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-05-08",
@@ -1731,7 +1731,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-05-08": {
-   "availability": 0,
+   "availability": 22,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -1874,7 +1874,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-07-24": {
-   "availability": 22,
+   "availability": 12,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-07-31",
@@ -2160,7 +2160,7 @@
    "was": 1150.0
   },
   "amelie-adventures::2026-11-26": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-11-29",
@@ -2173,7 +2173,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-11-30": {
-   "availability": 15,
+   "availability": 0,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-03",
@@ -2186,7 +2186,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-04": {
-   "availability": 16,
+   "availability": 5,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-07",
@@ -2199,7 +2199,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-08": {
-   "availability": 16,
+   "availability": 12,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-11",
@@ -2212,7 +2212,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-12": {
-   "availability": 16,
+   "availability": 9,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-15",
@@ -2225,7 +2225,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-16": {
-   "availability": 16,
+   "availability": 9,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -2238,7 +2238,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-20": {
-   "availability": 16,
+   "availability": 12,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-23",
@@ -2251,7 +2251,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-24": {
-   "availability": 16,
+   "availability": 12,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-27",
@@ -2264,7 +2264,7 @@
    "was": 485.0
   },
   "amelie-adventures::2026-12-28": {
-   "availability": 16,
+   "availability": 0,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2026-12-31",
@@ -2277,7 +2277,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-01-03": {
-   "availability": 16,
+   "availability": 6,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-01-06",
@@ -2459,7 +2459,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-03-02": {
-   "availability": 16,
+   "availability": 7,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-03-05",
@@ -2511,7 +2511,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-03-18": {
-   "availability": 16,
+   "availability": 14,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-03-21",
@@ -2524,7 +2524,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-03-22": {
-   "availability": 16,
+   "availability": 8,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-03-25",
@@ -2537,7 +2537,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-03-26": {
-   "availability": 13,
+   "availability": 4,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-03-29",
@@ -2576,7 +2576,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-04-07": {
-   "availability": 16,
+   "availability": 9,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-04-10",
@@ -2654,33 +2654,20 @@
    "was": 485.0
   },
   "amelie-adventures::2027-05-01": {
-   "availability": 16,
+   "availability": 0,
    "boat": "amelie-adventures",
    "currency": "EUR",
-   "end": "2027-05-04",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
+   "end": "2027-05-08",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
    "padi_id": 1555785,
    "price": 485.0,
    "slug": "amelie-adventures",
    "start": "2027-05-01",
    "was": 485.0
   },
-  "amelie-adventures::2027-05-05": {
-   "availability": 16,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2027-05-08",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1555767,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2027-05-05",
-   "was": 485.0
-  },
   "amelie-adventures::2027-05-09": {
-   "availability": 16,
+   "availability": 12,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-05-12",
@@ -2706,7 +2693,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-05-17": {
-   "availability": 16,
+   "availability": 14,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-05-20",
@@ -2719,29 +2706,16 @@
    "was": 485.0
   },
   "amelie-adventures::2027-05-21": {
-   "availability": 16,
+   "availability": 0,
    "boat": "amelie-adventures",
    "currency": "EUR",
-   "end": "2027-05-24",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
+   "end": "2027-05-28",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
    "padi_id": 1555766,
    "price": 485.0,
    "slug": "amelie-adventures",
    "start": "2027-05-21",
-   "was": 485.0
-  },
-  "amelie-adventures::2027-05-25": {
-   "availability": 16,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2027-05-28",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1555768,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2027-05-25",
    "was": 485.0
   },
   "amelie-adventures::2027-05-29": {
@@ -2757,21 +2731,8 @@
    "start": "2027-05-29",
    "was": 485.0
   },
-  "amelie-adventures::2027-06-07": {
-   "availability": 16,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2027-06-10",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1555775,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2027-06-07",
-   "was": 485.0
-  },
   "amelie-adventures::2027-06-11": {
-   "availability": 16,
+   "availability": 12,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-06-14",
@@ -2939,30 +2900,17 @@
    "start": "2027-07-31",
    "was": 485.0
   },
-  "amelie-adventures::2027-08-10": {
-   "availability": 16,
+  "amelie-adventures::2027-08-08": {
+   "availability": 0,
    "boat": "amelie-adventures",
    "currency": "EUR",
-   "end": "2027-08-13",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
+   "end": "2027-08-15",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
    "padi_id": 1557390,
    "price": 485.0,
    "slug": "amelie-adventures",
-   "start": "2027-08-10",
-   "was": 485.0
-  },
-  "amelie-adventures::2027-08-14": {
-   "availability": 16,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2027-08-17",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1557391,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2027-08-14",
+   "start": "2027-08-08",
    "was": 485.0
   },
   "amelie-adventures::2027-08-18": {
@@ -3122,7 +3070,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-10-09": {
-   "availability": 16,
+   "availability": 12,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-10-12",
@@ -3186,8 +3134,307 @@
    "start": "2027-10-30",
    "was": 1199.0
   },
+  "amelie-adventures::2027-11-06": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-11-09",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563618,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-06",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-11-10": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-11-13",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563620,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-10",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-11-14": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-11-17",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563629,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-14",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-11-18": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-11-21",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563625,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-18",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-11-22": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-11-25",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563632,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-22",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-11-26": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-11-29",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563622,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-26",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-11-30": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-03",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563627,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-11-30",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-04": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-07",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563616,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-04",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-08": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-11",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563634,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-08",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-12": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-15",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563623,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-12",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-16": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-19",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563626,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-16",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-20": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-23",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563630,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-20",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-24": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-27",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563637,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-24",
+   "was": 485.0
+  },
+  "amelie-adventures::2027-12-28": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2027-12-31",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563635,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2027-12-28",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-01-02": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-01-05",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563633,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-01-02",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-01-06": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-01-09",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563631,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-01-06",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-04": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-07",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563615,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-04",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-08": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-11",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563619,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-08",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-12": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-15",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563617,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-12",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-16": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-19",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563636,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-16",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-20": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-23",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563621,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-20",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-24": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-27",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563628,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-24",
+   "was": 485.0
+  },
+  "amelie-adventures::2028-03-28": {
+   "availability": 16,
+   "boat": "amelie-adventures",
+   "currency": "EUR",
+   "end": "2028-03-31",
+   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
+   "nights": 3,
+   "padi_id": 1563624,
+   "price": 485.0,
+   "slug": "amelie-adventures",
+   "start": "2028-03-28",
+   "was": 485.0
+  },
   "amelie::2026-11-30": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-03",
@@ -3200,7 +3447,7 @@
    "was": 435.0
   },
   "amelie::2026-12-04": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-07",
@@ -3213,7 +3460,7 @@
    "was": 435.0
   },
   "amelie::2026-12-08": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-11",
@@ -3226,7 +3473,7 @@
    "was": 435.0
   },
   "amelie::2026-12-12": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-15",
@@ -3239,7 +3486,7 @@
    "was": 435.0
   },
   "amelie::2026-12-16": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -3265,7 +3512,7 @@
    "was": 435.0
   },
   "amelie::2026-12-24": {
-   "availability": 7,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-27",
@@ -3278,7 +3525,7 @@
    "was": 435.0
   },
   "amelie::2026-12-28": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2026-12-31",
@@ -3304,7 +3551,7 @@
    "was": 435.0
   },
   "amelie::2027-01-07": {
-   "availability": 5,
+   "availability": 3,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-01-10",
@@ -3356,7 +3603,7 @@
    "was": 435.0
   },
   "amelie::2027-01-23": {
-   "availability": 12,
+   "availability": 8,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-01-26",
@@ -3447,7 +3694,7 @@
    "was": 435.0
   },
   "amelie::2027-02-22": {
-   "availability": 9,
+   "availability": 7,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-02-25",
@@ -3551,30 +3798,17 @@
    "was": 435.0
   },
   "amelie::2027-03-26": {
-   "availability": 0,
-   "boat": "amelie",
-   "currency": "EUR",
-   "end": "2027-03-29",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1545885,
-   "price": 435.0,
-   "slug": "amelie-safari",
-   "start": "2027-03-26",
-   "was": 435.0
-  },
-  "amelie::2027-03-30": {
-   "availability": 0,
+   "availability": 10,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-04-02",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1545886,
-   "price": 435.0,
+   "itinerary": "Best of Hurghada (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1545885,
+   "price": 809.0,
    "slug": "amelie-safari",
-   "start": "2027-03-30",
-   "was": 435.0
+   "start": "2027-03-26",
+   "was": 809.0
   },
   "amelie::2027-04-03": {
    "availability": 12,
@@ -3668,29 +3902,16 @@
    "was": 435.0
   },
   "amelie::2027-05-01": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
-   "end": "2027-05-04",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
+   "end": "2027-05-08",
+   "itinerary": "Best of Hurghada (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
    "padi_id": 1545894,
    "price": 435.0,
    "slug": "amelie-safari",
    "start": "2027-05-01",
-   "was": 435.0
-  },
-  "amelie::2027-05-05": {
-   "availability": 12,
-   "boat": "amelie",
-   "currency": "EUR",
-   "end": "2027-05-08",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1545895,
-   "price": 435.0,
-   "slug": "amelie-safari",
-   "start": "2027-05-05",
    "was": 435.0
   },
   "amelie::2027-05-09": {
@@ -4188,33 +4409,20 @@
    "was": 435.0
   },
   "amelie::2027-10-09": {
-   "availability": 12,
-   "boat": "amelie",
-   "currency": "EUR",
-   "end": "2027-10-12",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1546343,
-   "price": 435.0,
-   "slug": "amelie-safari",
-   "start": "2027-10-09",
-   "was": 435.0
-  },
-  "amelie::2027-10-13": {
-   "availability": 12,
+   "availability": 6,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-10-16",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1546342,
-   "price": 435.0,
+   "itinerary": "Best of Hurghada (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1546343,
+   "price": 809.0,
    "slug": "amelie-safari",
-   "start": "2027-10-13",
-   "was": 435.0
+   "start": "2027-10-09",
+   "was": 809.0
   },
   "amelie::2027-10-17": {
-   "availability": 12,
+   "availability": 0,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-10-20",
@@ -4224,19 +4432,6 @@
    "price": 435.0,
    "slug": "amelie-safari",
    "start": "2027-10-17",
-   "was": 435.0
-  },
-  "amelie::2027-10-21": {
-   "availability": 12,
-   "boat": "amelie",
-   "currency": "EUR",
-   "end": "2027-10-24",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1546344,
-   "price": 435.0,
-   "slug": "amelie-safari",
-   "start": "2027-10-21",
    "was": 435.0
   },
   "amelie::2027-10-25": {
@@ -4484,6 +4679,58 @@
    "price": 435.0,
    "slug": "amelie-safari",
    "start": "2028-01-06",
+   "was": 435.0
+  },
+  "amelie::2028-01-10": {
+   "availability": 12,
+   "boat": "amelie",
+   "currency": "EUR",
+   "end": "2028-01-13",
+   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
+   "nights": 3,
+   "padi_id": 1560729,
+   "price": 435.0,
+   "slug": "amelie-safari",
+   "start": "2028-01-10",
+   "was": 435.0
+  },
+  "amelie::2028-01-14": {
+   "availability": 12,
+   "boat": "amelie",
+   "currency": "EUR",
+   "end": "2028-01-17",
+   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
+   "nights": 3,
+   "padi_id": 1560733,
+   "price": 435.0,
+   "slug": "amelie-safari",
+   "start": "2028-01-14",
+   "was": 435.0
+  },
+  "amelie::2028-01-18": {
+   "availability": 12,
+   "boat": "amelie",
+   "currency": "EUR",
+   "end": "2028-01-21",
+   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
+   "nights": 3,
+   "padi_id": 1560737,
+   "price": 435.0,
+   "slug": "amelie-safari",
+   "start": "2028-01-18",
+   "was": 435.0
+  },
+  "amelie::2028-01-22": {
+   "availability": 12,
+   "boat": "amelie",
+   "currency": "EUR",
+   "end": "2028-01-25",
+   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
+   "nights": 3,
+   "padi_id": 1560736,
+   "price": 435.0,
+   "slug": "amelie-safari",
+   "start": "2028-01-22",
    "was": 435.0
   },
   "anemone::2026-11-28": {
@@ -7346,19 +7593,6 @@
    "start": "2027-09-11",
    "was": 590.0
   },
-  "bella-3::2026-11-25": {
-   "availability": 20,
-   "boat": "bella-3",
-   "currency": "EUR",
-   "end": "2026-11-29",
-   "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
-   "nights": 4,
-   "padi_id": 1542531,
-   "price": 630.8,
-   "slug": "bella-3",
-   "start": "2026-11-25",
-   "was": 760.0
-  },
   "bella-3::2026-11-30": {
    "availability": 0,
    "boat": "bella-3",
@@ -8634,7 +8868,7 @@
    "was": 1918.0
   },
   "blue-horizon::2027-10-09": {
-   "availability": 6,
+   "availability": 8,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-10-16",
@@ -9557,7 +9791,7 @@
    "was": 1281.0
   },
   "blue-melody::2027-01-09": {
-   "availability": 1,
+   "availability": 2,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-01-16",
@@ -15147,7 +15381,7 @@
    "was": 1150.0
   },
   "discovery-ii::2027-03-06": {
-   "availability": 19,
+   "availability": 17,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-03-13",
@@ -15173,7 +15407,7 @@
    "was": 1050.0
   },
   "discovery-ii::2027-03-20": {
-   "availability": 12,
+   "availability": 10,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-03-27",
@@ -15264,7 +15498,7 @@
    "was": 1100.0
   },
   "discovery-ii::2027-05-08": {
-   "availability": 18,
+   "availability": 19,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -15420,7 +15654,7 @@
    "was": 1050.0
   },
   "discovery-ii::2027-07-31": {
-   "availability": 16,
+   "availability": 14,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-08-07",
@@ -16213,7 +16447,7 @@
    "was": 1150.0
   },
   "dune-longara::2026-11-28": {
-   "availability": 3,
+   "availability": 2,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -17357,7 +17591,7 @@
    "was": 1450.0
   },
   "dune-silky::2026-12-05": {
-   "availability": 4,
+   "availability": 5,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -18488,7 +18722,7 @@
    "was": 1600.0
   },
   "dune-titan::2026-11-28": {
-   "availability": 14,
+   "availability": 13,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2026-12-09",
@@ -18956,7 +19190,7 @@
    "was": 1240.0
   },
   "dune-titan::2027-10-16": {
-   "availability": 25,
+   "availability": 23,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-10-23",
@@ -20022,7 +20256,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-06-26": {
-   "availability": 10,
+   "availability": 13,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-07-03",
@@ -20152,7 +20386,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-09-18": {
-   "availability": 16,
+   "availability": 14,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-09-25",
@@ -20217,7 +20451,7 @@
    "was": 1400.0
   },
   "emperor-asmaa::2027-10-23": {
-   "availability": 17,
+   "availability": 16,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -21270,7 +21504,7 @@
    "was": 1700.0
   },
   "emperor-elite::2027-10-28": {
-   "availability": 23,
+   "availability": 12,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-11-04",
@@ -21933,7 +22167,7 @@
    "was": 1160.0
   },
   "emperor-superior::2027-02-26": {
-   "availability": 11,
+   "availability": 12,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2027-03-05",
@@ -22323,7 +22557,7 @@
    "was": 1510.0
   },
   "emperor-superior::2027-10-23": {
-   "availability": 15,
+   "availability": 13,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -24935,19 +25169,6 @@
    "start": "2026-12-20",
    "was": 570.0
   },
-  "freedom-iv::2026-11-25": {
-   "availability": 0,
-   "boat": "freedom-iv",
-   "currency": "EUR",
-   "end": "2026-11-29",
-   "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi) 4 Nights",
-   "nights": 4,
-   "padi_id": 1529940,
-   "price": 760.0,
-   "slug": "freedom-iv",
-   "start": "2026-11-25",
-   "was": 760.0
-  },
   "freedom-iv::2026-12-02": {
    "availability": 0,
    "boat": "freedom-iv",
@@ -26392,17 +26613,17 @@
    "was": 1400.0
   },
   "grand-discovery::2026-11-28": {
-   "availability": 7,
+   "availability": 6,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-05",
    "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548968,
-   "price": 795.0,
+   "price": 954.0,
    "slug": "my-grand-discovery",
    "start": "2026-11-28",
-   "was": 1325.0
+   "was": 1590.0
   },
   "grand-discovery::2026-12-05": {
    "availability": 0,
@@ -26418,7 +26639,7 @@
    "was": 1250.0
   },
   "grand-discovery::2026-12-12": {
-   "availability": 7,
+   "availability": 8,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -26457,7 +26678,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-01-02": {
-   "availability": 22,
+   "availability": 20,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-09",
@@ -26613,7 +26834,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-03-27": {
-   "availability": 29,
+   "availability": 30,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-04-03",
@@ -26639,7 +26860,7 @@
    "was": 1275.0
   },
   "grand-discovery::2027-04-10": {
-   "availability": 32,
+   "availability": 31,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-04-17",
@@ -26795,7 +27016,7 @@
    "was": 1225.0
   },
   "grand-discovery::2027-07-03": {
-   "availability": 32,
+   "availability": 36,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-07-10",
@@ -26821,7 +27042,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-07-17": {
-   "availability": 36,
+   "availability": 24,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-07-24",
@@ -26860,7 +27081,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-08-07": {
-   "availability": 32,
+   "availability": 31,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-08-14",
@@ -31020,7 +31241,7 @@
    "was": 1610.0
   },
   "odyssey::2027-06-05": {
-   "availability": 17,
+   "availability": 22,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-06-12",
@@ -31241,7 +31462,7 @@
    "was": 1610.0
   },
   "odyssey::2027-10-09": {
-   "availability": 24,
+   "availability": 0,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -32762,7 +32983,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-03-27": {
-   "availability": 22,
+   "availability": 20,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-04-03",
@@ -34075,7 +34296,7 @@
    "was": 2799.0
   },
   "red-sea-aggressor-v::2027-04-03": {
-   "availability": 23,
+   "availability": 25,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-04-10",
@@ -34127,7 +34348,7 @@
    "was": 2799.0
   },
   "red-sea-aggressor-v::2027-05-01": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-05-08",
@@ -35252,7 +35473,7 @@
    "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1533545,
-   "price": 1290.0,
+   "price": 990.0,
    "slug": "red-sea-blue-force-2",
    "start": "2026-11-28",
    "was": 1290.0
@@ -35291,7 +35512,7 @@
    "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1533548,
-   "price": 1090.0,
+   "price": 990.0,
    "slug": "red-sea-blue-force-2",
    "start": "2026-12-19",
    "was": 1290.0
@@ -36584,7 +36805,7 @@
    "was": 950.0
   },
   "reef-voyager::2027-04-10": {
-   "availability": 22,
+   "availability": 20,
    "boat": "reef-voyager",
    "currency": "EUR",
    "end": "2027-04-17",
@@ -37234,7 +37455,7 @@
    "was": 2349.0
   },
   "royal-evolution::2027-05-13": {
-   "availability": 6,
+   "availability": 5,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2027-05-20",
@@ -38664,7 +38885,7 @@
    "was": 1540.0
   },
   "seawolf-steel::2027-11-06": {
-   "availability": 28,
+   "availability": 0,
    "boat": "seawolf-steel",
    "currency": "EUR",
    "end": "2027-11-13",
@@ -39327,7 +39548,7 @@
    "was": 1450.0
   },
   "serenity::2027-10-23": {
-   "availability": 12,
+   "availability": 11,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -40119,19 +40340,6 @@
    "start": "2027-12-23",
    "was": 699.0
   },
-  "snefro-pearl::2026-11-25": {
-   "availability": 0,
-   "boat": "snefro-pearl",
-   "currency": "EUR",
-   "end": "2026-11-28",
-   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1542405,
-   "price": 529.0,
-   "slug": "snefro-pearl",
-   "start": "2026-11-25",
-   "was": 529.0
-  },
   "snefro-pearl::2026-11-29": {
    "availability": 0,
    "boat": "snefro-pearl",
@@ -40172,7 +40380,7 @@
    "was": 479.0
   },
   "snefro-pearl::2026-12-09": {
-   "availability": 4,
+   "availability": 2,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -40237,7 +40445,7 @@
    "was": 479.0
   },
   "snefro-pearl::2026-12-27": {
-   "availability": 4,
+   "availability": 0,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-12-30",
@@ -41342,7 +41550,7 @@
    "was": 582.0
   },
   "snefro-pearl::2027-10-20": {
-   "availability": 8,
+   "availability": 6,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2027-10-23",
@@ -41417,6 +41625,19 @@
    "price": 582.0,
    "slug": "snefro-pearl",
    "start": "2027-11-07",
+   "was": 582.0
+  },
+  "snefro-pearl::2027-11-10": {
+   "availability": 12,
+   "boat": "snefro-pearl",
+   "currency": "EUR",
+   "end": "2027-11-13",
+   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
+   "nights": 3,
+   "padi_id": 1556397,
+   "price": 582.0,
+   "slug": "snefro-pearl",
+   "start": "2027-11-10",
    "was": 582.0
   },
   "snefro-spirit::2027-04-24": {
@@ -42993,7 +43214,7 @@
    "was": 1250.0
   },
   "tala::2027-06-27": {
-   "availability": 0,
+   "availability": 10,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-07-04",
