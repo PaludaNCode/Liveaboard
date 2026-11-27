@@ -1,5 +1,5 @@
 {
- "collected": "2026-11-26",
+ "collected": "2026-11-27",
  "departures": {
   "all-star-ghani::2026-11-30": {
    "availability": 24,
@@ -1705,7 +1705,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-04-24": {
-   "availability": 18,
+   "availability": 16,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-05-01",
@@ -2056,7 +2056,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-11-06": {
-   "availability": 24,
+   "availability": 22,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-11-13",
@@ -2264,7 +2264,7 @@
    "was": 485.0
   },
   "amelie-adventures::2027-01-03": {
-   "availability": 6,
+   "availability": 5,
    "boat": "amelie-adventures",
    "currency": "EUR",
    "end": "2027-01-06",
@@ -3538,7 +3538,7 @@
    "was": 435.0
   },
   "amelie::2027-01-07": {
-   "availability": 3,
+   "availability": 1,
    "boat": "amelie",
    "currency": "EUR",
    "end": "2027-01-10",
@@ -6359,7 +6359,7 @@
    "was": 1499.0
   },
   "avo::2027-03-06": {
-   "availability": 22,
+   "availability": 20,
    "boat": "avo",
    "currency": "EUR",
    "end": "2027-03-13",
@@ -6372,7 +6372,7 @@
    "was": 1499.0
   },
   "avo::2027-03-13": {
-   "availability": 24,
+   "availability": 22,
    "boat": "avo",
    "currency": "EUR",
    "end": "2027-03-20",
@@ -8465,7 +8465,7 @@
    "was": 1281.0
   },
   "blue-horizon::2027-02-13": {
-   "availability": 3,
+   "availability": 1,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-02-20",
@@ -8621,7 +8621,7 @@
    "was": 1743.0
   },
   "blue-horizon::2027-05-15": {
-   "availability": 25,
+   "availability": 21,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-05-22",
@@ -8686,7 +8686,7 @@
    "was": 1743.0
   },
   "blue-horizon::2027-06-19": {
-   "availability": 20,
+   "availability": 19,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-06-26",
@@ -9206,7 +9206,7 @@
    "was": 1764.0
   },
   "blue-horizon::2028-05-27": {
-   "availability": 0,
+   "availability": 26,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-06-03",
@@ -9219,7 +9219,7 @@
    "was": 1764.0
   },
   "blue-horizon::2028-06-03": {
-   "availability": 0,
+   "availability": 26,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-06-10",
@@ -9856,7 +9856,7 @@
    "was": 1281.0
   },
   "blue-melody::2027-03-27": {
-   "availability": 13,
+   "availability": 16,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-04-03",
@@ -11871,7 +11871,7 @@
    "was": 1190.0
   },
   "blue-seas::2027-06-24": {
-   "availability": 24,
+   "availability": 0,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2027-07-01",
@@ -13990,7 +13990,7 @@
    "was": 1025.0
   },
   "discovery-i::2026-12-19": {
-   "availability": 16,
+   "availability": 15,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-12-26",
@@ -14159,7 +14159,7 @@
    "was": 900.0
   },
   "discovery-i::2027-03-20": {
-   "availability": 19,
+   "availability": 14,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-03-27",
@@ -14237,7 +14237,7 @@
    "was": 930.0
   },
   "discovery-i::2027-05-01": {
-   "availability": 20,
+   "availability": 19,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-05-08",
@@ -14250,7 +14250,7 @@
    "was": 1075.0
   },
   "discovery-i::2027-05-08": {
-   "availability": 20,
+   "availability": 18,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -14445,7 +14445,7 @@
    "was": 900.0
   },
   "discovery-i::2027-08-21": {
-   "availability": 0,
+   "availability": 20,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-08-28",
@@ -16389,7 +16389,7 @@
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554507,
-   "price": 1200.0,
+   "price": 1500.0,
    "slug": "dune-longara",
    "start": "2026-11-28",
    "was": 1500.0
@@ -16441,7 +16441,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1560420,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-02-06",
    "was": 1600.0
@@ -16454,20 +16454,20 @@
    "itinerary": "Best of Egypt (Hurghada - Port Ghalib) 14 Nights",
    "nights": 14,
    "padi_id": 1554519,
-   "price": 2800.0,
+   "price": 1680.0,
    "slug": "dune-longara",
    "start": "2027-03-06",
    "was": 2800.0
   },
   "dune-longara::2027-03-20": {
-   "availability": 14,
+   "availability": 12,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-03-27",
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554515,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-03-20",
    "was": 1600.0
@@ -16480,7 +16480,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554511,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-03-27",
    "was": 1600.0
@@ -16493,7 +16493,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554499,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-04-03",
    "was": 1600.0
@@ -16506,7 +16506,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554522,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-04-10",
    "was": 1600.0
@@ -16519,7 +16519,7 @@
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1557148,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-longara",
    "start": "2027-04-17",
    "was": 1500.0
@@ -16532,7 +16532,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1554512,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-04-24",
    "was": 1600.0
@@ -16545,7 +16545,7 @@
    "itinerary": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1554503,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-longara",
    "start": "2027-05-01",
    "was": 1500.0
@@ -16558,7 +16558,7 @@
    "itinerary": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554518,
-   "price": 1700.0,
+   "price": 1190.0,
    "slug": "dune-longara",
    "start": "2027-05-08",
    "was": 1700.0
@@ -16571,7 +16571,7 @@
    "itinerary": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554514,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-05-15",
    "was": 1600.0
@@ -16584,7 +16584,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554497,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-05-22",
    "was": 1600.0
@@ -16597,7 +16597,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554523,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-05-29",
    "was": 1600.0
@@ -16610,20 +16610,20 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554526,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-06-05",
    "was": 1600.0
   },
   "dune-longara::2027-06-12": {
-   "availability": 15,
+   "availability": 13,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-06-19",
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554524,
-   "price": 1700.0,
+   "price": 1190.0,
    "slug": "dune-longara",
    "start": "2027-06-12",
    "was": 1700.0
@@ -16636,20 +16636,20 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554525,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-06-19",
    "was": 1600.0
   },
   "dune-longara::2027-06-26": {
-   "availability": 28,
+   "availability": 24,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-07-03",
    "itinerary": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554527,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-longara",
    "start": "2027-06-26",
    "was": 1400.0
@@ -16662,7 +16662,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1554529,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-longara",
    "start": "2027-07-10",
    "was": 1400.0
@@ -16675,7 +16675,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1554528,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-longara",
    "start": "2027-07-17",
    "was": 1400.0
@@ -16688,7 +16688,7 @@
    "itinerary": "North Brothers (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554802,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-longara",
    "start": "2027-07-24",
    "was": 1500.0
@@ -16701,7 +16701,7 @@
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554530,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-longara",
    "start": "2027-08-07",
    "was": 1500.0
@@ -16714,7 +16714,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554532,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-08-14",
    "was": 1600.0
@@ -16727,7 +16727,7 @@
    "itinerary": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554533,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-longara",
    "start": "2027-08-21",
    "was": 1400.0
@@ -16740,7 +16740,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554531,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-08-28",
    "was": 1600.0
@@ -16753,7 +16753,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554534,
-   "price": 1700.0,
+   "price": 1190.0,
    "slug": "dune-longara",
    "start": "2027-09-04",
    "was": 1700.0
@@ -16766,7 +16766,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554536,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-09-11",
    "was": 1600.0
@@ -16779,7 +16779,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554535,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-09-18",
    "was": 1600.0
@@ -16792,7 +16792,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554538,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-longara",
    "start": "2027-09-25",
    "was": 1650.0
@@ -16805,7 +16805,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554537,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-longara",
    "start": "2027-10-02",
    "was": 1650.0
@@ -16818,7 +16818,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554541,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-longara",
    "start": "2027-10-09",
    "was": 1650.0
@@ -16831,7 +16831,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554542,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-longara",
    "start": "2027-10-16",
    "was": 1650.0
@@ -16844,7 +16844,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554540,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-longara",
    "start": "2027-10-23",
    "was": 1650.0
@@ -16857,7 +16857,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554539,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-longara",
    "start": "2027-10-30",
    "was": 1650.0
@@ -16870,7 +16870,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554543,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-11-06",
    "was": 1600.0
@@ -16883,7 +16883,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554544,
-   "price": 1750.0,
+   "price": 1225.0,
    "slug": "dune-longara",
    "start": "2027-11-13",
    "was": 1750.0
@@ -16896,7 +16896,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554546,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-11-27",
    "was": 1600.0
@@ -16909,7 +16909,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554547,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-longara",
    "start": "2027-12-04",
    "was": 1600.0
@@ -16922,7 +16922,7 @@
    "itinerary": "Elba (Port Ghalib - Port Ghalib) 11 Nights",
    "nights": 11,
    "padi_id": 1554548,
-   "price": 2750.0,
+   "price": 1925.0,
    "slug": "dune-longara",
    "start": "2027-12-11",
    "was": 2750.0
@@ -16935,7 +16935,7 @@
    "itinerary": "Elba (Port Ghalib - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1554550,
-   "price": 2500.0,
+   "price": 1750.0,
    "slug": "dune-longara",
    "start": "2027-12-22",
    "was": 2500.0
@@ -17585,7 +17585,7 @@
    "itinerary": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555022,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-02-06",
    "was": 1400.0
@@ -17598,20 +17598,20 @@
    "itinerary": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555030,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-02-13",
    "was": 1400.0
   },
   "dune-silky::2027-02-20": {
-   "availability": 26,
+   "availability": 24,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2027-02-27",
    "itinerary": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555549,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-02-20",
    "was": 1400.0
@@ -17624,7 +17624,7 @@
    "itinerary": "Elba (Port Ghalib - Port Ghalib) 11 Nights",
    "nights": 11,
    "padi_id": 1555035,
-   "price": 2750.0,
+   "price": 1925.0,
    "slug": "dune-silky",
    "start": "2027-02-27",
    "was": 2750.0
@@ -17637,7 +17637,7 @@
    "itinerary": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555023,
-   "price": 1500.0,
+   "price": 900.0,
    "slug": "dune-silky",
    "start": "2027-03-13",
    "was": 1500.0
@@ -17650,7 +17650,7 @@
    "itinerary": "North Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555029,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-03-20",
    "was": 1600.0
@@ -17663,7 +17663,7 @@
    "itinerary": "North Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555034,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-03-27",
    "was": 1500.0
@@ -17676,7 +17676,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555038,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-04-03",
    "was": 1400.0
@@ -17689,7 +17689,7 @@
    "itinerary": "Best of Egypt (Hurghada - Port Ghalib) 14 Nights",
    "nights": 14,
    "padi_id": 1555041,
-   "price": 2800.0,
+   "price": 1960.0,
    "slug": "dune-silky",
    "start": "2027-04-10",
    "was": 2800.0
@@ -17702,7 +17702,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555043,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-04-24",
    "was": 1600.0
@@ -17715,7 +17715,7 @@
    "itinerary": "St John's Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555042,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-05-01",
    "was": 1500.0
@@ -17728,7 +17728,7 @@
    "itinerary": "North Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555037,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-05-08",
    "was": 1500.0
@@ -17741,7 +17741,7 @@
    "itinerary": "North Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555040,
-   "price": 1450.0,
+   "price": 1015.0,
    "slug": "dune-silky",
    "start": "2027-05-15",
    "was": 1450.0
@@ -17754,7 +17754,7 @@
    "itinerary": "North Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555036,
-   "price": 1450.0,
+   "price": 1015.0,
    "slug": "dune-silky",
    "start": "2027-05-22",
    "was": 1450.0
@@ -17767,7 +17767,7 @@
    "itinerary": "North Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555039,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-05-29",
    "was": 1600.0
@@ -17780,7 +17780,7 @@
    "itinerary": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555044,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-06-05",
    "was": 1600.0
@@ -17793,7 +17793,7 @@
    "itinerary": "North Brothers (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555056,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-06-12",
    "was": 1500.0
@@ -17806,7 +17806,7 @@
    "itinerary": "North Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555046,
-   "price": 1450.0,
+   "price": 1015.0,
    "slug": "dune-silky",
    "start": "2027-06-19",
    "was": 1450.0
@@ -17819,7 +17819,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555047,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-06-26",
    "was": 1400.0
@@ -17832,7 +17832,7 @@
    "itinerary": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555049,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-07-03",
    "was": 1500.0
@@ -17845,20 +17845,20 @@
    "itinerary": "North Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555059,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-07-10",
    "was": 1500.0
   },
   "dune-silky::2027-07-17": {
-   "availability": 21,
+   "availability": 20,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2027-07-31",
    "itinerary": "Best of Egypt (Hurghada - Port Ghalib) 14 Nights",
    "nights": 14,
    "padi_id": 1555045,
-   "price": 2800.0,
+   "price": 1960.0,
    "slug": "dune-silky",
    "start": "2027-07-17",
    "was": 2800.0
@@ -17871,7 +17871,7 @@
    "itinerary": "St John's Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555051,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-07-31",
    "was": 1500.0
@@ -17884,7 +17884,7 @@
    "itinerary": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555048,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-08-07",
    "was": 1400.0
@@ -17897,7 +17897,7 @@
    "itinerary": "North Brothers (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555050,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-08-14",
    "was": 1500.0
@@ -17910,7 +17910,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555057,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-08-21",
    "was": 1400.0
@@ -17923,7 +17923,7 @@
    "itinerary": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555055,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-08-28",
    "was": 1500.0
@@ -17936,7 +17936,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555060,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-09-04",
    "was": 1400.0
@@ -17949,7 +17949,7 @@
    "itinerary": "Best of Egypt (Hurghada - Port Ghalib) 14 Nights",
    "nights": 14,
    "padi_id": 1555062,
-   "price": 2800.0,
+   "price": 1960.0,
    "slug": "dune-silky",
    "start": "2027-09-11",
    "was": 2800.0
@@ -17962,7 +17962,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555058,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-silky",
    "start": "2027-09-25",
    "was": 1650.0
@@ -17975,7 +17975,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555053,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-silky",
    "start": "2027-10-02",
    "was": 1650.0
@@ -17988,20 +17988,20 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555063,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-silky",
    "start": "2027-10-09",
    "was": 1650.0
   },
   "dune-silky::2027-10-16": {
-   "availability": 26,
+   "availability": 0,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2027-10-23",
    "itinerary": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555066,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-silky",
    "start": "2027-10-16",
    "was": 1650.0
@@ -18014,7 +18014,7 @@
    "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555064,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-silky",
    "start": "2027-10-23",
    "was": 1650.0
@@ -18027,7 +18027,7 @@
    "itinerary": "Golden Triangle (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555052,
-   "price": 1650.0,
+   "price": 1155.0,
    "slug": "dune-silky",
    "start": "2027-10-30",
    "was": 1650.0
@@ -18040,7 +18040,7 @@
    "itinerary": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555065,
-   "price": 1500.0,
+   "price": 1050.0,
    "slug": "dune-silky",
    "start": "2027-11-06",
    "was": 1500.0
@@ -18053,7 +18053,7 @@
    "itinerary": "Golden Triangle (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555061,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-11-13",
    "was": 1600.0
@@ -18066,7 +18066,7 @@
    "itinerary": "Golden Triangle (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555054,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-11-20",
    "was": 1600.0
@@ -18079,7 +18079,7 @@
    "itinerary": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555069,
-   "price": 1400.0,
+   "price": 980.0,
    "slug": "dune-silky",
    "start": "2027-11-27",
    "was": 1400.0
@@ -18092,7 +18092,7 @@
    "itinerary": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555068,
-   "price": 1600.0,
+   "price": 1120.0,
    "slug": "dune-silky",
    "start": "2027-12-04",
    "was": 1600.0
@@ -18105,7 +18105,7 @@
    "itinerary": "Elba (Port Ghalib - Port Ghalib) 11 Nights",
    "nights": 11,
    "padi_id": 1555067,
-   "price": 2750.0,
+   "price": 1925.0,
    "slug": "dune-silky",
    "start": "2027-12-11",
    "was": 2750.0
@@ -18118,7 +18118,7 @@
    "itinerary": "Elba (Port Ghalib - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1555070,
-   "price": 2500.0,
+   "price": 1750.0,
    "slug": "dune-silky",
    "start": "2027-12-22",
    "was": 2500.0
@@ -18709,7 +18709,7 @@
    "was": 1100.0
   },
   "dune-titan::2027-02-06": {
-   "availability": 29,
+   "availability": 27,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-02-13",
@@ -19125,7 +19125,7 @@
    "was": 1240.0
   },
   "dune-titan::2027-10-16": {
-   "availability": 23,
+   "availability": 18,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-10-23",
@@ -20386,7 +20386,7 @@
    "was": 1400.0
   },
   "emperor-asmaa::2027-10-23": {
-   "availability": 16,
+   "availability": 10,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -21023,7 +21023,7 @@
    "was": 1300.0
   },
   "emperor-elite::2026-12-24": {
-   "availability": 12,
+   "availability": 11,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2026-12-31",
@@ -22022,19 +22022,6 @@
    "slug": "mv-emperor-elite",
    "start": "2028-12-21",
    "was": 1300.0
-  },
-  "emperor-superior::2026-11-27": {
-   "availability": 0,
-   "boat": "emperor-superior",
-   "currency": "EUR",
-   "end": "2026-12-04",
-   "itinerary": "Reefs and Wrecks (Hurghada- Hurghada) 7 nights",
-   "nights": 7,
-   "padi_id": 1524964,
-   "price": 1310.0,
-   "slug": "mv-emperor-superior",
-   "start": "2026-11-27",
-   "was": 1310.0
   },
   "emperor-superior::2026-12-04": {
    "availability": 0,
@@ -24013,7 +24000,7 @@
    "was": 2695.0
   },
   "explorer-ventures-grand-sea-explorer::2027-07-01": {
-   "availability": 0,
+   "availability": 20,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2027-07-08",
@@ -24052,7 +24039,7 @@
    "was": 2695.0
   },
   "explorer-ventures-grand-sea-explorer::2027-07-22": {
-   "availability": 16,
+   "availability": 20,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2027-07-29",
@@ -25404,7 +25391,7 @@
    "was": 1570.0
   },
   "ghazala-adventure::2027-05-10": {
-   "availability": 2,
+   "availability": 5,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-05-17",
@@ -26535,17 +26522,17 @@
    "was": 1400.0
   },
   "grand-discovery::2026-11-28": {
-   "availability": 7,
+   "availability": 6,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-05",
    "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548968,
-   "price": 795.0,
+   "price": 954.0,
    "slug": "my-grand-discovery",
    "start": "2026-11-28",
-   "was": 1325.0
+   "was": 1590.0
   },
   "grand-discovery::2026-12-05": {
    "availability": 0,
@@ -26574,7 +26561,7 @@
    "was": 1500.0
   },
   "grand-discovery::2026-12-19": {
-   "availability": 19,
+   "availability": 17,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-26",
@@ -26587,7 +26574,7 @@
    "was": 1225.0
   },
   "grand-discovery::2026-12-26": {
-   "availability": 2,
+   "availability": 1,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -26600,7 +26587,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-01-02": {
-   "availability": 20,
+   "availability": 22,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-09",
@@ -26808,7 +26795,7 @@
    "was": 1300.0
   },
   "grand-discovery::2027-04-24": {
-   "availability": 36,
+   "availability": 35,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-05-01",
@@ -26860,7 +26847,7 @@
    "was": 1275.0
   },
   "grand-discovery::2027-05-22": {
-   "availability": 36,
+   "availability": 33,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-05-29",
@@ -26899,7 +26886,7 @@
    "was": 1225.0
   },
   "grand-discovery::2027-06-12": {
-   "availability": 23,
+   "availability": 24,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-06-19",
@@ -26938,7 +26925,7 @@
    "was": 1225.0
   },
   "grand-discovery::2027-07-03": {
-   "availability": 36,
+   "availability": 34,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-07-10",
@@ -27003,7 +26990,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-08-07": {
-   "availability": 31,
+   "availability": 27,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-08-14",
@@ -28147,7 +28134,7 @@
    "was": 1240.0
   },
   "hammerhead-ii::2027-07-17": {
-   "availability": 32,
+   "availability": 30,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2027-07-21",
@@ -31215,7 +31202,7 @@
    "was": 1420.0
   },
   "odyssey::2027-07-17": {
-   "availability": 24,
+   "availability": 26,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-07-27",
@@ -32775,7 +32762,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-12-05": {
-   "availability": 0,
+   "availability": 1,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-12-12",
@@ -32892,7 +32879,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-04-03": {
-   "availability": 21,
+   "availability": 19,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-04-10",
@@ -32944,7 +32931,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-05-01": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-05-08",
@@ -32957,7 +32944,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-05-08": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-05-15",
@@ -32970,7 +32957,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-05-15": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-05-22",
@@ -32996,7 +32983,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-05-29": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-06-05",
@@ -33009,7 +32996,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-06-05": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-06-12",
@@ -33022,7 +33009,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-06-12": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-06-19",
@@ -34192,7 +34179,7 @@
    "was": 2799.0
   },
   "red-sea-aggressor-v::2027-04-03": {
-   "availability": 25,
+   "availability": 24,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-04-10",
@@ -34205,7 +34192,7 @@
    "was": 2799.0
   },
   "red-sea-aggressor-v::2027-04-10": {
-   "availability": 26,
+   "availability": 23,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-04-17",
@@ -36493,7 +36480,7 @@
    "was": 950.0
   },
   "reef-voyager::2026-12-05": {
-   "availability": 22,
+   "availability": 10,
    "boat": "reef-voyager",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -36506,33 +36493,33 @@
    "was": 950.0
   },
   "reef-voyager::2026-12-12": {
-   "availability": 12,
+   "availability": 0,
    "boat": "reef-voyager",
    "currency": "EUR",
    "end": "2026-12-19",
    "itinerary": "North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1548907,
-   "price": 1100.0,
+   "price": 950.0,
    "slug": "reef-voyager",
    "start": "2026-12-12",
-   "was": 1100.0
+   "was": 950.0
   },
   "reef-voyager::2026-12-19": {
-   "availability": 12,
+   "availability": 0,
    "boat": "reef-voyager",
    "currency": "EUR",
    "end": "2026-12-26",
    "itinerary": "North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1548908,
-   "price": 1100.0,
+   "price": 950.0,
    "slug": "reef-voyager",
    "start": "2026-12-19",
-   "was": 1100.0
+   "was": 950.0
   },
   "reef-voyager::2026-12-26": {
-   "availability": 22,
+   "availability": 10,
    "boat": "reef-voyager",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -38872,7 +38859,7 @@
    "was": 2350.0
   },
   "serenity::2026-11-28": {
-   "availability": 5,
+   "availability": 6,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -38989,7 +38976,7 @@
    "was": 1250.0
   },
   "serenity::2027-01-30": {
-   "availability": 14,
+   "availability": 13,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-02-06",
@@ -39067,7 +39054,7 @@
    "was": 1250.0
   },
   "serenity::2027-03-13": {
-   "availability": 17,
+   "availability": 16,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-03-20",
@@ -39249,7 +39236,7 @@
    "was": 1300.0
   },
   "serenity::2027-06-12": {
-   "availability": 8,
+   "availability": 10,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-06-19",
@@ -42551,7 +42538,7 @@
    "was": 1199.0
   },
   "snefro-target::2027-10-23": {
-   "availability": 20,
+   "availability": 12,
    "boat": "snefro-target",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -43279,7 +43266,7 @@
    "was": 1210.0
   },
   "tala::2027-10-10": {
-   "availability": 22,
+   "availability": 16,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-10-17",
@@ -43305,7 +43292,7 @@
    "was": 1105.0
   },
   "tala::2027-10-24": {
-   "availability": 22,
+   "availability": 19,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-10-31",
@@ -44059,7 +44046,7 @@
    "was": 1460.0
   },
   "topaz::2027-03-20": {
-   "availability": 5,
+   "availability": 4,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-03-27",
@@ -44508,7 +44495,7 @@
    "itinerary": "The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1558320,
-   "price": 1224.0,
+   "price": 1360.0,
    "slug": "topaz",
    "start": "2027-11-27",
    "was": 1360.0
@@ -44521,7 +44508,7 @@
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1558333,
-   "price": 1314.0,
+   "price": 1460.0,
    "slug": "topaz",
    "start": "2027-12-04",
    "was": 1460.0
