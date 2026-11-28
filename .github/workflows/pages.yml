@@ -60,16 +60,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     # A refresh that failed mid-way may still have rebuilt the page from stale
     # data; publishing that would present a broken run's output as current.
     if: >-
       github.event_name != 'workflow_run' ||
       github.event.workflow_run.conclusion == 'success' 
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
 
@@ -95,5 +92,20 @@ jobs:
         with:
           path: site
 
+  # **The deploy is its own job, and that is the fix for a flake.** In one job,
+  # deploy-pages asked for the artifact a second after upload-pages-artifact
+  # finalised it and was told "Found 0 artifact(s)" -- the listing API is
+  # eventually consistent. 10 of 37 deploys between 2026-11-21 and 11-27
+  # failed, and all four logs read failed that way, the upload's success two
+  # lines above the error. A job
+  # boundary is GitHub's own starter shape and puts a runner start between the
+  # two calls.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
         uses: actions/deploy-pages@v5
